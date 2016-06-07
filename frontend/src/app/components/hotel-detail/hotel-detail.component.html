@@ -3,7 +3,7 @@
   <div class="col s6 m6 center-align">
     <div class="card">
       <div class="card-image">
-        <img [src] = "getHotelImage()">
+        <img [src]="getHotelImage()">
         <span class="card-title">{{hotel.name}}</span>
       </div>
       <div class="card-content left-align">
@@ -63,7 +63,7 @@
     <div class="card">
       <div class="card-content left-align">
         <h3>Map</h3>
-        <map></map>
+        <map [hotel]="hotel"></map>
       </div>
     </div>
   </div>
