@@ -3,28 +3,28 @@
     <div class="row">
       <div class="input-field col s12">
         <input id="hotelName" type="text" class="validate" required [(ngModel)]="hotel.name">
-        <label for="hotelName">Name</label>
+        <label [class.active]="hotel.name" for="hotelName">Name</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
         <input id="website" type="text" class="validate" [(ngModel)]="hotel.website">
-        <label for="website">Website</label>
+        <label [class.active]="hotel.website" for="website">Website</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
         <input id="email" type="email" class="validate" [(ngModel)]="hotel.contactEmail">
-        <label for="email">Email</label>
+        <label [class.active]="hotel.contactEmail" for="email">Email</label>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
         <textarea id="description" class="materialize-textarea" [(ngModel)]="hotel.description"></textarea>
-        <label for="description">Description</label>
+        <label [class.active]="hotel.description" for="description">Description</label>
       </div>
     </div>
 
@@ -34,23 +34,23 @@
       <div class="row">
         <div class="input-field col s10">
           <input id="street" type="text" class="validate" [(ngModel)]="hotel.street">
-          <label for="street">Street</label>
+          <label [class.active]="hotel.street" for="street">Street</label>
         </div>
         <div class="input-field col s2">
           <input id="streetNumber" type="text" class="validate" [(ngModel)]="hotel.streetNumber">
-          <label for="streetNumber">Number</label>
+          <label [class.active]="hotel.streetNumber" for="streetNumber">Number</label>
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s4">
           <input id="zipCode" type="text" class="validate" [(ngModel)]="hotel.zipCode">
-          <label for="zipCode">Zip code</label>
+          <label [class.active]="hotel.zipCode" for="zipCode">Zip code</label>
         </div>
 
         <div class="input-field col s8">
           <input id="city" type="text" class="validate" required [(ngModel)]="hotel.city">
-          <label for="city">City</label>
+          <label [class.active]="hotel.city" for="city">City</label>
         </div>
       </div>
 
@@ -70,11 +70,11 @@
       <div class="row">
         <div class="input-field col s6">
           <input id="tripAdvisorUrl" type="text" class="validate" [(ngModel)]="hotel.tripAdvisorUrl">
-          <label for="tripAdvisorUrl">Trip Advisor</label>
+          <label [class.active]="hotel.tripAdvisorUrl" for="tripAdvisorUrl">Trip Advisor</label>
         </div>
         <div class="input-field col s6">
           <input id="holidayCheckUrl" type="text" class="validate" [(ngModel)]="hotel.holidayCheckUrl">
-          <label for="holidayCheckUrl">Holiday check</label>
+          <label [class.active]="hotel.holidayCheckUrl" for="holidayCheckUrl">Holiday check</label>
         </div>
       </div>
     </div>
