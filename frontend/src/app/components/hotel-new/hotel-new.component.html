@@ -1,10 +1,14 @@
 <div class="row">
   <form materialize class="col s12" (ngSubmit)="saveHotel()" #hotelForm="ngForm">
     <div class="row">
-      <div class="input-field col s12">
+      <div class="input-field col s6">
         <input id="hotelName" type="text" class="form-control" required
                [(ngModel)]="hotel.name" ngControl="name" #name="ngForm" [class.invalid]="!name.valid && name.touched">
         <label for="hotelName" data-error="required field">Name</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="email" type="email" class="validate" [(ngModel)]="hotel.contactEmail">
+        <label for="email">Email</label>
       </div>
     </div>
 
@@ -17,8 +21,8 @@
 
     <div class="row">
       <div class="input-field col s12">
-        <input id="email" type="email" class="validate" [(ngModel)]="hotel.contactEmail">
-        <label for="email">Email</label>
+        <input id="pictureUrl" type="url" class="validate" [(ngModel)]="hotel.pictureUrl">
+        <label for="pictureUrl">Picture Url</label>
       </div>
     </div>
 
@@ -29,7 +33,8 @@
       </div>
     </div>
 
-    <!-- Adresss block -->
+
+      <!-- Adresss block -->
     <div class="section">
       <h5>Address</h5>
       <div class="row">
@@ -72,11 +77,11 @@
       <h5>External information</h5>
       <div class="row">
         <div class="input-field col s6">
-          <input id="tripAdvisorUrl" type="text" class="validate" [(ngModel)]="hotel.tripAdvisorUrl">
+          <input id="tripAdvisorUrl" type="url" class="validate" [(ngModel)]="hotel.tripAdvisorUrl">
           <label for="tripAdvisorUrl">Trip Advisor</label>
         </div>
         <div class="input-field col s6">
-          <input id="holidayCheckUrl" type="text" class="validate" [(ngModel)]="hotel.holidayCheckUrl">
+          <input id="holidayCheckUrl" type="url" class="validate" [(ngModel)]="hotel.holidayCheckUrl">
           <label for="holidayCheckUrl">Holiday check</label>
         </div>
       </div>
