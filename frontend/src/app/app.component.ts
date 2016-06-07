@@ -5,11 +5,12 @@ import {CrudService} from "./shared/crud.service";
 import {HotelService} from "./shared/hotel.service";
 import {CountryService} from "./shared/country.service";
 import {CampService} from "./shared/camp.service";
+import {AuthService} from "./shared/auth.service";
 
 @Component({
   selector: 'app',
   directives: [HotelsComponent, NavigationComponent],
-  providers: [CrudService, HotelService, CountryService, CampService],
+  providers: [CrudService, HotelService, CountryService, CampService, AuthService],
   styles: [
     require('../assets/css/main.scss')
   ],

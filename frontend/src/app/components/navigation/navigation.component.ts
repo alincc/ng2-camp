@@ -1,15 +1,21 @@
-import {Component} from '@angular/core';
-import {AuthService} from '../../shared/auth.service';
+import {Component, OnInit} from "@angular/core";
+import {AuthService} from "../../shared/auth.service";
 
 @Component({
   selector: 'navigation',
   directives: [],
-  providers: [AuthService],
+  providers: [],
   template: require('./navigation.component.html')
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
+
+  username : string = "test";
 
   constructor(private auth: AuthService) {
+  }
+
+  ngOnInit() {
+    this.username = this.auth.getUsername();
   }
 
   logout() {
