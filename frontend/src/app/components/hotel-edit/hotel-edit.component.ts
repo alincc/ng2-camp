@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'hotel-edit',
   directives: [MaterializeDirective],
-  providers: [HotelService, CountryService],
+  providers: [],
   template: require('./hotel-edit.component.html')
 })
 export class HotelEditComponent implements OnInit {
