@@ -2,11 +2,13 @@ import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {HotelsComponent} from './components/hotel-overview/hotels.component';
 import {CrudService} from './shared/crud.service';
+import {HotelService} from './shared/hotel.service';
+import {CountryService} from './shared/country.service';
 
 @Component({
   selector: 'app',
   directives: [HotelsComponent, NavigationComponent],
-  providers: [CrudService],
+  providers: [CrudService, HotelService, CountryService],
   styles: [
     require('../assets/css/main.scss')
   ],

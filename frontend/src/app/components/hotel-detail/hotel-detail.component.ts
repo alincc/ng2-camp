@@ -11,7 +11,7 @@ import {MapComponent} from './map/map.component';
 @Component({
   selector: 'hotel-detail',
   directives: [MaterializeDirective, MapComponent],
-  providers: [HotelService],
+  providers: [],
   template: require('./hotel-detail.component.html')
 })
 export class HotelDetailComponent {

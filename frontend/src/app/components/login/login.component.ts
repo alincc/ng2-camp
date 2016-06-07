@@ -6,7 +6,7 @@ import {MaterializeDirective} from 'angular2-materialize';
 @Component({
   selector: 'login',
   directives: [MaterializeDirective],
-  providers: [HotelService, AuthService],
+  providers: [AuthService],
   template: require('./login.component.html')
 })
 export class LoginComponent {

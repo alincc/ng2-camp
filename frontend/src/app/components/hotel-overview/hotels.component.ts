@@ -12,7 +12,7 @@ import CountryFilterPipe from '../country.filter.pipe';
 @Component({
   selector: 'hotels',
   directives: [MaterializeDirective],
-  providers: [HotelService],
+  providers: [],
   pipes: [FilterPipe, CountryFilterPipe],
   template: require('./hotels.component.html')
 })
