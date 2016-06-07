@@ -83,7 +83,9 @@
 
 
     <div class="row">
-      <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="!hotelForm.valid">Save
+      <button class="btn waves-effect waves-light" type="submit" name="action"
+              [ngClass]="{disabled: !hotelForm.valid}"
+              [disabled]="!hotelForm.valid">Save
         <i class="material-icons right">send</i>
       </button>
     </div>

@@ -1,5 +1,5 @@
 <div class="row">
-  <form materialize class="col s12" #campForm="ngForm">
+  <form materialize class="col s12" (ngSubmit)="saveCamp()" #campForm="ngForm">
     <div class="row">
       <div class="input-field col s12">
         <input id="campName" type="text" class="validate" required [(ngModel)]="camp.name" ngControl="name">
@@ -27,8 +27,8 @@
 
     <div class="row">
       <button class="btn waves-effect waves-light" type="submit" name="action"
-              [ngClass]="{disabled: !campForm.form.valid}"
-              (click)="saveCamp()">Save
+              [ngClass]="{disabled: !campForm.valid}"
+              [disabled]="!campForm.valid">Save
         <i class="material-icons right">send</i>
       </button>
     </div>
