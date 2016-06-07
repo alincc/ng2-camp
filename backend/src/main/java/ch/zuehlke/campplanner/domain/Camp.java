@@ -14,6 +14,7 @@ public class Camp {
     private Long id;
 
     private String name;
+    // TODO will probably be deleted
     private String team;
 
     @Temporal(TemporalType.DATE)
@@ -24,7 +25,7 @@ public class Camp {
     private Integer numberOfPeople;
 
     @OneToMany
-    @JsonManagedReference
+    @JsonManagedReference("camp-offers")
     private List<Offer> offers;
 
 //	@OneToMany

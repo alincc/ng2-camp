@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
-import {Hotel, Camp} from "../../model/backend-typings";
+import {Camp} from "../../model/backend-typings";
 import {Router} from "@ngrx/router";
 import {MaterializeDirective} from "angular2-materialize";
+import {CampService} from "../../shared/camp.service";
 
 @Component({
   selector: 'camp-new',
@@ -10,14 +11,14 @@ import {MaterializeDirective} from "angular2-materialize";
   template: require('./camp-new.component.html')
 })
 export class CampNewComponent {
-  camp: Camp;
+  camp: Camp = {};
 
-  constructor(private router: Router) {
-    this.camp = {} as Hotel;
+  constructor(private router: Router, private campService : CampService) {
   }
 
 
   saveCamp() {
+    this.campService.saveCamp(this.camp);
   }
 
   openCamp(camp: Camp) {

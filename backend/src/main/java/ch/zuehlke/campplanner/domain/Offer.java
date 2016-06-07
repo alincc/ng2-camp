@@ -49,7 +49,7 @@ public class Offer {
     private Hotel hotel;
 
     @ManyToOne(optional = true)
-    @JsonBackReference
+    @JsonBackReference("camp-offers")
     private Camp camp;
 
     public Double getTotalPrice() {
