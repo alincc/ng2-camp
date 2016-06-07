@@ -26,10 +26,10 @@ export class HotelEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hotelId.flatMap(id => this.hotelService.getHotelAuthenticated(id)).subscribe(hotel => {
+    this.hotelId.flatMap(id => this.hotelService.getHotel(id)).subscribe(hotel => {
       this.hotel = hotel;
     });
-    this.countries = this.countryService.getCountriesAuthenticated();
+    this.countries = this.countryService.getAllCountries();
   }
 
   saveHotel() {
