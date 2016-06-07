@@ -1,11 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
+import {MapService} from '../../../shared/map/map.service';
+import {Hotel} from '../../../model/backend-typings';
+import {Coordinate} from '../../../shared/map/coordinate';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
   selector: 'map',
   directives: [ANGULAR2_GOOGLE_MAPS_DIRECTIVES],
-  providers: [ANGULAR2_GOOGLE_MAPS_PROVIDERS],
+  providers: [ANGULAR2_GOOGLE_MAPS_PROVIDERS, MapService],
   styles: [`
     .sebm-google-map-container {
       height: 300px;
@@ -13,12 +17,19 @@ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'a
   `],
   template: require('./map.component.html')
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
 
-  constructor() {
+  @Input('hotel') hotel: Hotel;
+
+  coordiante: Coordinate;
+
+  constructor(private mapService: MapService) {
   }
 
+  ngOnInit() {
+    this.mapService.getCoordinates(this.hotel).subscribe(coordinate => {
+      this.coordiante = coordinate
+    });
+  }
 }

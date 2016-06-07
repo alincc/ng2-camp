@@ -3,10 +3,11 @@ import {Camp} from "../../model/backend-typings";
 import {Router} from "@ngrx/router";
 import {MaterializeDirective} from "angular2-materialize";
 import {CampService} from "../../shared/camp.service";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'camp-new',
-  directives: [MaterializeDirective],
+  directives: [MaterializeDirective, NgClass],
   providers: [],
   template: require('./camp-new.component.html')
 })
