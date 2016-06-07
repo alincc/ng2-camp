@@ -25,7 +25,7 @@ export class HotelsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hotels = this.hotelService.getHotelsAuthenticated();
+    this.hotels = this.hotelService.getHotels();
     this.countries = this.hotels
       .flatMap(hotels => Observable.from(hotels))
       .map(hotel => hotel.countryCode)

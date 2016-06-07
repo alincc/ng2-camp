@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 import {Hotel} from '../model/backend-typings';
 import {CrudService} from './crud.service';
 
@@ -15,11 +14,11 @@ export class HotelService {
     return this.crud.post('/rest/hotels', hotel);
   }
 
-  getHotelsAuthenticated(): Observable<Hotel[]> {
+  getHotels(): Observable<Hotel[]> {
     return this.crud.get('/rest/hotels');
   }
 
-  getHotelAuthenticated(id: number): Observable<Hotel> {
+  getHotel(id: number): Observable<Hotel> {
     return this.crud.get('/rest/hotels/' + id);
   }
 

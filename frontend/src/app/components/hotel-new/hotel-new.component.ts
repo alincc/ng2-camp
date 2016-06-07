@@ -8,7 +8,7 @@ import {MaterializeDirective} from 'angular2-materialize';
 @Component({
   selector: 'hotel-new',
   directives: [MaterializeDirective],
-  providers: [HotelService, CountryService],
+  providers: [],
   template: require('./hotel-new.component.html')
 })
 export class HotelNewComponent implements OnInit {
@@ -21,14 +21,14 @@ export class HotelNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.countryService.getAllCountries().subscribe(c =>{
-      this.countries = c;
+    this.countryService.getAllCountries().subscribe((countries:Country[]) =>{
+      this.countries = countries;
     });
   }
 
   saveHotel() {
-    this.hotelService.saveHotel(this.hotel).subscribe(data =>
-      this.openHotel(data));
+    this.hotelService.saveHotel(this.hotel).subscribe((hotel:Hotel) =>
+      this.openHotel(hotel));
   }
 
   openHotel(hotel: Hotel) {
