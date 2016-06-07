@@ -1,6 +1,7 @@
 <nav>
   <div class="nav-wrapper blue">
-    <a href="#" class="brand-logo right">ng-camp</a>
+    <a href="#" class="brand-logo center">ng-camp</a>
+    <span class="brand-logo right">Logged in as: {{ username }}</span>
     <ul id="nav-mobile" class="left">
       <li *ngIf="auth.authenticated()" linkActive="active"><a [linkTo]="'/hotels'">Hotels</a></li>
       <li *ngIf="auth.authenticated()" linkActive="active"><a [linkTo]="'/camps'">Camps</a></li>
