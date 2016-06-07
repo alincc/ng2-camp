@@ -7,7 +7,7 @@ import {HotelNewComponent} from "../components/hotel-new/hotel-new.component";
 import {CampsComponent} from "../components/camp-overview/camps.component";
 import {CampNewComponent} from "../components/camp-new/camp-new.component";
 import {HotelEditComponent} from "../components/hotel-edit/hotel-edit.component";
-import {MailTemplatesComponent} from "../components/mail-templates/mailtemplates.component";
+// import {MailTemplatesComponent} from "../components/mail-templates/mailtemplates.component";
 
 export const routes: Routes = [
   {
@@ -38,11 +38,11 @@ export const routes: Routes = [
     guards: [AuthGuard],
     component: CampNewComponent
   },
-  {
-    path: '/mailtemplates',
-    guards: [AuthGuard],
-    component: MailTemplatesComponent
-  },
+  // {
+  //   path: '/mailtemplates',
+  //   guards: [AuthGuard],
+  //   component: MailTemplatesComponent
+  // },
   {
     path: '/hotels/edit/:id',
     guards: [AuthGuard],
