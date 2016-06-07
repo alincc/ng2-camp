@@ -24,7 +24,7 @@ export class HotelDetailComponent {
     this.hotelId = routeParams.pluck<number>('id');
     this.hotelId
       .filter(id => !isNaN(id))
-      .flatMap(id => this.hotelService.getHotelAuthenticated(id)).subscribe(hotel => {
+      .flatMap(id => this.hotelService.getHotelAuthenticated(id)).subscribe((hotel:Hotel) => {
       this.hotel = hotel;
     });
   }
