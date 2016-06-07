@@ -5,6 +5,7 @@
     <ul id="nav-mobile" class="left">
       <li *ngIf="auth.authenticated()" linkActive="active"><a [linkTo]="'/hotels'">Hotels</a></li>
       <li *ngIf="auth.authenticated()" linkActive="active"><a [linkTo]="'/camps'">Camps</a></li>
+      <li *ngIf="auth.authenticated()" linkActive="active"><a [linkTo]="'/mailtemplates'">Mail templates</a></li>
       <li *ngIf="!auth.authenticated()" linkActive="active"><a [linkTo]="'/login'">Login</a></li>
       <li *ngIf="auth.authenticated()"><a (click)="logout()">Logout</a></li>
     </ul>
