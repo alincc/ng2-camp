@@ -19,7 +19,7 @@ import CountryFilterPipe from '../country.filter.pipe';
 export class HotelsComponent implements OnInit {
   hotels: Observable<Hotel[]>;
   countries: Observable<string[]>;
-  private selectedValues = [];
+  selectedValues = [];
 
   constructor(private hotelService: HotelService) {
   }
@@ -38,7 +38,5 @@ export class HotelsComponent implements OnInit {
     this.selectedValues = Array.apply(null, options)  // convert to real Array
       .filter(option => option.selected)
       .map(option => option.value);
-
-    console.log(this.selectedValues);
   }
 }
