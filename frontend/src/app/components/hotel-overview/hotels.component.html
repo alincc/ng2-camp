@@ -36,14 +36,17 @@
       <table class="responsive-table striped bordered">
         <thead>
           <tr>
-            <th>Info</th>
             <th>Name</th>
             <th>City</th>
             <th>Country</th>
+            <th>Info</th>
           </tr>
         </thead>
         <tbody>
         <tr *ngFor="let hotel of hotels | async | hotelFilter:filterInput.value | countryFilter:selectedValues">
+          <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td >
+          <td>{{hotel.city}}</td>
+          <td>{{hotel.countryCode}}</td>
           <td>
             <a href="{{hotel.website}}" target="_blank">
               <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
@@ -52,9 +55,6 @@
               <i class="fa fa-tripadvisor fa-2x" aria-hidden="true"></i>
             </a>
           </td>
-          <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td >
-          <td>{{hotel.city}}</td>
-          <td>{{hotel.countryCode}}</td>
         </tr>
       </table>
   </div>
