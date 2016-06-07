@@ -23,7 +23,7 @@ export class HotelNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.countryService.getCountriesAuthenticated().subscribe(c =>{
+    this.countryService.getAllCountries().subscribe(c =>{
       this.countries = c;
     });
   }

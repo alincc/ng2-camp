@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/toArray';
 import {Country} from '../model/backend-typings';
@@ -14,17 +13,23 @@ export class CountryService {
   constructor(private http:Http) {
   }
 
-  getCountriesAuthenticated():Observable<Country[]> {
+  getAllCountries():Observable<Country[]> {
     return this.http.get(this.baseUrl + '/all')
-      .map(response => response.json())
-      .flatMap(countries => Observable.from(countries))
-      .map(country => {
+      .map((res:Response) => res.json())
+      .flatMap((countries:ISOCountry[]) => Observable.from(countries))
+      .map((country:ISOCountry) => {
           return {
             name: country.name,
             code: country.alpha2Code
-          } as Country;
+          };
         }
       )
       .toArray();
   }
+
+}
+
+interface ISOCountry {
+  name:string;
+  alpha2Code:string;
 }

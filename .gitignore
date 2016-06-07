@@ -50,6 +50,7 @@ npm-debug.log
 /src/*/dist/
 /dist/**
 .webpack.json
+/frontend/dist
 
 # Doc #
 /doc/
