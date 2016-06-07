@@ -1,38 +1,3 @@
-
-    alter table hotel_offers 
-        drop constraint FK_jq8c8kaurrm3g4fryiqpgpl0s;
-
-    alter table hotel_offers 
-        drop constraint FK_qlnlnl66170wfie02qlbipi13;
-
-    alter table offer 
-        drop constraint FK_dvjbd8or2xrady0rxgul5mmoi;
-
-    alter table offer 
-        drop constraint FK_7w0lpk0dph8bfchqetb2x2qna;
-
-    alter table offer_request 
-        drop constraint FK_gka6ghev5hyp1qs1exgrr1c9n;
-
-    alter table rating 
-        drop constraint FK_ns8b94vlj2d1ply4qa5dblcbm;
-
-    drop table if exists camp cascade;
-
-    drop table if exists hotel cascade;
-
-    drop table if exists hotel_offers cascade;
-
-    drop table if exists mail_template cascade;
-
-    drop table if exists offer cascade;
-
-    drop table if exists offer_request cascade;
-
-    drop table if exists rating cascade;
-
-    drop sequence hibernate_sequence;
-
     create table camp (
         id int8 not null,
         from_date date,
@@ -42,6 +7,11 @@
         team varchar(255),
         to_date date,
         primary key (id)
+    );
+
+    create table camp_offers (
+        camp_id int8 not null,
+        offers_id int8 not null
     );
 
     create table hotel (
@@ -112,37 +82,50 @@
         primary key (id)
     );
 
-    alter table hotel_offers 
+    alter table camp_offers
+        add constraint UK_o5krel5d0ingi0jtij2gyct23 unique (offers_id);
+
+    alter table hotel_offers
         add constraint UK_jq8c8kaurrm3g4fryiqpgpl0s unique (offers_id);
 
-    alter table hotel_offers 
-        add constraint FK_jq8c8kaurrm3g4fryiqpgpl0s 
-        foreign key (offers_id) 
+    alter table camp_offers
+        add constraint FK_o5krel5d0ingi0jtij2gyct23
+        foreign key (offers_id)
         references offer;
 
-    alter table hotel_offers 
-        add constraint FK_qlnlnl66170wfie02qlbipi13 
-        foreign key (hotel_id) 
-        references hotel;
-
-    alter table offer 
-        add constraint FK_dvjbd8or2xrady0rxgul5mmoi 
-        foreign key (camp_id) 
+    alter table camp_offers
+        add constraint FK_pyh5sfk6d9qpkqnegg1gfj83t
+        foreign key (camp_id)
         references camp;
 
-    alter table offer 
-        add constraint FK_7w0lpk0dph8bfchqetb2x2qna 
-        foreign key (hotel_id) 
+    alter table hotel_offers
+        add constraint FK_jq8c8kaurrm3g4fryiqpgpl0s
+        foreign key (offers_id)
+        references offer;
+
+    alter table hotel_offers
+        add constraint FK_qlnlnl66170wfie02qlbipi13
+        foreign key (hotel_id)
         references hotel;
 
-    alter table offer_request 
-        add constraint FK_gka6ghev5hyp1qs1exgrr1c9n 
-        foreign key (hotel_id) 
+    alter table offer
+        add constraint FK_dvjbd8or2xrady0rxgul5mmoi
+        foreign key (camp_id)
+        references camp;
+
+    alter table offer
+        add constraint FK_7w0lpk0dph8bfchqetb2x2qna
+        foreign key (hotel_id)
         references hotel;
 
-    alter table rating 
-        add constraint FK_ns8b94vlj2d1ply4qa5dblcbm 
-        foreign key (hotel_id) 
+    alter table offer_request
+        add constraint FK_gka6ghev5hyp1qs1exgrr1c9n
+        foreign key (hotel_id)
+        references hotel;
+
+    alter table rating
+        add constraint FK_ns8b94vlj2d1ply4qa5dblcbm
+        foreign key (hotel_id)
         references hotel;
 
     create sequence hibernate_sequence;
