@@ -14,7 +14,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class HotelNewComponent implements OnInit {
   hotel: Hotel;
-  countries: Observable<Country[]>;
+  countries: Country[];
 
   constructor(private hotelService: HotelService,
               private countryService: CountryService,
@@ -23,7 +23,9 @@ export class HotelNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.countries = this.countryService.getCountriesAuthenticated();
+    this.countryService.getCountriesAuthenticated().subscribe(c =>{
+      this.countries = c;
+    });
   }
 
   saveHotel() {

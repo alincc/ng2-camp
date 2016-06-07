@@ -56,9 +56,9 @@
 
       <div class="row">
         <div class="input-field col s4">
-          <select materialize="material_select" [materializeSelectOptions]="countries | async" [(ngModel)]="hotel.countryCode">
+          <select materialize="material_select" [materializeSelectOptions]="countries" [(ngModel)]="hotel.countryCode">
             <option value="" disabled selected>Select country</option>
-            <option *ngFor="let country of countries | async" [value]="country.code">{{country.name}}</option>
+            <option *ngFor="let country of countries" [value]="country.code">{{country.name}}</option>
           </select>
           <label>Country</label>
         </div>
