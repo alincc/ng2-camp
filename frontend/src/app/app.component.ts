@@ -1,14 +1,15 @@
-import {Component, ViewEncapsulation, OnInit} from '@angular/core';
-import {NavigationComponent} from './components/navigation/navigation.component';
-import {HotelsComponent} from './components/hotel-overview/hotels.component';
-import {CrudService} from './shared/crud.service';
-import {HotelService} from './shared/hotel.service';
-import {CountryService} from './shared/country.service';
+import {Component, ViewEncapsulation, OnInit} from "@angular/core";
+import {NavigationComponent} from "./components/navigation/navigation.component";
+import {HotelsComponent} from "./components/hotel-overview/hotels.component";
+import {CrudService} from "./shared/crud.service";
+import {HotelService} from "./shared/hotel.service";
+import {CountryService} from "./shared/country.service";
+import {CampService} from "./shared/camp.service";
 
 @Component({
   selector: 'app',
   directives: [HotelsComponent, NavigationComponent],
-  providers: [CrudService, HotelService, CountryService],
+  providers: [CrudService, HotelService, CountryService, CampService],
   styles: [
     require('../assets/css/main.scss')
   ],
