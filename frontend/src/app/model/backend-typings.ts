@@ -1,3 +1,4 @@
+
 export interface Camp {
     fromDate?: Date;
     id?: number;
