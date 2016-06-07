@@ -4,7 +4,6 @@ import {HotelService} from '../../shared/hotel.service';
 import {Router} from '@ngrx/router';
 import {CountryService} from '../../shared/country.service';
 import {MaterializeDirective} from 'angular2-materialize';
-import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'hotel-new',
@@ -13,13 +12,12 @@ import {Observable} from 'rxjs/Observable';
   template: require('./hotel-new.component.html')
 })
 export class HotelNewComponent implements OnInit {
-  hotel: Hotel;
+  hotel: Hotel = {};
   countries: Country[];
 
   constructor(private hotelService: HotelService,
               private countryService: CountryService,
               private router: Router) {
-    this.hotel = {} as Hotel;
   }
 
   ngOnInit() {
