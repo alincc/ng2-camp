@@ -5,6 +5,7 @@ import {LoginComponent} from "../components/login/login.component";
 import {AuthGuard} from "./authGuard";
 import {HotelNewComponent} from "../components/hotel-new/hotel-new.component";
 import {CampsComponent} from "../components/camp-overview/camps.component";
+import {CampNewComponent} from "../components/camp-new/camp-new.component";
 
 export const routes: Routes = [
   {
@@ -29,6 +30,11 @@ export const routes: Routes = [
     path: '/camps',
     guards: [AuthGuard],
     component: CampsComponent
+  },
+  {
+    path: '/camps/new',
+    guards: [AuthGuard],
+    component: CampNewComponent
   },
   {
     path: '/login',
