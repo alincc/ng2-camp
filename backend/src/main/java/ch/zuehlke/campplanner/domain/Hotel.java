@@ -15,6 +15,7 @@ public class Hotel {
 
     @NotNull
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private String zipCode;
     private String street;

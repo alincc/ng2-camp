@@ -30,6 +30,7 @@ public class OfferRequest {
 
     private Date lastStatusChange;
 
+    @Column(columnDefinition = "TEXT")
     private String comment;
 
     @OneToOne

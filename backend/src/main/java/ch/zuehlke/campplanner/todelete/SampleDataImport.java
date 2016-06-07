@@ -24,6 +24,8 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        hotelRepository.deleteAll();
+
         hotelRepository.save(createCompleteHotel());
         hotelRepository.save(create("Schloss Münchenweiler", "Münchenweiler", "CH", "http://www.schloss-muenchenwiler.ch/home.html"));
         hotelRepository.save(create("Hotel Moosegg", "Moosegg", "CH", "http://www.moosegg.ch/v2/"));
