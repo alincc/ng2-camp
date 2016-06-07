@@ -1,9 +1,10 @@
 <div class="row">
-  <form materialize class="col s12">
+  <form materialize class="col s12" (ngSubmit)="saveHotel()" #hotelForm="ngForm">
     <div class="row">
       <div class="input-field col s12">
-        <input id="hotelName" type="text" class="validate" required [(ngModel)]="hotel.name">
-        <label for="hotelName">Name</label>
+        <input id="hotelName" type="text" class="form-control validate" required
+               [(ngModel)]="hotel.name" ngControl="name" #name="ngForm" [class.invalid]="!name.valid && name.touched">
+        <label for="hotelName" data-error="required field">Name</label>
       </div>
     </div>
 
@@ -49,8 +50,9 @@
         </div>
 
         <div class="input-field col s8">
-          <input id="city" type="text" class="validate" required [(ngModel)]="hotel.city">
-          <label for="city">City</label>
+          <input id="city" type="text" class="validate" required
+                 [(ngModel)]="hotel.city" ngControl="city" #city="ngForm" [class.invalid]="!city.valid && city.touched">
+          <label for="city" data-error="required field">City</label>
         </div>
       </div>
 
@@ -81,8 +83,7 @@
 
 
     <div class="row">
-      <button class="btn waves-effect waves-light" type="submit" name="action"
-        (click)="saveHotel()">Save
+      <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="!hotelForm.valid">Save
         <i class="material-icons right">send</i>
       </button>
     </div>
