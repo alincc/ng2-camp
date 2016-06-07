@@ -14,14 +14,13 @@ import {Observable} from 'rxjs/Observable';
 })
 export class HotelEditComponent implements OnInit {
   hotelId: Observable<number>;
-  hotel: Hotel;
+  hotel: Hotel = {};
   countries: Observable<Country[]>;
 
   constructor(private hotelService: HotelService,
               private countryService: CountryService,
               private router: Router,
               routeParams: RouteParams) {
-    this.hotel = {} as Hotel;
     this.hotelId = routeParams.pluck<number>('id');
   }
 
@@ -33,8 +32,8 @@ export class HotelEditComponent implements OnInit {
   }
 
   saveHotel() {
-    this.hotelService.saveHotel(this.hotel).subscribe(data =>
-      this.openHotel(data));
+    this.hotelService.saveHotel(this.hotel).subscribe(hotel =>
+      this.openHotel(hotel));
   }
 
   openHotel(hotel: Hotel) {
