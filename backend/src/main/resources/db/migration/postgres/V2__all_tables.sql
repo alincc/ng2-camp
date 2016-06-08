@@ -79,8 +79,8 @@
         date date,
         description varchar(255),
         person varchar(255),
-        rating_from1to5 int4,
-        hotel_id int8,
+        rating_from1to5 int4 not null,
+        hotel_id int8 not null,
         primary key (id)
     );
 
