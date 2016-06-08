@@ -6,9 +6,9 @@ import {CampService} from '../../shared/camp.service';
 @Component({
   selector: 'camps',
   directives: [],
-  template: require('./camps.component.html')
+  template: require('./camp-overview.component.html')
 })
-export class CampsComponent implements OnInit{
+export class CampOverviewComponent implements OnInit{
   camps: Observable<Camp[]>;
 
   constructor(private campService: CampService) {

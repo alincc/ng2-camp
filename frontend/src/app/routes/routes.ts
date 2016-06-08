@@ -1,9 +1,9 @@
 import {Routes, Route} from "@ngrx/router";
-import {HotelsComponent} from "../components/hotel-overview/hotels.component";
+import {HotelOverviewComponent} from "../components/hotel-overview/hotel-overview.component";
 import {HotelDetailComponent} from "../components/hotel-detail/hotel-detail.component";
 import {LoginComponent} from "../components/login/login.component";
 import {AuthGuard} from "./authGuard";
-import {CampsComponent} from "../components/camp-overview/camps.component";
+import {CampOverviewComponent} from "../components/camp-overview/camp-overview.component";
 import {CampEditComponent} from "../components/camp-edit/camp-edit.component";
 import {HotelEditComponent} from "../components/hotel-edit/hotel-edit.component";
 import {MailTemplatesComponent} from "../components/mail-templates/mailtemplates.component";
@@ -16,7 +16,7 @@ export const routes: Routes = [
   {
     path: '/hotels',
     guards: [AuthGuard],
-    component: HotelsComponent
+    component: HotelOverviewComponent
   },
   {
     path: '/hotels/:id',
@@ -31,7 +31,7 @@ export const routes: Routes = [
   {
     path: '/camps',
     guards: [AuthGuard],
-    component: CampsComponent
+    component: CampOverviewComponent
   },
   {
     path: '/camps/new',
