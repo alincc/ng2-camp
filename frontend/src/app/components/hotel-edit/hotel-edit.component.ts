@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Hotel, Country} from '../../model/backend-typings';
+import {Hotel} from '../../model/backend-typings';
 import {HotelService} from '../../shared/hotel.service';
 import {RouteParams, Router} from '@ngrx/router';
+import {Country} from '../../model/country';
 import {CountryService} from '../../shared/country.service';
 import {MaterializeDirective} from 'angular2-materialize';
 import {Observable} from 'rxjs/Observable';
