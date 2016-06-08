@@ -1,0 +1,1 @@
+ALTER TABLE mail_template ADD COLUMN NAME varchar(255);

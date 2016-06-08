@@ -25,28 +25,12 @@
                        [materializeParams]="[{selectMonths: true, selectYears: 15}]"
                        type="text"/>
               </div>
-
-              <div class="col s6">
-                <label for="toDate">To</label>
-                <input id="toDate"
-                       materialize="pickadate"
-                       [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-                       type="text"/>
-              </div>
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-
-<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-  <a class="btn-floating btn-large waves-effect waves-light red" style="margin-left: 10px; "
-     linkTo="/mailtemplates/new">
-    <i class="material-icons">add</i>
-  </a>
 </div>
 
 <div class="row">
@@ -58,7 +42,7 @@
         <div class="row">
           <form materialize class="col s12" #mailTemplateForm="ngForm">
             <div class="row">
-              <div class="input-field col s6">
+              <div *ngIf="!isNewTemplate" class="input-field col s6">
                 <select [(ngModel)]="selectedOption" materialize="material_select"
                         [materializeSelectOptions]="selectOptions">
                   <option value="" disabled selected>Template</option>
@@ -67,17 +51,21 @@
                 <label>Template</label>
               </div>
 
+              <div *ngIf="isNewTemplate" class="input-field col s6">
+                <input  [(ngModel)]="mailTemplate.name" id="templateName" type="text" class="validate" >
+                <label for="templateName">New template name</label>
+              </div>
+
               <div class="col s6">
                 <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a>
-                <a class="btn-floating btn-large waves-effect waves-light blue disabled"><i class="material-icons">done</i></a>
-                <!--<a class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Delete template</a>-->
-                <!--<a class="waves-effect waves-light btn"><i class="material-icons left">done</i>Save changes</a>-->
+                <a class="btn-floating btn-large waves-effect waves-light blue" (click)="saveTemplate()"><i class="material-icons">done</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light blue" (click)="addTemplate()"><i class="material-icons">add</i></a>
               </div>
             </div>
 
             <div class="row">
               <div class="input-field col s12">
-                <textarea id="templateText" class="materialize-textarea"></textarea>
+                <textarea [(ngModel)]="mailTemplate.text" id="templateText" class="materialize-textarea"></textarea>
                 <label for="templateText">Template text</label>
               </div>
             </div>
