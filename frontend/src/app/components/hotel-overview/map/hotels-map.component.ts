@@ -29,14 +29,16 @@ export class HotelsMapComponent implements OnInit {
   ngOnInit() {
     this.hotels
       .flatMap(hotels => Observable.from(hotels))
-      .forEach(hotel => this.mapService.getCoordinates(hotel).subscribe(coordinate => {
-        this.coordinates.push({
-          id: hotel.id,
-          name: hotel.name,
-          lat: coordinate.lat,
-          lng: coordinate.lng
-        })
-      }))
+      .forEach((hotel:Hotel) =>
+        this.mapService.getCoordinates(hotel)
+          .subscribe(coordinate => {
+            this.coordinates.push({
+              id: hotel.id,
+              name: hotel.name,
+              lat: coordinate.lat,
+              lng: coordinate.lng
+            })
+          }))
   }
 }
 
