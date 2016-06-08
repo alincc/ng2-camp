@@ -1,6 +1,7 @@
 package ch.zuehlke.campplanner.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -9,13 +10,14 @@ public class Rating {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotNull
 	private Integer ratingFrom1To5;
 	private String description;
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	private String person;
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	private Hotel hotel;
 
 	public Long getId() {
