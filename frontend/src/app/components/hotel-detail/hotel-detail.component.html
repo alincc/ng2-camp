@@ -21,7 +21,7 @@
   <div class="col s6 m6 center-align">
     <div class="card">
       <div class="card-content left-align">
-        <h3>Infos</h3>
+        <h4>Infos</h4>
         <div class="section">
           <h5>Address</h5>
           <p>{{hotel.name}}</p>
@@ -44,7 +44,7 @@
     <ul>
       <li>
         <a materialize="leanModal" [materializeParams]="[{dismissible: true}]" class="btn-floating red modal-trigger"
-             href="#modal-asure-delete">
+           href="#modal-asure-delete">
           <i class="material-icons">delete</i>
         </a>
       </li>
@@ -63,12 +63,39 @@
   </div>
 
 </div>
+
 <div class="row" *ngIf="hotel">
   <div class="col s6 m6 center-align">
     <div class="card">
       <div class="card-content left-align">
-        <h3>Map</h3>
+        <h4>Map</h4>
         <map [hotel]="hotel"></map>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s6 m6 center-align">
+    <div class="card">
+      <div class="card-content left-align">
+        <h4>Offers</h4>
+        <table class="responsive-table striped bordered">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>People</th>
+            <th>Price</th>
+            <th>Accepted</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let offer of hotel.offers">
+            <td>{{offer.offerDate | date}}</td>
+            <td>{{offer.numberOfPeople}}</td>
+            <td>{{offer.totalPrice}} {{offer.currency}}</td>
+            <td><i *ngIf="offer.accepted" class="material-icons">done</i></td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

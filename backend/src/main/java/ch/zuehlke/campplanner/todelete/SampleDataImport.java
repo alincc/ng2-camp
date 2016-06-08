@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.Currency;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -44,16 +45,20 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         hotelRepository.save(create("Steigenberger Inselhotel", "Konstanz", "DE", "http://de.steigenberger.com/Konstanz/Steigenberger-Inselhotel"));
         Hotel hotelWartegg = create("Schloss Wartegg", "Rohrschacherberg", "CH", "http://wartegg.ch/");
         Hotel hotelVierJahreszeiten = createCompleteHotel();
-        Offer offerWartegg = createOffer();
-        Offer offerVierJahreszeiten = createOffer();
-        hotelWartegg.addOffer(offerWartegg);
+        Offer offerWartegg1 = createOffer1();
+        Offer offerWartegg2 = createOffer2();
+        Offer offerVierJahreszeiten = createOffer1();
+        hotelWartegg.addOffer(offerWartegg1);
+        hotelWartegg.addOffer(offerWartegg2);
         hotelVierJahreszeiten.addOffer(offerVierJahreszeiten);
-        OfferRequest offerRequestWartegg = createOfferRequest(hotelWartegg, offerWartegg);
+        OfferRequest offerRequestWartegg1 = createOfferRequest(hotelWartegg, offerWartegg1);
+        OfferRequest offerRequestWartegg2 = createOfferRequest(hotelWartegg, offerWartegg2);
         OfferRequest offerRequestVierJahreszeiten = createOfferRequest(hotelVierJahreszeiten, offerVierJahreszeiten);
         Camp campVierJahreszeiten = createCamp(offerVierJahreszeiten);
         hotelRepository.save(hotelWartegg);
         hotelRepository.save(hotelVierJahreszeiten);
-        offerRequestRepository.save(offerRequestWartegg);
+        offerRequestRepository.save(offerRequestWartegg1);
+        offerRequestRepository.save(offerRequestWartegg2);
         offerRequestRepository.save(offerRequestVierJahreszeiten);
         campRepository.save(campVierJahreszeiten);
     }
@@ -70,17 +75,34 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         return camp;
     }
 
-
-    private Offer createOffer() {
+    private Offer createOffer1() {
         Offer offer = new Offer();
-        offer.setFromDate(new Date());
-        offer.setToDate(new Date());
+        offer.setOfferDate(new Date(1451640442000L));
+        offer.setFromDate(new Date(1454923642000L));
+        offer.setToDate(new Date(1455355642000L));
         offer.setDoubleRooms(34);
         offer.setSingleRooms(10);
         offer.setTotalPrice(36000d);
+        offer.setCurrency(Currency.getInstance("CHF"));
         offer.setNumberOfPeople(30);
+        offer.setAccepted(true);
         return offer;
     }
+
+    private Offer createOffer2() {
+        Offer offer = new Offer();
+        offer.setOfferDate(new Date());
+        offer.setFromDate(new Date());
+        offer.setToDate(new Date());
+        offer.setDoubleRooms(5);
+        offer.setSingleRooms(0);
+        offer.setTotalPrice(15000d);
+        offer.setCurrency(Currency.getInstance("CHF"));
+        offer.setNumberOfPeople(5);
+        offer.setAccepted(false);
+        return offer;
+    }
+
     private OfferRequest createOfferRequest(Hotel hotel, Offer offer) {
         OfferRequest offerRequest = new OfferRequest();
         offerRequest.setComment("comment");
