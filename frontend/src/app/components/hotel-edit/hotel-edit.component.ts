@@ -14,21 +14,21 @@ import {Observable} from 'rxjs/Observable';
   template: require('./hotel-edit.component.html')
 })
 export class HotelEditComponent implements OnInit {
-  hotel:Hotel = {};
-  hotelId:Observable<number>;
-  countries:Country[];
+  hotel: Hotel = {};
+  hotelId: Observable<number>;
+  countries: Country[];
 
-  constructor(private hotelService:HotelService,
-              private countryService:CountryService,
-              private router:Router,
-              routeParams:RouteParams) {
+  constructor(private hotelService: HotelService,
+              private countryService: CountryService,
+              private router: Router,
+              routeParams: RouteParams) {
     this.hotelId = routeParams.pluck<number>('id');
   }
 
   ngOnInit() {
     this.countryService
       .getAllCountries()
-      .subscribe((countries:Country[]) => {
+      .subscribe((countries: Country[]) => {
         this.countries = countries;
       });
 
@@ -47,7 +47,7 @@ export class HotelEditComponent implements OnInit {
       this.openHotel(hotel));
   }
 
-  openHotel(hotel:Hotel) {
+  openHotel(hotel: Hotel) {
     this.router.go('/hotels/' + hotel.id);
   }
 }
