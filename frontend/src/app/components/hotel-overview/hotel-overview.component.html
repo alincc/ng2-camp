@@ -33,30 +33,41 @@
     </div>
   </div>
   <div class="col m10">
-    <table class="responsive-table striped bordered">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>City</th>
-        <th>Country</th>
-        <th>Info</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let hotel of hotels | async | hotelFilter:filterInput.value | countryFilter:selectedValues">
-        <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td>
-        <td>{{hotel.city}}</td>
-        <td>{{hotel.countryCode}}</td>
-        <td>
-          <a href="{{hotel.website}}" target="_blank">
-            <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
-          </a>
-          <a *ngIf="hotel.tripAdvisorUrl" href="{{hotel.tripAdvisorUrl}}" target="_blank">
-            <i class="fa fa-tripadvisor fa-2x" aria-hidden="true"></i>
-          </a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <tabs>
+      <tab tab-title="Map View">
+        <div id="hotelsMap" class="row" *ngIf="hotels">
+          <hotels-map [hotels]="hotels"></hotels-map>
+        </div>
+      </tab>
+      <tab tab-title="Table View">
+        <div id="hotelsTable">
+          <table class="responsive-table striped bordered">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>City</th>
+              <th>Country</th>
+              <th>Info</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let hotel of hotels | async | hotelFilter:filterInput.value | countryFilter:selectedValues">
+              <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td>
+              <td>{{hotel.city}}</td>
+              <td>{{hotel.countryCode}}</td>
+              <td>
+                <a href="{{hotel.website}}" target="_blank">
+                  <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
+                </a>
+                <a *ngIf="hotel.tripAdvisorUrl" href="{{hotel.tripAdvisorUrl}}" target="_blank">
+                  <i class="fa fa-tripadvisor fa-2x" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </tab>
+    </tabs>
+
   </div>
 </div>

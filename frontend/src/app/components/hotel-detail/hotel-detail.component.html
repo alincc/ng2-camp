@@ -35,11 +35,9 @@
     </div>
   </div>
 
-
-  <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-    <!--<a [linkTo]="'/hotels/edit/' + hotel.id" class="btn-floating btn-large blue">-->
-    <a (click)="editHotel()" class="btn-floating btn-large blue">
-      <i class="large material-icons">mode_edit</i>
+  <div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 45px;">
+    <a class="btn-floating btn-large red">
+      <i class="material-icons">menu</i>
     </a>
     <ul>
       <li>
@@ -48,6 +46,8 @@
           <i class="material-icons">delete</i>
         </a>
       </li>
+      <li><a [linkTo]="'/offers/new/'" class="btn-floating green"><i class="material-icons">note_add</i></a></li>
+      <li><a [linkTo]="'/hotels/edit/' + hotel.id" class="btn-floating blue"><i class="material-icons">mode_edit</i></a></li>
     </ul>
   </div>
 
@@ -64,7 +64,7 @@
 
 </div>
 
-<div class="row" *ngIf="hotel">
+<div class="row" *ngIf="dataFetched">
   <div class="col s6 m6 center-align">
     <div class="card">
       <div class="card-content left-align">
@@ -78,24 +78,7 @@
     <div class="card">
       <div class="card-content left-align">
         <h4>Offers</h4>
-        <table class="responsive-table striped bordered">
-          <thead>
-          <tr>
-            <th>Date</th>
-            <th>People</th>
-            <th>Price</th>
-            <th>Accepted</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let offer of hotel.offers">
-            <td>{{offer.offerDate | date}}</td>
-            <td>{{offer.numberOfPeople}}</td>
-            <td>{{offer.totalPrice}} {{offer.currency}}</td>
-            <td><i *ngIf="offer.accepted" class="material-icons">done</i></td>
-          </tr>
-          </tbody>
-        </table>
+        <offer-list [hotel]="hotel"></offer-list>
       </div>
     </div>
   </div>

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
 import {HotelService} from '../../shared/hotel.service';
 import {Hotel} from '../../model/backend-typings';
@@ -16,6 +15,7 @@ import {MapComponent} from './map/map.component';
 })
 export class HotelDetailComponent implements  OnInit{
   hotel:Hotel = {};
+  dataFetched: boolean = false;
 
   constructor(private routeParams:RouteParams,
               private hotelService:HotelService,
@@ -28,6 +28,7 @@ export class HotelDetailComponent implements  OnInit{
       .flatMap(id => this.hotelService.getHotel(id))
       .subscribe((hotel:Hotel) => {
         this.hotel = hotel;
+        this.dataFetched = true;
       });
   }
 

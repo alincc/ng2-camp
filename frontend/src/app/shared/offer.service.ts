@@ -22,6 +22,10 @@ export class OfferService {
     return this.crud.get('/rest/offers/' + id);
   }
 
+  getByHotelId(id: number): Observable<Offer[]> {
+    return this.crud.get('/rest/offers/byhotel/' + id);
+  }
+
   deleteOffer(id: number): Observable<Response> {
     return this.crud.doDelete('/rest/offers/' + id);
   }

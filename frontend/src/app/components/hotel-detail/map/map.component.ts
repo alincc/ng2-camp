@@ -4,7 +4,6 @@ import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
 import {Coordinate} from '../../../shared/map/coordinate';
 
-
 @Component({
   selector: 'map',
   directives: [ANGULAR2_GOOGLE_MAPS_DIRECTIVES],
@@ -18,17 +17,17 @@ import {Coordinate} from '../../../shared/map/coordinate';
 })
 export class MapComponent implements OnInit {
 
+  @Input()
+  hotel:Hotel;
+  coordinate:Coordinate;
 
-  @Input('hotel') hotel: Hotel;
-
-  coordiante: Coordinate;
-
-  constructor(private mapService: MapService) {
+  constructor(private mapService:MapService) {
   }
 
   ngOnInit() {
-    this.mapService.getCoordinates(this.hotel).subscribe(coordinate => {
-      this.coordiante = coordinate
-    });
+    this.mapService.getCoordinates(this.hotel)
+      .subscribe(coordinate => {
+        this.coordinate = coordinate;
+      });
   }
 }
