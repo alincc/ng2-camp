@@ -41,12 +41,16 @@
       <i class="large material-icons">mode_edit</i>
     </a>
     <ul>
-      <li><a materialize="leanModal" [materializeParams]="[{dismissible: true}]" class="btn-floating red modal-trigger"
-             href="#modal1"><i class="material-icons">delete</i></a></li>
+      <li>
+        <a materialize="leanModal" [materializeParams]="[{dismissible: true}]" class="btn-floating red modal-trigger"
+             href="#modal-asure-delete">
+          <i class="material-icons">delete</i>
+        </a>
+      </li>
     </ul>
   </div>
 
-  <div id="modal1" class="modal">
+  <div id="modal-asure-delete" class="modal">
     <div class="modal-content">
       <h4>Delete Hotel?</h4>
       <p>Do you really want to delete the hotel "{{hotel.name}}"?</p>
