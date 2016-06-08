@@ -54,10 +54,10 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         hotelWartegg.addOffer(offerWartegg1);
         hotelWartegg.addOffer(offerWartegg2);
         hotelVierJahreszeiten.addOffer(offerVierJahreszeiten);
-        OfferRequest offerRequestWartegg1 = createOfferRequest(hotelWartegg, offerWartegg1);
-        OfferRequest offerRequestWartegg2 = createOfferRequest(hotelWartegg, offerWartegg2);
-        OfferRequest offerRequestVierJahreszeiten = createOfferRequest(hotelVierJahreszeiten, offerVierJahreszeiten);
-        Camp campVierJahreszeiten = createCamp(offerVierJahreszeiten);
+        OfferRequest offerRequestWartegg1 = createOfferRequest(offerWartegg1);
+        OfferRequest offerRequestWartegg2 = createOfferRequest(offerWartegg2);
+        OfferRequest offerRequestVierJahreszeiten = createOfferRequest(offerVierJahreszeiten);
+        Camp campVierJahreszeiten = createCamp(offerRequestVierJahreszeiten);
         hotelRepository.save(hotelWartegg);
         hotelRepository.save(hotelVierJahreszeiten);
         offerRequestRepository.save(offerRequestWartegg1);
@@ -68,13 +68,13 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         ratingRepository.save(createRating(5, null, null, hotelVierJahreszeiten));
     }
 
-    private Camp createCamp(Offer offer) {
+    private Camp createCamp(OfferRequest offerRequest) {
         Camp camp = new Camp();
         camp.setName("JSO / JES - Vier Jahreszeiten 2016");
-        camp.setNumberOfPeople(offer.getNumberOfPeople());
+        camp.setNumberOfPeople(30);
         camp.setStatus("Planning");
         camp.setTeam("JSO & JES");
-        camp.setOffers(Arrays.asList(offer));
+        camp.setOfferRequests(Arrays.asList(offerRequest));
         camp.setFromDate(new Date());
         camp.setToDate(new Date());
         return camp;
@@ -108,11 +108,10 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         return offer;
     }
 
-    private OfferRequest createOfferRequest(Hotel hotel, Offer offer) {
+    private OfferRequest createOfferRequest(Offer offer) {
         OfferRequest offerRequest = new OfferRequest();
         offerRequest.setComment("comment");
         offerRequest.setDate(new Date());
-        offerRequest.setHotel(hotel);
         offerRequest.setLastStatusChange(new Date());
         offerRequest.setOffer(offer);
         offerRequest.setStatus(RequestStatus.OFFER_RECEIVED);

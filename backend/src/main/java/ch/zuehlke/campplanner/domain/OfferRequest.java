@@ -11,9 +11,6 @@ public class OfferRequest {
 
     private Date date;
 
-    @ManyToOne
-    private Hotel hotel;
-
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
@@ -42,14 +39,6 @@ public class OfferRequest {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
     }
 
     public RequestStatus getStatus() {

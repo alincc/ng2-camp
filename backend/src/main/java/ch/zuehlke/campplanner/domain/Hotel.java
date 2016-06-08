@@ -1,6 +1,9 @@
 package ch.zuehlke.campplanner.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,7 +39,6 @@ public class Hotel {
     private Integer rooms;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Offer> offers;
 
     public List<Offer> getOffers() {
