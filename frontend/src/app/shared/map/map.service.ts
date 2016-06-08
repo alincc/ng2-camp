@@ -3,7 +3,6 @@ import {Hotel} from '../../model/backend-typings';
 import {Http} from '@angular/http';
 import {Coordinate} from './coordinate';
 import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class MapService {
@@ -15,18 +14,16 @@ export class MapService {
   }
 
   public getCoordinates(hotel: Hotel): Observable<Coordinate> {
-    let subject = new Subject<Coordinate>();
-    let addressInput: string = [hotel.name, hotel.city].join(',');
-    this.http.get(this.apiUrl + addressInput + '&key=' + this.apiKey).subscribe(response => {
-        if (response.status === 200 && response.json().results[0]) {
-          let coordinate: Coordinate = new Coordinate(
-            response.json().results[0].geometry.location.lat,
-            response.json().results[0].geometry.location.lng
-          );
-          subject.next(coordinate);
-        }
-      }
-    );
-    return subject.asObservable();
+    let addressInput: string = ['hotel ' + hotel.name, hotel.city, hotel.street, hotel.countryCode].join(',');
+    return this.http.get(this.apiUrl + addressInput + '&key=' + this.apiKey)
+      .filter(response => response.status === 200)
+      .map(response => response.json())
+      .filter(data => data.status === 'OK' && data.results[0])
+      .map(data => {
+        return new Coordinate(
+          data.results[0].geometry.location.lat,
+          data.results[0].geometry.location.lng
+        );
+      });
   }
 }
