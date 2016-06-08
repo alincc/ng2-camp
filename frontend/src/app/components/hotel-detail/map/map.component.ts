@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.mapService.getCoordinates(this.hotel).subscribe(coordinate => {
-      this.coordinate = coordinate
+      this.coordinate = coordinate;
     });
   }
 }

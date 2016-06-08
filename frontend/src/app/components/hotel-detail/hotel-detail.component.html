@@ -78,24 +78,7 @@
     <div class="card">
       <div class="card-content left-align">
         <h4>Offers</h4>
-        <table class="responsive-table striped bordered">
-          <thead>
-          <tr>
-            <th>Date</th>
-            <th>People</th>
-            <th>Price</th>
-            <th>Accepted</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let offer of hotel.offers">
-            <td>{{offer.offerDate | date}}</td>
-            <td>{{offer.numberOfPeople}}</td>
-            <td>{{offer.totalPrice}} {{offer.currency}}</td>
-            <td><i *ngIf="offer.accepted" class="material-icons">done</i></td>
-          </tr>
-          </tbody>
-        </table>
+        <offer-list [hotel]="hotel"></offer-list>
       </div>
     </div>
   </div>

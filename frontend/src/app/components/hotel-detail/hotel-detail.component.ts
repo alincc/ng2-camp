@@ -6,26 +6,28 @@ import {Hotel} from '../../model/backend-typings';
 import * as Materialize from 'angular2-materialize/dist/index';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {MapComponent} from './map/map.component';
+import {OfferListComponent} from './offer-list/offer-list.component';
 
 @Component({
   selector: 'hotel-detail',
-  directives: [MaterializeDirective, MapComponent],
+  directives: [MaterializeDirective, MapComponent, OfferListComponent],
   providers: [],
   template: require('./hotel-detail.component.html')
 })
-export class HotelDetailComponent implements  OnInit{
-  hotel:Hotel;
+export class HotelDetailComponent implements OnInit {
+  hotel: Hotel;
 
-  constructor(private routeParams:RouteParams,
-              private hotelService:HotelService,
-              private router:Router) {
+  constructor(private routeParams: RouteParams,
+              private hotelService: HotelService,
+              private router: Router) {
   }
-  ngOnInit():any {
+
+  ngOnInit(): any {
     let hotelId = this.routeParams.pluck<number>('id');
     hotelId
       .filter(id => !isNaN(id))
       .flatMap(id => this.hotelService.getHotel(id))
-      .subscribe((hotel:Hotel) => {
+      .subscribe((hotel: Hotel) => {
         this.hotel = hotel;
       });
   }
