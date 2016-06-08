@@ -9,6 +9,7 @@ public class OfferRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @Enumerated(EnumType.STRING)
