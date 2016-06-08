@@ -1,1 +1,33 @@
-<h1>{{camp.name}}</h1>
+<div class="row">
+  <h1>{{camp.name}}</h1>
+</div>
+<div class="row">
+  Status: {{camp.status}}
+</div>
+<div class="row">
+  Number of people: {{camp.numberOfPeople}}
+</div>
+
+<div class="row">
+  <table class="responsive-table striped bordered">
+    <thead>
+    <tr>
+      <th>Offer date</th>
+      <th>Status</th>
+      <th>Hotel</th>
+      <th>City</th>
+      <th>Country</th>
+      <th>Comment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let offerRequest of camp.offerRequests">
+      <td>{{offerRequest.date}}</td>
+      <td>{{offerRequest.status}}</td>
+      <td>{{offerRequest.offer.hotel.name}}</td>
+      <td>{{offerRequest.offer.hotel.city}}</td>
+      <td>{{offerRequest.offer.hotel.countryCode}}</td>
+      <td>{{offerRequest.comment}}</td>
+    </tr>
+  </table>
+</div>
