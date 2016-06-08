@@ -25,8 +25,8 @@ public class Camp {
     private Integer numberOfPeople;
 
     @OneToMany
-    @JsonManagedReference("camp-offers")
-    private List<Offer> offers;
+    @JsonManagedReference("camp-offer-requests")
+    private List<OfferRequest> offerRequests;
 
 //	@OneToMany
 //	private List<OfferRequest> offerRequests;
@@ -90,14 +90,14 @@ public class Camp {
         this.status = status;
     }
 
-    public List<Offer> getOffers() {
-        if(offers == null) {
-            offers = new LinkedList<>();
+    public List<OfferRequest> getOfferRequests() {
+        if(offerRequests == null) {
+            offerRequests = new LinkedList<>();
         }
-        return offers;
+        return offerRequests;
     }
 
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
+    public void setOfferRequests(List<OfferRequest> offerRequests) {
+        this.offerRequests = offerRequests;
     }
 }

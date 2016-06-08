@@ -4,8 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/toArray';
-import {Country} from '../model/backend-typings';
 import {Observer} from 'rxjs/Observer';
+import {Country} from '../model/country';
 
 @Injectable()
 export class CountryService {

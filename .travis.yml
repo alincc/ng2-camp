@@ -1,33 +1,41 @@
-language: node_js
-node_js:
-  - "5"
+language: java
+jdk:
+  - oraclejdk8
+env:
+  - NODE_VERSION=5
+
 notifications:
-  slack: ng-camp:aXB3psuLzMhyiqGoDglEu6Sv
-  
+    slack: ng-camp:aXB3psuLzMhyiqGoDglEu6Sv
+
 before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sudo apt-get install python-software-properties
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get update
-  - sudo apt-get install gcc-5 g++-5
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 80 --slave /usr/bin/g++ g++ /usr/bin/g++-5
-  - sudo update-alternatives --set gcc /usr/bin/gcc-5
-  
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sudo apt-get install python-software-properties
+- sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+- sudo apt-get update
+- sudo apt-get install gcc-5 g++-5
+- sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 80 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+- sudo update-alternatives --set gcc /usr/bin/gcc-5
+
+install:
+  - nvm install $NODE_VERSION
+  - cd frontend && npm install
+
+script:
+  - cd ../backend
+  - chmod +x gradlew
+  - ./gradlew test
+  - cd ..
+  - nvm use $NODE_VERSION
+  - cd frontend npm test
+
 before_script:
   - sh -e /etc/init.d/xvfb start
-  # - nohup bash -c webdriver-manager start 2>&1 & 
+  # - nohup bash -c webdriver-manager start 2>&1 &
   - sleep 1  # give server time to start
-  
+
 branches:
   only: master
 
-script: cd frontend && npm install && npm run test
-
 cache:
   directories: node_modules
-# deploy:
-  # provider: heroku
-  # api_key:
-  #    secure: "8eb24951-75b1-4b6b-89c6-cec5f96185e1"
-  # app: ze-campplanner

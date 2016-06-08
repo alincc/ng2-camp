@@ -4,15 +4,10 @@ export interface Camp {
     id?: number;
     name?: string;
     numberOfPeople?: number;
-    offers?: Offer[];
+    offerRequests?: OfferRequest[];
     status?: string;
     team?: string;
     toDate?: Date;
-}
-
-export interface Country {
-    code?: string;
-    name?: string;
 }
 
 export interface Currency {
@@ -39,6 +34,7 @@ export interface Hotel {
 export interface MailTemplate {
     id?: number;
     language?: string;
+    name?: string;
     text?: string;
 }
 
@@ -49,6 +45,7 @@ export interface Offer {
     doubleRooms?: number;
     expirationDate?: Date;
     fromDate?: Date;
+    hotel?: Hotel;
     id?: number;
     numberOfPeople?: number;
     offerDate?: Date;
@@ -61,7 +58,6 @@ export interface Offer {
 export interface OfferRequest {
     comment?: string;
     date?: Date;
-    hotel?: Hotel;
     id?: number;
     lastStatusChange?: Date;
     offer?: Offer;

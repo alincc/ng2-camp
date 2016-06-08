@@ -9,9 +9,9 @@ import {NgClass} from "@angular/common";
   selector: 'camp-new',
   directives: [MaterializeDirective, NgClass],
   providers: [],
-  template: require('./camp-new.component.html')
+  template: require('./camp-edit.component.html')
 })
-export class CampNewComponent {
+export class CampEditComponent {
   camp: Camp = {};
 
   constructor(private router: Router, private campService : CampService) {
