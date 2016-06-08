@@ -17,4 +17,9 @@ public class CampplannerApplicationTests {
 	public void contextLoads() {
 	}
 
+	@Test
+	public void fail() {
+		fail();
+	}
+
 }
