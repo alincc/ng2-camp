@@ -8,9 +8,9 @@ import {Hotel} from '../../model/backend-typings';
 import FilterPipe from '../hotel.filter.pipe.ts';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import CountryFilterPipe from '../country.filter.pipe';
-import {HotelsMapComponent} from "./map/hotels-map.component";
-import {TabsComponent} from "./../tabs/tabs.component.ts";
-import {TabComponent} from "./../tabs/tab.component.ts";
+import {HotelsMapComponent} from './map/hotels-map.component';
+import {TabsComponent} from './../tabs/tabs.component.ts';
+import {TabComponent} from './../tabs/tab.component.ts';
 
 @Component({
   selector: 'hotels',
