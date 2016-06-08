@@ -34,6 +34,7 @@ export interface Hotel {
 export interface MailTemplate {
     id?: number;
     language?: string;
+    name?: string;
     text?: string;
 }
 
