@@ -9,13 +9,6 @@ public class OfferRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    enum RequestStatus {
-        REQUEST_SENT,
-        OFFER_RECEIVED,
-        WAITING_FOR_CLARIFCATION,
-        OFFER_CONFIRMED,
-        OFFER_DECLINED,
-    }
 
     private Date date;
 

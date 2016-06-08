@@ -1,8 +1,11 @@
 package ch.zuehlke.campplanner.todelete;
 
 import ch.zuehlke.campplanner.dao.HotelRepository;
+import ch.zuehlke.campplanner.dao.OfferRequestRepository;
 import ch.zuehlke.campplanner.domain.Hotel;
 import ch.zuehlke.campplanner.domain.Offer;
+import ch.zuehlke.campplanner.domain.OfferRequest;
+import ch.zuehlke.campplanner.domain.RequestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -18,6 +21,8 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
 
     @Autowired
     private HotelRepository hotelRepository;
+    @Autowired
+    private OfferRequestRepository offerRequestRepository;
 
     /**
      * Source https://docs.google.com/spreadsheets/d/1OtLHjQg6SycAdK7YWI1GOUhmDIQsO-jOavjV6k704kM/edit#gid=0.
@@ -36,11 +41,14 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         hotelRepository.save(create("Hotel Helvetia", "Lindau", "DE", "http://www.hotel-helvetia.com/"));
         hotelRepository.save(create("Steigenberger Inselhotel", "Konstanz", "DE", "http://de.steigenberger.com/Konstanz/Steigenberger-Inselhotel"));
         Hotel hotel = create("Schloss Wartegg", "Rohrschacherberg", "CH", "http://wartegg.ch/");
-        createOffer(hotel);
+        Offer offer = createOffer();
+        hotel.addOffer(offer);
+        OfferRequest offerRequest = createOfferRequest(hotel, offer);
+        offerRequestRepository.save(offerRequest);
         hotelRepository.save(hotel);
     }
 
-    private void createOffer(Hotel savedHotel) {
+    private Offer createOffer() {
         Offer offer = new Offer();
         offer.setFromDate(new Date());
         offer.setToDate(new Date());
@@ -48,7 +56,18 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         offer.setSingleRooms(10);
         offer.setTotalPrice(1200d);
         offer.setNumberOfPeople(30);
-        savedHotel.addOffer(offer);
+        return offer;
+        
+    }
+    private OfferRequest createOfferRequest(Hotel hotel, Offer offer) {
+        OfferRequest offerRequest = new OfferRequest();
+        offerRequest.setComment("comment");
+        offerRequest.setDate(new Date());
+        offerRequest.setHotel(hotel);
+        offerRequest.setLastStatusChange(new Date());
+        offerRequest.setOffer(offer);
+        offerRequest.setStatus(RequestStatus.OFFER_RECEIVED);
+        return offerRequest;
     }
 
     private Hotel create(String name, String city, String country, String website) {
