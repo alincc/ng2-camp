@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.Currency;
 import java.util.Date;
 
 /**
@@ -29,7 +30,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        hotelRepository.deleteAll();;
+        hotelRepository.deleteAll();
 
         hotelRepository.save(createCompleteHotel());
         hotelRepository.save(create("Schloss Münchenweiler", "Münchenweiler", "CH", "http://www.schloss-muenchenwiler.ch/home.html"));
@@ -41,24 +42,47 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         hotelRepository.save(create("Hotel Helvetia", "Lindau", "DE", "http://www.hotel-helvetia.com/"));
         hotelRepository.save(create("Steigenberger Inselhotel", "Konstanz", "DE", "http://de.steigenberger.com/Konstanz/Steigenberger-Inselhotel"));
         Hotel hotel = create("Schloss Wartegg", "Rohrschacherberg", "CH", "http://wartegg.ch/");
-        Offer offer = createOffer();
-        hotel.addOffer(offer);
-        OfferRequest offerRequest = createOfferRequest(hotel, offer);
+        Offer offer1 = createOffer1();
+        hotel.addOffer(offer1);
+        OfferRequest offerRequest1 = createOfferRequest(hotel, offer1);
+
+        Offer offer2 = createOffer2();
+        hotel.addOffer(offer2);
+        OfferRequest offerRequest2 = createOfferRequest(hotel, offer2);
+
         hotelRepository.save(hotel);
-        offerRequestRepository.save(offerRequest);
+        offerRequestRepository.save(offerRequest1);
+        offerRequestRepository.save(offerRequest2);
     }
 
-    private Offer createOffer() {
+    private Offer createOffer1() {
         Offer offer = new Offer();
-        offer.setFromDate(new Date());
-        offer.setToDate(new Date());
+        offer.setOfferDate(new Date(1451640442000L));
+        offer.setFromDate(new Date(1454923642000L));
+        offer.setToDate(new Date(1455355642000L));
         offer.setDoubleRooms(34);
         offer.setSingleRooms(10);
         offer.setTotalPrice(1200d);
+        offer.setCurrency(Currency.getInstance("CHF"));
         offer.setNumberOfPeople(30);
+        offer.setAccepted(true);
         return offer;
-        
     }
+
+    private Offer createOffer2() {
+        Offer offer = new Offer();
+        offer.setOfferDate(new Date());
+        offer.setFromDate(new Date());
+        offer.setToDate(new Date());
+        offer.setDoubleRooms(5);
+        offer.setSingleRooms(0);
+        offer.setTotalPrice(1900d);
+        offer.setCurrency(Currency.getInstance("CHF"));
+        offer.setNumberOfPeople(5);
+        offer.setAccepted(false);
+        return offer;
+    }
+
     private OfferRequest createOfferRequest(Hotel hotel, Offer offer) {
         OfferRequest offerRequest = new OfferRequest();
         offerRequest.setComment("comment");
