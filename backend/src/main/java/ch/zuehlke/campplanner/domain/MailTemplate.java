@@ -1,9 +1,6 @@
 package ch.zuehlke.campplanner.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class MailTemplate {
@@ -11,6 +8,7 @@ public class MailTemplate {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(columnDefinition = "text")
     private String text;
     private String language;
 

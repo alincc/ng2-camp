@@ -22,8 +22,9 @@ install:
   - cd frontend && npm install
 
 script:
+  - cd ../backend && ./gradlew test
   - nvm use $NODE_VERSION
-  - cd frontend  && npm test
+  - cd ../frontend npm test
 
 before_script:
   - sh -e /etc/init.d/xvfb start
