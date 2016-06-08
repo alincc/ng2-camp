@@ -19,10 +19,6 @@ export const routes: Routes = [
     component: HotelsComponent
   },
   {
-    path: '/hotels/new',
-    component: HotelNewComponent
-  },
-  {
     path: '/hotels/:id',
     guards: [AuthGuard],
     component: HotelDetailComponent
