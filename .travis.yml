@@ -34,7 +34,5 @@ before_script:
 branches:
   only: master
 
-
-
 cache:
   directories: node_modules
