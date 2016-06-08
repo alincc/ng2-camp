@@ -1,23 +1,21 @@
 language: java
-
 jdk:
   - oraclejdk8
-
 env:
   - NODE_VERSION=5
 
-  notifications:
+notifications:
     slack: ng-camp:aXB3psuLzMhyiqGoDglEu6Sv
 
-  before_install:
-    - export CHROME_BIN=chromium-browser
-    - export DISPLAY=:99.0
-    - sudo apt-get install python-software-properties
-    - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-    - sudo apt-get update
-    - sudo apt-get install gcc-5 g++-5
-    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 80 --slave /usr/bin/g++ g++ /usr/bin/g++-5
-    - sudo update-alternatives --set gcc /usr/bin/gcc-5
+before_install:
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sudo apt-get install python-software-properties
+- sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+- sudo apt-get update
+- sudo apt-get install gcc-5 g++-5
+- sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 80 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+- sudo update-alternatives --set gcc /usr/bin/gcc-5
 
 install:
   - nvm install $NODE_VERSION
