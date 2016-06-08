@@ -9,7 +9,6 @@ public class OfferRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     private Date date;
 
     @ManyToOne
@@ -23,6 +22,7 @@ public class OfferRequest {
 
     private Date lastStatusChange;
 
+    @Column(columnDefinition = "text")
     private String comment;
 
     @OneToOne
