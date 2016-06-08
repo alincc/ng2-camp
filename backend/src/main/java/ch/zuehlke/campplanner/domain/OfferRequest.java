@@ -14,9 +14,7 @@ public class OfferRequest {
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
-
     @Temporal(TemporalType.DATE)
-
     private Date lastStatusChange;
 
     @Column(columnDefinition = "text")
