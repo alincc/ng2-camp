@@ -3,14 +3,15 @@ package ch.zuehlke.campplanner.todelete;
 import ch.zuehlke.campplanner.dao.CampRepository;
 import ch.zuehlke.campplanner.dao.HotelRepository;
 import ch.zuehlke.campplanner.dao.OfferRequestRepository;
+import ch.zuehlke.campplanner.dao.RatingRepository;
 import ch.zuehlke.campplanner.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.Currency;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.Date;
 
 /**
@@ -25,6 +26,8 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
     private OfferRequestRepository offerRequestRepository;
     @Autowired
     private CampRepository campRepository;
+    @Autowired
+    private RatingRepository ratingRepository;
 
     /**
      * Source https://docs.google.com/spreadsheets/d/1OtLHjQg6SycAdK7YWI1GOUhmDIQsO-jOavjV6k704kM/edit#gid=0.
@@ -61,6 +64,8 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         offerRequestRepository.save(offerRequestWartegg2);
         offerRequestRepository.save(offerRequestVierJahreszeiten);
         campRepository.save(campVierJahreszeiten);
+        ratingRepository.save(createRating(3, "Internet didn't work", "saka", hotelVierJahreszeiten));
+        ratingRepository.save(createRating(5, null, null, hotelVierJahreszeiten));
     }
 
     private Camp createCamp(OfferRequest offerRequest) {
@@ -138,5 +143,15 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         hotel.setRooms(111);
         hotel.setPictureUrl("http://vjz.werbstatt.info/uploads/pics/aussicht_wald_see.jpg");
         return hotel;
+    }
+
+    private Rating createRating(Integer ratingFrom1to5, String description, String person, Hotel hotel) {
+        Rating rating = new Rating();
+        rating.setRatingFrom1To5(ratingFrom1to5);
+        rating.setDescription(description);
+        rating.setPerson(person);
+        rating.setHotel(hotel);
+        rating.setDate(new Date());
+        return rating;
     }
 }
