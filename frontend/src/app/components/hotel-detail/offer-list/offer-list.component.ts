@@ -12,7 +12,7 @@ import {OfferService} from '../../../shared/offer.service';
 })
 export class OfferListComponent implements OnInit {
 
-  @Input('hotel') hotel: Hotel;
+  @Input() hotelObservable: Observable<Hotel>;
 
   offers: Observable<Offer[]>;
 
@@ -20,6 +20,6 @@ export class OfferListComponent implements OnInit {
   }
 
   ngOnInit(): any {
-    this.offers = this.offerService.getByHotelId(this.hotel.id);
+    this.offers = this.hotelObservable.flatMap(hotel => this.offerService.getByHotelId(hotel.id));
   }
 }

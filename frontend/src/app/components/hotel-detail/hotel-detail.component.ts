@@ -6,44 +6,39 @@ import {Hotel} from '../../model/backend-typings';
 import * as Materialize from 'angular2-materialize/dist/index';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {MapComponent} from './map/map.component';
+import {Observable} from 'rxjs/Observable';
+import {OfferListComponent} from './offer-list/offer-list.component';
 
 @Component({
   selector: 'hotel-detail',
-  directives: [MaterializeDirective, MapComponent],
+  directives: [MaterializeDirective, MapComponent, OfferListComponent],
   providers: [],
   template: require('./hotel-detail.component.html')
 })
-export class HotelDetailComponent implements  OnInit{
-  hotel:Hotel = {};
-  dataFetched: boolean = false;
+export class HotelDetailComponent implements OnInit {
+  hotel: Hotel = {};
+  hotelObservable: Observable<Hotel>;
 
-  constructor(private routeParams:RouteParams,
-              private hotelService:HotelService,
-              private router:Router) {
+  constructor(private routeParams: RouteParams,
+              private hotelService: HotelService,
+              private router: Router) {
   }
-  ngOnInit():any {
-    let hotelId = this.routeParams.pluck<number>('id');
-    hotelId
+
+  ngOnInit(): any {
+    this.hotelObservable = this.routeParams.pluck<number>('id')
       .filter(id => !isNaN(id))
-      .flatMap(id => this.hotelService.getHotel(id))
-      .subscribe((hotel:Hotel) => {
-        this.hotel = hotel;
-        this.dataFetched = true;
-      });
-  }
-
-  editHotel() {
-    if (this.hotel && this.hotel.id) {
-      this.router.go(`/hotels/edit/${this.hotel.id}`);
-    }
+      .flatMap(id => this.hotelService.getHotel(id));
+    this.hotelObservable.subscribe(hotel => {
+      this.hotel = hotel;
+    });
   }
 
   deleteHotel() {
     if (this.hotel && this.hotel.id) {
-      this.hotelService.deleteHotel(this.hotel.id).subscribe(response => {
+      this.hotelService.deleteHotel(this.hotel.id).subscribe(() => {
         Materialize.toast('Deleted hotel', 4000, 'rounded');
         this.router.go('/hotels');
-      }, error => {
+      }, () => {
         Materialize.toast('Error: Could not delete hotel', 4000, 'rounded');
       });
     }

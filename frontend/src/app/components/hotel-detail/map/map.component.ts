@@ -3,6 +3,7 @@ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'a
 import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
 import {Coordinate} from '../../../shared/map/coordinate';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'map',
@@ -17,15 +18,14 @@ import {Coordinate} from '../../../shared/map/coordinate';
 })
 export class MapComponent implements OnInit {
 
-  @Input()
-  hotel:Hotel;
-  coordinate:Coordinate;
+  @Input() hotelObservable: Observable<Hotel>;
+  coordinate: Coordinate;
 
-  constructor(private mapService:MapService) {
+  constructor(private mapService: MapService) {
   }
 
   ngOnInit() {
-    this.mapService.getCoordinates(this.hotel)
+    this.hotelObservable.flatMap(hotel => this.mapService.getCoordinates(hotel))
       .subscribe(coordinate => {
         this.coordinate = coordinate;
       });

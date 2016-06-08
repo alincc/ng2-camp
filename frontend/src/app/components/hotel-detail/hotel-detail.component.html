@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="hotel">
 
   <div class="col s6 m6 center-align">
     <div class="card">
@@ -64,12 +64,12 @@
 
 </div>
 
-<div class="row" *ngIf="dataFetched">
+<div class="row">
   <div class="col s6 m6 center-align">
     <div class="card">
       <div class="card-content left-align">
         <h4>Map</h4>
-        <map [hotel]="hotel"></map>
+        <map [hotelObservable]="hotelObservable"></map>
       </div>
     </div>
   </div>
@@ -78,7 +78,7 @@
     <div class="card">
       <div class="card-content left-align">
         <h4>Offers</h4>
-        <offer-list [hotel]="hotel"></offer-list>
+        <offer-list [hotelObservable]="hotelObservable"></offer-list>
       </div>
     </div>
   </div>
