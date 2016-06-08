@@ -45,16 +45,20 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         hotelRepository.save(create("Steigenberger Inselhotel", "Konstanz", "DE", "http://de.steigenberger.com/Konstanz/Steigenberger-Inselhotel"));
         Hotel hotelWartegg = create("Schloss Wartegg", "Rohrschacherberg", "CH", "http://wartegg.ch/");
         Hotel hotelVierJahreszeiten = createCompleteHotel();
-        Offer offerWartegg = createOffer();
-        Offer offerVierJahreszeiten = createOffer();
-        hotelWartegg.addOffer(offerWartegg);
+        Offer offerWartegg1 = createOffer1();
+        Offer offerWartegg2 = createOffer2();
+        Offer offerVierJahreszeiten = createOffer1();
+        hotelWartegg.addOffer(offerWartegg1);
+        hotelWartegg.addOffer(offerWartegg2);
         hotelVierJahreszeiten.addOffer(offerVierJahreszeiten);
-        OfferRequest offerRequestWartegg = createOfferRequest(hotelWartegg, offerWartegg);
+        OfferRequest offerRequestWartegg1 = createOfferRequest(hotelWartegg, offerWartegg1);
+        OfferRequest offerRequestWartegg2 = createOfferRequest(hotelWartegg, offerWartegg2);
         OfferRequest offerRequestVierJahreszeiten = createOfferRequest(hotelVierJahreszeiten, offerVierJahreszeiten);
         Camp campVierJahreszeiten = createCamp(offerVierJahreszeiten);
         hotelRepository.save(hotelWartegg);
         hotelRepository.save(hotelVierJahreszeiten);
-        offerRequestRepository.save(offerRequestWartegg);
+        offerRequestRepository.save(offerRequestWartegg1);
+        offerRequestRepository.save(offerRequestWartegg2);
         offerRequestRepository.save(offerRequestVierJahreszeiten);
         campRepository.save(campVierJahreszeiten);
     }
@@ -70,7 +74,6 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         camp.setToDate(new Date());
         return camp;
     }
-
 
     private Offer createOffer1() {
         Offer offer = new Offer();
@@ -93,7 +96,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         offer.setToDate(new Date());
         offer.setDoubleRooms(5);
         offer.setSingleRooms(0);
-        offer.setTotalPrice(1900d);
+        offer.setTotalPrice(15000d);
         offer.setCurrency(Currency.getInstance("CHF"));
         offer.setNumberOfPeople(5);
         offer.setAccepted(false);
