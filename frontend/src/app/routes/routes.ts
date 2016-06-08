@@ -8,6 +8,7 @@ import {CampEditComponent} from "../components/camp-edit/camp-edit.component";
 import {HotelEditComponent} from "../components/hotel-edit/hotel-edit.component";
 import {MailTemplatesComponent} from "../components/mail-templates/mailtemplates.component";
 import {CampDetailComponent} from "../components/camp-detail/camp-detail.component";
+import {OfferEditComponent} from '../components/offer-edit/offer-edit.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,16 @@ export const routes: Routes = [
     path: '/camps/:id',
     guards: [AuthGuard],
     component: CampDetailComponent
+  },
+  {
+    path: '/offers/new',
+    guards: [AuthGuard],
+    component: OfferEditComponent
+  },
+  {
+    path: '/offers/edit/:id',
+    guards: [AuthGuard],
+    component: OfferEditComponent
   },
   {
     path: '/mailtemplates',
