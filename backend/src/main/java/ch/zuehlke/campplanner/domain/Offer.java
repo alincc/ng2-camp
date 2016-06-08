@@ -14,7 +14,6 @@ import java.util.Date;
  * Grundsätzlich sind alle Felder optional.
  */
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,6 +49,7 @@ public class Offer {
     private String userId;
 
     @ManyToOne(optional = false)
+    @JsonManagedReference
     private Hotel hotel;
 
     public Double getTotalPrice() {

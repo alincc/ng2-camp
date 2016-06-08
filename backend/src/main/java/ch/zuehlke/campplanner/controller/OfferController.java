@@ -32,4 +32,9 @@ public class OfferController {
         return offerRepository.findOne(id);
     }
 
+    @RequestMapping(value = "/byhotel/{hotelId}", method = RequestMethod.GET)
+    public List<Offer> getByHotelId(@PathVariable("hotelId") long hotelId) {
+        return offerRepository.findByHotelId(hotelId);
+    }
+
 }
