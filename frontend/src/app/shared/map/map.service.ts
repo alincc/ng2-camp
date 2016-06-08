@@ -16,16 +16,13 @@ export class MapService {
 
   public getCoordinates(hotel: Hotel): Observable<Coordinate> {
     let subject = new Subject<Coordinate>();
-    let addressInput: string = [hotel.name, hotel.street, hotel.streetNumber, hotel.zipCode, hotel.city, hotel.countryCode].join(',');
-    console.log(addressInput);
+    let addressInput: string = [hotel.name, hotel.city].join(',');
     this.http.get(this.apiUrl + addressInput + '&key=' + this.apiKey).subscribe(response => {
         if (response.status === 200 && response.json().results[0]) {
-
           let coordinate: Coordinate = new Coordinate(
             response.json().results[0].geometry.location.lat,
             response.json().results[0].geometry.location.lng
           );
-          console.log('coordinate', coordinate);
           subject.next(coordinate);
         }
       }
