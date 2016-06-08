@@ -14,9 +14,9 @@ import CountryFilterPipe from '../country.filter.pipe';
   directives: [MaterializeDirective],
   providers: [],
   pipes: [FilterPipe, CountryFilterPipe],
-  template: require('./hotels.component.html')
+  template: require('./hotel-overview.component.html')
 })
-export class HotelsComponent implements OnInit {
+export class HotelOverviewComponent implements OnInit {
   hotels: Observable<Hotel[]>;
   countries: Observable<string[]>;
   selectedValues = [];

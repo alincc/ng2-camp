@@ -37,7 +37,8 @@
 
 
   <div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
-    <a [linkTo]="'/hotels/edit/' + hotel.id" class="btn-floating btn-large blue">
+    <!--<a [linkTo]="'/hotels/edit/' + hotel.id" class="btn-floating btn-large blue">-->
+    <a (click)="editHotel()" class="btn-floating btn-large blue">
       <i class="large material-icons">mode_edit</i>
     </a>
     <ul>
