@@ -21,7 +21,6 @@ export interface Hotel {
     holidayCheckUrl?: string;
     id?: number;
     name?: string;
-    offers?: Offer[];
     pictureUrl?: string;
     rooms?: number;
     street?: string;

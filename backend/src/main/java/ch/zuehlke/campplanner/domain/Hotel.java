@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,6 +38,7 @@ public class Hotel {
     private Integer rooms;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Offer> offers;
 
     public List<Offer> getOffers() {
