@@ -1,5 +1,7 @@
 package ch.zuehlke.campplanner.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class Rating {
 	private String person;
 
 	@ManyToOne(optional = false)
+	@JsonIdentityReference(alwaysAsId = true)
 	private Hotel hotel;
 
 	public Long getId() {

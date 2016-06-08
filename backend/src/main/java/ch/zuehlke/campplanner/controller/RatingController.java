@@ -26,6 +26,7 @@ public class RatingController {
 		return ratings;
 	}
 
+	@Transactional
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Rating get(@PathVariable("id") Long id) {
 		return ratingRepository.findOne(id);
@@ -33,7 +34,7 @@ public class RatingController {
 
 	@Transactional
 	@RequestMapping(value = "/byhotel/{hotelId}", method = RequestMethod.GET)
-	public List<Rating> queryByHotelId(@PathVariable("hotelId") Long hotelId) {
+	public List<Rating> findByHotelId(@PathVariable("hotelId") Long hotelId) {
 		return ratingRepository.findByHotelId(hotelId);
 	}
 
