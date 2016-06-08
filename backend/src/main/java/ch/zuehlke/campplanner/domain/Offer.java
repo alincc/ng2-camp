@@ -39,7 +39,6 @@ public class Offer {
     private Double totalPrice;
     private Currency currency; // funktioniert das?
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 
     // TODO wie werden user abgelegt und woher kommen sie?

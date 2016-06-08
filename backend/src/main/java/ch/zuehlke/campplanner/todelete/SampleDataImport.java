@@ -29,7 +29,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        hotelRepository.deleteAll();
+        hotelRepository.deleteAll();;
 
         hotelRepository.save(createCompleteHotel());
         hotelRepository.save(create("Schloss Münchenweiler", "Münchenweiler", "CH", "http://www.schloss-muenchenwiler.ch/home.html"));
@@ -44,8 +44,8 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         Offer offer = createOffer();
         hotel.addOffer(offer);
         OfferRequest offerRequest = createOfferRequest(hotel, offer);
-        offerRequestRepository.save(offerRequest);
         hotelRepository.save(hotel);
+        offerRequestRepository.save(offerRequest);
     }
 
     private Offer createOffer() {
