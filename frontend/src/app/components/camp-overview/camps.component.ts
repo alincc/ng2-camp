@@ -1,18 +1,20 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import "rxjs/add/observable/from";
-import "rxjs/add/operator/toArray";
-import "rxjs/add/operator/distinct";
 import {Camp} from "../../model/backend-typings";
-import {MaterializeDirective} from "angular2-materialize/dist/index";
+import {CampService} from '../../shared/camp.service';
 
 @Component({
   selector: 'camps',
-  directives: [MaterializeDirective],
-  providers: [],
-  pipes: [],
+  directives: [],
   template: require('./camps.component.html')
 })
-export class CampsComponent {
+export class CampsComponent implements OnInit{
   camps: Observable<Camp[]>;
+
+  constructor(private campService: CampService) {
+  }
+
+  ngOnInit() {
+    this.camps = this.campService.getCamps();
+  }
 }
