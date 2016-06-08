@@ -13,7 +13,7 @@ describe('HotelFilterPipe', () => {
 
   it('filters the hotels list by name and city', () => {
     filter = 'Schluch';
-    let filteredAmount: number = 2;
+    let filteredAmount: number =32;
     expect(pipe.transform(hotels, filter).length).toEqual(filteredAmount);
   });
 
