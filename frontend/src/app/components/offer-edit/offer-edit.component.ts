@@ -41,6 +41,12 @@ export class OfferEditComponent implements OnInit {
     });
   }
 
+  saveOffer() {
+    this.offerService.saveOffer(this.offer).subscribe(response => {
+      console.log(response);
+    });
+  }
+
   private getOffer(offerId): Observable<Offer> {
     if (isNaN(offerId)) {
       return Observable.of({} as Offer);
@@ -55,10 +61,5 @@ export class OfferEditComponent implements OnInit {
     } else {
       return this.hotelService.getHotel(hotelId);
     }
-  }
-
-  saveOffer() {
-    this.offerService.saveOffer(this.offer).subscribe(offer => {
-    });
   }
 }

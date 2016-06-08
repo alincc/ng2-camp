@@ -16,6 +16,7 @@
         <input id="expirationDate"
                materialize="pickadate"
                [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               [(ngModel)]="offer.expirationDate"
                type="text"/>
       </div>
     </div>
@@ -26,6 +27,7 @@
         <input id="fromDate"
                materialize="pickadate"
                [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               [(ngModel)]="offer.fromDate"
                type="text"/>
       </div>
       <div class="col s6">
@@ -33,20 +35,54 @@
         <input id="toDate"
                materialize="pickadate"
                [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               [(ngModel)]="offer.toDate"
                type="text"/>
       </div>
     </div>
 
     <div class="row">
       <div class="col s6">
-        <label for="people">Number Of people</label>
+        <label for="people">Number of people - {{offer.numberOfPeople}}</label>
         <p class="range-field">
-          <input type="range" id="people" min="1" max="100" />
+          <input type="range" id="people" min="1" max="100" [(ngModel)]="offer.numberOfPeople"/>
         </p>
       </div>
       <div class="col s6">
-        <input type="checkbox" id="accepted" checked="offer.accepted" />
+        <label for="singleRooms">Number of single rooms - {{offer.singleRooms}}</label>
+        <p class="range-field">
+          <input type="range" id="singleRooms" min="1" max="100" [(ngModel)]="offer.singleRooms"/>
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <label for="doubleRooms">Number of double rooms - {{offer.doubleRooms}}</label>
+        <p class="range-field">
+          <input type="range" id="doubleRooms" min="1" max="100" [(ngModel)]="offer.doubleRooms"/>
+        </p>
+      </div>
+      <div class="col s6">
+        <input type="checkbox" id="accepted" [(ngModel)]="offer.accepted"/>
         <label for="accepted">Offer accepted</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <label for="totalPrice">Total price</label>
+          <input type="text" id="totalPrice" [(ngModel)]="offer.totalPrice"/>
+      </div>
+      <div class="col s6">
+        <label for="currency">Currency</label>
+          <input type="text" id="currency" [(ngModel)]="offer.currency"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea id="description" class="materialize-textarea" [(ngModel)]="offer.description"></textarea>
+        <label for="description">Description</label>
       </div>
     </div>
 
