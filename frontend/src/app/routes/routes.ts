@@ -46,11 +46,6 @@ export const routes: Routes = [
     component: CampDetailComponent
   },
   {
-    path: '/offers/new',
-    guards: [AuthGuard],
-    component: OfferEditComponent
-  },
-  {
     path: '/offers/edit/:id',
     guards: [AuthGuard],
     component: OfferEditComponent

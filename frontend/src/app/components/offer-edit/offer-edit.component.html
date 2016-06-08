@@ -1,3 +1,76 @@
-<div class="row">
-  <h1>New / Edit Offer</h1>
+<div class="row" *ngIf="offer">
+  <h2>Offer for {{offer.hotel.name}}</h2>
+  <form materialize class="col s12" (ngSubmit)="saveOffer()" #offerForm="ngForm">
+
+    <div class="row">
+      <div class="col s6">
+        <label for="offerDate">Offer date</label>
+        <input id="offerDate"
+               materialize="pickadate"
+               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               [(ngModel)]="offer.offerDate"
+               type="text"/>
+      </div>
+      <div class="col s6">
+        <label for="expirationDate">Offer expiration date</label>
+        <input id="expirationDate"
+               materialize="pickadate"
+               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               type="text"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <label for="fromDate">Camp from</label>
+        <input id="fromDate"
+               materialize="pickadate"
+               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               type="text"/>
+      </div>
+      <div class="col s6">
+        <label for="toDate">Camp to</label>
+        <input id="toDate"
+               materialize="pickadate"
+               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+               type="text"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s6">
+        <label for="people">Number Of people</label>
+        <p class="range-field">
+          <input type="range" id="people" min="1" max="100" />
+        </p>
+      </div>
+      <div class="col s6">
+        <input type="checkbox" id="accepted" checked="offer.accepted" />
+        <label for="accepted">Offer accepted</label>
+      </div>
+    </div>
+
+    <!--accepted?: boolean;-->
+    <!--currency?: Currency;-->
+    <!--description?: string;-->
+    <!--doubleRooms?: number;-->
+    <!--expirationDate?: Date;-->
+    <!--fromDate?: Date;-->
+    <!--hotel?: Hotel;-->
+    <!--id?: number;-->
+    <!--numberOfPeople?: number;-->
+    <!--offerDate?: Date;-->
+    <!--singleRooms?: number;-->
+    <!--toDate?: Date;-->
+    <!--totalPrice?: number;-->
+    <!--userId?: string;-->
+
+    <div class="row">
+      <button class="btn waves-effect waves-light blue" type="submit" name="action"
+              [ngClass]="{disabled: !offerForm.valid}"
+              [disabled]="!offerForm.valid">Save
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </form>
 </div>
