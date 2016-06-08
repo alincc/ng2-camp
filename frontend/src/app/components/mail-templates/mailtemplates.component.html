@@ -1,1 +1,99 @@
-<h1>Mail templates</h1>
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Template parameters</span>
+
+        <div class="row">
+          <form materialize class="col s12" #mailTemplateForm="ngForm">
+            <div class="row">
+              <div class="input-field col s6">
+                <select [(ngModel)]="selectedOption" materialize="material_select"
+                        [materializeSelectOptions]="selectOptions">
+                  <option value="" disabled selected>Choose camp</option>
+                  <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                </select>
+                <label>Choose a camp</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col s6">
+                <label for="fromDate">From</label>
+                <input id="fromDate"
+                       materialize="pickadate"
+                       [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+                       type="text"/>
+              </div>
+
+              <div class="col s6">
+                <label for="toDate">To</label>
+                <input id="toDate"
+                       materialize="pickadate"
+                       [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+                       type="text"/>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 45px;">
+  <a class="btn-floating btn-large waves-effect waves-light red" style="margin-left: 10px; "
+     linkTo="/mailtemplates/new">
+    <i class="material-icons">add</i>
+  </a>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Templates</span>
+
+        <div class="row">
+          <form materialize class="col s12" #mailTemplateForm="ngForm">
+            <div class="row">
+              <div class="input-field col s6">
+                <select [(ngModel)]="selectedOption" materialize="material_select"
+                        [materializeSelectOptions]="selectOptions">
+                  <option value="" disabled selected>Template</option>
+                  <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                </select>
+                <label>Template</label>
+              </div>
+
+              <div class="col s6">
+                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light blue disabled"><i class="material-icons">done</i></a>
+                <!--<a class="waves-effect waves-light btn"><i class="material-icons left">delete</i>Delete template</a>-->
+                <!--<a class="waves-effect waves-light btn"><i class="material-icons left">done</i>Save changes</a>-->
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="templateText" class="materialize-textarea"></textarea>
+                <label for="templateText">Template text</label>
+              </div>
+            </div>
+            <div class="row">
+              <a class="waves-effect waves-light btn"><i class="material-icons left">email</i>Generate email</a>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="generatedTemplate" class="materialize-textarea"></textarea>
+                <label for="generatedTemplate">Generated template</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
