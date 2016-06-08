@@ -1,6 +1,9 @@
 package ch.zuehlke.campplanner.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +14,7 @@ import java.util.Date;
  * Grundsätzlich sind alle Felder optional.
  */
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,12 +50,7 @@ public class Offer {
     private String userId;
 
     @ManyToOne(optional = false)
-    @JsonBackReference
     private Hotel hotel;
-
-    @ManyToOne(optional = true)
-    @JsonBackReference("camp-offers")
-    private Camp camp;
 
     public Double getTotalPrice() {
         return totalPrice;
@@ -67,14 +66,6 @@ public class Offer {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public Camp getCamp() {
-        return camp;
-    }
-
-    public void setCamp(Camp camp) {
-        this.camp = camp;
     }
 
     public Long getId() {
