@@ -51,6 +51,11 @@ export const routes: Routes = [
     component: OfferEditComponent
   },
   {
+    path: '/offers/edit/:id',
+    guards: [AuthGuard],
+    component: OfferEditComponent
+  },
+  {
     path: '/mailtemplates',
     guards: [AuthGuard],
     component: MailTemplatesComponent
