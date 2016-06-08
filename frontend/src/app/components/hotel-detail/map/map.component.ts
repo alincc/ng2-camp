@@ -21,14 +21,14 @@ export class MapComponent implements OnInit {
 
   @Input('hotel') hotel: Hotel;
 
-  coordiante: Coordinate;
+  coordinate: Coordinate;
 
   constructor(private mapService: MapService) {
   }
 
   ngOnInit() {
     this.mapService.getCoordinates(this.hotel).subscribe(coordinate => {
-      this.coordiante = coordinate
+      this.coordinate = coordinate
     });
   }
 }

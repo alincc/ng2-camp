@@ -1,13 +1,13 @@
-<sebm-google-map *ngIf="coordiante" [latitude]="coordiante.lat" [longitude]="coordiante.lng">
+<sebm-google-map *ngIf="coordinate" [latitude]="coordinate.lat" [longitude]="coordinate.lng">
 
   <sebm-google-map-marker
-    [latitude]="coordiante.lat"
-    [longitude]="coordiante.lng"
+    [latitude]="coordinate.lat"
+    [longitude]="coordinate.lng"
     [label]="Hotel">
   </sebm-google-map-marker>
 
 </sebm-google-map>
 
-<div *ngIf="!coordiante">
+<div *ngIf="!coordinate">
   Location information unavailable
 </div>

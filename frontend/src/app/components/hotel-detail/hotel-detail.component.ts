@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
 import {HotelService} from '../../shared/hotel.service';
 import {Hotel} from '../../model/backend-typings';
@@ -15,7 +14,7 @@ import {MapComponent} from './map/map.component';
   template: require('./hotel-detail.component.html')
 })
 export class HotelDetailComponent implements  OnInit{
-  hotel:Hotel = {};
+  hotel:Hotel;
 
   constructor(private routeParams:RouteParams,
               private hotelService:HotelService,
