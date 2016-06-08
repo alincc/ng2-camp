@@ -1,16 +1,15 @@
 package ch.zuehlke.campplanner.todelete;
 
+import ch.zuehlke.campplanner.dao.CampRepository;
 import ch.zuehlke.campplanner.dao.HotelRepository;
 import ch.zuehlke.campplanner.dao.OfferRequestRepository;
-import ch.zuehlke.campplanner.domain.Hotel;
-import ch.zuehlke.campplanner.domain.Offer;
-import ch.zuehlke.campplanner.domain.OfferRequest;
-import ch.zuehlke.campplanner.domain.RequestStatus;
+import ch.zuehlke.campplanner.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -23,15 +22,18 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
     private HotelRepository hotelRepository;
     @Autowired
     private OfferRequestRepository offerRequestRepository;
+    @Autowired
+    private CampRepository campRepository;
 
     /**
      * Source https://docs.google.com/spreadsheets/d/1OtLHjQg6SycAdK7YWI1GOUhmDIQsO-jOavjV6k704kM/edit#gid=0.
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        hotelRepository.deleteAll();;
+        offerRequestRepository.deleteAll();
+        hotelRepository.deleteAll();
+        campRepository.deleteAll();
 
-        hotelRepository.save(createCompleteHotel());
         hotelRepository.save(create("Schloss Münchenweiler", "Münchenweiler", "CH", "http://www.schloss-muenchenwiler.ch/home.html"));
         hotelRepository.save(create("Hotel Moosegg", "Moosegg", "CH", "http://www.moosegg.ch/v2/"));
         hotelRepository.save(create("Hotel Seeblick", "Emmetten", "CH", "http://www.seminarhotelseeblick.ch/de/"));
@@ -40,13 +42,34 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         hotelRepository.save(create("Parkhotel Adler", "Hinterzarten", "DE", "http://www.parkhoteladler.de/de/"));
         hotelRepository.save(create("Hotel Helvetia", "Lindau", "DE", "http://www.hotel-helvetia.com/"));
         hotelRepository.save(create("Steigenberger Inselhotel", "Konstanz", "DE", "http://de.steigenberger.com/Konstanz/Steigenberger-Inselhotel"));
-        Hotel hotel = create("Schloss Wartegg", "Rohrschacherberg", "CH", "http://wartegg.ch/");
-        Offer offer = createOffer();
-        hotel.addOffer(offer);
-        OfferRequest offerRequest = createOfferRequest(hotel, offer);
-        hotelRepository.save(hotel);
-        offerRequestRepository.save(offerRequest);
+        Hotel hotelWartegg = create("Schloss Wartegg", "Rohrschacherberg", "CH", "http://wartegg.ch/");
+        Hotel hotelVierJahreszeiten = createCompleteHotel();
+        Offer offerWartegg = createOffer();
+        Offer offerVierJahreszeiten = createOffer();
+        hotelWartegg.addOffer(offerWartegg);
+        hotelVierJahreszeiten.addOffer(offerVierJahreszeiten);
+        OfferRequest offerRequestWartegg = createOfferRequest(hotelWartegg, offerWartegg);
+        OfferRequest offerRequestVierJahreszeiten = createOfferRequest(hotelVierJahreszeiten, offerVierJahreszeiten);
+        Camp campVierJahreszeiten = createCamp(offerVierJahreszeiten);
+        hotelRepository.save(hotelWartegg);
+        hotelRepository.save(hotelVierJahreszeiten);
+        offerRequestRepository.save(offerRequestWartegg);
+        offerRequestRepository.save(offerRequestVierJahreszeiten);
+        campRepository.save(campVierJahreszeiten);
     }
+
+    private Camp createCamp(Offer offer) {
+        Camp camp = new Camp();
+        camp.setName("JSO / JES - Vier Jahreszeiten 2016");
+        camp.setNumberOfPeople(offer.getNumberOfPeople());
+        camp.setStatus("Planning");
+        camp.setTeam("JSO & JES");
+        camp.setOffers(Arrays.asList(offer));
+        camp.setFromDate(new Date());
+        camp.setToDate(new Date());
+        return camp;
+    }
+
 
     private Offer createOffer() {
         Offer offer = new Offer();
@@ -54,10 +77,9 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         offer.setToDate(new Date());
         offer.setDoubleRooms(34);
         offer.setSingleRooms(10);
-        offer.setTotalPrice(1200d);
+        offer.setTotalPrice(36000d);
         offer.setNumberOfPeople(30);
         return offer;
-        
     }
     private OfferRequest createOfferRequest(Hotel hotel, Offer offer) {
         OfferRequest offerRequest = new OfferRequest();
