@@ -38,7 +38,7 @@ export class HotelOverviewComponent implements OnInit {
   }
 
   public change(options) {
-    this.selectedValues = Array.apply(null, options)
+    this.selectedValues = Array.apply(undefined, options)
       .filter(option => option.selected)
       .map(option => option.value);
   }

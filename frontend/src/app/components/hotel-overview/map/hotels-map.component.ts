@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -19,17 +19,17 @@ import {Observable} from "rxjs/Observable";
 export class HotelsMapComponent implements OnInit {
 
   @Input()
-  hotels:Observable<Hotel[]>;
+  hotels: Observable<Hotel[]>;
 
-  coordinates:HotelWithCoordinates[] = [];
+  coordinates: HotelWithCoordinates[] = [];
 
-  constructor(private mapService:MapService) {
+  constructor(private mapService: MapService) {
   }
 
   ngOnInit() {
     this.hotels
       .flatMap(hotels => Observable.from(hotels))
-      .forEach((hotel:Hotel) =>
+      .forEach((hotel: Hotel) =>
         this.mapService.getCoordinates(hotel)
           .subscribe(coordinate => {
             this.coordinates.push({
@@ -37,14 +37,14 @@ export class HotelsMapComponent implements OnInit {
               name: hotel.name,
               lat: coordinate.lat,
               lng: coordinate.lng
-            })
-          }))
+            });
+          }));
   }
 }
 
 interface HotelWithCoordinates {
-  id:number;
-  name:string;
-  lat:number;
-  lng:number;
+  id: number;
+  name: string;
+  lat: number;
+  lng: number;
 }
