@@ -18,23 +18,31 @@ import {Observable} from "rxjs/Observable";
 })
 export class HotelsMapComponent implements OnInit {
 
+  @Input()
+  hotels:Observable<Hotel[]>;
 
-  @Input('hotels') hotels: Observable<Hotel[]>;
+  coordinates:HotelWithCoordinates[] = [];
 
-  coordinates: HotelWithCoordinates[] = [];
-
-  constructor(private mapService: MapService) {
+  constructor(private mapService:MapService) {
   }
 
   ngOnInit() {
     this.hotels
       .flatMap(hotels => Observable.from(hotels))
       .forEach(hotel => this.mapService.getCoordinates(hotel).subscribe(coordinate => {
-      this.coordinates.push(new HotelWithCoordinates(hotel.id, hotel.name, coordinate.lat, coordinate.lng));
-    }));
+        this.coordinates.push({
+          id: hotel.id,
+          name: hotel.name,
+          lat: coordinate.lat,
+          lng: coordinate.lng
+        })
+      }))
   }
 }
 
-class HotelWithCoordinates {
-  public constructor(public id: number, public name: string, public lat: number, public lng: number) {}
+interface HotelWithCoordinates {
+  id:number;
+  name:string;
+  lat:number;
+  lng:number;
 }
