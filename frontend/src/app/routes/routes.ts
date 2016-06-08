@@ -7,6 +7,7 @@ import {CampOverviewComponent} from "../components/camp-overview/camp-overview.c
 import {CampEditComponent} from "../components/camp-edit/camp-edit.component";
 import {HotelEditComponent} from "../components/hotel-edit/hotel-edit.component";
 import {MailTemplatesComponent} from "../components/mail-templates/mailtemplates.component";
+import {CampDetailComponent} from "../components/camp-detail/camp-detail.component";
 
 export const routes: Routes = [
   {
@@ -37,6 +38,11 @@ export const routes: Routes = [
     path: '/camps/new',
     guards: [AuthGuard],
     component: CampEditComponent
+  },
+  {
+    path: '/camps/:id',
+    guards: [AuthGuard],
+    component: CampDetailComponent
   },
   {
     path: '/mailtemplates',

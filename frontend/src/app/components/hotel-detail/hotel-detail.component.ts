@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
@@ -14,19 +14,21 @@ import {MapComponent} from './map/map.component';
   providers: [],
   template: require('./hotel-detail.component.html')
 })
-export class HotelDetailComponent {
-  hotelId: Observable<number>;
-  hotel: Hotel;
+export class HotelDetailComponent implements  OnInit{
+  hotel:Hotel = {};
 
-  constructor(routeParams: RouteParams,
-              private hotelService: HotelService,
-              private router: Router) {
-    this.hotelId = routeParams.pluck<number>('id');
-    this.hotelId
+  constructor(private routeParams:RouteParams,
+              private hotelService:HotelService,
+              private router:Router) {
+  }
+  ngOnInit():any {
+    let hotelId = this.routeParams.pluck<number>('id');
+    hotelId
       .filter(id => !isNaN(id))
-      .flatMap(id => this.hotelService.getHotel(id)).subscribe((hotel:Hotel) => {
-      this.hotel = hotel;
-    });
+      .flatMap(id => this.hotelService.getHotel(id))
+      .subscribe((hotel:Hotel) => {
+        this.hotel = hotel;
+      });
   }
 
   editHotel() {
