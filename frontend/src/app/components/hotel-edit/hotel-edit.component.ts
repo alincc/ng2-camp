@@ -15,7 +15,7 @@ import {Observable} from 'rxjs/Observable';
 export class HotelEditComponent implements OnInit {
   hotelId: Observable<number>;
   hotel: Hotel = {};
-  countries: Observable<Country[]>;
+  countries: Country[];
 
   constructor(private hotelService: HotelService,
               private countryService: CountryService,
@@ -25,10 +25,15 @@ export class HotelEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hotelId.flatMap(id => this.hotelService.getHotel(id)).subscribe(hotel => {
-      this.hotel = hotel;
-    });
-    this.countries = this.countryService.getAllCountries();
+    this.countryService
+      .getAllCountries()
+      .subscribe((countries:Country[]) => { this.countries = countries; });
+    // look for 'id' in path params, and if it is a number go and fetch according hotel from hotelService
+    // do not do that if id is not a number, i.e. stick with empty hotel instance
+    this.hotelId
+      .filter(id => !isNaN(id))
+      .flatMap(id => this.hotelService.getHotel(id))
+      .subscribe(hotel => { this.hotel = hotel; });
   }
 
   saveHotel() {

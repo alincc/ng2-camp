@@ -29,6 +29,11 @@ export const routes: Routes = [
     component: HotelDetailComponent
   },
   {
+    path: '/hotels/edit/:id',
+    guards: [AuthGuard],
+    component: HotelEditComponent
+  },
+  {
     path: '/camps',
     guards: [AuthGuard],
     component: CampsComponent
@@ -43,11 +48,6 @@ export const routes: Routes = [
   //   guards: [AuthGuard],
   //   component: MailTemplatesComponent
   // },
-  {
-    path: '/hotels/edit/:id',
-    guards: [AuthGuard],
-    component: HotelEditComponent
-  },
   {
     path: '/login',
     component: LoginComponent
