@@ -10,11 +10,6 @@ export interface Camp {
     toDate?: Date;
 }
 
-export interface Country {
-    code?: string;
-    name?: string;
-}
-
 export interface Currency {
 }
 
