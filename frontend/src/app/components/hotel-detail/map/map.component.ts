@@ -3,7 +3,6 @@ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'a
 import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
 import {Coordinate} from '../../../shared/map/coordinate';
-import {Observable} from 'rxjs/Observable';
 
 
 @Component({

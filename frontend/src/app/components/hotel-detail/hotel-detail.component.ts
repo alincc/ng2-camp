@@ -29,6 +29,12 @@ export class HotelDetailComponent {
     });
   }
 
+  editHotel() {
+    if (this.hotel && this.hotel.id) {
+      this.router.go(`/hotels/edit/${this.hotel.id}`);
+    }
+  }
+
   deleteHotel() {
     if (this.hotel && this.hotel.id) {
       this.hotelService.deleteHotel(this.hotel.id).subscribe(response => {
