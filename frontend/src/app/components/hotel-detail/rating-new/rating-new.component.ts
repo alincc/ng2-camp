@@ -12,6 +12,7 @@ import {RatingService} from '../../../shared/rating.service';
 export class RatingNewComponent implements OnInit {
 
   @Input('hotelId') hotelId: Observable<number>;
+  private hotelIdNumber: number;
 
   private rating: Rating = {};
 
@@ -21,11 +22,11 @@ export class RatingNewComponent implements OnInit {
   ngOnInit(): any {
     this.hotelId
       .filter(hotelId => !isNaN(hotelId))
-      .subscribe(hotelId => this.rating.hotel = {id: hotelId});
+      .subscribe(id => this.hotelIdNumber = id);
   }
 
   saveRating() {
-    this.ratingService.saveRating(this.rating)
+    this.ratingService.saveRating(this.rating, this.hotelIdNumber)
       .subscribe(rating => console.log(rating));
   }
 }

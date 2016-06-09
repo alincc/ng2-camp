@@ -8,11 +8,11 @@ export class RatingService {
   constructor(private crud: CrudService) {
   }
 
-  saveRating(rating: Rating): Observable<Rating> {
-    return this.crud.post('/rest/ratings', rating);
+  saveRating(rating: Rating, hotelId: number): Observable<Rating> {
+    return this.crud.post('/rest/hotels/' + hotelId + '/ratings', rating);
   }
 
   getByHotelId(id: number): Observable<Rating[]> {
-    return this.crud.get('/rest/ratings/byhotel/' + id);
+    return this.crud.get('/rest/hotels/' + id + '/ratings');
   }
 }
