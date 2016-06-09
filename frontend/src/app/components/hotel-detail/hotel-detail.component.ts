@@ -10,10 +10,11 @@ import {Observable} from 'rxjs/Observable';
 import {OfferListComponent} from './offer-list/offer-list.component';
 import {RatingListComponent} from './rating-list/rating-list.component';
 import {Subscription} from 'rxjs/Rx';
+import {RatingNewComponent} from "./rating-new/rating-new.component";
 
 @Component({
   selector: 'hotel-detail',
-  directives: [MaterializeDirective, MapComponent, OfferListComponent, RatingListComponent],
+  directives: [MaterializeDirective, MapComponent, OfferListComponent, RatingListComponent, RatingNewComponent],
   providers: [],
   template: require('./hotel-detail.component.html')
 })

@@ -45,6 +45,11 @@
           <i class="material-icons">delete</i>
         </a>
       </li>
+      <li>
+        <a materialize="leanModal" class="btn-floating green modal-trigger" href="#modal-new-rating">
+          <i class="material-icons">star_rate</i>
+        </a>
+      </li>
       <li materialize="tooltip" data-position="left" data-delay="0" data-tooltip="Add offer">
         <a [linkTo]="'/offers/edit/new?hotelId=' + hotel.id" class="btn-floating green"><i class="material-icons">note_add</i></a>
       </li>
@@ -97,3 +102,5 @@
     </div>
   </div>
 </div>
+
+<rating-new [hotelId]="hotelId"></rating-new>
