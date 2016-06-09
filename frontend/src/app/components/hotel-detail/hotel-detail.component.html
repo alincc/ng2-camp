@@ -40,14 +40,17 @@
       <i class="material-icons">menu</i>
     </a>
     <ul>
-      <li>
-        <a materialize="leanModal" [materializeParams]="[{dismissible: true}]" class="btn-floating red modal-trigger"
-           href="#modal-asure-delete">
+      <li materialize="tooltip" data-position="left" data-delay="0" data-tooltip="Delete hotel">
+        <a materialize="leanModal" [materializeParams]="[{dismissible: true}]" class="btn-floating red modal-trigger" href="#modal-asure-delete">
           <i class="material-icons">delete</i>
         </a>
       </li>
-      <li><a [linkTo]="'/offers/edit/new?hotelId=' + hotel.id" class="btn-floating green"><i class="material-icons">note_add</i></a></li>
-      <li><a [linkTo]="'/hotels/edit/' + hotel.id" class="btn-floating blue"><i class="material-icons">mode_edit</i></a></li>
+      <li materialize="tooltip" data-position="left" data-delay="0" data-tooltip="Add offer">
+        <a [linkTo]="'/offers/edit/new?hotelId=' + hotel.id" class="btn-floating green"><i class="material-icons">note_add</i></a>
+      </li>
+      <li materialize="tooltip" data-position="left" data-delay="0" data-tooltip="Edit hotel">
+        <a [linkTo]="'/hotels/edit/' + hotel.id" class="btn-floating blue"><i class="material-icons">mode_edit</i></a>
+      </li>
     </ul>
   </div>
 
