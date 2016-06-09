@@ -15,11 +15,15 @@ import {TabsComponent} from './tabs.component.ts';
   `
 })
 export class TabComponent {
+
+  public STYLE_ACTIVE: string = "waves-light btn blue";
+  public STYLE_INACTIVE: string = "waves-light btn grey darken-2";
+
   @Input('tab-title') title: string;
   active: boolean;
+  style: string = this.STYLE_INACTIVE;
 
-  constructor(tabs: TabsComponent){
+  constructor(tabs: TabsComponent) {
     tabs.addTab(this);
-
   }
 }
