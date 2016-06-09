@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {AuthService} from "../../shared/auth.service";
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../shared/auth.service';
 
 @Component({
   selector: 'navigation',
@@ -7,9 +7,9 @@ import {AuthService} from "../../shared/auth.service";
   providers: [],
   template: require('./navigation.component.html')
 })
-export class NavigationComponent implements OnInit{
+export class NavigationComponent implements OnInit {
 
-  username : string = "test";
+  username: string = 'test';
 
   constructor(private auth: AuthService) {
   }

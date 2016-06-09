@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Http, Headers} from "@angular/http";
-import {tokenNotExpired} from "angular2-jwt";
-import {Router} from "@ngrx/router";
-import {UrlProvider} from "./urlProvider";
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
+import {tokenNotExpired} from 'angular2-jwt';
+import {Router} from '@ngrx/router';
+import {UrlProvider} from './urlProvider';
 
 @Injectable()
 export class AuthService {
@@ -38,7 +38,7 @@ export class AuthService {
     this.router.go('/login');
   }
 
-  public getUsername() : string {
+  public getUsername(): string {
     return localStorage.getItem('username');
   }
 }

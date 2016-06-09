@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import { TabComponent } from './tab.component.ts';
+import {TabComponent} from './tab.component.ts';
 
 @Component({
   selector: 'tabs',
-  template:`
+  template: `
     <ul class="tabs">
       <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
         <a [class]="tab.style">{{tab.title}}</a>

@@ -40,12 +40,12 @@ export class OfferEditComponent implements OnInit {
         }
         return offer;
       }).subscribe(offer => {
-      this.offer = offer;
-    });
+        this.offer = offer;
+      });
   }
 
   ngOnDestroy() {
-     this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   saveOffer() {

@@ -8,7 +8,7 @@ import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {MapComponent} from './map/map.component';
 import {Observable} from 'rxjs/Observable';
 import {OfferListComponent} from './offer-list/offer-list.component';
-import {RatingListComponent} from "./rating-list/rating-list.component";
+import {RatingListComponent} from './rating-list/rating-list.component';
 import {Subscription} from 'rxjs/Rx';
 
 @Component({
