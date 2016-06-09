@@ -1,9 +1,6 @@
 package ch.zuehlke.campplanner.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -49,7 +46,8 @@ public class Offer {
     private String userId;
 
     @ManyToOne(optional = false)
-    @JsonManagedReference
+    @JsonManagedReference()
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Hotel hotel;
 
     public Double getTotalPrice() {
