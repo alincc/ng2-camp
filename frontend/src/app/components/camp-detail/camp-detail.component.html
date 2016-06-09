@@ -24,6 +24,9 @@
       <td>{{offerRequest.offer.hotel.city}}</td>
       <td>{{offerRequest.offer.hotel.countryCode}}</td>
       <td>{{offerRequest.comment}}</td>
+      <td><a [linkTo]="'/offers/edit/' + offerRequest.offer.id">
+        <i class="material-icons">mode_edit</i>
+      </a></td>
     </tr>
   </table>
 </div>

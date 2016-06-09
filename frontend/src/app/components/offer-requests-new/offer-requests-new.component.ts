@@ -18,6 +18,7 @@ export class OfferRequestNewComponent implements OnInit {
   private campId:number;
   private campIdSubscription:Subscription;
   private hotelSubscription:Subscription;
+  private offerRequestCreateSubscription:Subscription;
 
   constructor(private routeParams:RouteParams,
               private hotelService:HotelService,
@@ -35,8 +36,9 @@ export class OfferRequestNewComponent implements OnInit {
   }
 
   saveOfferRequest() {
-    this.offerRequestService.saveOfferRequest(this.campId, this.offerRequest);
-    this.goToCamp();
+    this.offerRequestCreateSubscription = this.offerRequestService.saveOfferRequest(this.campId, this.offerRequest).subscribe(
+      () => this.goToCamp()
+    );
   }
 
   private goToCamp() {
@@ -46,5 +48,6 @@ export class OfferRequestNewComponent implements OnInit {
   ngOnDestroy() {
     this.campIdSubscription.unsubscribe();
     this.hotelSubscription.unsubscribe();
+    this.offerRequestCreateSubscription.unsubscribe();
   }
 }
