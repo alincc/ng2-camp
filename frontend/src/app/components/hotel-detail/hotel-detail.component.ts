@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
 import {HotelService} from '../../shared/hotel.service';
@@ -17,12 +17,19 @@ import {Subscription} from 'rxjs/Rx';
   providers: [],
   template: require('./hotel-detail.component.html')
 })
-export class HotelDetailComponent implements OnInit {
+export class HotelDetailComponent implements OnInit, OnDestroy {
+
   hotel: Hotel = {};
   hotelObservable: Observable<Hotel>;
   hotelId: Observable<number>;
 
   private subscription: Subscription;
+
+  private static removeTooltipsFromDom() {
+    let elements: Element[] = Array.prototype.slice.call(document.getElementsByClassName('material-tooltip'));
+    console.log('much workaround, such hack', elements);
+    elements.forEach(element => element.remove());
+  }
 
   constructor(private routeParams: RouteParams,
               private hotelService: HotelService,
@@ -56,5 +63,6 @@ export class HotelDetailComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    HotelDetailComponent.removeTooltipsFromDom();
   }
 }
