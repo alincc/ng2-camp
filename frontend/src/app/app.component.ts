@@ -8,11 +8,12 @@ import {CampService} from "./shared/camp.service";
 import {AuthService} from "./shared/auth.service";
 import {RatingService} from "./shared/rating.service";
 import {OfferRequestService} from "./shared/offer-request.service";
+import {MailTemplateService} from "./shared/mailtemplate.service";
 
 @Component({
   selector: 'app',
   directives: [HotelOverviewComponent, NavigationComponent],
-  providers: [CrudService, HotelService, CountryService, CampService, AuthService, OfferRequestService, RatingService],
+  providers: [CrudService, HotelService, CountryService, CampService, AuthService, OfferRequestService, RatingService, MailTemplateService],
   styles: [
     require('../assets/css/main.scss')
   ],
