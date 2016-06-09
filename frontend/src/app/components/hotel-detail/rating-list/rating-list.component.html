@@ -11,7 +11,7 @@
   <tr *ngFor="let rating of ratings | async">
     <td>{{rating.ratingFrom1To5}}</td>
     <td>{{rating.description}}</td>
-    <td>{{rating.date}}</td>
+    <td>{{rating.date | date}}</td>
     <td>{{rating.person}}</td>
   </tr>
   </tbody>
