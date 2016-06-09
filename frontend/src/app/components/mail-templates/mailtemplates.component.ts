@@ -24,10 +24,10 @@ export class MailTemplatesComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.refreshTemplates2();
+    this.refreshTemplates();
   }
 
-  private refreshTemplates2() {
+  private refreshTemplates() {
     this.mailTemplateService.getAll().subscribe(
       mailTemplates => this.templatesLoaded(mailTemplates)
     )
@@ -37,6 +37,7 @@ export class MailTemplatesComponent implements OnInit{
     this.mailTemplates = mailTemplates;
     if(this.mailTemplates.length > 0) {
       this.mailTemplate = this.mailTemplates[0];
+      this.mailTemplateId = this.mailTemplate.id;
     } else {
       this.mailTemplate = {
         id: -1,
@@ -74,8 +75,9 @@ export class MailTemplatesComponent implements OnInit{
   }
 
   deleteTemplate() {
-    this.mailTemplateService.deleteById(this.mailTemplate.id);
-    this.refreshTemplates2();
+    this.mailTemplateService.deleteById(this.mailTemplate.id).subscribe(
+      response => this.refreshTemplates()
+    );
   }
 
 
