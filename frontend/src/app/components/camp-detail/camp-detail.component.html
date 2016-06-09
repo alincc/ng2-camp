@@ -19,7 +19,7 @@
     <tbody>
     <tr *ngFor="let offerRequest of camp.offerRequests">
       <td>{{offerRequest.date | date}}</td>
-      <td><div class="chip light-blue accent-1">{{offerRequest.status}}</div></td>
+      <td><div class="chip" [ngClass]="getStatusColor(offerRequest.status)">{{offerRequest.status}}</div></td>
       <td>{{offerRequest.offer.hotel.name}}</td>
       <td>{{offerRequest.offer.hotel.city}}</td>
       <td>{{offerRequest.offer.hotel.countryCode}}</td>
