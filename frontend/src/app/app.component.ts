@@ -6,11 +6,12 @@ import {HotelService} from "./shared/hotel.service";
 import {CountryService} from "./shared/country.service";
 import {CampService} from "./shared/camp.service";
 import {AuthService} from "./shared/auth.service";
+import {RatingService} from "./shared/rating.service";
 
 @Component({
   selector: 'app',
   directives: [HotelOverviewComponent, NavigationComponent],
-  providers: [CrudService, HotelService, CountryService, CampService, AuthService],
+  providers: [CrudService, HotelService, CountryService, CampService, AuthService, RatingService],
   styles: [
     require('../assets/css/main.scss')
   ],
