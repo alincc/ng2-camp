@@ -1,0 +1,18 @@
+<table class="responsive-table striped bordered">
+  <thead>
+  <tr>
+    <th>Rating</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th>Author</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let rating of ratings | async">
+    <td>{{rating.ratingFrom1To5}}</td>
+    <td>{{rating.description}}</td>
+    <td>{{rating.date}}</td>
+    <td>{{rating.person}}</td>
+  </tr>
+  </tbody>
+</table>
