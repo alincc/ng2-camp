@@ -14,6 +14,7 @@ import {MailTemplateService} from "../../shared/mailtemplate.service";
 })
 export class MailTemplatesComponent implements OnInit{
   isNewTemplate : boolean = false;
+  isTemplateChanged : boolean = false;
 
   private mailTemplate : MailTemplate = {};
   private mailTemplates : MailTemplate[] = [];
@@ -23,10 +24,10 @@ export class MailTemplatesComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.refreshTemplates2();
+    this.refreshTemplates();
   }
 
-  private refreshTemplates2() {
+  private refreshTemplates() {
     this.mailTemplateService.getAll().subscribe(
       mailTemplates => this.templatesLoaded(mailTemplates)
     )
@@ -36,6 +37,7 @@ export class MailTemplatesComponent implements OnInit{
     this.mailTemplates = mailTemplates;
     if(this.mailTemplates.length > 0) {
       this.mailTemplate = this.mailTemplates[0];
+      this.mailTemplateId = this.mailTemplate.id;
     } else {
       this.mailTemplate = {
         id: -1,
@@ -51,8 +53,18 @@ export class MailTemplatesComponent implements OnInit{
   }
 
   saveTemplate() {
-    this.mailTemplateService.saveOrUpdate(this.mailTemplate);
-    this.isNewTemplate = false;
+    this.mailTemplateService.saveOrUpdate(this.mailTemplate).subscribe(
+      savedTemplate => {
+        if(!this.isTemplateChanged) {
+          console.log("add");
+          this.mailTemplate = savedTemplate;
+          this.mailTemplates.push(savedTemplate);
+          this.mailTemplateId = savedTemplate.id;
+        }
+        this.isNewTemplate = false;
+        this.isTemplateChanged = false;
+      }
+    );
   }
 
   onChange(optionId) {
@@ -60,9 +72,14 @@ export class MailTemplatesComponent implements OnInit{
     this.mailTemplate = matchedTemplates[0];
   }
 
+  onTemplateChange() {
+    this.isTemplateChanged = true;
+  }
+
   deleteTemplate() {
-    this.mailTemplateService.deleteById(this.mailTemplate.id);
-    this.refreshTemplates2();
+    this.mailTemplateService.deleteById(this.mailTemplate.id).subscribe(
+      response => this.refreshTemplates()
+    );
   }
 
 

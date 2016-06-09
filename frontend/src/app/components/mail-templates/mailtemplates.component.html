@@ -54,15 +54,15 @@
               </div>
 
               <div *ngIf="isNewTemplate" class="input-field col s6">
-                <input  [(ngModel)]="mailTemplate.name" id="templateName" type="text" class="validate" >
+                <input [(ngModel)]="mailTemplate.name" id="templateName" type="text" class="validate" >
                 <label for="templateName">New template name</label>
               </div>
 
               <div class="col s6">
                 <button class="btn-floating btn-large waves-effect waves-light red" (click)="deleteTemplate()"><i class="material-icons">delete</i></button>
                 <button class="btn-floating btn-large waves-effect waves-light blue" (click)="saveTemplate()"
-                   [ngClass]="{disabled: !isNewTemplate}"
-                   [disabled]="!isNewTemplate">
+                   [ngClass]="{disabled: !isNewTemplate && !isTemplateChanged}"
+                   [disabled]="!isNewTemplate && !isTemplateChanged">
                   <i class="material-icons">done</i>
                 </button>
                 <button class="btn-floating btn-large waves-effect waves-light blue" (click)="addTemplate()"
@@ -75,7 +75,7 @@
 
             <div class="row">
               <div class="input-field col s12">
-                <textarea [(ngModel)]="mailTemplate.text" id="templateText" class="materialize-textarea"></textarea>
+                <textarea [(ngModel)]="mailTemplate.text" id="templateText" class="materialize-textarea" (change)="onTemplateChange()"></textarea>
                 <label for="templateText">Template text</label>
               </div>
             </div>

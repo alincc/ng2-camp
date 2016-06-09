@@ -1,6 +1,7 @@
 package ch.zuehlke.campplanner.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import ch.zuehlke.campplanner.utils.HotelIdSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,7 +21,7 @@ public class Rating {
 	private String person;
 
 	@ManyToOne(optional = false)
-	@JsonIdentityReference(alwaysAsId = true)
+	@JsonSerialize(using = HotelIdSerializer.class)
 	private Hotel hotel;
 
 	public Long getId() {
