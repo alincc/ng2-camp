@@ -10,8 +10,8 @@ export class OfferRequestService {
   constructor(private crud: CrudService) {
   }
 
-  saveOfferRequest(offerRequest: OfferRequest): Observable<OfferRequest> {
-    return this.crud.post('/rest/offerrequests', offerRequest);
+  saveOfferRequest(campId: number, offerRequest: OfferRequest): Observable<OfferRequest> {
+    return this.crud.post('/rest/camps/' + campId + '/offerrequests', offerRequest);
   }
 
   getOfferRequests(): Observable<OfferRequest[]> {
