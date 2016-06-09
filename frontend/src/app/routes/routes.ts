@@ -1,15 +1,15 @@
-import {Routes, Route} from "@ngrx/router";
-import {HotelOverviewComponent} from "../components/hotel-overview/hotel-overview.component";
-import {HotelDetailComponent} from "../components/hotel-detail/hotel-detail.component";
-import {LoginComponent} from "../components/login/login.component";
-import {AuthGuard} from "./authGuard";
-import {CampOverviewComponent} from "../components/camp-overview/camp-overview.component";
-import {CampEditComponent} from "../components/camp-edit/camp-edit.component";
-import {HotelEditComponent} from "../components/hotel-edit/hotel-edit.component";
-import {MailTemplatesComponent} from "../components/mail-templates/mailtemplates.component";
-import {CampDetailComponent} from "../components/camp-detail/camp-detail.component";
+import {Routes, Route} from '@ngrx/router';
+import {HotelOverviewComponent} from '../components/hotel-overview/hotel-overview.component';
+import {HotelDetailComponent} from '../components/hotel-detail/hotel-detail.component';
+import {LoginComponent} from '../components/login/login.component';
+import {AuthGuard} from './authGuard';
+import {CampOverviewComponent} from '../components/camp-overview/camp-overview.component';
+import {CampEditComponent} from '../components/camp-edit/camp-edit.component';
+import {HotelEditComponent} from '../components/hotel-edit/hotel-edit.component';
+import {MailTemplatesComponent} from '../components/mail-templates/mailtemplates.component';
+import {CampDetailComponent} from '../components/camp-detail/camp-detail.component';
 import {OfferEditComponent} from '../components/offer-edit/offer-edit.component';
-import {OfferRequestNewComponent} from "../components/offer-requests-new/offer-requests-new.component.ts";
+import {OfferRequestNewComponent} from '../components/offer-requests-new/offer-requests-new.component.ts';
 
 export const routes: Routes = [
   {
