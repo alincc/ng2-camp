@@ -24,7 +24,7 @@ public class Camp {
     private Date toDate;
     private Integer numberOfPeople;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     @JsonManagedReference("camp-offer-requests")
     private List<OfferRequest> offerRequests;
 

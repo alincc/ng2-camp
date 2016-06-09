@@ -63,6 +63,13 @@ export interface OfferRequest {
     status?: RequestStatus;
 }
 
+export interface OfferRequestCreateDto {
+    comment?: string;
+    date?: Date;
+    hotelId?: number;
+    status?: RequestStatus;
+}
+
 export interface Rating {
     date?: Date;
     description?: string;
