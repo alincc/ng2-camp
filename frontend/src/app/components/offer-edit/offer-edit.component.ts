@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/zip';
-import {RouteParams, QueryParams} from '@ngrx/router';
+import {RouteParams, QueryParams, Router} from '@ngrx/router';
 import {OfferService} from '../../shared/offer.service';
 import {Offer, Hotel} from '../../model/backend-typings';
 import {HotelService} from '../../shared/hotel.service';
@@ -21,7 +21,8 @@ export class OfferEditComponent implements OnInit {
 
   private subscription: Subscription;
 
-  constructor(private routeParams: RouteParams,
+  constructor(private router: Router,
+              private routeParams: RouteParams,
               private queryParams: QueryParams,
               private offerService: OfferService,
               private hotelService: HotelService) {
@@ -49,8 +50,17 @@ export class OfferEditComponent implements OnInit {
   }
 
   saveOffer() {
-    this.offerService.saveOffer(this.offer).subscribe(response => {
-      console.log(response);
+    this.offer.totalPrice = +this.offer.totalPrice;
+    this.offer.numberOfPeople = +this.offer.numberOfPeople;
+    this.offer.singleRooms = +this.offer.singleRooms;
+    this.offer.doubleRooms = +this.offer.doubleRooms;
+    this.offer.fromDate = new Date(this.offer.fromDate);
+    this.offer.toDate = new Date(this.offer.toDate);
+    this.offer.offerDate = new Date(this.offer.offerDate);
+    this.offer.expirationDate = new Date(this.offer.expirationDate);
+
+    this.offerService.saveOfferForHotelId(this.offer.hotel.id, this.offer).subscribe(response => {
+      this.router.go('/hotels/' + this.offer.hotel.id);
     });
   }
 

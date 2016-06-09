@@ -1,7 +1,8 @@
 package ch.zuehlke.campplanner.controller;
 
+import ch.zuehlke.campplanner.dao.HotelRepository;
 import ch.zuehlke.campplanner.dao.OfferRepository;
-import ch.zuehlke.campplanner.domain.Camp;
+import ch.zuehlke.campplanner.domain.Hotel;
 import ch.zuehlke.campplanner.domain.Offer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,9 @@ public class OfferController {
 
     @Autowired
     private OfferRepository offerRepository;
+
+    @Autowired
+    private HotelRepository hotelRepository;
 
     @Transactional
     @RequestMapping
@@ -36,8 +40,10 @@ public class OfferController {
     }
 
     @Transactional
-    @RequestMapping(method = RequestMethod.POST)
-    public Offer addOrUpdate(@RequestBody Offer offer) {
+    @RequestMapping(value = "/byhotel/{hotelId}", method = RequestMethod.POST)
+    public Offer addOrUpdate(@PathVariable("hotelId") long hotelId, @RequestBody Offer offer) {
+        Hotel hotel = hotelRepository.findOne(hotelId);
+        offer.setHotel(hotel);
         offerRepository.save(offer);
         return offer;
     }
