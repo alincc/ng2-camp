@@ -23,14 +23,11 @@ public class Offer {
     private Date expirationDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
     private Date fromDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @NotNull
     private Date toDate;
 
-    @NotNull
     private Integer numberOfPeople;
     private Integer doubleRooms;
     private Integer singleRooms;

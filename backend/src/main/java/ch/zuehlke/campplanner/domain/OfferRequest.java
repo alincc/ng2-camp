@@ -21,7 +21,7 @@ public class OfferRequest {
     @Column(columnDefinition = "text")
     private String comment;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Offer offer;
 
     public Long getId() {
