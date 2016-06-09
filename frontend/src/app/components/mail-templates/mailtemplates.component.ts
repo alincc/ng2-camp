@@ -55,14 +55,16 @@ export class MailTemplatesComponent implements OnInit{
   saveTemplate() {
     this.mailTemplateService.saveOrUpdate(this.mailTemplate).subscribe(
       savedTemplate => {
-        this.mailTemplate = savedTemplate;
-        this.mailTemplates.push(savedTemplate);
-        this.mailTemplateId = savedTemplate.id;
+        if(!this.isTemplateChanged) {
+          console.log("add");
+          this.mailTemplate = savedTemplate;
+          this.mailTemplates.push(savedTemplate);
+          this.mailTemplateId = savedTemplate.id;
+        }
+        this.isNewTemplate = false;
+        this.isTemplateChanged = false;
       }
     );
-
-    this.isNewTemplate = false;
-    this.isTemplateChanged = false;
   }
 
   onChange(optionId) {
