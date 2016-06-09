@@ -11,6 +11,7 @@ import '@angular/common';
 import '@angular/http';
 import '@ngrx/core';
 import '@ngrx/router';
+import 'marked';
 
 // RxJS
 import 'rxjs/add/operator/map';

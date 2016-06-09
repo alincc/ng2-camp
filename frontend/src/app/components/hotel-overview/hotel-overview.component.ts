@@ -50,7 +50,7 @@ export class HotelOverviewComponent implements OnInit {
     this.filterCrieriaChanged();
   }
 
-  filterHotels(event: KeyboardEvent) {
+  filterHotels(event: any) {
     this.filteredInput = event.target.value;
     this.filterCrieriaChanged();
   }

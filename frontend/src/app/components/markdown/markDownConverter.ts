@@ -1,9 +1,9 @@
-import * as marked from "marked/marked.min.js";
-import {Injectable} from "angular2/core";
+import * as marked from 'marked';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class MarkdownConverter {
-  private md:MarkedStatic;
+  private md: MarkedStatic;
 
   constructor() {
     this.md = marked;
