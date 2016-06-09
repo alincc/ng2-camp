@@ -16,10 +16,10 @@
   <div class="col m2">
     <div class="row">
       <div class="input-field">
-        <select multiple materialize="material_select" [materializeSelectOptions]="countries | async"
+        <select multiple materialize="material_select" [materializeSelectOptions]="countries"
                 (change)="change($event.target.options)">
           <option value="" disabled selected>Choose countries</option>
-          <option *ngFor="let country of countries | async" [value]="country">{{country}}</option>
+          <option *ngFor="let country of countries" [value]="country">{{country}}</option>
         </select>
         <label>Countries</label>
       </div>
@@ -51,7 +51,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let hotel of hotels | async | hotelFilter:filterInput.value | countryFilter:selectedValues">
+            <tr *ngFor="let hotel of hotels | hotelFilter:filterInput.value | countryFilter:selectedValues">
               <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td>
               <td>{{hotel.city}}</td>
               <td>{{hotel.countryCode}}</td>
