@@ -80,11 +80,11 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         MailTemplate mailTemplate = new MailTemplate();
         mailTemplate.setLanguage("DE");
         mailTemplate.setName("JSO / JES 2016");
-        mailTemplate.setText("Subject\n" +
+        mailTemplate.setText("### Subject\n" +
                 "\n" +
                 "Offerte für Seminarwoche, @CAMP_FROM@ - @CAMP_TO@\n" +
                 "\n" +
-                "Text\n" +
+                "### Text\n" +
                 "\n" +
                 "Sehr geehrte Damen und Herren\n" +
                 " \n" +
@@ -99,24 +99,28 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
                 " \n" +
                 "Folgende Kriterien sind uns wichtig:\n" +
                 " \n" +
-                "·         Unterbringung in Einzel- oder Doppelzimmern (min. 2 Einzelzimmer)\n" +
-                "·         Ein oder mehrere Seminarräume\n" +
+                "- Unterbringung in Einzel- oder Doppelzimmern (min. 2 Einzelzimmer)\n" +
+                "- Ein oder mehrere Seminarräume\n" +
                 "·         Schneller Internetzugang in den Seminarräumen\n" +
                 " \n" +
                 " \n" +
                 "Verpflegung:\n" +
                 " \n" +
-                "·         Kaffeepausen morgens und nachmittags (Montag - Freitag)\n" +
-                "·         5 Mal Frühstück (Montag - Freitag)\n" +
-                "·         5 Mal Mittagessen (Montag - Freitag)\n" +
-                "·         4 Mal Abendessen (Sonntag - Donnerstag, Mittwoch ohne Abendessen)\n" +
+                "- Kaffeepausen morgens und nachmittags (Montag - Freitag)\n" +
+                "- 5 Mal Frühstück (Montag - Freitag)\n" +
+                "- 5 Mal Mittagessen (Montag - Freitag)\n" +
+                "- 4 Mal Abendessen (Sonntag - Donnerstag, Mittwoch ohne Abendessen)\n" +
                 " \n" +
                 " \n" +
                 "Sollten Sie weitere Fragen haben, zögern Sie bitte nicht mich zu kontaktieren.\n" +
+                "\n" +
+                "\n" +
                 "Ich freue mich auf Ihre Offerte!\n" +
                 " \n" +
                 "Meine Kontaktdaten wie folgt:\n" +
+                "\n" +
                 "E-Mail: @CONTACT_EMAIL@\n" +
+                "\n" +
                 "Telefon: @CONTACT_PHONE@");
         return mailTemplate;
     }

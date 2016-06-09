@@ -2,6 +2,7 @@ package ch.zuehlke.campplanner.controller;
 
 import ch.zuehlke.campplanner.dao.MailTemplateRepository;
 import ch.zuehlke.campplanner.domain.MailTemplate;
+import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +41,14 @@ public class MailTemplateController {
 
 
     @Transactional
-    @RequestMapping(path = "/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         mailTemplateRepository.delete(id);
+    }
+
+    @RequestMapping(path = "/markdown", method = RequestMethod.POST)
+    public String generateHtml(@RequestBody MarkdownDto markdownDto) {
+        PegDownProcessor pegDownProcessor = new PegDownProcessor();
+        return pegDownProcessor.markdownToHtml(markdownDto.getTemplateText());
     }
 }

@@ -4,6 +4,7 @@ import "rxjs/add/operator/distinct";
 import {MaterializeDirective} from "angular2-materialize/dist/index";
 import {MailTemplate} from "../../model/backend-typings";
 import {MailTemplateService} from "../../shared/mailtemplate.service";
+import {MarkdownConverter} from "../markdown/markDownConverter";
 
 @Component({
   selector: 'mail-templates',
@@ -12,15 +13,16 @@ import {MailTemplateService} from "../../shared/mailtemplate.service";
   pipes: [],
   template: require('./mailtemplates.component.html')
 })
-export class MailTemplatesComponent implements OnInit{
-  isNewTemplate : boolean = false;
-  isTemplateChanged : boolean = false;
+export class MailTemplatesComponent implements OnInit {
+  isNewTemplate:boolean = false;
+  isTemplateChanged:boolean = false;
 
-  private mailTemplate : MailTemplate = {};
-  private mailTemplates : MailTemplate[] = [];
-  private mailTemplateId : Number;
+  private mailTemplate:MailTemplate = {};
+  private mailTemplates:MailTemplate[] = [];
+  private mailTemplateId:Number;
+  private html:string = '';
 
-  constructor(private mailTemplateService: MailTemplateService) {
+  constructor(private mailTemplateService:MailTemplateService, private markDownConverter:MarkdownConverter) {
   }
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class MailTemplatesComponent implements OnInit{
 
   private templatesLoaded(mailTemplates:MailTemplate[]) {
     this.mailTemplates = mailTemplates;
-    if(this.mailTemplates.length > 0) {
+    if (this.mailTemplates.length > 0) {
       this.mailTemplate = this.mailTemplates[0];
       this.mailTemplateId = this.mailTemplate.id;
     } else {
@@ -55,7 +57,7 @@ export class MailTemplatesComponent implements OnInit{
   saveTemplate() {
     this.mailTemplateService.saveOrUpdate(this.mailTemplate).subscribe(
       savedTemplate => {
-        if(!this.isTemplateChanged) {
+        if (!this.isTemplateChanged) {
           console.log("add");
           this.mailTemplate = savedTemplate;
           this.mailTemplates.push(savedTemplate);
@@ -70,6 +72,10 @@ export class MailTemplatesComponent implements OnInit{
   onChange(optionId) {
     var matchedTemplates = this.mailTemplates.filter(template => template.id == optionId);
     this.mailTemplate = matchedTemplates[0];
+  }
+
+  private refreshHtml(templateText : string) {
+    this.html = this.markDownConverter.convert(templateText);
   }
 
   onTemplateChange() {

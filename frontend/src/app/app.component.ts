@@ -9,11 +9,12 @@ import {AuthService} from "./shared/auth.service";
 import {RatingService} from "./shared/rating.service";
 import {OfferRequestService} from "./shared/offer-request.service";
 import {MailTemplateService} from "./shared/mailtemplate.service";
+import {MarkdownConverter} from "./components/markdown/markDownConverter";
 
 @Component({
   selector: 'app',
   directives: [HotelOverviewComponent, NavigationComponent],
-  providers: [CrudService, HotelService, CountryService, CampService, AuthService, OfferRequestService, RatingService, MailTemplateService],
+  providers: [CrudService, HotelService, CountryService, CampService, AuthService, OfferRequestService, RatingService, MailTemplateService, MarkdownConverter],
   styles: [
     require('../assets/css/main.scss')
   ],

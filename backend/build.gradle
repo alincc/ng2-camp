@@ -50,6 +50,7 @@ dependencies {
     compile('org.flywaydb:flyway-core')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    compile group: 'org.pegdown', name: 'pegdown', version: '1.6.0'
 }
 
 
