@@ -3,6 +3,7 @@ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'a
 import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Rx';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class HotelsMapComponent implements OnInit {
 
   coordinates: HotelWithCoordinates[] = [];
 
+  private subscriptions: Subscription[] = [];
+
   constructor(private mapService: MapService) {
   }
 
@@ -30,7 +33,7 @@ export class HotelsMapComponent implements OnInit {
     this.hotels
       .flatMap(hotels => Observable.from(hotels))
       .forEach((hotel: Hotel) =>
-        this.mapService.getCoordinates(hotel)
+        this.subscriptions.push(this.mapService.getCoordinates(hotel)
           .subscribe(coordinate => {
             this.coordinates.push({
               id: hotel.id,
@@ -38,7 +41,11 @@ export class HotelsMapComponent implements OnInit {
               lat: coordinate.lat,
               lng: coordinate.lng
             });
-          }));
+          })));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }
 

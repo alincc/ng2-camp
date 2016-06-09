@@ -4,6 +4,7 @@ import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
 import {Coordinate} from '../../../shared/map/coordinate';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'map',
@@ -21,13 +22,19 @@ export class MapComponent implements OnInit {
   @Input() hotelObservable: Observable<Hotel>;
   coordinate: Coordinate;
 
+  private subscription: Subscription;
+
   constructor(private mapService: MapService) {
   }
 
   ngOnInit() {
-    this.hotelObservable.flatMap(hotel => this.mapService.getCoordinates(hotel))
+    this.subscription = this.hotelObservable.flatMap(hotel => this.mapService.getCoordinates(hotel))
       .subscribe(coordinate => {
         this.coordinate = coordinate;
       });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

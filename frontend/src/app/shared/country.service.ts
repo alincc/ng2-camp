@@ -6,6 +6,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/toArray';
 import {Observer} from 'rxjs/Observer';
 import {Country} from '../model/country';
+import {Subscription} from 'rxjs/Rx';
 
 @Injectable()
 export class CountryService {
@@ -13,6 +14,8 @@ export class CountryService {
   private baseUrl: string = 'https://restcountries.eu/rest/v1';
   private countries: Country[];
   private observer: Observer<Country[]>;
+
+  private subscription: Subscription;
 
   constructor(private http: Http) {
   }
@@ -23,7 +26,7 @@ export class CountryService {
     }
 
     let observable = new Observable(observer => this.observer = observer);
-    this.fetchCountries().subscribe(
+    this.subscription = this.fetchCountries().subscribe(
       (countries) => {
         this.countries = countries;
         this.observer.next(this.countries);
@@ -53,6 +56,10 @@ export class CountryService {
       name: country.name,
       code: country.alpha2Code
     };
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -8,6 +8,7 @@ import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {MapComponent} from './map/map.component';
 import {Observable} from 'rxjs/Observable';
 import {OfferListComponent} from './offer-list/offer-list.component';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'hotel-detail',
@@ -19,16 +20,18 @@ export class HotelDetailComponent implements OnInit {
   hotel: Hotel = {};
   hotelObservable: Observable<Hotel>;
 
+  private subscription: Subscription;
+
   constructor(private routeParams: RouteParams,
               private hotelService: HotelService,
               private router: Router) {
   }
 
   ngOnInit(): any {
-    this.hotelObservable = this.routeParams.pluck<number>('id')
+    this.hotelObservable = this.routeParams.pluck<number>('hotelId')
       .filter(id => !isNaN(id))
       .flatMap(id => this.hotelService.getHotel(id));
-    this.hotelObservable.subscribe(hotel => {
+    this.subscription = this.hotelObservable.subscribe(hotel => {
       this.hotel = hotel;
     });
   }
@@ -46,5 +49,9 @@ export class HotelDetailComponent implements OnInit {
 
   getHotelImage() {
     return this.hotel.pictureUrl ? this.hotel.pictureUrl : '/assets/img/default_image.png';
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

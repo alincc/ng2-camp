@@ -21,12 +21,12 @@ export const routes: Routes = [
     component: HotelOverviewComponent
   },
   {
-    path: '/hotels/:id',
+    path: '/hotels/:hotelId',
     guards: [AuthGuard],
     component: HotelDetailComponent
   },
   {
-    path: '/hotels/edit/:id',
+    path: '/hotels/edit/:editHotelId',
     guards: [AuthGuard],
     component: HotelEditComponent
   },
@@ -41,12 +41,12 @@ export const routes: Routes = [
     component: CampEditComponent
   },
   {
-    path: '/camps/:id',
+    path: '/camps/:campId',
     guards: [AuthGuard],
     component: CampDetailComponent
   },
   {
-    path: '/offers/edit/:id',
+    path: '/offers/edit/:offerId',
     guards: [AuthGuard],
     component: OfferEditComponent
   },

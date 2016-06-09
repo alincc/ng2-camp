@@ -6,6 +6,7 @@ import {Country} from '../../model/country';
 import {CountryService} from '../../shared/country.service';
 import {MaterializeDirective} from 'angular2-materialize';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'hotel-edit',
@@ -18,21 +19,24 @@ export class HotelEditComponent implements OnInit {
   hotelId: Observable<number>;
   countries: Country[];
 
+  private countriesSubscription: Subscription;
+  private hotelsSubscription: Subscription;
+
   constructor(private hotelService: HotelService,
               private countryService: CountryService,
               private router: Router,
               routeParams: RouteParams) {
-    this.hotelId = routeParams.pluck<number>('id');
+    this.hotelId = routeParams.pluck<number>('editHotelId');
   }
 
   ngOnInit() {
-    this.countryService
+   this.countriesSubscription = this.countryService
       .getAllCountries()
       .subscribe((countries: Country[]) => {
         this.countries = countries;
       });
 
-    this.hotelId
+    this.hotelsSubscription = this.hotelId
     // look for 'id' in path params, and if it is a number go and fetch according hotel from hotelService
     // do not do that if id is not a number, i.e. stick with empty hotel instance
       .filter(id => !isNaN(id))
@@ -49,5 +53,10 @@ export class HotelEditComponent implements OnInit {
 
   openHotel(hotel: Hotel) {
     this.router.go('/hotels/' + hotel.id);
+  }
+
+  ngOnDestroy() {
+    this.countriesSubscription.unsubscribe();
+    this.hotelsSubscription.unsubscribe();
   }
 }
