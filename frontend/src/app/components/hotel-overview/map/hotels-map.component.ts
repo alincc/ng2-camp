@@ -20,9 +20,8 @@ import {Subscription} from 'rxjs/Rx';
 export class HotelsMapComponent implements OnInit {
 
   @Input()
-  hotels: Observable<Hotel[]>;
-
-  coordinates: HotelWithCoordinates[] = [];
+  hotels:Hotel[];
+  coordinates:HotelWithCoordinates[] = [];
 
   private subscriptions: Subscription[] = [];
 
@@ -30,9 +29,18 @@ export class HotelsMapComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.refreshMapCoordinates();
+  }
+
+  hotelSelectionChanged(selectedHotels:Hotel[]) {
+    this.hotels = selectedHotels;
+    this.coordinates = [];
+    this.refreshMapCoordinates();
+  }
+
+  refreshMapCoordinates() {
     this.hotels
-      .flatMap(hotels => Observable.from(hotels))
-      .forEach((hotel: Hotel) =>
+      .forEach((hotel:Hotel) =>
         this.subscriptions.push(this.mapService.getCoordinates(hotel)
           .subscribe(coordinate => {
             this.coordinates.push({
@@ -50,8 +58,8 @@ export class HotelsMapComponent implements OnInit {
 }
 
 interface HotelWithCoordinates {
-  id: number;
-  name: string;
-  lat: number;
-  lng: number;
+  id:number;
+  name:string;
+  lat:number;
+  lng:number;
 }

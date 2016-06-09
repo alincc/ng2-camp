@@ -15,7 +15,7 @@ public class Rating {
 	@NotNull
 	private Integer ratingFrom1To5;
 	private String description;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	private String person;
 

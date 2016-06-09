@@ -76,7 +76,7 @@
 
     create table rating (
         id int8 not null,
-        date date,
+        date timestamp,
         description varchar(255),
         person varchar(255),
         rating_from1to5 int4 not null,

@@ -8,17 +8,19 @@ import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {MapComponent} from './map/map.component';
 import {Observable} from 'rxjs/Observable';
 import {OfferListComponent} from './offer-list/offer-list.component';
+import {RatingListComponent} from "./rating-list/rating-list.component";
 import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'hotel-detail',
-  directives: [MaterializeDirective, MapComponent, OfferListComponent],
+  directives: [MaterializeDirective, MapComponent, OfferListComponent, RatingListComponent],
   providers: [],
   template: require('./hotel-detail.component.html')
 })
 export class HotelDetailComponent implements OnInit {
   hotel: Hotel = {};
   hotelObservable: Observable<Hotel>;
+  hotelId: Observable<number>;
 
   private subscription: Subscription;
 
@@ -28,7 +30,8 @@ export class HotelDetailComponent implements OnInit {
   }
 
   ngOnInit(): any {
-    this.hotelObservable = this.routeParams.pluck<number>('hotelId')
+    this.hotelId = this.routeParams.pluck<number>('hotelId');
+    this.hotelObservable = this.hotelId
       .filter(id => !isNaN(id))
       .flatMap(id => this.hotelService.getHotel(id));
     this.subscription = this.hotelObservable.subscribe(hotel => {

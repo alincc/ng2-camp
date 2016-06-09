@@ -9,6 +9,7 @@ import {HotelEditComponent} from "../components/hotel-edit/hotel-edit.component"
 import {MailTemplatesComponent} from "../components/mail-templates/mailtemplates.component";
 import {CampDetailComponent} from "../components/camp-detail/camp-detail.component";
 import {OfferEditComponent} from '../components/offer-edit/offer-edit.component';
+import {OfferRequestNewComponent} from "../components/offer-requests-new/offer-requests-new.component.ts";
 
 export const routes: Routes = [
   {
@@ -44,6 +45,11 @@ export const routes: Routes = [
     path: '/camps/:campId',
     guards: [AuthGuard],
     component: CampDetailComponent
+  },
+  {
+    path: '/camps/:campId/offer-requests/new',
+    guards: [AuthGuard],
+    component: OfferRequestNewComponent
   },
   {
     path: '/offers/edit/:offerId',

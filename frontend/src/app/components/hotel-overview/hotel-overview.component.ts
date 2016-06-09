@@ -1,8 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/toArray';
-import 'rxjs/add/operator/distinct';
 import {HotelService} from './../../shared/hotel.service.ts';
 import {Hotel} from '../../model/backend-typings';
 import FilterPipe from '../hotel.filter.pipe.ts';
@@ -11,6 +8,7 @@ import CountryFilterPipe from '../country.filter.pipe';
 import {HotelsMapComponent} from './map/hotels-map.component';
 import {TabsComponent} from './../tabs/tabs.component.ts';
 import {TabComponent} from './../tabs/tab.component.ts';
+import HotelFilterPipe from './../hotel.filter.pipe';
 
 @Component({
   selector: 'hotels',
@@ -20,26 +18,51 @@ import {TabComponent} from './../tabs/tab.component.ts';
   template: require('./hotel-overview.component.html')
 })
 export class HotelOverviewComponent implements OnInit {
-  hotels: Observable<Hotel[]>;
-  countries: Observable<string[]>;
+  hotels:Hotel[] = [];
+  filteredHotels:Hotel[] = [];
+  countries:string[] = [];
   selectedValues = [];
+  filteredInput:string = "";
+  @ViewChild(HotelsMapComponent)
+  hotelsMapComponent:HotelsMapComponent;
 
-  constructor(private hotelService: HotelService) {
+
+  constructor(private hotelService:HotelService) {
   }
 
   ngOnInit() {
-    this.hotels = this.hotelService.getHotels();
-    this.countries = this.hotels
-      .flatMap(hotels => Observable.from(hotels))
-      .map(hotel => hotel.countryCode)
-      .distinct()
-      .toArray()
-      .map(arr => arr.sort());
+    this.hotelService.getHotels()
+      .subscribe((hotels:Hotel[]) => {
+        this.hotels = hotels;
+        this.filteredHotels = hotels;
+        this.hotelsMapComponent.hotelSelectionChanged(hotels);
+        this.countries = this.hotels
+          .map((hotel:Hotel) => hotel.countryCode)
+          .filter(this.onlyUnique)
+          .sort();
+      });
   }
 
-  public change(options) {
+  countrySelectionChanged(options) {
     this.selectedValues = Array.apply(undefined, options)
       .filter(option => option.selected)
       .map(option => option.value);
+    this.filterCrieriaChanged();
   }
+
+  filterHotels(event:KeyboardEvent) {
+    this.filteredInput = event.target.value;
+    this.filterCrieriaChanged();
+  }
+
+  filterCrieriaChanged() {
+    let HotelsFilteredByCountry = new CountryFilterPipe().transform(this.hotels, this.selectedValues);
+    this.filteredHotels = new HotelFilterPipe().transform(HotelsFilteredByCountry, this.filteredInput);
+    this.hotelsMapComponent.hotelSelectionChanged(this.filteredHotels);
+  }
+
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
 }
