@@ -54,7 +54,7 @@
               </div>
 
               <div *ngIf="isNewTemplate" class="input-field col s6">
-                <input  [(ngModel)]="mailTemplate.name" id="templateName" type="text" class="validate" >
+                <input [(ngModel)]="mailTemplate.name" id="templateName" type="text" class="validate" >
                 <label for="templateName">New template name</label>
               </div>
 
@@ -75,7 +75,7 @@
 
             <div class="row">
               <div class="input-field col s12">
-                <textarea [(ngModel)]="mailTemplate.text" id="templateText" class="materialize-textarea"></textarea>
+                <textarea [(ngModel)]="mailTemplate.text" id="templateText" class="materialize-textarea" (change)="onTemplateChange()"></textarea>
                 <label for="templateText">Template text</label>
               </div>
             </div>

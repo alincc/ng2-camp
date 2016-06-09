@@ -14,6 +14,7 @@ import {MailTemplateService} from "../../shared/mailtemplate.service";
 })
 export class MailTemplatesComponent implements OnInit{
   isNewTemplate : boolean = false;
+  isTemplateChanged : boolean = false;
 
   private mailTemplate : MailTemplate = {};
   private mailTemplates : MailTemplate[] = [];
@@ -51,13 +52,25 @@ export class MailTemplatesComponent implements OnInit{
   }
 
   saveTemplate() {
-    this.mailTemplateService.saveOrUpdate(this.mailTemplate);
+    this.mailTemplateService.saveOrUpdate(this.mailTemplate).subscribe(
+      savedTemplate => {
+        this.mailTemplate = savedTemplate;
+        this.mailTemplates.push(savedTemplate);
+        this.mailTemplateId = savedTemplate.id;
+      }
+    );
+
     this.isNewTemplate = false;
+    this.isTemplateChanged = false;
   }
 
   onChange(optionId) {
     var matchedTemplates = this.mailTemplates.filter(template => template.id == optionId);
     this.mailTemplate = matchedTemplates[0];
+  }
+
+  onTemplateChange() {
+    this.isTemplateChanged = true;
   }
 
   deleteTemplate() {
