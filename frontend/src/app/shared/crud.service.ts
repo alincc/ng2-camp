@@ -14,29 +14,29 @@ export class CrudService {
   }
 
   public get<T>(url: string): Observable<T> {
-    return this.wrapCallAndMap(this.authHttp.get(UrlProvider.getBackendUrl(url),
+    return this.wrapCallAndMap<T>(this.authHttp.get(UrlProvider.getBackendUrl(url),
       this.createRequestOptions()));
   }
 
   public post<T>(url: string, data: T): Observable<T> {
     let json = JSON.stringify(data);
-    return this.wrapCallAndMap(this.authHttp.post(UrlProvider.getBackendUrl(url), json,
+    return this.wrapCallAndMap<T>(this.authHttp.post(UrlProvider.getBackendUrl(url), json,
       this.createRequestOptions()));
   }
 
   public put<T>(url: string, data: T): Observable<T> {
     let json = JSON.stringify(data);
-    return this.wrapCallAndMap(this.authHttp.put(UrlProvider.getBackendUrl(url), json,
+    return this.wrapCallAndMap<T>(this.authHttp.put(UrlProvider.getBackendUrl(url), json,
       this.createRequestOptions()));
   }
 
   public doDelete(url: string): Observable<Response> {
-    return this.wrapCall(this.authHttp.delete(UrlProvider.getBackendUrl(url),
+    return this.wrapCall<Response>(this.authHttp.delete(UrlProvider.getBackendUrl(url),
       this.createRequestOptions()));
   }
 
   private wrapCallAndMap<T>(observable: Observable<Response>): Observable<T> {
-    return this.wrapCall(observable, this.responseToJsonObject);
+    return this.wrapCall<T>(observable, this.responseToJsonObject);
   }
 
   private wrapCall<T>(observable: Observable<Response>, mapper: (n: Response) => any = n => n): Observable<T> {

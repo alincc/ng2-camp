@@ -25,7 +25,7 @@ export class CountryService {
       return Observable.of(this.countries);
     }
 
-    let observable = new Observable(observer => this.observer = observer);
+    let observable = new Observable<Country[]>(observer => this.observer = observer);
     this.subscription = this.fetchCountries().subscribe(
       (countries) => {
         this.countries = countries;

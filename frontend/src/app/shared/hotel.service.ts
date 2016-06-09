@@ -11,15 +11,15 @@ export class HotelService {
   }
 
   saveHotel(hotel: Hotel): Observable<Hotel> {
-    return this.crud.post('/rest/hotels', hotel);
+    return this.crud.post<Hotel>('/rest/hotels', hotel);
   }
 
   getHotels(): Observable<Hotel[]> {
-    return this.crud.get('/rest/hotels');
+    return this.crud.get<Hotel[]>('/rest/hotels');
   }
 
   getHotel(id: number): Observable<Hotel> {
-    return this.crud.get('/rest/hotels/' + id);
+    return this.crud.get<Hotel>('/rest/hotels/' + id);
   }
 
   deleteHotel(id: number): Observable<Response> {

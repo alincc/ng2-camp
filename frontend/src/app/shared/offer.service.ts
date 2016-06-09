@@ -11,19 +11,19 @@ export class OfferService {
   }
 
   saveOfferForHotelId(id: number, offer: Offer): Observable<Offer> {
-    return this.crud.post('/rest/offers/byhotel/' + id, offer);
+    return this.crud.post<Offer>('/rest/offers/byhotel/' + id, offer);
   }
 
   getOffers(): Observable<Offer[]> {
-    return this.crud.get('/rest/offers');
+    return this.crud.get<Offer[]>('/rest/offers');
   }
 
   getOffer(id: number): Observable<Offer> {
-    return this.crud.get('/rest/offers/' + id);
+    return this.crud.get<Offer>('/rest/offers/' + id);
   }
 
   getByHotelId(id: number): Observable<Offer[]> {
-    return this.crud.get('/rest/offers/byhotel/' + id);
+    return this.crud.get<Offer[]>('/rest/offers/byhotel/' + id);
   }
 
   deleteOffer(id: number): Observable<Response> {

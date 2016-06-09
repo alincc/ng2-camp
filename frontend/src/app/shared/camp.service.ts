@@ -11,15 +11,15 @@ export class CampService {
   }
 
   saveCamp(camp: Camp): Observable<Camp> {
-    return this.crud.post('/rest/camps', camp);
+    return this.crud.post<Camp>('/rest/camps', camp);
   }
 
   getCamps(): Observable<Camp[]> {
-    return this.crud.get('/rest/camps');
+    return this.crud.get<Camp[]>('/rest/camps');
   }
 
   getCamp(id: number): Observable<Camp> {
-    return this.crud.get('/rest/camps/' + id);
+    return this.crud.get<Camp>('/rest/camps/' + id);
   }
 
   deleteCamp(id: number): Observable<Response> {

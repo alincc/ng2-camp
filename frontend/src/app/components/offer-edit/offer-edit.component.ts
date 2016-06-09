@@ -54,10 +54,10 @@ export class OfferEditComponent implements OnInit {
     this.offer.numberOfPeople = +this.offer.numberOfPeople;
     this.offer.singleRooms = +this.offer.singleRooms;
     this.offer.doubleRooms = +this.offer.doubleRooms;
-    this.offer.fromDate = new Date(this.offer.fromDate);
-    this.offer.toDate = new Date(this.offer.toDate);
-    this.offer.offerDate = new Date(this.offer.offerDate);
-    this.offer.expirationDate = new Date(this.offer.expirationDate);
+    this.offer.fromDate = new Date(this.offer.fromDate + '');
+    this.offer.toDate = new Date(this.offer.toDate + '');
+    this.offer.offerDate = new Date(this.offer.offerDate + '');
+    this.offer.expirationDate = new Date(this.offer.expirationDate + '');
 
     this.offerService.saveOfferForHotelId(this.offer.hotel.id, this.offer).subscribe(response => {
       this.router.go('/hotels/' + this.offer.hotel.id);

@@ -11,15 +11,15 @@ export class OfferRequestService {
   }
 
   saveOfferRequest(campId: number, offerRequest: OfferRequest): Observable<OfferRequest> {
-    return this.crud.post('/rest/camps/' + campId + '/offerrequests', offerRequest);
+    return this.crud.post<OfferRequest>('/rest/camps/' + campId + '/offerrequests', offerRequest);
   }
 
   getOfferRequests(): Observable<OfferRequest[]> {
-    return this.crud.get('/rest/offerrequests');
+    return this.crud.get<OfferRequest[]>('/rest/offerrequests');
   }
 
   getOfferRequest(id: number): Observable<OfferRequest> {
-    return this.crud.get('/rest/offerrequests/' + id);
+    return this.crud.get<OfferRequest>('/rest/offerrequests/' + id);
   }
 
   deleteOfferRequest(id: number): Observable<Response> {

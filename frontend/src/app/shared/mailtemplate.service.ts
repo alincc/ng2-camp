@@ -13,15 +13,15 @@ export class MailTemplateService {
   }
 
   saveOrUpdate(mailtemplate: MailTemplate): Observable<MailTemplate> {
-    return this.crud.post(this.baseUrl, mailtemplate);
+    return this.crud.post<MailTemplate>(this.baseUrl, mailtemplate);
   }
 
   getAll(): Observable<MailTemplate[]> {
-    return this.crud.get(this.baseUrl);
+    return this.crud.get<MailTemplate[]>(this.baseUrl);
   }
 
   getById(id: number): Observable<MailTemplate> {
-    return this.crud.get(this.baseUrl + '/' + id);
+    return this.crud.get<MailTemplate>(this.baseUrl + '/' + id);
   }
 
   deleteById(id: number): Observable<Response> {
