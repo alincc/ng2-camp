@@ -4,7 +4,6 @@ import "rxjs/add/operator/distinct";
 import {MaterializeDirective} from "angular2-materialize/dist/index";
 import {MailTemplate} from "../../model/backend-typings";
 import {MailTemplateService} from "../../shared/mailtemplate.service";
-import {Observable} from "rxjs/Rx";
 
 @Component({
   selector: 'mail-templates',
@@ -15,30 +14,35 @@ import {Observable} from "rxjs/Rx";
 })
 export class MailTemplatesComponent implements OnInit{
   isNewTemplate : boolean = false;
-  mailTemplate : MailTemplate = {};
 
+  private mailTemplate : MailTemplate = {};
   private mailTemplates : MailTemplate[] = [];
-
-  private selectedOption : string = "";
-  private selectOptions = [];
+  private mailTemplateId : Number;
 
   constructor(private mailTemplateService: MailTemplateService) {
   }
 
   ngOnInit() {
-    this.refreshTemplates();
+    this.refreshTemplates2();
   }
 
-  private refreshTemplates() {
-    this.mailTemplateService.getAll().flatMap(res => Observable.from(res))
-      .forEach((mailTemplate:MailTemplate) => {
-          this.selectOptions.push({
-            value: mailTemplate.id,
-            name: mailTemplate.name
-          });
-          this.mailTemplates.push(mailTemplate);
-        }
-      );
+  private refreshTemplates2() {
+    this.mailTemplateService.getAll().subscribe(
+      mailTemplates => this.templatesLoaded(mailTemplates)
+    )
+  }
+
+  private templatesLoaded(mailTemplates:MailTemplate[]) {
+    this.mailTemplates = mailTemplates;
+    if(this.mailTemplates.length > 0) {
+      this.mailTemplate = this.mailTemplates[0];
+    } else {
+      this.mailTemplate = {
+        id: -1,
+        name: "",
+        text: ""
+      }
+    }
   }
 
   addTemplate() {
@@ -47,23 +51,19 @@ export class MailTemplatesComponent implements OnInit{
   }
 
   saveTemplate() {
-    this.mailTemplateService.saveOrUpdate(this.mailTemplate)
-      .subscribe((mailTemplate:MailTemplate) => {
-          this.selectOptions.push(
-            {
-              value: mailTemplate.id,
-              name: mailTemplate.name
-            });
-          this.selectedOption = "" + mailTemplate.id;
-          this.mailTemplate = mailTemplate;
-        }
-      );
-
+    this.mailTemplateService.saveOrUpdate(this.mailTemplate);
     this.isNewTemplate = false;
   }
 
-  onChange(value) {
-    var filteredTemplates = this.mailTemplates.filter(mailTemplate => mailTemplate.id == value);
-    this.mailTemplate = filteredTemplates[0];
+  onChange(optionId) {
+    var matchedTemplates = this.mailTemplates.filter(template => template.id == optionId);
+    this.mailTemplate = matchedTemplates[0];
   }
+
+  deleteTemplate() {
+    this.mailTemplateService.deleteById(this.mailTemplate.id);
+    this.refreshTemplates2();
+  }
+
+
 }
