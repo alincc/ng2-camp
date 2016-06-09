@@ -1,9 +1,6 @@
 package ch.zuehlke.campplanner.todelete;
 
-import ch.zuehlke.campplanner.dao.CampRepository;
-import ch.zuehlke.campplanner.dao.HotelRepository;
-import ch.zuehlke.campplanner.dao.OfferRequestRepository;
-import ch.zuehlke.campplanner.dao.RatingRepository;
+import ch.zuehlke.campplanner.dao.*;
 import ch.zuehlke.campplanner.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -22,12 +19,19 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
 
     @Autowired
     private HotelRepository hotelRepository;
+
     @Autowired
     private OfferRequestRepository offerRequestRepository;
+
     @Autowired
     private CampRepository campRepository;
+
     @Autowired
     private RatingRepository ratingRepository;
+
+    @Autowired
+    private MailTemplateRepository mailTemplateRepository;
+
 
     /**
      * Source https://docs.google.com/spreadsheets/d/1OtLHjQg6SycAdK7YWI1GOUhmDIQsO-jOavjV6k704kM/edit#gid=0.
@@ -66,6 +70,55 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         campRepository.save(campVierJahreszeiten);
         ratingRepository.save(createRating(3, "Internet didn't work", "saka", hotelVierJahreszeiten));
         ratingRepository.save(createRating(5, null, null, hotelVierJahreszeiten));
+
+        mailTemplateRepository.save(createMailTemplate());
+
+
+    }
+
+    private MailTemplate createMailTemplate() {
+        MailTemplate mailTemplate = new MailTemplate();
+        mailTemplate.setLanguage("DE");
+        mailTemplate.setName("JSO / JES 2016");
+        mailTemplate.setText("Subject\n" +
+                "\n" +
+                "Offerte für Seminarwoche, @CAMP_FROM@ - @CAMP_TO@\n" +
+                "\n" +
+                "Text\n" +
+                "\n" +
+                "Sehr geehrte Damen und Herren\n" +
+                " \n" +
+                "Für eine Seminarwoche mit gesamthaft @NUMBER_OF_PEOPLE@ Teilnehmenden sind wir momentan auf der Suche nach einer geeigneten Unterkunft vom @CAMP_FROM@ bis zum @CAMP_TO@.\n" +
+                "Es würde mich sehr freuen, wenn Sie mir eine entsprechende Offerte zustellen würden.\n" +
+                " \n" +
+                "Die Eckdaten:\n" +
+                " \n" +
+                "Zeitraum: Sonntag, den @CAMP_FROM@ ca. 17:00 Uhr bis Freitag. den @CAMP_TO@ ca. 15:00 Uhr\n" +
+                "Anzahl Teilnehmer: 10\n" +
+                " \n" +
+                " \n" +
+                "Folgende Kriterien sind uns wichtig:\n" +
+                " \n" +
+                "·         Unterbringung in Einzel- oder Doppelzimmern (min. 2 Einzelzimmer)\n" +
+                "·         Ein oder mehrere Seminarräume\n" +
+                "·         Schneller Internetzugang in den Seminarräumen\n" +
+                " \n" +
+                " \n" +
+                "Verpflegung:\n" +
+                " \n" +
+                "·         Kaffeepausen morgens und nachmittags (Montag - Freitag)\n" +
+                "·         5 Mal Frühstück (Montag - Freitag)\n" +
+                "·         5 Mal Mittagessen (Montag - Freitag)\n" +
+                "·         4 Mal Abendessen (Sonntag - Donnerstag, Mittwoch ohne Abendessen)\n" +
+                " \n" +
+                " \n" +
+                "Sollten Sie weitere Fragen haben, zögern Sie bitte nicht mich zu kontaktieren.\n" +
+                "Ich freue mich auf Ihre Offerte!\n" +
+                " \n" +
+                "Meine Kontaktdaten wie folgt:\n" +
+                "E-Mail: @CONTACT_EMAIL@\n" +
+                "Telefon: @CONTACT_PHONE@");
+        return mailTemplate;
     }
 
     private Camp createCamp(OfferRequest offerRequest) {
