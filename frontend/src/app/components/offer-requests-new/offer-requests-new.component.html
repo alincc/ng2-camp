@@ -1,0 +1,17 @@
+<div class="row">
+  <form materialize class="col s12" (ngSubmit)="saveOfferRequest()" #offerRequestForm="ngForm">
+    <div class="row">
+      <div class="col s3">
+        <input id="requestDate" type="date" class="validate" required [(ngModel)]="offerRequest.date" ngControl="requestDate">
+        <label for="requestDate">Request date</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s5">
+        <textarea name="comment" id="comment" cols="30" rows="10" class="materialize-textarea"></textarea>
+        <label for="comment">Comment</label>
+      </div>
+    </div>
+  </form>
+</div>

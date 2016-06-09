@@ -19,7 +19,7 @@ import {Observable} from 'rxjs/Observable';
 export class HotelsMapComponent implements OnInit {
 
   @Input()
-  hotels: Observable<Hotel[]>;
+  hotels: Hotel[];
 
   coordinates: HotelWithCoordinates[] = [];
 
@@ -28,7 +28,6 @@ export class HotelsMapComponent implements OnInit {
 
   ngOnInit() {
     this.hotels
-      .flatMap(hotels => Observable.from(hotels))
       .forEach((hotel: Hotel) =>
         this.mapService.getCoordinates(hotel)
           .subscribe(coordinate => {
