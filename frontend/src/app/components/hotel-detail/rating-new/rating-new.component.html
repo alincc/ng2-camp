@@ -1,0 +1,25 @@
+<div id="modal-new-rating" class="modal">
+  <form class="modal-content">
+    <h4>Add rating</h4>
+    <div class="row">
+      <div class="col s6">
+        <label for="rating">Rating</label>
+        <p class="range-field">
+          <input type="number" id="rating" min="1" max="5" [(ngModel)]="rating.ratingFrom1To5"/>
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea id="description" class="materialize-textarea" [(ngModel)]="rating.description"></textarea>
+        <label for="description">Description</label>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+      <a (click)="saveRating()" class=" modal-action modal-close waves-effect waves-green btn-flat">Add</a>
+    </div>
+  </form>
+</div>
