@@ -1,8 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {RouteParams, Router} from '@ngrx/router';
-import {Camp} from "../../model/backend-typings";
-import {CampService} from "../../shared/camp.service";
-import {Observable} from "rxjs/Observable";
+import {Component, OnInit} from '@angular/core';
+import {RouteParams} from '@ngrx/router';
+import {Camp} from '../../model/backend-typings';
+import {CampService} from '../../shared/camp.service';
 import {Subscription} from 'rxjs/Rx';
 
 @Component({

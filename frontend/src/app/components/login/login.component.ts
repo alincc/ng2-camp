@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {AuthService} from "../../shared/auth.service";
-import {MaterializeDirective} from "angular2-materialize";
+import {Component} from '@angular/core';
+import {AuthService} from '../../shared/auth.service';
+import {MaterializeDirective} from 'angular2-materialize';
 
 @Component({
   selector: 'login',

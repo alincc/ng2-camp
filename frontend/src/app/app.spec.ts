@@ -1,11 +1,7 @@
-import {
-  it,
-  inject,
-  beforeEachProviders
-} from '@angular/core/testing';
+import {it, inject, beforeEachProviders} from '@angular/core/testing';
+import {App} from './app.component';
 
 // Load the implementations that should be tested
-import {App} from './app.component';
 
 describe('App', () => {
   // provide our implementations or mocks to the dependency injector
@@ -13,7 +9,7 @@ describe('App', () => {
     App
   ]);
 
-  it('should have a url', inject([ App ], (app) => {
+  it('should have a url', inject([App], (app) => {
     expect(true).toBe(true);
   }));
 

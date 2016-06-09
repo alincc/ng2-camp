@@ -18,26 +18,26 @@ import HotelFilterPipe from './../hotel.filter.pipe';
   template: require('./hotel-overview.component.html')
 })
 export class HotelOverviewComponent implements OnInit {
-  hotels:Hotel[] = [];
-  filteredHotels:Hotel[] = [];
-  countries:string[] = [];
+  hotels: Hotel[] = [];
+  filteredHotels: Hotel[] = [];
+  countries: string[] = [];
   selectedValues = [];
-  filteredInput:string = "";
+  filteredInput: string = '';
   @ViewChild(HotelsMapComponent)
-  hotelsMapComponent:HotelsMapComponent;
+  hotelsMapComponent: HotelsMapComponent;
 
 
-  constructor(private hotelService:HotelService) {
+  constructor(private hotelService: HotelService) {
   }
 
   ngOnInit() {
     this.hotelService.getHotels()
-      .subscribe((hotels:Hotel[]) => {
+      .subscribe((hotels: Hotel[]) => {
         this.hotels = hotels;
         this.filteredHotels = hotels;
         this.hotelsMapComponent.hotelSelectionChanged(hotels);
         this.countries = this.hotels
-          .map((hotel:Hotel) => hotel.countryCode)
+          .map((hotel: Hotel) => hotel.countryCode)
           .filter(this.onlyUnique)
           .sort();
       });
@@ -50,7 +50,7 @@ export class HotelOverviewComponent implements OnInit {
     this.filterCrieriaChanged();
   }
 
-  filterHotels(event:KeyboardEvent) {
+  filterHotels(event: KeyboardEvent) {
     this.filteredInput = event.target.value;
     this.filterCrieriaChanged();
   }

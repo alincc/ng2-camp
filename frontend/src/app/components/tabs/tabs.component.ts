@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import { TabComponent } from './tab.component.ts';
+import {TabComponent} from './tab.component.ts';
 
 @Component({
   selector: 'tabs',
-  template:`
+  template: `
     <ul class="tabs">
       <li *ngFor="let tab of tabs" (click)="selectTab(tab)" [class.active]="tab.active">
         <a class="waves-light btn blue">{{tab.title}}</a>
@@ -19,12 +19,13 @@ export class TabsComponent {
   constructor() {
     this.tabs = [];
   }
-  public selectTab(tab: TabComponent){
+
+  public selectTab(tab: TabComponent) {
     console.log("selecting tab")
     _deactivateAllTabs(this.tabs);
     tab.active = true;
 
-    function _deactivateAllTabs(tabs: TabComponent[]){
+    function _deactivateAllTabs(tabs: TabComponent[]) {
       tabs.forEach((tab)=>tab.active = false);
     }
 

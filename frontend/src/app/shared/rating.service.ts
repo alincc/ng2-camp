@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {CrudService} from "./crud.service";
-import {Rating} from "../model/backend-typings";
-import {Observable} from "rxjs/Observable";
+import {CrudService} from './crud.service';
+import {Rating} from '../model/backend-typings';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class RatingService {

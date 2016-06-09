@@ -18,7 +18,7 @@ export class TabComponent {
   @Input('tab-title') title: string;
   active: boolean;
 
-  constructor(tabs: TabsComponent){
+  constructor(tabs: TabsComponent) {
     tabs.addTab(this);
 
   }

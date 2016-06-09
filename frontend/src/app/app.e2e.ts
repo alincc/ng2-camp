@@ -5,7 +5,7 @@ describe('App', () => {
   });
 
   it('should have <header>', () => {
-    let result  = true;
+    let result = true;
     expect(true).toEqual(result);
   });
 

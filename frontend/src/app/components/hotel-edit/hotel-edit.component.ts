@@ -30,7 +30,7 @@ export class HotelEditComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.countriesSubscription = this.countryService
+    this.countriesSubscription = this.countryService
       .getAllCountries()
       .subscribe((countries: Country[]) => {
         this.countries = countries;
