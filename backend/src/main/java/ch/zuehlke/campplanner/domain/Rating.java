@@ -1,6 +1,8 @@
 package ch.zuehlke.campplanner.domain;
 
+import ch.zuehlke.campplanner.utils.HotelIdDeserializer;
 import ch.zuehlke.campplanner.utils.HotelIdSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
@@ -22,6 +24,7 @@ public class Rating {
 
 	@ManyToOne(optional = false)
 	@JsonSerialize(using = HotelIdSerializer.class)
+	@JsonDeserialize(using = HotelIdDeserializer.class)
 	private Hotel hotel;
 
 	public Long getId() {
