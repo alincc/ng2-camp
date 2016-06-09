@@ -3,6 +3,7 @@ import {RouteParams, Router} from '@ngrx/router';
 import {Camp} from "../../model/backend-typings";
 import {CampService} from "../../shared/camp.service";
 import {Observable} from "rxjs/Observable";
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'camp-detail',
@@ -12,19 +13,24 @@ import {Observable} from "rxjs/Observable";
   template: require('./camp-detail.component.html')
 })
 export class CampDetailComponent implements OnInit {
-  camp:Camp = {};
+  camp: Camp = {};
 
-  constructor(private routeParams:RouteParams,
-              private campService:CampService) {
+  private subscription: Subscription;
+
+  constructor(private routeParams: RouteParams,
+              private campService: CampService) {
   }
 
   ngOnInit() {
-    let id = this.routeParams.pluck<number>('id');
-    id
-      .filter(id => !isNaN(id))
-      .flatMap((id:number) => this.campService.getCamp(id))
-      .subscribe((camp:Camp) => {
+    let campId = this.routeParams.pluck<number>('campId');
+    this.subscription = campId.filter(id => !isNaN(id))
+      .flatMap((id: number) => this.campService.getCamp(id))
+      .subscribe((camp: Camp) => {
         this.camp = camp;
       });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

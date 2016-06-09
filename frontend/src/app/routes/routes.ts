@@ -1,15 +1,15 @@
-import {Routes, Route} from "@ngrx/router";
-import {HotelOverviewComponent} from "../components/hotel-overview/hotel-overview.component";
-import {HotelDetailComponent} from "../components/hotel-detail/hotel-detail.component";
-import {LoginComponent} from "../components/login/login.component";
-import {AuthGuard} from "./authGuard";
-import {CampOverviewComponent} from "../components/camp-overview/camp-overview.component";
-import {CampEditComponent} from "../components/camp-edit/camp-edit.component";
-import {HotelEditComponent} from "../components/hotel-edit/hotel-edit.component";
-import {MailTemplatesComponent} from "../components/mail-templates/mailtemplates.component";
-import {CampDetailComponent} from "../components/camp-detail/camp-detail.component";
+import {Routes, Route} from '@ngrx/router';
+import {HotelOverviewComponent} from '../components/hotel-overview/hotel-overview.component';
+import {HotelDetailComponent} from '../components/hotel-detail/hotel-detail.component';
+import {LoginComponent} from '../components/login/login.component';
+import {AuthGuard} from './authGuard';
+import {CampOverviewComponent} from '../components/camp-overview/camp-overview.component';
+import {CampEditComponent} from '../components/camp-edit/camp-edit.component';
+import {HotelEditComponent} from '../components/hotel-edit/hotel-edit.component';
+import {MailTemplatesComponent} from '../components/mail-templates/mailtemplates.component';
+import {CampDetailComponent} from '../components/camp-detail/camp-detail.component';
 import {OfferEditComponent} from '../components/offer-edit/offer-edit.component';
-import {OfferRequestNewComponent} from "../components/offer-requests-new/offer-requests-new.component.ts";
+import {OfferRequestNewComponent} from '../components/offer-requests-new/offer-requests-new.component.ts';
 
 export const routes: Routes = [
   {
@@ -22,12 +22,12 @@ export const routes: Routes = [
     component: HotelOverviewComponent
   },
   {
-    path: '/hotels/:id',
+    path: '/hotels/:hotelId',
     guards: [AuthGuard],
     component: HotelDetailComponent
   },
   {
-    path: '/hotels/edit/:id',
+    path: '/hotels/edit/:editHotelId',
     guards: [AuthGuard],
     component: HotelEditComponent
   },
@@ -42,7 +42,7 @@ export const routes: Routes = [
     component: CampEditComponent
   },
   {
-    path: '/camps/:id',
+    path: '/camps/:campId',
     guards: [AuthGuard],
     component: CampDetailComponent
   },
@@ -52,7 +52,7 @@ export const routes: Routes = [
     component: OfferRequestNewComponent
   },
   {
-    path: '/offers/edit/:id',
+    path: '/offers/edit/:offerId',
     guards: [AuthGuard],
     component: OfferEditComponent
   },

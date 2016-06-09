@@ -7,6 +7,7 @@ import {OfferService} from '../../shared/offer.service';
 import {Offer, Hotel} from '../../model/backend-typings';
 import {HotelService} from '../../shared/hotel.service';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
+import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'offer-edit',
@@ -18,6 +19,8 @@ export class OfferEditComponent implements OnInit {
 
   offer: Offer;
 
+  private subscription: Subscription;
+
   constructor(private routeParams: RouteParams,
               private queryParams: QueryParams,
               private offerService: OfferService,
@@ -25,10 +28,10 @@ export class OfferEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    let offerObservable = this.routeParams.pluck<number>('id').flatMap(id => this.getOffer(id));
-    let hotelObservable = this.queryParams.pluck<number>('hotelId').flatMap(id => this.getHotel(id));
+    let offerObservable = this.routeParams.pluck<number>('offerId').switchMap(id => this.getOffer(id));
+    let hotelObservable = this.queryParams.pluck<number>('hotelId').switchMap(id => this.getHotel(id));
 
-    Observable.zip(offerObservable, hotelObservable)
+    this.subscription = Observable.zip(offerObservable, hotelObservable)
       .map(data => {
         let offer: Offer = data[0];
         let hotel: Hotel = data[1];
@@ -39,6 +42,10 @@ export class OfferEditComponent implements OnInit {
       }).subscribe(offer => {
       this.offer = offer;
     });
+  }
+
+  ngOnDestroy() {
+     this.subscription.unsubscribe();
   }
 
   saveOffer() {

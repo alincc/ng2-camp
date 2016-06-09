@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Rx';
 
 
 @Component({
@@ -21,7 +23,9 @@ export class HotelsMapComponent implements OnInit {
   hotels:Hotel[];
   coordinates:HotelWithCoordinates[] = [];
 
-  constructor(private mapService:MapService) {
+  private subscriptions: Subscription[] = [];
+
+  constructor(private mapService: MapService) {
   }
 
   ngOnInit() {
@@ -37,7 +41,7 @@ export class HotelsMapComponent implements OnInit {
   refreshMapCoordinates() {
     this.hotels
       .forEach((hotel:Hotel) =>
-        this.mapService.getCoordinates(hotel)
+        this.subscriptions.push(this.mapService.getCoordinates(hotel)
           .subscribe(coordinate => {
             this.coordinates.push({
               id: hotel.id,
@@ -45,7 +49,11 @@ export class HotelsMapComponent implements OnInit {
               lat: coordinate.lat,
               lng: coordinate.lng
             });
-          }));
+          })));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }
 
