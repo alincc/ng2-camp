@@ -3,10 +3,12 @@ import {RouteParams} from '@ngrx/router';
 import {Camp, RequestStatus} from '../../model/backend-typings';
 import {CampService} from '../../shared/camp.service';
 import {Subscription} from 'rxjs/Rx';
+import {MaterializeDirective} from "angular2-materialize/dist/index";
+import {TooltipWorkaround} from "../../shared/tooltip/tooltip-workaround";
 
 @Component({
   selector: 'camp-detail',
-  directives: [],
+  directives: [MaterializeDirective],
   providers: [],
   pipes: [],
   template: require('./camp-detail.component.html')
@@ -31,6 +33,7 @@ export class CampDetailComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    TooltipWorkaround.removeTooltipsFromDom();
   }
 
   getStatusColor(status:RequestStatus) {

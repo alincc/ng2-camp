@@ -11,6 +11,7 @@ import {OfferListComponent} from './offer-list/offer-list.component';
 import {RatingListComponent} from './rating-list/rating-list.component';
 import {Subscription} from 'rxjs/Rx';
 import {RatingNewComponent} from "./rating-new/rating-new.component";
+import {TooltipWorkaround} from "../../shared/tooltip/tooltip-workaround";
 
 @Component({
   selector: 'hotel-detail',
@@ -25,12 +26,6 @@ export class HotelDetailComponent implements OnInit, OnDestroy {
   hotelId: Observable<number>;
 
   private subscription: Subscription;
-
-  private static removeTooltipsFromDom() {
-    let elements: Element[] = Array.prototype.slice.call(document.getElementsByClassName('material-tooltip'));
-    console.log('much workaround, such hack', elements);
-    elements.forEach(element => element.remove());
-  }
 
   constructor(private routeParams: RouteParams,
               private hotelService: HotelService,
@@ -64,6 +59,6 @@ export class HotelDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    HotelDetailComponent.removeTooltipsFromDom();
+    TooltipWorkaround.removeTooltipsFromDom();
   }
 }
