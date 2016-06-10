@@ -1,6 +1,6 @@
 package ch.zuehlke.campplanner.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,14 +25,11 @@ public class Camp {
     private Integer numberOfPeople;
 
     @OneToMany(cascade = CascadeType.MERGE)
-    @JsonManagedReference("camp-offer-requests")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<OfferRequest> offerRequests;
 
-//	@OneToMany
-//	private List<OfferRequest> offerRequests;
-
-    // derzeitge stand (doodle erstellt, datum fixiert, offerte angenommen, hotels abgesagt, ...)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private CampStatus status;
 
     public Date getToDate() {
         return toDate;
@@ -82,11 +79,11 @@ public class Camp {
         this.numberOfPeople = numberOfPeople;
     }
 
-    public String getStatus() {
+    public CampStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(CampStatus status) {
         this.status = status;
     }
 

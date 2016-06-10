@@ -1,0 +1,14 @@
+package ch.zuehlke.campplanner.domain;
+
+public enum CampStatus {
+    CREATED_CAMP,
+    CREATED_DOODLE,
+    FIXED_DATE,
+    GETTING_HOTEL_OFFERS,
+    ACCEPTED_HOTEL_OFFER,
+    DECLINED_REMAINING_OFFERS,
+    READY,
+    OTHER,
+    FURTHER_CLARIFICATION_NEEDED,
+    CANCELLED
+}
