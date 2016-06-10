@@ -9,7 +9,18 @@
         <span class="card-title">Infos</span>
         <p>Current status: {{camp.status}}</p>
         <p>{{camp.numberOfPeople}} people</p>
+        <p *ngIf="camp.fromDate && camp.toDate">From {{camp.fromDate}} to {{camp.toDate}}</p>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12" *ngIf="!camp.fromDate || !camp.toDate" >
+    <div class="card-panel yellow accent-1">
+        <span>
+          Your camp does not have a fixed date yet. Want to <a [href]="'http://doodle.com/create?type=date&locale=de&title=' + camp.name" target="_blank">create a Doodle</a> for it?
+        </span>
     </div>
   </div>
 </div>
@@ -29,7 +40,9 @@
     <tbody>
     <tr *ngFor="let offerRequest of camp.offerRequests">
       <td>{{offerRequest.date | date}}</td>
-      <td><div class="chip" [ngClass]="getStatusColor(offerRequest.status)">{{offerRequest.status}}</div></td>
+      <td>
+        <div class="chip" [ngClass]="getStatusColor(offerRequest.status)">{{offerRequest.status}}</div>
+      </td>
       <td>{{offerRequest.offer.hotel.name}}</td>
       <td>{{offerRequest.offer.hotel.city}}</td>
       <td>{{offerRequest.offer.hotel.countryCode}}</td>
