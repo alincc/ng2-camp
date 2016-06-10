@@ -124,7 +124,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         Camp camp = new Camp();
         camp.setName("JSO / JES - Vier Jahreszeiten 2016");
         camp.setNumberOfPeople(30);
-        camp.setStatus("Planning");
+        camp.setStatus(CampStatus.CREATED_CAMP);
         camp.setTeam("JSO & JES");
         camp.setOfferRequests(Arrays.asList(offerRequest));
         camp.setFromDate(new Date());

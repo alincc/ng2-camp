@@ -5,7 +5,7 @@ export interface Camp {
     name?: string;
     numberOfPeople?: number;
     offerRequests?: OfferRequest[];
-    status?: string;
+    status?: CampStatus;
     team?: string;
     toDate?: Date;
 }
@@ -78,5 +78,7 @@ export interface Rating {
     person?: string;
     ratingFrom1To5?: number;
 }
+
+export type CampStatus = "CREATED_CAMP" | "CREATED_DOODLE" | "FIXED_DATE" | "GETTING_HOTEL_OFFERS" | "ACCEPTED_HOTEL_OFFER" | "DECLINED_REMAINING_OFFERS" | "READY" | "OTHER" | "FURTHER_CLARIFICATION_NEEDED" | "CANCELLED";
 
 export type RequestStatus = "REQUEST_SENT" | "OFFER_RECEIVED" | "WAITING_FOR_CLARIFCATION" | "OFFER_CONFIRMED" | "OFFER_DECLINED";
