@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {Component, Input, Output, OnInit, OnDestroy, EventEmitter} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Rating} from '../../../model/backend-typings';
 import {RatingService} from '../../../shared/rating.service';
@@ -13,6 +13,7 @@ import {Subscription} from "rxjs/Rx";
 export class RatingNewComponent implements OnInit, OnDestroy {
 
   @Input('hotelId') hotelId: Observable<number>;
+  @Output() ratingSavedEvent: EventEmitter<Rating> = new EventEmitter();
   private hotelIdNumber: number;
 
   private rating: Rating = {};
@@ -30,7 +31,7 @@ export class RatingNewComponent implements OnInit, OnDestroy {
 
   saveRating() {
     this.ratingService.saveRating(this.rating, this.hotelIdNumber)
-      .subscribe(rating => console.log(rating));
+      .subscribe(rating => this.ratingSavedEvent.emit(rating));
   }
 
   ngOnDestroy() {

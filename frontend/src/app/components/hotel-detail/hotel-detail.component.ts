@@ -1,8 +1,8 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
 import {HotelService} from '../../shared/hotel.service';
-import {Hotel} from '../../model/backend-typings';
+import {Hotel, Rating} from '../../model/backend-typings';
 import * as Materialize from 'angular2-materialize/dist/index';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {MapComponent} from './map/map.component';
@@ -25,6 +25,8 @@ export class HotelDetailComponent implements OnInit, OnDestroy {
   hotelObservable: Observable<Hotel>;
   hotelId: Observable<number>;
 
+  @ViewChild(RatingListComponent)
+  ratingListComponent: RatingListComponent;
   private subscription: Subscription;
 
   constructor(private routeParams: RouteParams,
@@ -60,5 +62,9 @@ export class HotelDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
     TooltipWorkaround.removeTooltipsFromDom();
+  }
+
+  deliverRatingSavedEvent(rating: Rating) {
+    this.ratingListComponent.handleRatingSavedEvent(rating);
   }
 }

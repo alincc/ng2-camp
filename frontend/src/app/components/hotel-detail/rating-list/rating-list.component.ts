@@ -13,21 +13,27 @@ import {Subscription} from "rxjs/Rx";
 export class RatingListComponent implements OnInit, OnDestroy {
 
   @Input('hotelId') hotelId: Observable<number>;
-
   ratings: Observable<Rating[]>;
-
   private subscription: Subscription;
+  private hotelIdNumber: number;
 
   constructor(private ratingService: RatingService) {
   }
 
-  ngOnInit(): any {
+  ngOnInit() {
     this.subscription = this.hotelId
       .filter(hotelId => !isNaN(hotelId))
-      .subscribe(hotelId => this.ratings = this.ratingService.getByHotelId(hotelId));
+      .subscribe(hotelId => {
+        this.hotelIdNumber = hotelId;
+        this.ratings = this.ratingService.getByHotelId(hotelId);
+      });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  handleRatingSavedEvent(rating: Rating) {
+    this.ratings = this.ratingService.getByHotelId(this.hotelIdNumber);
   }
 }

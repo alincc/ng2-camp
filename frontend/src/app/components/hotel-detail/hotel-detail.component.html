@@ -103,4 +103,4 @@
   </div>
 </div>
 
-<rating-new [hotelId]="hotelId"></rating-new>
+<rating-new [hotelId]="hotelId" (ratingSavedEvent)="deliverRatingSavedEvent($event)"></rating-new>
