@@ -5,72 +5,65 @@
   </a>
 </div>
 
-<div class="row">
-  <div class="input-field col m10 offset-m2">
+<div class="row" style="margin-top: 20px;">
+  <div class="input-field col m6">
     <i class="material-icons prefix">search</i>
     <input id="icon_prefix" type="text" class="validate" (keyup)="filterHotels($event)">
     <label for="icon_prefix">Search by name, desc or city</label>
   </div>
+
+    <div class="input-field col m6">
+      <select multiple materialize="material_select" [materializeSelectOptions]="countries"
+              (change)="countrySelectionChanged($event.target.options)">
+        <option value="" disabled selected>Choose countries</option>
+        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+      </select>
+      <label>Countries</label>
+    </div>
+</div>
+
+
+<div class="row">
+  <div class="col m12">
+    <ul class="tabs card" materialize="tabs">
+      <li class="tab col m3"><a class="active blue-text" href="#mapView">Map view</a></li>
+      <li class="tab col m3"><a class="blue-text" href="#tableView">Table view</a></li>
+      <div class="indicator blue" style="z-index:1"></div>
+    </ul>
+  </div>
 </div>
 <div class="row">
-  <div class="col m2">
-    <div class="row">
-      <div class="input-field">
-        <select multiple materialize="material_select" [materializeSelectOptions]="countries"
-                (change)="countrySelectionChanged($event.target.options)">
-          <option value="" disabled selected>Choose countries</option>
-          <option *ngFor="let country of countries" [value]="country">{{country}}</option>
-        </select>
-        <label>Countries</label>
-      </div>
+  <div id="mapView" class="col s12">
+    <div class="card">
+      <hotels-map *ngIf="hotels" [hotels]="hotels"></hotels-map>
     </div>
-    <br>
   </div>
-  <div class="col m10">
-
-    <div class="row">
-      <div class="col m12">
-        <ul class="tabs card" materialize="tabs">
-          <li class="tab col m3"><a class="active blue-text" href="#mapView">Map view</a></li>
-          <li class="tab col m3"><a class="blue-text" href="#tableView">Table view</a></li>
-          <div class="indicator blue" style="z-index:1"></div>
-        </ul>
-      </div>
-    </div>
-    <div class="row">
-      <div id="mapView" class="col s12">
-        <div class="card">
-          <hotels-map *ngIf="hotels" [hotels]="hotels"></hotels-map>
-        </div>
-      </div>
-      <div id="tableView" class="col s12">
-        <div class="card">
-          <table class="responsive-table striped bordered">
-            <thead>
-            <tr>
-              <th>Name</th>
-              <th>City</th>
-              <th>Country</th>
-              <th>Info</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let hotel of filteredHotels">
-              <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td>
-              <td>{{hotel.city}}</td>
-              <td>{{hotel.countryCode}}</td>
-              <td>
-                <a href="{{hotel.website}}" target="_blank">
-                  <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
-                </a>
-                <a *ngIf="hotel.tripAdvisorUrl" href="{{hotel.tripAdvisorUrl}}" target="_blank">
-                  <i class="fa fa-tripadvisor fa-2x" aria-hidden="true"></i>
-                </a>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
+  <div id="tableView" class="col s12">
+    <div class="card">
+      <table class="responsive-table striped bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>Country</th>
+          <th>Info</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let hotel of filteredHotels">
+          <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td>
+          <td>{{hotel.city}}</td>
+          <td>{{hotel.countryCode}}</td>
+          <td>
+            <a href="{{hotel.website}}" target="_blank">
+              <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
+            </a>
+            <a *ngIf="hotel.tripAdvisorUrl" href="{{hotel.tripAdvisorUrl}}" target="_blank">
+              <i class="fa fa-tripadvisor fa-2x" aria-hidden="true"></i>
+            </a>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
