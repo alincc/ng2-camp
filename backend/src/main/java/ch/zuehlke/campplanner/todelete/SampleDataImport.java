@@ -88,24 +88,20 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
                 "\n" +
                 "Sehr geehrte Damen und Herren\n" +
                 " \n" +
-                "Für eine Seminarwoche mit gesamthaft @NUMBER_OF_PEOPLE@ Teilnehmenden sind wir momentan auf der Suche nach einer geeigneten Unterkunft vom @CAMP_FROM@ bis zum @CAMP_TO@.\n" +
+                "Für eine Seminarwoche mit gesamthaft @NUMBER_OF_PEOPLE@ Teilnehmenden sind wir momentan auf der Suche nach einer geeigneten Unterkunft vom @CAMP_FROM@ bis zum @CAMP_TO@.  \n" +
                 "Es würde mich sehr freuen, wenn Sie mir eine entsprechende Offerte zustellen würden.\n" +
                 " \n" +
-                "Die Eckdaten:\n" +
-                " \n" +
+                "**Die Eckdaten:**   \n" +
                 "Zeitraum: Sonntag, den @CAMP_FROM@ ca. 17:00 Uhr bis Freitag. den @CAMP_TO@ ca. 15:00 Uhr\n" +
                 "Anzahl Teilnehmer: 10\n" +
                 " \n" +
-                " \n" +
-                "Folgende Kriterien sind uns wichtig:\n" +
-                " \n" +
+                "Folgende Kriterien sind uns wichtig:  \n" +
                 "- Unterbringung in Einzel- oder Doppelzimmern (min. 2 Einzelzimmer)\n" +
                 "- Ein oder mehrere Seminarräume\n" +
                 "·         Schneller Internetzugang in den Seminarräumen\n" +
                 " \n" +
                 " \n" +
-                "Verpflegung:\n" +
-                " \n" +
+                "**Verpflegung:**\n" +
                 "- Kaffeepausen morgens und nachmittags (Montag - Freitag)\n" +
                 "- 5 Mal Frühstück (Montag - Freitag)\n" +
                 "- 5 Mal Mittagessen (Montag - Freitag)\n" +
@@ -119,8 +115,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
                 " \n" +
                 "Meine Kontaktdaten wie folgt:\n" +
                 "\n" +
-                "E-Mail: @CONTACT_EMAIL@\n" +
-                "\n" +
+                "E-Mail: @CONTACT_EMAIL@  \n" +
                 "Telefon: @CONTACT_PHONE@");
         return mailTemplate;
     }
