@@ -21,7 +21,10 @@ export class MailTemplatesComponent implements OnInit {
   private mailTemplates:MailTemplate[] = [];
   private mailTemplateId:Number;
   private html:string = '';
-  fromDate:string;
+  fromDateInput:string;
+  toDateInput:string;
+  emailInput:string;
+  phoneInput:string;
 
   constructor(private mailTemplateService:MailTemplateService, private markDownConverter:MarkdownConverter) {
   }
@@ -96,12 +99,23 @@ export class MailTemplatesComponent implements OnInit {
   }
 
   private replaceTemplateStrings(markDownString:string):string {
-    return this.
-      replaceIfReplacementIsNotEmpty(markDownString, "@CAMP_FROM@", this.fromDate);
+    markDownString = this.replaceIfReplacementIsNotEmpty(markDownString, "@CAMP_FROM@", this.fromDateInput);
+    markDownString = this.replaceIfReplacementIsNotEmpty(markDownString, "@CAMP_TO@", this.toDateInput);
+    markDownString = this.replaceIfReplacementIsNotEmpty(markDownString, "@CONTACT_EMAIL@", this.emailInput);
+    markDownString = this.replaceIfReplacementIsNotEmpty(markDownString, "@CONTACT_PHONE@", this.phoneInput);
+    return markDownString;
   }
 
-  private replaceIfReplacementIsNotEmpty(inputString:string, stringToReplace:string, replacement:string) : string {
-    return replacement ? inputString.replace(stringToReplace, replacement) : inputString;
+  private replaceIfReplacementIsNotEmpty(inputString:string, stringToReplace:string, replacement:string):string {
+    return replacement ? this.replaceAll(inputString, stringToReplace, replacement) : inputString;
+  }
+
+  private replaceAll(str, find, replace) {
+    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  }
+
+  private escapeRegExp(str) {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
   }
 
 
