@@ -41,6 +41,10 @@ public class CampController {
     @Transactional
     @RequestMapping(method = RequestMethod.POST)
     public Camp addOrUpdate(@RequestBody Camp camp) {
+        if(camp.getId() != null) {
+            Camp oldCamp = campRepository.findOne(camp.getId());
+            camp.setOfferRequests(oldCamp.getOfferRequests());
+        }
         campRepository.save(camp);
         return camp;
     }

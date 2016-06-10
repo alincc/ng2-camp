@@ -11,7 +11,7 @@
       <div class="input-field col s4">
         <select id="status" materialize="material_select" [materializeSelectOptions]="campStates" required
                 [(ngModel)]="camp.status" ngControl="status" #hotelId="ngForm" >
-          <option *ngFor="let status of campStates" [value]="status">{{status}}</option>
+          <option *ngFor="let status of campStates" [value]="status" [selected]="status === camp.status">{{status}}</option>
         </select>
         <label for="status">Status</label>
       </div>

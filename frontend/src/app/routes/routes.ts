@@ -37,14 +37,14 @@ export const routes: Routes = [
     component: CampOverviewComponent
   },
   {
-    path: '/camps/new',
-    guards: [AuthGuard],
-    component: CampEditComponent
-  },
-  {
     path: '/camps/:campId',
     guards: [AuthGuard],
     component: CampDetailComponent
+  },
+  {
+    path: '/camps/edit/:campId',
+    guards: [AuthGuard],
+    component: CampEditComponent
   },
   {
     path: '/camps/:campId/offer-requests/new',
