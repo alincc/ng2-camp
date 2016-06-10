@@ -23,25 +23,34 @@
                 <input id="fromDate"
                        materialize="pickadate"
                        [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-                       type="text"/>
+                       type="text"
+                       [ngModel]="fromDateInput"
+                       (ngModelChange)="fromDateInput=$event"
+                />
               </div>
 
               <div class="col s6">
-                <label for="fromDate">To</label>
+                <label for="toDate">To</label>
                 <input id="toDate"
                        materialize="pickadate"
                        [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-                       type="text"/>
+                       type="text"
+                       [ngModel]="toDateInput"
+                       (ngModelChange)="toDateInput=$event"/>
               </div>
             </div>
 
             <div class="row">
               <div class="input-field col s6">
-                <input id="contactEmail" type="text" class="validate" >
+                <input id="contactEmail" type="text" class="validate"
+                       [ngModel]="emailInput"
+                       (ngModelChange)="emailInput=$event" >
                 <label for="contactEmail">Contact email</label>
               </div>
               <div class="input-field col s6">
-                <input id="contactPhone" type="text" class="validate" >
+                <input id="contactPhone" type="text" class="validate"
+                       [ngModel]="phoneInput"
+                       (ngModelChange)="phoneInput=$event">
                 <label for="contactPhone">Contact phone</label>
               </div>
             </div>
