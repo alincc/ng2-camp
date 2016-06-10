@@ -14,3 +14,17 @@ i {
 .camp-pull-right {
   float: right;
 }
+
+.card .card-content .default-styling ul {
+  padding-left: 40px;
+}
+
+.card .card-content .default-styling li {
+  list-style: disc;
+  display: list-item;
+}
+
+.card .card-content .default-styling p {
+  display: block;
+  margin: 1em;
+}

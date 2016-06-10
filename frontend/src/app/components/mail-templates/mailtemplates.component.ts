@@ -44,6 +44,7 @@ export class MailTemplatesComponent implements OnInit {
     if (this.mailTemplates.length > 0) {
       this.mailTemplate = this.mailTemplates[0];
       this.mailTemplateId = this.mailTemplate.id;
+      this.refreshHtml(this.mailTemplate.text);
     } else {
       this.mailTemplate = {
         id: -1,
