@@ -29,7 +29,8 @@ public class HotelRatingController {
 	@Transactional
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Rating> addOrUpdate(@PathVariable("hotelId") long hotelId, @RequestBody Rating rating) {
-		if (rating.getRatingFrom1To5() == null) {
+		Integer ratingFrom1To5 = rating.getRatingFrom1To5();
+		if (ratingFrom1To5 == null || ratingFrom1To5 > 5 || ratingFrom1To5 < 1) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		Hotel hotel = new Hotel();
