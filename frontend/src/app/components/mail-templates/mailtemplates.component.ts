@@ -21,6 +21,7 @@ export class MailTemplatesComponent implements OnInit {
   private mailTemplates:MailTemplate[] = [];
   private mailTemplateId:Number;
   private html:string = '';
+  fromDate:string;
 
   constructor(private mailTemplateService:MailTemplateService, private markDownConverter:MarkdownConverter) {
   }
@@ -81,7 +82,7 @@ export class MailTemplatesComponent implements OnInit {
 
   private refreshHtml(templateText:string) {
     let htmlTemplate = this.markDownConverter.convert(templateText);
-    this.html = htmlTemplate;
+    this.html = this.replaceTemplateStrings(htmlTemplate);
   }
 
   onTemplateChange() {
@@ -92,6 +93,15 @@ export class MailTemplatesComponent implements OnInit {
     this.mailTemplateService.deleteById(this.mailTemplate.id).subscribe(
       response => this.refreshTemplates()
     );
+  }
+
+  private replaceTemplateStrings(markDownString:string):string {
+    return this.
+      replaceIfReplacementIsNotEmpty(markDownString, "@CAMP_FROM@", this.fromDate);
+  }
+
+  private replaceIfReplacementIsNotEmpty(inputString:string, stringToReplace:string, replacement:string) : string {
+    return replacement ? inputString.replace(stringToReplace, replacement) : inputString;
   }
 
 

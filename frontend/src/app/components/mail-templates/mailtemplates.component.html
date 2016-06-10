@@ -23,7 +23,9 @@
                 <input id="fromDate"
                        materialize="pickadate"
                        [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-                       type="text"/>
+                       type="text"
+                       (ngModelChange)="fromDate=$event.value"
+                />
               </div>
 
               <div class="col s6">
