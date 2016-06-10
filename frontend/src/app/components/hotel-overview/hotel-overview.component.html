@@ -25,28 +25,26 @@
       </div>
     </div>
     <br>
-    <div class="row">
-      <p>Price range</p>
-      <p class="range-field">
-        <input type="range" id="priceRange" min="0" max="100"/>
-      </p>
-    </div>
   </div>
   <div class="col m10">
 
     <div class="row">
       <div class="col m12">
-        <ul class="tabs" materialize="tabs">
+        <ul class="tabs card" materialize="tabs">
           <li class="tab col m3"><a class="active blue-text" href="#mapView">Map view</a></li>
           <li class="tab col m3"><a class="blue-text" href="#tableView">Table view</a></li>
           <div class="indicator blue" style="z-index:1"></div>
         </ul>
       </div>
+    </div>
+    <div class="row">
       <div id="mapView" class="col s12">
-        <hotels-map *ngIf="hotels" [hotels]="hotels"></hotels-map>
+        <div class="card">
+          <hotels-map *ngIf="hotels" [hotels]="hotels"></hotels-map>
+        </div>
       </div>
       <div id="tableView" class="col s12">
-        <div id="hotelsTable">
+        <div class="card">
           <table class="responsive-table striped bordered">
             <thead>
             <tr>
