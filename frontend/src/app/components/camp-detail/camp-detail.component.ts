@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RouteParams} from '@ngrx/router';
 import {Camp, RequestStatus} from '../../model/backend-typings';
 import {CampService} from '../../shared/camp.service';
@@ -13,7 +13,7 @@ import {TooltipWorkaround} from "../../shared/tooltip/tooltip-workaround";
   pipes: [],
   template: require('./camp-detail.component.html')
 })
-export class CampDetailComponent implements OnInit {
+export class CampDetailComponent implements OnInit, OnDestroy {
   camp: Camp = {};
 
   private subscription: Subscription;

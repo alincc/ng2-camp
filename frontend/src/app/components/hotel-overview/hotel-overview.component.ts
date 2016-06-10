@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import 'rxjs/add/observable/from';
 import {HotelService} from './../../shared/hotel.service.ts';
 import {Hotel} from '../../model/backend-typings';
@@ -7,6 +7,7 @@ import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import CountryFilterPipe from '../country.filter.pipe';
 import {HotelsMapComponent} from './map/hotels-map.component';
 import HotelFilterPipe from './../hotel.filter.pipe';
+import {TooltipWorkaround} from "../../shared/tooltip/tooltip-workaround";
 
 @Component({
   selector: 'hotels',
@@ -15,7 +16,7 @@ import HotelFilterPipe from './../hotel.filter.pipe';
   pipes: [FilterPipe, CountryFilterPipe],
   template: require('./hotel-overview.component.html')
 })
-export class HotelOverviewComponent implements OnInit {
+export class HotelOverviewComponent implements OnInit, OnDestroy {
   hotels: Hotel[] = [];
   filteredHotels: Hotel[] = [];
   countries: string[] = [];
@@ -39,6 +40,10 @@ export class HotelOverviewComponent implements OnInit {
           .filter(this.onlyUnique)
           .sort();
       });
+  }
+
+  ngOnDestroy() {
+    TooltipWorkaround.removeTooltipsFromDom();
   }
 
   countrySelectionChanged(options) {
