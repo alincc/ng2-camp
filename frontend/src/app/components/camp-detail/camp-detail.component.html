@@ -1,7 +1,17 @@
 <div class="row">
-  <h1>{{camp.name}}</h1>
-  <h5>Status: {{camp.status}}</h5>
-  <h5>Number of people: {{camp.numberOfPeople}}</h5>
+  <h2>{{camp.name}}</h2>
+</div>
+
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Infos</span>
+        <p>Current status: {{camp.status}}</p>
+        <p>{{camp.numberOfPeople}} people</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
