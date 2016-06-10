@@ -27,6 +27,10 @@ export class MailTemplatesComponent implements OnInit {
 
   ngOnInit() {
     this.refreshTemplates();
+    // Trying to solve resize problem https://github.com/Dogfalo/materialize/issues/1503
+    $('body').on('focus', '.materialize-textarea', function () {
+      $(this).trigger('autoresize');
+    })
   }
 
   private refreshTemplates() {
