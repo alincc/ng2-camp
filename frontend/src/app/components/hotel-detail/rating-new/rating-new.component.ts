@@ -31,7 +31,10 @@ export class RatingNewComponent implements OnInit, OnDestroy {
 
   saveRating() {
     this.ratingService.saveRating(this.rating, this.hotelIdNumber)
-      .subscribe(rating => this.ratingSavedEvent.emit(rating));
+      .subscribe(rating => {
+        this.ratingSavedEvent.emit(rating);
+        this.rating = {}
+      });
   }
 
   ngOnDestroy() {
