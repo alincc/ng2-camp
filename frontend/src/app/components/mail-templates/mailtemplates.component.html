@@ -25,7 +25,7 @@
                        [materializeParams]="[{selectMonths: true, selectYears: 15}]"
                        type="text"
                        [ngModel]="fromDateInput"
-                       (ngModelChange)="fromDateInput=$event"
+                       (ngModelChange)="fromDateInput=$event; refreshTemplates()"
                 />
               </div>
 
@@ -36,7 +36,7 @@
                        [materializeParams]="[{selectMonths: true, selectYears: 15}]"
                        type="text"
                        [ngModel]="toDateInput"
-                       (ngModelChange)="toDateInput=$event"/>
+                       (ngModelChange)="toDateInput=$event; refreshTemplates()"/>
               </div>
             </div>
 
@@ -44,13 +44,13 @@
               <div class="input-field col s6">
                 <input id="contactEmail" type="text" class="validate"
                        [ngModel]="emailInput"
-                       (ngModelChange)="emailInput=$event" >
+                       (ngModelChange)="emailInput=$event; refreshTemplates()" >
                 <label for="contactEmail">Contact email</label>
               </div>
               <div class="input-field col s6">
                 <input id="contactPhone" type="text" class="validate"
                        [ngModel]="phoneInput"
-                       (ngModelChange)="phoneInput=$event">
+                       (ngModelChange)="phoneInput=$event; refreshTemplates()">
                 <label for="contactPhone">Contact phone</label>
               </div>
             </div>
