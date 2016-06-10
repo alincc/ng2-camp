@@ -1,4 +1,3 @@
-<!-- not supported yet
 <div class="row">
   <div class="col s12">
     <div class="card">
@@ -26,6 +25,25 @@
                        [materializeParams]="[{selectMonths: true, selectYears: 15}]"
                        type="text"/>
               </div>
+
+              <div class="col s6">
+                <label for="fromDate">To</label>
+                <input id="toDate"
+                       materialize="pickadate"
+                       [materializeParams]="[{selectMonths: true, selectYears: 15}]"
+                       type="text"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s6">
+                <input id="contactEmail" type="text" class="validate" >
+                <label for="contactEmail">Contact email</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="contactPhone" type="text" class="validate" >
+                <label for="contactPhone">Contact phone</label>
+              </div>
             </div>
           </form>
         </div>
@@ -33,7 +51,6 @@
     </div>
   </div>
 </div>
--->
 
 
 <div class="row">

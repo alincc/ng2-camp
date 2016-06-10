@@ -79,8 +79,9 @@ export class MailTemplatesComponent implements OnInit {
     this.mailTemplate = matchedTemplates[0];
   }
 
-  private refreshHtml(templateText : string) {
-    this.html = this.markDownConverter.convert(templateText);
+  private refreshHtml(templateText:string) {
+    let htmlTemplate = this.markDownConverter.convert(templateText);
+    this.html = htmlTemplate;
   }
 
   onTemplateChange() {
