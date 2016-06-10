@@ -4,6 +4,7 @@ import {Router, RouteParams} from '@ngrx/router';
 import {MaterializeDirective} from 'angular2-materialize';
 import {CampService} from '../../shared/camp.service';
 import {NgClass} from '@angular/common';
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'camp-new',
@@ -16,14 +17,16 @@ export class CampEditComponent implements OnInit {
   campStates:CampStatus[] = ['CREATED_CAMP', 'CREATED_DOODLE', 'FIXED_DATE', 'GETTING_HOTEL_OFFERS', 'ACCEPTED_HOTEL_OFFER',
     'DECLINED_REMAINING_OFFERS', 'READY', 'OTHER', 'FURTHER_CLARIFICATION_NEEDED', 'CANCELLED'];
 
+  private subscription:Subscription;
+
   constructor(private router:Router,
               private routeParams:RouteParams,
               private campService:CampService) {
   }
 
   ngOnInit() {
-    this.routeParams.pluck('campId')
-      .filter((campId) => !isNaN(campId))
+    this.subscription = this.routeParams.pluck('campId')
+      .filter((campId:number) => !isNaN(campId))
       .flatMap((campId:number) => this.campService.getCamp(campId))
       .subscribe(
         (camp:Camp) => this.camp = camp
@@ -38,5 +41,9 @@ export class CampEditComponent implements OnInit {
 
   openCamp(camp:Camp) {
     this.router.go('/camps/' + camp.id);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
