@@ -6,13 +6,11 @@ import FilterPipe from '../hotel.filter.pipe.ts';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import CountryFilterPipe from '../country.filter.pipe';
 import {HotelsMapComponent} from './map/hotels-map.component';
-import {TabsComponent} from './../tabs/tabs.component.ts';
-import {TabComponent} from './../tabs/tab.component.ts';
 import HotelFilterPipe from './../hotel.filter.pipe';
 
 @Component({
   selector: 'hotels',
-  directives: [MaterializeDirective, HotelsMapComponent, TabsComponent, TabComponent],
+  directives: [MaterializeDirective, HotelsMapComponent],
   providers: [],
   pipes: [FilterPipe, CountryFilterPipe],
   template: require('./hotel-overview.component.html')

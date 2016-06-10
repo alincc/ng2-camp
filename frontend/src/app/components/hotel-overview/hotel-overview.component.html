@@ -33,13 +33,19 @@
     </div>
   </div>
   <div class="col m10">
-    <tabs>
-      <tab tab-title="Map View">
-        <div id="hotelsMap" class="row" *ngIf="hotels">
-          <hotels-map [hotels]="hotels"></hotels-map>
-        </div>
-      </tab>
-      <tab tab-title="Table View">
+
+    <div class="row">
+      <div class="col m12">
+        <ul class="tabs" materialize="tabs">
+          <li class="tab col m3"><a class="active blue-text" href="#mapView">Map view</a></li>
+          <li class="tab col m3"><a class="blue-text" href="#tableView">Table view</a></li>
+          <div class="indicator blue" style="z-index:1"></div>
+        </ul>
+      </div>
+      <div id="mapView" class="col s12">
+        <hotels-map *ngIf="hotels" [hotels]="hotels"></hotels-map>
+      </div>
+      <div id="tableView" class="col s12">
         <div id="hotelsTable">
           <table class="responsive-table striped bordered">
             <thead>
@@ -66,8 +72,7 @@
             </tr>
           </table>
         </div>
-      </tab>
-    </tabs>
-
+      </div>
+    </div>
   </div>
 </div>
