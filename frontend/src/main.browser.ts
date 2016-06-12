@@ -7,8 +7,8 @@ import {bootstrap} from '@angular/platform-browser-dynamic';
  * Platform and Environment
  * our providers/directives/pipes
  */
-import { PLATFORM_PROVIDERS } from './platform/browser';
-import { ENV_PROVIDERS } from './platform/environment';
+import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
+import {ENV_PROVIDERS} from './platform/environment';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 import { provideRouter } from '@ngrx/router';
 import { routes } from 'app/routes/routes';
@@ -27,8 +27,10 @@ import {App} from './app/app.component';
 export function main(): Promise<any> {
 
   return bootstrap(App, [
-    ...PLATFORM_PROVIDERS,
+    ...PROVIDERS,
     ...ENV_PROVIDERS,
+    ...DIRECTIVES,
+    ...PIPES,
     ...AUTH_PROVIDERS,
     provideRouter(routes),
     AuthGuard
@@ -46,4 +48,6 @@ export function main(): Promise<any> {
  */
 
 
-document.addEventListener('DOMContentLoaded', () => main());
+if ('development' === ENV) {
+  document.addEventListener('DOMContentLoaded', () => main());
+}
