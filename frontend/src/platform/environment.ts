@@ -1,9 +1,10 @@
-
 // Angular 2
 import { enableProdMode } from '@angular/core';
 
 // Environment Providers
-let PROVIDERS = [];
+let PROVIDERS = [
+  // common env directives
+];
 
 if ('production' === ENV) {
   // Production
@@ -11,12 +12,14 @@ if ('production' === ENV) {
 
   PROVIDERS = [
     ...PROVIDERS
+    // custom providers in production
   ];
 
 } else {
   // Development
   PROVIDERS = [
     ...PROVIDERS
+    // custom providers in development
   ];
 
 }
