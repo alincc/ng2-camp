@@ -1,15 +1,14 @@
 <sebm-google-map [latitude]="47.5797815" [longitude]="8.183049">
   <sebm-google-map-marker
-    *ngFor="let m of coordinates"
-    [latitude]="m.lat"
-    [longitude]="m.lng"
+    *ngFor="let hotel of (hotelsWithCoordinates | async)"
+    [latitude]="hotel.lat"
+    [longitude]="hotel.lng"
     [markerDraggable]="true">
 
     <sebm-google-map-info-window>
-      <strong><a [linkTo]="'/hotels/' + m.id">{{m.name}}</a></strong>
+      <strong><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></strong>
     </sebm-google-map-info-window>
 
   </sebm-google-map-marker>
-
 </sebm-google-map>
 

@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Rx';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
 import {Coordinate} from '../../../shared/map/coordinate';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Rx';
 
 @Component({
   selector: 'map',
@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscription = this.hotelObservable.flatMap(hotel => this.mapService.getCoordinates(hotel))
+    this.subscription = this.hotelObservable.flatMap(hotel => this.mapService.getCoordinate(hotel))
       .subscribe(coordinate => {
         this.coordinate = coordinate;
       });
