@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Hotel} from '../../model/backend-typings';
-import {Http} from '@angular/http';
 import {Coordinate} from './coordinate';
 import {Observable} from 'rxjs/Observable';
+import {CachedCrudService} from '../cached-crud.service';
 
 @Injectable()
 export class MapService {
@@ -10,10 +10,10 @@ export class MapService {
   private apiUrl: string = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
   private apiKey: string = 'AIzaSyB9aWalvPN_ThVFnN90dVrTlPRQSykiYwo';
 
-  constructor(private http: Http) {
+  constructor(private http: CachedCrudService) {
   }
 
-  public getCoordinates(hotel: Hotel): Observable<Coordinate> {
+  public getCoordinate(hotel: Hotel): Observable<Coordinate> {
     let addressInput: string = ['hotel ' + hotel.name, hotel.city, hotel.street, hotel.countryCode].join(',');
     return this.http.get(this.apiUrl + addressInput + '&key=' + this.apiKey)
       .filter(response => response.status === 200)

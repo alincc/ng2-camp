@@ -1,71 +1,79 @@
-import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/startWith';
 import {HotelService} from './../../shared/hotel.service.ts';
 import {Hotel} from '../../model/backend-typings';
-import FilterPipe from '../hotel.filter.pipe.ts';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
-import CountryFilterPipe from '../country.filter.pipe';
 import {HotelsMapComponent} from './map/hotels-map.component';
-import HotelFilterPipe from './../hotel.filter.pipe';
-import {TooltipWorkaround} from "../../shared/tooltip/tooltip-workaround";
+import {TooltipWorkaround} from '../../shared/tooltip/tooltip-workaround';
 
 @Component({
   selector: 'hotels',
   directives: [MaterializeDirective, HotelsMapComponent],
   providers: [],
-  pipes: [FilterPipe, CountryFilterPipe],
   template: require('./hotel-overview.component.html')
 })
 export class HotelOverviewComponent implements OnInit, OnDestroy {
-  hotels: Hotel[] = [];
-  filteredHotels: Hotel[] = [];
-  countries: string[] = [];
-  selectedValues = [];
-  filteredInput: string = '';
-  @ViewChild(HotelsMapComponent)
-  hotelsMapComponent: HotelsMapComponent;
 
+  stringFilterSubject: Subject<string> = new Subject<string>();
+  countryFilterSubject: Subject<string[]> = new Subject<string[]>();
+
+  countryCodes: Observable<string[]>;
+  hotelsFiltered: Observable<Hotel[]>;
 
   constructor(private hotelService: HotelService) {
   }
 
   ngOnInit() {
-    this.hotelService.getHotels()
-      .subscribe((hotels: Hotel[]) => {
-        this.hotels = hotels;
-        this.filteredHotels = hotels;
-        this.hotelsMapComponent.hotelSelectionChanged(hotels);
-        this.countries = this.hotels
-          .map((hotel: Hotel) => hotel.countryCode)
-          .filter(this.onlyUnique)
-          .sort();
+    let stringFilter: Observable<string> = this.stringFilterSubject.asObservable().startWith('');
+    let countryFilter: Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
+    let hotelsUnfiltered = this.hotelService.getHotels();
+
+    this.countryCodes = hotelsUnfiltered
+      .flatMap((hotels: Hotel[]) => Observable.from(hotels))
+      .map((hotel: Hotel) => hotel.countryCode)
+      .distinct()
+      .toArray()
+      .map((codes: string[]) => codes.sort());
+
+    this.hotelsFiltered = Observable.combineLatest(hotelsUnfiltered, stringFilter, countryFilter)
+      .map(data => {
+        let hotels: Hotel[] = data[0];
+        let filterInput: string = data[1];
+        let countries: string[] = data[2];
+
+        return hotels.filter(hotel => this.hotelContainsString(hotel, filterInput))
+          .filter(hotel => this.hotelIsInCountries(hotel, countries));
       });
+  }
+
+  hotelContainsString(hotel: Hotel, filterInput: string): boolean {
+    let filter = filterInput ? filterInput.trim().toLocaleLowerCase() : '';
+    return (hotel.name ? hotel.name.toLocaleLowerCase().includes(filter) : false) ||
+      (hotel.description ? hotel.description.toLocaleLowerCase().includes(filter) : false) ||
+      (hotel.city ? hotel.city.toLocaleLowerCase().includes(filter) : false);
+  }
+
+  hotelIsInCountries(hotel: Hotel, countries: string[]): boolean {
+    return countries.length === 0 || countries.includes(hotel.countryCode);
+  }
+
+  countrySelectionChanged(options) {
+    let selectedCountries = Array.apply(undefined, options)
+      .filter(option => option.selected)
+      .map(option => option.value)
+      .filter(option => option !== '');
+    this.countryFilterSubject.next(selectedCountries);
+  }
+
+  hotelFilterChanged(event: any) {
+    this.stringFilterSubject.next(event.target.value);
   }
 
   ngOnDestroy() {
     TooltipWorkaround.removeTooltipsFromDom();
   }
-
-  countrySelectionChanged(options) {
-    this.selectedValues = Array.apply(undefined, options)
-      .filter(option => option.selected)
-      .map(option => option.value);
-    this.filterCrieriaChanged();
-  }
-
-  filterHotels(event: any) {
-    this.filteredInput = event.target.value;
-    this.filterCrieriaChanged();
-  }
-
-  filterCrieriaChanged() {
-    let HotelsFilteredByCountry = new CountryFilterPipe().transform(this.hotels, this.selectedValues);
-    this.filteredHotels = new HotelFilterPipe().transform(HotelsFilteredByCountry, this.filteredInput);
-    this.hotelsMapComponent.hotelSelectionChanged(this.filteredHotels);
-  }
-
-  onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
-
 }

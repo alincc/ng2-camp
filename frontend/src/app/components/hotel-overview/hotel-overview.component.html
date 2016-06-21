@@ -10,15 +10,15 @@
 <div class="row" style="margin-top: 20px;">
   <div class="input-field col m6">
     <i class="material-icons prefix">search</i>
-    <input id="icon_prefix" type="text" class="validate" (keyup)="filterHotels($event)">
+    <input id="icon_prefix" type="text" class="validate" (keyup)="hotelFilterChanged($event)">
     <label for="icon_prefix">Search by name, desc or city</label>
   </div>
 
     <div class="input-field col m6">
-      <select multiple materialize="material_select" [materializeSelectOptions]="countries"
+      <select multiple materialize="material_select" [materializeSelectOptions]="countryCodes | async"
               (change)="countrySelectionChanged($event.target.options)">
         <option value="" disabled selected>Choose countries</option>
-        <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+        <option *ngFor="let country of (countryCodes | async)" [value]="country">{{country}}</option>
       </select>
       <label>Countries</label>
     </div>
@@ -34,10 +34,10 @@
     </ul>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="hotelsFiltered">
   <div id="mapView" class="col s12">
     <div class="card">
-      <hotels-map *ngIf="hotels" [hotels]="hotels"></hotels-map>
+      <hotels-map [hotels]="hotelsFiltered"></hotels-map>
     </div>
   </div>
   <div id="tableView" class="col s12">
@@ -52,7 +52,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let hotel of filteredHotels">
+        <tr *ngFor="let hotel of (hotelsFiltered | async)">
           <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td>
           <td>{{hotel.city}}</td>
           <td>{{hotel.countryCode}}</td>

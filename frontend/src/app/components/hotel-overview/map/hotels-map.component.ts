@@ -1,9 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/concatAll';
+import 'rxjs/add/operator/toArray';
+import 'rxjs/add/observable/from';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 import {MapService} from '../../../shared/map/map.service';
 import {Hotel} from '../../../model/backend-typings';
-import {Subscription} from 'rxjs/Rx';
-
 
 @Component({
   selector: 'hotels-map',
@@ -19,46 +21,33 @@ import {Subscription} from 'rxjs/Rx';
 export class HotelsMapComponent implements OnInit {
 
   @Input()
-  hotels: Hotel[];
-  coordinates: HotelWithCoordinates[] = [];
+  hotels: Observable<Hotel[]>;
 
-  private subscriptions: Subscription[] = [];
+  hotelsWithCoordinates: Observable<HotelWithCoordinates[]>;
 
   constructor(private mapService: MapService) {
   }
 
   ngOnInit() {
-    this.refreshMapCoordinates();
+    this.hotelsWithCoordinates = this.hotels
+      .map((hotels: Hotel[]) => Observable.from(hotels)
+        .map(hotel => this.getCoordinate(hotel))
+        .concatAll()
+        .toArray())
+      .concatAll();
   }
 
-  hotelSelectionChanged(selectedHotels: Hotel[]) {
-    this.hotels = selectedHotels;
-    this.coordinates = [];
-    this.refreshMapCoordinates();
-  }
-
-  refreshMapCoordinates() {
-    this.hotels
-      .forEach((hotel: Hotel) =>
-        this.subscriptions.push(this.mapService.getCoordinates(hotel)
-          .subscribe(coordinate => {
-            this.coordinates.push({
-              id: hotel.id,
-              name: hotel.name,
-              lat: coordinate.lat,
-              lng: coordinate.lng
-            });
-          })));
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
+  getCoordinate(hotel: Hotel): Observable<HotelWithCoordinates> {
+    return this.mapService.getCoordinate(hotel)
+      .map(coordinate => new HotelWithCoordinates(hotel.id, hotel.name, coordinate.lat, coordinate.lng));
   }
 }
 
-interface HotelWithCoordinates {
-  id: number;
-  name: string;
-  lat: number;
-  lng: number;
+class HotelWithCoordinates {
+  constructor(public id: number,
+              public name: string,
+              public lat: number,
+              public lng: number) {
+  }
 }
+
