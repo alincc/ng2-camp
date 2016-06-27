@@ -42,6 +42,7 @@ export function main(): Promise<any> {
     ...DIRECTIVES,
     ...PIPES,
     ...AUTH_PROVIDERS,
+    ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provideStore(reducer),
     runEffects(effects),
     ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
