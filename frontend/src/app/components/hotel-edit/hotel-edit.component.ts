@@ -7,6 +7,9 @@ import {CountryService} from '../../shared/country.service';
 import {MaterializeDirective} from 'angular2-materialize';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Rx';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers/index';
+import {HotelActions} from '../../actions/hotel.actions';
 
 @Component({
   selector: 'hotel-edit',
@@ -15,24 +18,26 @@ import {Subscription} from 'rxjs/Rx';
   template: require('./hotel-edit.component.html')
 })
 export class HotelEditComponent implements OnInit {
-  hotel: Hotel = {};
-  hotelId: Observable<number>;
-  countries: Country[];
+  hotel:Hotel = {};
+  hotelId:Observable<number>;
+  countries:Country[];
 
-  private countriesSubscription: Subscription;
-  private hotelsSubscription: Subscription;
+  private countriesSubscription:Subscription;
+  private hotelsSubscription:Subscription;
 
-  constructor(private hotelService: HotelService,
-              private countryService: CountryService,
-              private router: Router,
-              routeParams: RouteParams) {
+  constructor(private hotelService:HotelService,
+              private countryService:CountryService,
+              private store:Store<AppState>,
+              private hotelActions:HotelActions,
+              private router:Router,
+              routeParams:RouteParams) {
     this.hotelId = routeParams.pluck<number>('editHotelId');
   }
 
   ngOnInit() {
     this.countriesSubscription = this.countryService
       .getAllCountries()
-      .subscribe((countries: Country[]) => {
+      .subscribe((countries:Country[]) => {
         this.countries = countries;
       });
 
@@ -47,11 +52,12 @@ export class HotelEditComponent implements OnInit {
   }
 
   saveHotel() {
-    this.hotelService.saveHotel(this.hotel).subscribe(hotel =>
-      this.openHotel(hotel));
+    this.store.dispatch(this.hotelActions.addToCollection(this.hotel));
+    /*this.hotelService.saveHotel(this.hotel).subscribe(hotel =>
+      this.openHotel(hotel));*/
   }
 
-  openHotel(hotel: Hotel) {
+  openHotel(hotel:Hotel) {
     this.router.go('/hotels/' + hotel.id);
   }
 

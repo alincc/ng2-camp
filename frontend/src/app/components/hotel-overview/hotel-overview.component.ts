@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+import {Store} from '@ngrx/store';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/startWith';
@@ -9,6 +10,7 @@ import {Hotel} from '../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {HotelsMapComponent} from './map/hotels-map.component';
 import {TooltipWorkaround} from '../../shared/tooltip/tooltip-workaround';
+import {AppState, getHotelEntities, getHotelState} from '../../reducers/index';
 
 @Component({
   selector: 'hotels',
@@ -24,13 +26,16 @@ export class HotelOverviewComponent implements OnInit, OnDestroy {
   countryCodes: Observable<string[]>;
   hotelsFiltered: Observable<Hotel[]>;
 
-  constructor(private hotelService: HotelService) {
+  constructor(private hotelService: HotelService, private store: Store<AppState>){
+    //this.hotelsFiltered = store.select('hotels');
   }
 
   ngOnInit() {
     let stringFilter: Observable<string> = this.stringFilterSubject.asObservable().startWith('');
     let countryFilter: Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
-    let hotelsUnfiltered = this.hotelService.getHotels();
+    //let hotelsUnfiltered = this.hotelService.getHotels();
+    let hotelsUnfiltered = this.store.let(getHotelEntities());
+    console.log(hotelsUnfiltered);
 
     this.countryCodes = hotelsUnfiltered
       .flatMap((hotels: Hotel[]) => Observable.from(hotels))
