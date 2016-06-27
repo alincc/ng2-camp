@@ -50,7 +50,6 @@ export function main(): Promise<any> {
     actions
   ])
     .catch(err => console.error(err));
-
 }
 
 
