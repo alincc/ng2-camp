@@ -48,14 +48,14 @@ export class HotelOverviewComponent implements OnInit, OnDestroy {
       });
   }
 
-  hotelContainsString(hotel:Hotel, filterInput:string):boolean {
+  hotelContainsString(hotel: Hotel, filterInput: string): boolean {
     let filter = filterInput ? filterInput.trim().toLocaleLowerCase() : '';
     return (hotel.name ? hotel.name.toLocaleLowerCase().includes(filter) : false) ||
       (hotel.description ? hotel.description.toLocaleLowerCase().includes(filter) : false) ||
       (hotel.city ? hotel.city.toLocaleLowerCase().includes(filter) : false);
   }
 
-  hotelIsInCountries(hotel:Hotel, countries:string[]):boolean {
+  hotelIsInCountries(hotel: Hotel, countries: string[]): boolean {
     return countries.length === 0 || countries.includes(hotel.countryCode);
   }
 
@@ -67,7 +67,7 @@ export class HotelOverviewComponent implements OnInit, OnDestroy {
     this.countryFilterSubject.next(selectedCountries);
   }
 
-  hotelFilterChanged(event:any) {
+  hotelFilterChanged(event: any) {
     this.stringFilterSubject.next(event.target.value);
   }
 

@@ -22,6 +22,7 @@ import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 import reducer from './app/reducers';
 import effects from './app/effects';
 import actions from './app/actions';
+import services from './app/shared/index';
 
 /*
  * App Component
@@ -47,7 +48,8 @@ export function main(): Promise<any> {
     provideRouter(routes),
     connectRouterToStore(),
     AuthGuard,
-    actions
+    actions,
+    services
   ])
     .catch(err => console.error(err));
 }
