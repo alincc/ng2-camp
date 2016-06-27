@@ -52,7 +52,6 @@ export function main(): Promise<any> {
     services
   ])
     .catch(err => console.error(err));
-
 }
 
 
