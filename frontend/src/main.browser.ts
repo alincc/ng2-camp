@@ -24,6 +24,11 @@ import services from './app/shared/index';
 
 import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 
+import reducer from './app/reducers';
+import effects from './app/effects';
+import actions from './app/actions';
+import services from './app/shared/index';
+
 /*
  * App Component
  * our top level component that holds all of our components
