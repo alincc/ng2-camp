@@ -11,6 +11,9 @@ import '@angular/common';
 import '@angular/http';
 import '@ngrx/core';
 import '@ngrx/router';
+import '@ngrx/store';
+import '@ngrx/router-store';
+import '@ngrx/effects';
 import 'marked';
 
 // RxJS

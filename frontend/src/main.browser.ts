@@ -11,10 +11,17 @@ import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
 import {ENV_PROVIDERS} from './platform/environment';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 import { provideRouter } from '@ngrx/router';
+import { provideStore } from '@ngrx/store';
+import { connectRouterToStore } from '@ngrx/router-store';
+import { runEffects } from '@ngrx/effects';
 import { routes } from 'app/routes/routes';
 import { AuthGuard } from 'app/routes/authGuard';
 
 import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
+
+import reducer from './app/reducers';
+import effects from './app/effects';
+import actions from './app/actions';
 
 /*
  * App Component
@@ -35,8 +42,12 @@ export function main(): Promise<any> {
     ...PIPES,
     ...AUTH_PROVIDERS,
     ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
+    provideStore(reducer),
+    runEffects(effects),
     provideRouter(routes),
-    AuthGuard
+    connectRouterToStore(),
+    AuthGuard,
+    actions
   ])
     .catch(err => console.error(err));
 
