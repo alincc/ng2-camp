@@ -60,5 +60,4 @@ npm-debug.log
 *.swp
 
 # Gradle #
-.gradle
 build
