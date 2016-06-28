@@ -3,14 +3,14 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/concatAll';
 import 'rxjs/add/operator/toArray';
 import 'rxjs/add/observable/from';
-import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
+import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
 import {MapService} from '../../../shared/map.service';
 import {Hotel} from '../../../model/backend-typings';
 
 @Component({
   selector: 'hotels-map',
   directives: [ANGULAR2_GOOGLE_MAPS_DIRECTIVES],
-  providers: [ANGULAR2_GOOGLE_MAPS_PROVIDERS, MapService],
+  providers: [MapService],
   styles: [`
     .sebm-google-map-container {
       height: 500px;

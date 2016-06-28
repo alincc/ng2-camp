@@ -14,6 +14,8 @@ import { provideRouter } from '@ngrx/router';
 import { routes } from 'app/routes/routes';
 import { AuthGuard } from 'app/routes/authGuard';
 
+import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
+
 /*
  * App Component
  * our top level component that holds all of our components
@@ -32,6 +34,7 @@ export function main(): Promise<any> {
     ...DIRECTIVES,
     ...PIPES,
     ...AUTH_PROVIDERS,
+    ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provideRouter(routes),
     AuthGuard
   ])
