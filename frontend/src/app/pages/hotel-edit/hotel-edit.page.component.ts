@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Hotel} from '../../model/backend-typings';
 import {HotelService} from '../../shared/hotel.service';
 import {RouteParams, Router} from '@ngrx/router';
+import {Store} from '@ngrx/store';
 import {Country} from '../../model/country';
 import {CountryService} from '../../shared/country.service';
 import {Observable} from 'rxjs/Observable';
@@ -9,15 +10,17 @@ import {Subscription} from "rxjs/Subscription";
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/observable/of';
 import {HotelEditComponent} from '../../components/hotel-edit/hotel-edit.component';
+import {AppState} from '../../reducers/index';
+import {HotelActions} from '../../actions/hotel.actions';
 
 @Component({
   selector: 'hotel-edit-page',
   directives: [HotelEditComponent],
   template: `
     <hotel-edit 
-    [hotel]="hotel | async"
-    [countries]="countries | async"
-    (saveHotel)="saveHotel($event)">
+      [hotel]="hotel | async"
+      [countries]="countries | async"
+      (saveHotel)="saveHotel($event)">
     </hotel-edit>
 `
 })
@@ -30,6 +33,8 @@ export class HotelEditPageComponent implements OnInit, OnDestroy {
   constructor(private hotelService: HotelService,
               private countryService: CountryService,
               private router: Router,
+              private store: Store<AppState>,
+              private hotelActions: HotelActions,
               private routeParams: RouteParams) {
   }
 
@@ -51,6 +56,7 @@ export class HotelEditPageComponent implements OnInit, OnDestroy {
   }
 
   saveHotel(hotel: Hotel) {
+    this.store.dispatch(this.hotelActions.addToCollection(this.hotel));
     this.hotelService.saveHotel(hotel).subscribe(hotel =>
       this.router.go('/hotels/' + hotel.id));
   }
