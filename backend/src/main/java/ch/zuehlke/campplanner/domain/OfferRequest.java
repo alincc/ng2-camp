@@ -24,6 +24,9 @@ public class OfferRequest {
     @OneToOne(cascade = CascadeType.MERGE)
     private Offer offer;
 
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Hotel hotel;
+
     public Long getId() {
         return id;
     }
@@ -70,5 +73,13 @@ public class OfferRequest {
 
     public void setOffer(Offer offer) {
         this.offer = offer;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }

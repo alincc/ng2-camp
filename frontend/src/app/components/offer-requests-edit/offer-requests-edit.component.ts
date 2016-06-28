@@ -2,22 +2,28 @@ import {Component, OnInit} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
 import {MaterializeDirective} from 'angular2-materialize';
 import {HotelService} from '../../shared/hotel.service';
-import {Hotel, OfferRequestCreateDto} from '../../model/backend-typings';
+import {Hotel, OfferRequest} from '../../model/backend-typings';
+import {RequestStatusEnum, getRequestStatusValues} from '../../model/RequestStatusEnum';
 import {OfferRequestService} from '../../shared/offer-request.service';
 import {Subscription} from "rxjs/Subscription";
+import {Observable} from "rxjs/Rx";
 
 @Component({
   selector: 'offer-request-edit',
   directives: [MaterializeDirective],
-  template: require('./offer-requests-new.component.html')
+  template: require('./offer-requests-edit.component.html')
 })
-export class OfferRequestNewComponent implements OnInit {
+export class OfferRequestEditComponent implements OnInit {
   hotels:Hotel[] = [];
-  offerRequest:OfferRequestCreateDto = {status: 'REQUEST_SENT'};
+  offerRequest:OfferRequest = {status: 'REQUEST_SENT'};
+  isNewTemplate:boolean = false;
 
   private campId:number;
+  private offerRequestIdSubscription:Subscription;
   private campIdSubscription:Subscription;
   private hotelSubscription:Subscription;
+  private observable:Observable<number>;
+  private requestStatusList:RequestStatusEnum[] = getRequestStatusValues();
 
   constructor(private routeParams:RouteParams,
               private hotelService:HotelService,
@@ -26,6 +32,15 @@ export class OfferRequestNewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.observable = this.routeParams.pluck<number>('offerRequestId')
+      .filter(id => !isNaN(id));
+    this.offerRequestIdSubscription = this.observable
+      .flatMap(id => this.offerRequestService.getOfferRequest(id))
+      .subscribe(offerRequest => {
+        this.offerRequest = offerRequest;
+      });
+    this.isNewTemplate = false;
+
     this.campIdSubscription = this.routeParams.pluck('campId').subscribe(
       (id:number) => this.campId = id
     );
@@ -45,6 +60,7 @@ export class OfferRequestNewComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.offerRequestIdSubscription.unsubscribe();
     this.campIdSubscription.unsubscribe();
     this.hotelSubscription.unsubscribe();
   }

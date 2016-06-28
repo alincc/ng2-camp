@@ -9,7 +9,7 @@ import {HotelEditComponent} from '../components/hotel-edit/hotel-edit.component'
 import {MailTemplatesComponent} from '../components/mail-templates/mailtemplates.component';
 import {CampDetailComponent} from '../components/camp-detail/camp-detail.component';
 import {OfferEditComponent} from '../components/offer-edit/offer-edit.component';
-import {OfferRequestNewComponent} from '../components/offer-requests-new/offer-requests-new.component.ts';
+import {OfferRequestEditComponent} from '../components/offer-requests-edit/offer-requests-edit.component.ts';
 
 export const routes: Routes = [
   {
@@ -47,9 +47,9 @@ export const routes: Routes = [
     component: CampEditComponent
   },
   {
-    path: '/camps/:campId/offer-requests/new',
+    path: '/camps/:campId/offer-requests/edit/:offerRequestId',
     guards: [AuthGuard],
-    component: OfferRequestNewComponent
+    component: OfferRequestEditComponent
   },
   {
     path: '/offers/edit/:offerId',

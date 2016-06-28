@@ -5,14 +5,21 @@
         <input id="requestDate" type="date" class="validate" required [(ngModel)]="offerRequest.date" ngControl="requestDate">
         <label for="requestDate">Request date</label>
       </div>
+      <div class="col s3">
+        <select id="requestStatus" materialize="material_select" [materializeSelectOptions]="requestStatusList"
+                [(ngModel)]="offerRequest.status" ngControl="requestStatus">
+          <option *ngFor="let status of requestStatusList" [value]="offerRequest.status" [selected]="requestStatus === offerRequest.status">{{status}}</option>
+        </select>
+        <label for="requestStatus">Request status</label>
+      </div>
     </div>
 
     <div class="row">
       <div class="input-field col s6">
         <select id="hotel" materialize="material_select" [materializeSelectOptions]="hotels" required
                 [(ngModel)]="offerRequest.hotelId" ngControl="hotelId" #hotelId="ngForm" >
-          <option value="" disabled selected>Select hotel</option>
-          <option *ngFor="let hotel of hotels" [value]="hotel.id">{{hotel.name}} - {{hotel.city}}, {{hotel.countryCode}}</option>
+          <option *ngIf="isNewTemplate" value="" disabled selected>Select hotel</option>
+          <option *ngFor="let hotel of hotels" [value]="offerRequest.hotelId" [selected]="hotelId === offerRequest.hotelId">{{hotel.name}} - {{hotel.city}}, {{hotel.countryCode}}</option>
         </select>
         <label for="hotel">Hotel</label>
       </div>

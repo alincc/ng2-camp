@@ -32,8 +32,6 @@
       <th>Offer date</th>
       <th>Status</th>
       <th>Hotel</th>
-      <th>City</th>
-      <th>Country</th>
       <th>Comment</th>
     </tr>
     </thead>
@@ -43,11 +41,9 @@
       <td>
         <div class="chip" [ngClass]="getStatusColor(offerRequest.status)">{{offerRequest.status}}</div>
       </td>
-      <td>{{offerRequest.offer.hotel.name}}</td>
-      <td>{{offerRequest.offer.hotel.city}}</td>
-      <td>{{offerRequest.offer.hotel.countryCode}}</td>
+      <td>{{offerRequest.hotel.name}}</td>
       <td>{{offerRequest.comment}}</td>
-      <td><a [linkTo]="'/offers/edit/' + offerRequest.offer.id">
+      <td><a [linkTo]="'/camps/' + camp.id + '/offer-requests/edit/' + offerRequest.id">
         <i class="material-icons">mode_edit</i>
       </a></td>
     </tr>
@@ -60,7 +56,7 @@
   </a>
   <ul>
     <li materialize="tooltip" data-position="left" data-delay="0" data-tooltip="Add offer request">
-      <a [linkTo]="'/camps/' + camp.id + '/offer-requests/new'" class="btn-floating green">
+      <a [linkTo]="'/camps/' + camp.id + '/offer-requests/edit/new'" class="btn-floating green">
         <i class="material-icons">note_add</i>
       </a>
     </li>

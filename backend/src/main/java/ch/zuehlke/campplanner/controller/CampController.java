@@ -52,31 +52,14 @@ public class CampController {
     @Transactional
     @RequestMapping(value = "/{id}/offerrequests",
             method = RequestMethod.POST)
-    public OfferRequest addOfferRequest(@PathVariable("id") Long id, @RequestBody OfferRequestCreateDto offerRequestCreateDto) {
+    public OfferRequest addOfferRequest(@PathVariable("id") Long id, @RequestBody OfferRequest offerRequest) {
         Camp camp = campRepository.findOne(id);
         if (camp == null) {
             throw new IllegalArgumentException("Camp with the id " + id + " does not exist");
         }
-
-        Long hotelId = offerRequestCreateDto.getHotelId();
-        Hotel hotel = hotelRepository.findOne(hotelId);
-        if (hotel == null) {
-            throw new IllegalArgumentException("Hotel with the id " + hotelId + " does not exist");
-        }
-
-        Offer offer = new Offer();
-        offer.setHotel(hotel);
-
-        OfferRequest offerRequest = new OfferRequest();
-        offerRequest.setDate(offerRequestCreateDto.getDate());
-        offerRequest.setComment(offerRequestCreateDto.getComment());
-        offerRequest.setStatus(offerRequestCreateDto.getStatus());
-        offerRequest.setOffer(offer);
         offerRequestRepository.save(offerRequest);
-
         camp.getOfferRequests().add(offerRequest);
         campRepository.save(camp);
-
         return offerRequest;
     }
 }

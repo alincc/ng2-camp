@@ -166,6 +166,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         offerRequest.setDate(new Date());
         offerRequest.setLastStatusChange(new Date());
         offerRequest.setOffer(offer);
+        offerRequest.setHotel(offer.getHotel());
         offerRequest.setStatus(RequestStatus.OFFER_RECEIVED);
         return offerRequest;
     }

@@ -57,16 +57,10 @@ export interface Offer {
 export interface OfferRequest {
     comment?: string;
     date?: Date;
+    hotel?: Hotel;
     id?: number;
     lastStatusChange?: Date;
     offer?: Offer;
-    status?: RequestStatus;
-}
-
-export interface OfferRequestCreateDto {
-    comment?: string;
-    date?: Date;
-    hotelId?: number;
     status?: RequestStatus;
 }
 
