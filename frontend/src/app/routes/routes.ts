@@ -1,15 +1,15 @@
 import {Routes, Route} from '@ngrx/router';
-import {HotelOverviewComponent} from '../components/hotel-overview/hotel-overview.component';
-import {HotelDetailComponent} from '../components/hotel-detail/hotel-detail.component';
+import {HotelDetailPageComponent} from '../pages/hotel-detail/hotel-detail.page.component';
 import {LoginComponent} from '../components/login/login.component';
 import {AuthGuard} from './authGuard';
-import {CampOverviewComponent} from '../components/camp-overview/camp-overview.component';
-import {CampEditComponent} from '../components/camp-edit/camp-edit.component';
-import {HotelEditComponent} from '../components/hotel-edit/hotel-edit.component';
+import {CampOverviewPageComponent} from '../pages/camp-overview/camp-overview.page.component';
+import {CampEditPageComponent} from '../pages/camp-edit/camp-edit.page.component';
+import {HotelEditPageComponent} from '../pages/hotel-edit/hotel-edit.page.component';
 import {MailTemplatesComponent} from '../components/mail-templates/mailtemplates.component';
-import {CampDetailComponent} from '../components/camp-detail/camp-detail.component';
-import {OfferEditComponent} from '../components/offer-edit/offer-edit.component';
-import {OfferRequestEditComponent} from '../components/offer-requests-edit/offer-requests-edit.component.ts';
+import {CampDetailPageComponent} from '../pages/camp-detail/camp-detail.page.component';
+import {OfferEditPageComponent} from '../pages/offer-edit/offer-edit.page.component';
+import {OfferRequestEditPageComponent} from '../pages/offer-requests-edit/offer-request-edit.page.component.ts';
+import {HotelOverviewPageComponent} from '../pages/hotel-overview/hotel-overview.page.component';
 
 export const routes: Routes = [
   {
@@ -19,42 +19,42 @@ export const routes: Routes = [
   {
     path: '/hotels',
     guards: [AuthGuard],
-    component: HotelOverviewComponent
+    component: HotelOverviewPageComponent
   },
   {
     path: '/hotels/:hotelId',
     guards: [AuthGuard],
-    component: HotelDetailComponent
+    component: HotelDetailPageComponent
   },
   {
-    path: '/hotels/edit/:editHotelId',
+    path: '/hotels/edit/:hotelId',
     guards: [AuthGuard],
-    component: HotelEditComponent
+    component: HotelEditPageComponent
   },
   {
     path: '/camps',
     guards: [AuthGuard],
-    component: CampOverviewComponent
+    component: CampOverviewPageComponent
   },
   {
     path: '/camps/:campId',
     guards: [AuthGuard],
-    component: CampDetailComponent
+    component: CampDetailPageComponent
   },
   {
     path: '/camps/edit/:campId',
     guards: [AuthGuard],
-    component: CampEditComponent
+    component: CampEditPageComponent
   },
   {
-    path: '/camps/:campId/offer-requests/edit/:offerRequestId',
+    path: '/camps/:campId/offer-requests/new',
     guards: [AuthGuard],
-    component: OfferRequestEditComponent
+    component: OfferRequestEditPageComponent
   },
   {
     path: '/offers/edit/:offerId',
     guards: [AuthGuard],
-    component: OfferEditComponent
+    component: OfferEditPageComponent
   },
   {
     path: '/mailtemplates',

@@ -66,7 +66,7 @@
     </div>
     <div class="modal-footer">
       <a class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-      <a (click)="deleteHotel()" class=" modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
+      <a (click)="delete.emit(hotel)" class=" modal-action modal-close waves-effect waves-green btn-flat">Delete</a>
     </div>
   </div>
 
@@ -77,7 +77,7 @@
     <div class="card">
       <div class="card-content left-align">
         <h4>Map</h4>
-        <map [hotelObservable]="hotelObservable"></map>
+        <map [hotel]="hotel" [coordinate]="coordinate"></map>
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@
     <div class="card">
       <div class="card-content left-align">
         <h4>Offers</h4>
-        <offer-list [hotelObservable]="hotelObservable"></offer-list>
+        <offer-list [offers]="offers"></offer-list>
       </div>
     </div>
   </div>
@@ -97,10 +97,10 @@
     <div class="card">
       <div class="card-content left-align">
         <h4>Ratings</h4>
-        <rating-list [hotelId]="hotelId"></rating-list>
+        <rating-list [ratings]="ratings"></rating-list>
       </div>
     </div>
   </div>
 </div>
 
-<rating-new [hotelId]="hotelId" (ratingSavedEvent)="deliverRatingSavedEvent($event)"></rating-new>
+<rating-new (ratingSavedEvent)="deliverRatingSavedEvent($event)"></rating-new>

@@ -1,24 +1,17 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {Camp} from '../../model/backend-typings';
-import {CampService} from '../../shared/camp.service';
 import {MaterializeDirective} from "angular2-materialize/dist/index"
 import {TooltipWorkaround} from "../../shared/tooltip/tooltip-workaround";
 
 @Component({
-  selector: 'camps',
+  selector: 'camp-overview',
   directives: [MaterializeDirective],
   template: require('./camp-overview.component.html')
 })
-export class CampOverviewComponent implements OnInit, OnDestroy {
-  camps: Observable<Camp[]>;
+export class CampOverviewComponent implements OnDestroy {
 
-  constructor(private campService:CampService) {
-  }
-
-  ngOnInit() {
-    this.camps = this.campService.getCamps();
-  }
+  @Input()
+  camps: Camp[];
 
   ngOnDestroy() {
     TooltipWorkaround.removeTooltipsFromDom();

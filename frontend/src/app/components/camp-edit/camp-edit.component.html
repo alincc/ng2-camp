@@ -1,5 +1,5 @@
-<div class="row">
-  <form materialize class="col s12" (ngSubmit)="saveCamp()" #campForm="ngForm">
+<div class="row" *ngIf="camp">
+  <form materialize class="col s12" (ngSubmit)="saveCamp.emit(camp)" #campForm="ngForm">
     <div class="row">
       <div class="input-field col s12">
         <input id="campName" type="text" class="validate" required [(ngModel)]="camp.name" ngControl="name">

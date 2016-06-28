@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/observable/from';
@@ -18,46 +18,44 @@ import {TooltipWorkaround} from '../../shared/tooltip/tooltip-workaround';
 })
 export class HotelOverviewComponent implements OnInit, OnDestroy {
 
-  stringFilterSubject: Subject<string> = new Subject<string>();
-  countryFilterSubject: Subject<string[]> = new Subject<string[]>();
+  @Input()
+  hotels:Observable<Hotel[]>;
 
-  countryCodes: Observable<string[]>;
-  hotelsFiltered: Observable<Hotel[]>;
+  stringFilterSubject:Subject<string> = new Subject<string>();
+  countryFilterSubject:Subject<string[]> = new Subject<string[]>();
 
-  constructor(private hotelService: HotelService) {
-  }
+  countryCodes:Observable<string[]>;
+  hotelsFiltered:Observable<Hotel[]>;
 
   ngOnInit() {
-    let stringFilter: Observable<string> = this.stringFilterSubject.asObservable().startWith('');
-    let countryFilter: Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
-    let hotelsUnfiltered = this.hotelService.getHotels();
-
-    this.countryCodes = hotelsUnfiltered
-      .flatMap((hotels: Hotel[]) => Observable.from(hotels))
-      .map((hotel: Hotel) => hotel.countryCode)
+    let stringFilter:Observable<string> = this.stringFilterSubject.asObservable().startWith('');
+    let countryFilter:Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
+    this.countryCodes = this.hotels
+      .flatMap((hotels:Hotel[]) => Observable.from(this.hotels))
+      .map((hotel:Hotel) => hotel.countryCode)
       .distinct()
       .toArray()
-      .map((codes: string[]) => codes.sort());
+      .map((codes:string[]) => codes.sort());
 
-    this.hotelsFiltered = Observable.combineLatest(hotelsUnfiltered, stringFilter, countryFilter)
+    this.hotelsFiltered = Observable.combineLatest(this.hotels, stringFilter, countryFilter)
       .map(data => {
-        let hotels: Hotel[] = data[0];
-        let filterInput: string = data[1];
-        let countries: string[] = data[2];
+        let hotels:Hotel[] = data[0];
+        let filterInput:string = data[1];
+        let countries:string[] = data[2];
 
         return hotels.filter(hotel => this.hotelContainsString(hotel, filterInput))
           .filter(hotel => this.hotelIsInCountries(hotel, countries));
       });
   }
 
-  hotelContainsString(hotel: Hotel, filterInput: string): boolean {
+  hotelContainsString(hotel:Hotel, filterInput:string):boolean {
     let filter = filterInput ? filterInput.trim().toLocaleLowerCase() : '';
     return (hotel.name ? hotel.name.toLocaleLowerCase().includes(filter) : false) ||
       (hotel.description ? hotel.description.toLocaleLowerCase().includes(filter) : false) ||
       (hotel.city ? hotel.city.toLocaleLowerCase().includes(filter) : false);
   }
 
-  hotelIsInCountries(hotel: Hotel, countries: string[]): boolean {
+  hotelIsInCountries(hotel:Hotel, countries:string[]):boolean {
     return countries.length === 0 || countries.includes(hotel.countryCode);
   }
 
@@ -69,7 +67,7 @@ export class HotelOverviewComponent implements OnInit, OnDestroy {
     this.countryFilterSubject.next(selectedCountries);
   }
 
-  hotelFilterChanged(event: any) {
+  hotelFilterChanged(event:any) {
     this.stringFilterSubject.next(event.target.value);
   }
 

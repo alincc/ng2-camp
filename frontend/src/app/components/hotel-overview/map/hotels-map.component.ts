@@ -4,7 +4,7 @@ import 'rxjs/add/operator/concatAll';
 import 'rxjs/add/operator/toArray';
 import 'rxjs/add/observable/from';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
-import {MapService} from '../../../shared/map/map.service';
+import {MapService} from '../../../shared/map.service';
 import {Hotel} from '../../../model/backend-typings';
 
 @Component({

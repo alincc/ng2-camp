@@ -8,7 +8,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let rating of ratings | async">
+  <tr *ngFor="let rating of ratings">
     <td>{{rating.ratingFrom1To5}}</td>
     <td>{{rating.description}}</td>
     <td>{{rating.date | date}}</td>

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Hotel} from '../../model/backend-typings';
-import {Coordinate} from './coordinate';
+import {Hotel} from '../model/backend-typings';
+import {Coordinate} from '../model/coordinate';
 import {Observable} from 'rxjs/Observable';
-import {CachedCrudService} from '../cached-crud.service';
+import {CachedCrudService} from './cached-crud.service';
 
 @Injectable()
 export class MapService {

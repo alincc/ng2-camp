@@ -1,6 +1,6 @@
 <div class="row" *ngIf="offer">
-  <h2>Offer for {{offer.hotel.name}}</h2>
-  <form materialize class="col s12" (ngSubmit)="saveOffer()" #offerForm="ngForm">
+  <h2>Offer</h2>
+  <form materialize class="col s12" (ngSubmit)="saveOffer.emit(offer)" #offerForm="ngForm">
 
     <div class="row">
       <div class="col s6">
@@ -85,21 +85,6 @@
         <label for="description">Description</label>
       </div>
     </div>
-
-    <!--accepted?: boolean;-->
-    <!--currency?: Currency;-->
-    <!--description?: string;-->
-    <!--doubleRooms?: number;-->
-    <!--expirationDate?: Date;-->
-    <!--fromDate?: Date;-->
-    <!--hotel?: Hotel;-->
-    <!--id?: number;-->
-    <!--numberOfPeople?: number;-->
-    <!--offerDate?: Date;-->
-    <!--singleRooms?: number;-->
-    <!--toDate?: Date;-->
-    <!--totalPrice?: number;-->
-    <!--userId?: string;-->
 
     <div class="row">
       <button class="btn waves-effect waves-light blue" type="submit" name="action"

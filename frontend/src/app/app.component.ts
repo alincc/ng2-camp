@@ -11,11 +11,14 @@ import {OfferRequestService} from './shared/offer-request.service';
 import {MailTemplateService} from './shared/mailtemplate.service';
 import {MarkdownConverter} from './components/markdown/markDownConverter';
 import {CachedCrudService} from './shared/cached-crud.service';
+import {MapService} from './shared/map.service';
+import {OfferService} from './shared/offer.service';
 
 @Component({
   selector: 'app',
   directives: [HotelOverviewComponent, NavigationComponent],
-  providers: [CrudService, CachedCrudService, HotelService, CountryService, CampService, AuthService, OfferRequestService, RatingService, MailTemplateService, MarkdownConverter],
+  providers: [CrudService, CachedCrudService, HotelService, CountryService, CampService, OfferService,
+    AuthService, OfferRequestService, RatingService, MailTemplateService, MarkdownConverter, MapService],
   styles: [
     require('../assets/css/main.scss')
   ],

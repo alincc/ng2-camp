@@ -1,25 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Component, Input} from '@angular/core';
 import 'rxjs/add/operator/pluck';
-import {Hotel, Offer} from '../../../model/backend-typings';
-import {OfferService} from '../../../shared/offer.service';
+import {Offer} from '../../../model/backend-typings';
 
 @Component({
   selector: 'offer-list',
   directives: [],
-  providers: [OfferService],
+  providers: [],
   template: require('./offer-list.component.html')
 })
-export class OfferListComponent implements OnInit {
+export class OfferListComponent {
 
-  @Input() hotelObservable: Observable<Hotel>;
-
-  offers: Observable<Offer[]>;
-
-  constructor(private offerService: OfferService) {
-  }
-
-  ngOnInit(): any {
-    this.offers = this.hotelObservable.flatMap(hotel => this.offerService.getByHotelId(hotel.id));
-  }
+  @Input()
+  offers: Offer[];
 }
