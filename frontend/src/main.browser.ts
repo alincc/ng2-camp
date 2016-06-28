@@ -42,9 +42,9 @@ export function main(): Promise<any> {
     ...DIRECTIVES,
     ...PIPES,
     ...AUTH_PROVIDERS,
-    ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provideStore(reducer),
     runEffects(effects),
+    ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provideRouter(routes),
     connectRouterToStore(),
     AuthGuard,
@@ -52,6 +52,7 @@ export function main(): Promise<any> {
     services
   ])
     .catch(err => console.error(err));
+
 }
 
 
