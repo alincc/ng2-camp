@@ -8,5 +8,6 @@ import {Rating} from '../../../model/backend-typings';
   template: require('./rating-new.component.html')
 })
 export class RatingNewComponent {
+  @Input()
   rating: Rating = {};
 }

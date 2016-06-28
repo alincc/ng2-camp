@@ -1,20 +1,15 @@
-import {Component, OnDestroy, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Camp, RequestStatus} from '../../model/backend-typings';
-import {TooltipWorkaround} from "../../shared/tooltip/tooltip-workaround";
 
 @Component({
   selector: 'camp-detail',
   directives: [],
   template: require('./camp-detail.component.html')
 })
-export class CampDetailComponent implements OnDestroy {
+export class CampDetailComponent {
 
   @Input()
   camp: Camp;
-
-  ngOnDestroy() {
-    TooltipWorkaround.removeTooltipsFromDom();
-  }
 
   getStatusColor(status:RequestStatus) {
     switch (status) {
