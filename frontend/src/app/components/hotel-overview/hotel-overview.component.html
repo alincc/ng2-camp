@@ -42,38 +42,7 @@
   </div>
   <div id="tableView" class="col s12">
     <div class="card">
-      <table class="responsive-table striped bordered">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>City</th>
-          <th>Country</th>
-          <th>Info</th>
-          <th *ngIf="camp">Camp</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let hotel of (hotelsFiltered | async)">
-          <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td>
-          <td>{{hotel.city}}</td>
-          <td>{{hotel.countryCode}}</td>
-          <td>
-            <a href="{{hotel.website}}" target="_blank">
-              <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
-            </a>
-            <a *ngIf="hotel.tripAdvisorUrl" href="{{hotel.tripAdvisorUrl}}" target="_blank">
-              <i class="fa fa-tripadvisor fa-2x" aria-hidden="true"></i>
-            </a>
-          </td>
-          <td *ngIf="camp">
-            <a class='btn-floating waves-effect waves-light grey' href='#'>
-              <i class="material-icons">add</i>
-            </a>
-            <a class='btn-floating waves-effect waves-light grey' href='#'>
-              <i class="material-icons">remove</i>
-            </a>
-        </tr>
-      </table>
+      <hotels-table [hotels]="hotelsFiltered | async"></hotels-table>
     </div>
   </div>
 </div>

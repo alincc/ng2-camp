@@ -7,10 +7,11 @@ import 'rxjs/add/operator/startWith';
 import {Hotel, Camp} from '../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {HotelsMapComponent} from './map/hotels-map.component';
+import {HotelsTableComponent} from './table/hotels-table.component';
 
 @Component({
   selector: 'hotels',
-  directives: [MaterializeDirective, HotelsMapComponent],
+  directives: [MaterializeDirective, HotelsMapComponent, HotelsTableComponent],
   providers: [],
   template: require('./hotel-overview.component.html')
 })
@@ -32,7 +33,7 @@ export class HotelOverviewComponent implements OnInit {
     let stringFilter:Observable<string> = this.stringFilterSubject.asObservable().startWith('');
     let countryFilter:Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
     this.countryCodes = this.hotels
-      .flatMap((hotels:Hotel[]) => Observable.from(this.hotels))
+      .flatMap((hotels:Hotel[]) => Observable.from(hotels))
       .map((hotel:Hotel) => hotel.countryCode)
       .distinct()
       .toArray()
