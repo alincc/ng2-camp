@@ -48,7 +48,7 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
         if (!isNaN(offerRequestId)) {
           this.offerRequest = this.offerRequestService.getOfferRequest(offerRequestId);
         } else {
-          this.offerRequest = Observable.of({lastStatusChange: Date.now()} as OfferRequest);
+          this.offerRequest = Observable.of({lastStatusChange: new Date()} as OfferRequest);
         }
       });
 

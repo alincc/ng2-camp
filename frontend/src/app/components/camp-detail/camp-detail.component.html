@@ -10,7 +10,7 @@
           <span class="card-title">Infos</span>
           <p>Current status: {{camp.status}}</p>
           <p>{{camp.numberOfPeople}} people</p>
-          <p *ngIf="camp.fromDate && camp.toDate">From {{camp.fromDate}} to {{camp.toDate}}</p>
+          <p *ngIf="camp.fromDate && camp.toDate">From {{camp.fromDate | date}} to {{camp.toDate | date}}</p>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
       <tbody>
       <tr *ngFor="let offerRequest of camp.offerRequests">
         <td>{{offerRequest.date | date}}</td>
-        <td>{{offerRequest.lastStatusChange}}</td>
+        <td>{{offerRequest.lastStatusChange | date}}</td>
         <td>
           <div class="chip" [ngClass]="getStatusColor(offerRequest.status)">{{offerRequest.status}}</div>
         </td>

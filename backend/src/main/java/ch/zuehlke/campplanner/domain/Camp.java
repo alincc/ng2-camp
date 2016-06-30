@@ -22,10 +22,10 @@ public class Camp {
     @Column(columnDefinition = "text")
     private String notes;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fromDate;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
     private Date toDate;
     private Integer numberOfPeople;
 
