@@ -16,7 +16,7 @@ export class CampDateComponent {
     window.open('http://doodle.com/create?type=date&locale=en'
       + '&title=' + this.camp.name
       + '&name=' + this.camp.organizer
-      // + '&description=' + this.camp.notes
+      + '&description=' + this.camp.notes
       ,'_blank');
   }
 }

@@ -3,6 +3,7 @@ export interface Camp {
     fromDate?: Date;
     id?: number;
     name?: string;
+    notes?: string;
     numberOfPeople?: number;
     offerRequests?: OfferRequest[];
     organizer?: string;

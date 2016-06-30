@@ -19,6 +19,9 @@ public class Camp {
 
     private String organizer;
 
+    @Column(columnDefinition = "text")
+    private String notes;
+
     @Temporal(TemporalType.DATE)
     private Date fromDate;
 
@@ -79,6 +82,14 @@ public class Camp {
 
     public void setOrganizer(String organizer) {
         this.organizer = organizer;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public Integer getNumberOfPeople() {
