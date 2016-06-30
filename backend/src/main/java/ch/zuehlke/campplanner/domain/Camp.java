@@ -17,6 +17,8 @@ public class Camp {
     // TODO will probably be deleted
     private String team;
 
+    private String organizer;
+
     @Temporal(TemporalType.DATE)
     private Date fromDate;
 
@@ -69,6 +71,14 @@ public class Camp {
 
     public void setTeam(String team) {
         this.team = team;
+    }
+
+    public String getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer;
     }
 
     public Integer getNumberOfPeople() {

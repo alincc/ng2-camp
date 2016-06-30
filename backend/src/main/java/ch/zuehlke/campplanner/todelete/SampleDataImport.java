@@ -129,6 +129,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         camp.setOfferRequests(Arrays.asList(offerRequest));
         camp.setFromDate(new Date());
         camp.setToDate(new Date());
+        camp.setOrganizer("Johny");
         return camp;
     }
 
