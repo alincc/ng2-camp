@@ -20,23 +20,14 @@
             <div class="row">
               <div class="col s6">
                 <label for="fromDate">From</label>
-                <input id="fromDate"
-                       materialize="pickadate"
-                       [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-                       type="text"
-                       [ngModel]="fromDateInput"
-                       (ngModelChange)="fromDateInput=$event; refreshTemplates()"
-                />
+                <input id="fromDate" type="date" [ngModel]="fromDateInput"
+                       (ngModelChange)="fromDateInput=$event; refreshTemplates()">
               </div>
 
               <div class="col s6">
                 <label for="toDate">To</label>
-                <input id="toDate"
-                       materialize="pickadate"
-                       [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-                       type="text"
-                       [ngModel]="toDateInput"
-                       (ngModelChange)="toDateInput=$event; refreshTemplates()"/>
+                <input id="toDate" type="date" [ngModel]="toDateInput"
+                       (ngModelChange)="toDateInput=$event; refreshTemplates()">
               </div>
             </div>
 

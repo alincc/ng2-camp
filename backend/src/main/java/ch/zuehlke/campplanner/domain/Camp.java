@@ -17,10 +17,10 @@ public class Camp {
     // TODO will probably be deleted
     private String team;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fromDate;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
     private Date toDate;
     private Integer numberOfPeople;
 
