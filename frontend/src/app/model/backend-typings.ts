@@ -5,6 +5,7 @@ export interface Camp {
     name?: string;
     numberOfPeople?: number;
     offerRequests?: OfferRequest[];
+    organizer?: string;
     status?: CampStatus;
     team?: string;
     toDate?: Date;
