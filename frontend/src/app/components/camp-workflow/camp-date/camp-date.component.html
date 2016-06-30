@@ -4,7 +4,7 @@
       <a id="camp_dateDoodle" class="btn waves-effect waves-light active" (click)="createDoodle()">
         <i class="material-icons left">open_in_new</i>Create Doodle
       </a>
-      <label for="camp_dateDoodle" [class.active]="true">Find a Date</label>
+      <label for="camp_dateDoodle" [class.active]="true">Vote for a Date</label>
     </div>
     <div class="input-field col s2">
       <i class="material-icons prefix">today</i>
@@ -24,9 +24,9 @@
       <label for="camp_people" [class.active]="camp.numberOfPeople">Number of People</label>
     </div>
     <div class="input-field col s3">
-      <a id="camp_dateIcs" class="btn waves-effect waves-light active">
+      <button id="camp_dateIcs" class="btn waves-effect waves-light disabled">
         <i class="material-icons left">file_download</i>Download .ics
-      </a>
+      </button>
       <label for="camp_dateDoodle" [class.active]="true">Create Camp Blocker</label>
     </div>
   </div>
