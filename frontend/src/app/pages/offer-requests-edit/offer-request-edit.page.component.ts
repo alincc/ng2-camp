@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
 import {HotelService} from '../../shared/hotel.service';
 import {Hotel, OfferRequest} from '../../model/backend-typings';
+import {RequestStatusEnum, getRequestStatusValues} from '../../model/RequestStatusEnum';
 import {OfferRequestService} from '../../shared/offer-request.service';
 import {OfferRequestEditComponent} from '../../components/offer-request-edit/offer-request-edit.component';
 import {Observable} from 'rxjs/Observable';
@@ -15,6 +16,7 @@ import 'rxjs/add/operator/pluck';
     <offer-request-edit
         [offerRequest]="offerRequest | async"
         [hotels]="hotels | async"
+        [requestStatusList]="requestStatusList"
         (saveOfferRequest)="saveOfferRequest($event)">
     </offer-request-edit>
 `
@@ -23,9 +25,11 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
 
   hotels:Observable<Hotel[]>;
   offerRequest:Observable<OfferRequest>;
+  requestStatusList:RequestStatusEnum[];
 
   private campId:number;
   private campIdSubscription:Subscription;
+  private offerRequestSubscription:Subscription;
 
   constructor(private routeParams:RouteParams,
               private hotelService:HotelService,
@@ -39,14 +43,23 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
       .subscribe(
         (id) => this.campId = id
     );
-    this.offerRequest = this.routeParams.pluck<number>('offerRequestId')
-      .filter(offerRequestId => !isNaN(offerRequestId))
-      .flatMap(offerRequestId => this.offerRequestService.getOfferRequest(offerRequestId));
+    this.offerRequestSubscription = this.routeParams.pluck<number>('offerRequestId')
+      .subscribe(offerRequestId => {
+        if (!isNaN(offerRequestId)) {
+          this.offerRequest = this.offerRequestService.getOfferRequest(offerRequestId);
+        } else {
+          this.offerRequest = Observable.of({lastStatusChange: Date.now()} as OfferRequest);
+        }
+      });
+
     this.hotels = this.hotelService.getHotels();
+
+    this.requestStatusList = getRequestStatusValues();
   }
 
   ngOnDestroy() {
     this.campIdSubscription.unsubscribe();
+    this.offerRequestSubscription.unsubscribe();
   }
 
   saveOfferRequest(offerRequest:OfferRequest) {

@@ -24,7 +24,7 @@ public class OfferRequest {
     @OneToOne(cascade = CascadeType.MERGE)
     private Offer offer;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     private Hotel hotel;
 
     public Long getId() {

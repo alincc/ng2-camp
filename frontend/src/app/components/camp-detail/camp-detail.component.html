@@ -32,26 +32,26 @@
       <thead>
       <tr>
         <th>Offer date</th>
+        <th>Last status change</th>
         <th>Status</th>
         <th>Hotel</th>
-        <th>City</th>
-        <th>Country</th>
         <th>Comment</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let offerRequest of camp.offerRequests">
         <td>{{offerRequest.date | date}}</td>
+        <td>{{offerRequest.lastStatusChange}}</td>
         <td>
           <div class="chip" [ngClass]="getStatusColor(offerRequest.status)">{{offerRequest.status}}</div>
         </td>
-        <td>{{offerRequest.offer.hotel.name}}</td>
-        <td>{{offerRequest.offer.hotel.city}}</td>
-        <td>{{offerRequest.offer.hotel.countryCode}}</td>
+        <td>{{offerRequest.hotel.name}}</td>
         <td>{{offerRequest.comment}}</td>
-        <td><a [linkTo]="'/offers/edit/' + offerRequest.offer.id  + '?hotelId=' + offerRequest.offer.hotel.id">
-          <i class="material-icons">mode_edit</i>
-        </a></td>
+          <td>
+            <a [linkTo]="'/camps/' + camp.id + '/offer-requests/edit/' + offerRequest.id">
+              <i class="material-icons">mode_edit</i>
+            </a>
+          </td>
       </tr>
     </table>
   </div>
@@ -62,7 +62,7 @@
     </a>
     <ul>
       <li materialize="tooltip" data-position="left" data-delay="0" data-tooltip="Add offer request">
-        <a [linkTo]="'/camps/' + camp.id + '/offer-requests/new'" class="btn-floating green">
+        <a [linkTo]="'/camps/' + camp.id + '/offer-requests/edit/new'" class="btn-floating green">
           <i class="material-icons">note_add</i>
         </a>
       </li>
