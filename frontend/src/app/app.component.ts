@@ -20,7 +20,7 @@ import {OfferService} from './shared/offer.service';
   providers: [CrudService, CachedCrudService, HotelService, CountryService, CampService, OfferService,
     AuthService, OfferRequestService, RatingService, MailTemplateService, MarkdownConverter, MapService],
   styles: [
-    require('../assets/css/main.scss')
+    require('./app.scss')
   ],
   encapsulation: ViewEncapsulation.None,
   template: require('./app.template.html')
