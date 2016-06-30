@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {CampService} from '../../shared/camp.service';
 import {HotelService} from '../../shared/hotel.service.ts';
 import {CampWorkflowComponent} from '../../components/camp-workflow/camp-workflow.component';
+import {HotelWithCoordinate} from '../../model/hotelWithCoordinate';
 
 @Component({
   selector: 'camp-workflow-page',
@@ -21,7 +22,7 @@ import {CampWorkflowComponent} from '../../components/camp-workflow/camp-workflo
 export class CampWorkflowPageComponent implements OnInit {
 
   camp: Observable<Camp>;
-  hotels: Observable<Hotel[]>;
+  hotels: Observable<HotelWithCoordinate[]>;
   step: Observable<number>;
 
   constructor(private routeParams: RouteParams,
@@ -36,6 +37,6 @@ export class CampWorkflowPageComponent implements OnInit {
       .filter(campId => !isNaN(campId))
       .flatMap(campId => this.campService.getCamp(campId));
     this.step = this.queryParams.pluck<number>('step');
-    this.hotels = this.hotelService.getHotels();
+    this.hotels = this.hotelService.getHotelsWithCoordinates();
   }
 }

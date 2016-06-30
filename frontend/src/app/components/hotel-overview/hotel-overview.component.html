@@ -34,15 +34,15 @@
     </ul>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="hotelsWithCoordinatesFiltered">
   <div id="mapView" class="col s12">
     <div class="card">
-      <hotels-map [hotels]="hotelsWithCoordinatesFiltered | async"></hotels-map>
+      <hotels-map [hotelsWithCoordinates]="hotelsWithCoordinatesFiltered | async"></hotels-map>
     </div>
   </div>
   <div id="tableView" class="col s12">
     <div class="card">
-      <hotels-table [hotels]="hotelsFiltered | async"></hotels-table>
+      <hotels-table [hotels]="hotelsWithCoordinatesFiltered | async"></hotels-table>
     </div>
   </div>
 </div>
