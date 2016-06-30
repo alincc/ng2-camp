@@ -3,6 +3,8 @@ import {Hotel} from '../../model/backend-typings';
 import {HotelService} from '../../shared/hotel.service';
 import {RouteParams, Router} from '@ngrx/router';
 import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers/index';
+import {HotelActions} from '../../actions/hotel.actions';
 import {Country} from '../../model/country';
 import {CountryService} from '../../shared/country.service';
 import {Observable} from 'rxjs/Observable';
@@ -10,8 +12,6 @@ import {Subscription} from "rxjs/Subscription";
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/observable/of';
 import {HotelEditComponent} from '../../components/hotel-edit/hotel-edit.component';
-import {AppState} from '../../reducers/index';
-import {HotelActions} from '../../actions/hotel.actions';
 
 @Component({
   selector: 'hotel-edit-page',

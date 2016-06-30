@@ -19,11 +19,11 @@ export class HotelEffects {
   @Effect()
   loadCollectionOnInit$ = Observable.of(this.hotelActions.loadCollection());
 
-  @Effect()
+  /*@Effect()
   loadCollection$ = this.updates$
     .whenAction(HotelActions.LOAD_COLLECTION)
     .switchMapTo(this.hotelService.getHotels())
-    .map((hotels: Hotel[]) => this.hotelActions.loadCollectionSuccess(hotels));
+    .map((hotels) => this.hotelActions.loadCollectionSuccess(hotels));
 
   @Effect()
   addHotelToCollection$ = this.updates$
@@ -34,5 +34,5 @@ export class HotelEffects {
       .catch(() => Observable.of(
         this.hotelActions.addToCollectionFail(hotel)
       ))
-    );
+    );*/
 }

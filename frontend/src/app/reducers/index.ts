@@ -1,35 +1,40 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
-
-import { compose } from '@ngrx/core/compose';
-import { combineReducers } from '@ngrx/store';
-import { routerReducer, RouterState } from '@ngrx/router-store';
-import { Observable } from 'rxjs/Observable';
-import hotelsReducer, * as fromHotels from './hotel.reducer';
+import { Action} from '@ngrx/store';
+import {HotelActions} from '../actions/index';
+import {Hotel} from '../model/backend-typings';
 
 export interface AppState {
-  router: RouterState;
-  hotels: fromHotels.HotelsState;
+  hotels: Hotel[];
 }
 
-export function getHotelState() {
-  return (state$: Observable<AppState>) => state$
-    .select(appState => appState.hotels);
+export const defaultState: AppState = {
+  hotels: []
 }
 
-export function getHotelEntities() {
-  return compose(fromHotels.getHotelEntities(), getHotelState());
+export const hotels = (state = defaultState, action:Action):AppState => {
+  switch (action.type) {
+    case HotelActions.LOAD_COLLECTION:
+    {
+      return Object.assign({}, state, {
+        loading: true
+      });
+    }
+
+    case HotelActions.LOAD_COLLECTION_SUCCESS:
+    {
+      const hotels:Hotel[] = action.payload;
+      return {
+        hotels: hotels
+      };
+    }
+
+    default:
+    {
+      return state;
+    }
+  }
 }
 
-/**
- * Because metareducers take a reducer function and return a new reducer,
- * we can use our compose helper to chain them together. Here we are
- * using combineReducers to make our top level reducer, and then
- * wrapping that in storeLogger. Remember that compose applies
- * the result from right to left.
- */
-export default compose(combineReducers)({
-  router: routerReducer
-});
 
