@@ -4,10 +4,11 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/startWith';
-import {Hotel, Camp} from '../../model/backend-typings';
+import {Camp, Hotel} from '../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {HotelsMapComponent} from './map/hotels-map.component';
 import {HotelsTableComponent} from './table/hotels-table.component';
+import {HotelWithCoordinate} from '../../model/hotelWithCoordinate';
 
 @Component({
   selector: 'hotels',
@@ -18,46 +19,51 @@ import {HotelsTableComponent} from './table/hotels-table.component';
 export class HotelOverviewComponent implements OnInit {
 
   @Input()
-  hotels:Observable<Hotel[]>;
+  hotelsWithCoordinates: Observable<HotelWithCoordinate[]>;
 
   @Input()
   camp: Camp;
 
-  stringFilterSubject:Subject<string> = new Subject<string>();
-  countryFilterSubject:Subject<string[]> = new Subject<string[]>();
+  stringFilterSubject: Subject<string> = new Subject<string>();
+  countryFilterSubject: Subject<string[]> = new Subject<string[]>();
 
-  countryCodes:Observable<string[]>;
-  hotelsFiltered:Observable<Hotel[]>;
+  countryCodes: Observable<string[]>;
+  hotelsWithCoordinatesFiltered: Observable<Hotel[]>;
+  hotelsFiltered: Observable<Hotel[]>;
 
   ngOnInit() {
-    let stringFilter:Observable<string> = this.stringFilterSubject.asObservable().startWith('');
-    let countryFilter:Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
-    this.countryCodes = this.hotels
-      .flatMap((hotels:Hotel[]) => Observable.from(hotels))
-      .map((hotel:Hotel) => hotel.countryCode)
+    let stringFilter: Observable<string> = this.stringFilterSubject.asObservable().startWith('');
+    let countryFilter: Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
+    this.hotelsWithCoordinatesFiltered = Observable.combineLatest(this.hotelsWithCoordinates, stringFilter, countryFilter)
+      .map(data => {
+        let hotels: HotelWithCoordinate[] = data[0];
+        let filterInput: string = data[1];
+        let countries: string[] = data[2];
+
+        return hotels.filter(hotelWithCoordinate => this.hotelContainsString(hotelWithCoordinate.hotel, filterInput))
+          .filter(hotelWithCoordinate => this.hotelIsInCountries(hotelWithCoordinate.hotel, countries));
+      });
+    this.hotelsFiltered = this.hotelsWithCoordinatesFiltered
+      .flatMap((hotelWithCoordinates: HotelWithCoordinate[]) => Observable.from(hotelWithCoordinates))
+      .map((hotelWithCoordinate: HotelWithCoordinate) => hotelWithCoordinate.hotel)
+      .toArray();
+    this.countryCodes = this.hotelsFiltered
+      .flatMap((hotels: Hotel[]) => Observable.from(hotels))
+      .map((hotel: Hotel) => hotel.countryCode)
       .distinct()
       .toArray()
-      .map((codes:string[]) => codes.sort());
+      .map((codes: string[]) => codes.sort());
 
-    this.hotelsFiltered = Observable.combineLatest(this.hotels, stringFilter, countryFilter)
-      .map(data => {
-        let hotels:Hotel[] = data[0];
-        let filterInput:string = data[1];
-        let countries:string[] = data[2];
-
-        return hotels.filter(hotel => this.hotelContainsString(hotel, filterInput))
-          .filter(hotel => this.hotelIsInCountries(hotel, countries));
-      });
   }
 
-  hotelContainsString(hotel:Hotel, filterInput:string):boolean {
+  hotelContainsString(hotel: Hotel, filterInput: string): boolean {
     let filter = filterInput ? filterInput.trim().toLocaleLowerCase() : '';
     return (hotel.name ? hotel.name.toLocaleLowerCase().includes(filter) : false) ||
       (hotel.description ? hotel.description.toLocaleLowerCase().includes(filter) : false) ||
       (hotel.city ? hotel.city.toLocaleLowerCase().includes(filter) : false);
   }
 
-  hotelIsInCountries(hotel:Hotel, countries:string[]):boolean {
+  hotelIsInCountries(hotel: Hotel, countries: string[]): boolean {
     return countries.length === 0 || countries.includes(hotel.countryCode);
   }
 
@@ -69,7 +75,7 @@ export class HotelOverviewComponent implements OnInit {
     this.countryFilterSubject.next(selectedCountries);
   }
 
-  hotelFilterChanged(event:any) {
+  hotelFilterChanged(event: any) {
     this.stringFilterSubject.next(event.target.value);
   }
 }

@@ -1,16 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/concatAll';
-import 'rxjs/add/operator/toArray';
-import 'rxjs/add/observable/from';
+import {Component, Input} from '@angular/core';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
-import {MapService} from '../../../shared/map.service';
-import {Hotel} from '../../../model/backend-typings';
+import {HotelWithCoordinate} from '../../../model/hotelWithCoordinate';
 
 @Component({
   selector: 'hotels-map',
   directives: [ANGULAR2_GOOGLE_MAPS_DIRECTIVES],
-  providers: [MapService],
   styles: [`
     .sebm-google-map-container {
       height: 500px;
@@ -18,36 +12,10 @@ import {Hotel} from '../../../model/backend-typings';
   `],
   template: require('./hotels-map.component.html')
 })
-export class HotelsMapComponent implements OnInit {
+export class HotelsMapComponent {
 
   @Input()
-  hotels: Observable<Hotel[]>;
-
-  hotelsWithCoordinates: Observable<HotelWithCoordinates[]>;
-
-  constructor(private mapService: MapService) {
-  }
-
-  ngOnInit() {
-    this.hotelsWithCoordinates = this.hotels
-      .map((hotels: Hotel[]) => Observable.from(hotels)
-        .map(hotel => this.getCoordinate(hotel))
-        .concatAll()
-        .toArray())
-      .concatAll();
-  }
-
-  getCoordinate(hotel: Hotel): Observable<HotelWithCoordinates> {
-    return this.mapService.getCoordinate(hotel)
-      .map(coordinate => new HotelWithCoordinates(hotel.id, hotel.name, coordinate.lat, coordinate.lng));
-  }
+  hotelsWithCoordinates: HotelWithCoordinate[];
 }
 
-class HotelWithCoordinates {
-  constructor(public id: number,
-              public name: string,
-              public lat: number,
-              public lng: number) {
-  }
-}
 
