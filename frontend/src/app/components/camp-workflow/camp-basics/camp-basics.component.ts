@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Camp} from '../../model/backend-typings';
+import {Camp} from '../../../model/backend-typings';
 
 @Component({
   selector: 'camp-basics',

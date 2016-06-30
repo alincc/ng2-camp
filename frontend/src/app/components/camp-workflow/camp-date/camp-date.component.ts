@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Camp} from '../../model/backend-typings';
+import {Camp} from '../../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 
 @Component({
@@ -15,7 +15,7 @@ export class CampDateComponent {
   createDoodle() {
     window.open('http://doodle.com/create?type=date&locale=en'
       + '&title=' + this.camp.name
-      // + '&name=' + this.camp.organizer
+      + '&name=' + this.camp.organizer
       // + '&description=' + this.camp.notes
       ,'_blank');
   }
