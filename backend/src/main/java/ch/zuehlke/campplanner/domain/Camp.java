@@ -24,7 +24,7 @@ public class Camp {
     private Date toDate;
     private Integer numberOfPeople;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<OfferRequest> offerRequests;
 

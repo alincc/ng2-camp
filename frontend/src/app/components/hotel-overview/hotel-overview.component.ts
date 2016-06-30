@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Input} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/observable/from';
@@ -7,7 +7,6 @@ import 'rxjs/add/operator/startWith';
 import {Hotel, Camp} from '../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {HotelsMapComponent} from './map/hotels-map.component';
-import {TooltipWorkaround} from '../../shared/tooltip/tooltip-workaround';
 
 @Component({
   selector: 'hotels',
@@ -15,7 +14,7 @@ import {TooltipWorkaround} from '../../shared/tooltip/tooltip-workaround';
   providers: [],
   template: require('./hotel-overview.component.html')
 })
-export class HotelOverviewComponent implements OnInit, OnDestroy {
+export class HotelOverviewComponent implements OnInit {
 
   @Input()
   hotels:Observable<Hotel[]>;
@@ -71,9 +70,5 @@ export class HotelOverviewComponent implements OnInit, OnDestroy {
 
   hotelFilterChanged(event:any) {
     this.stringFilterSubject.next(event.target.value);
-  }
-
-  ngOnDestroy() {
-    TooltipWorkaround.removeTooltipsFromDom();
   }
 }

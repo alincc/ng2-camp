@@ -52,7 +52,7 @@ export const routes: Routes = [
     component: CampEditPageComponent
   },
   {
-    path: '/camps/:campId/offer-requests/new',
+    path: '/camps/:campId/offer-requests/edit/:offerRequestId',
     guards: [AuthGuard],
     component: OfferRequestEditPageComponent
   },

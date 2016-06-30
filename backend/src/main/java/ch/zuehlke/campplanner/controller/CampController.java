@@ -5,7 +5,6 @@ import ch.zuehlke.campplanner.dao.HotelRepository;
 import ch.zuehlke.campplanner.dao.OfferRequestRepository;
 import ch.zuehlke.campplanner.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,10 +51,10 @@ public class CampController {
     @Transactional
     @RequestMapping(value = "/{id}/offerrequests",
             method = RequestMethod.POST)
-    public OfferRequest addOfferRequest(@PathVariable("id") Long id, @RequestBody OfferRequest offerRequest) {
-        Camp camp = campRepository.findOne(id);
+    public OfferRequest addOrUpdateOfferRequest(@PathVariable("id") Long campId, @RequestBody OfferRequest offerRequest) {
+        Camp camp = campRepository.findOne(campId);
         if (camp == null) {
-            throw new IllegalArgumentException("Camp with the id " + id + " does not exist");
+            throw new IllegalArgumentException("Camp with the id " + campId + " does not exist");
         }
         offerRequestRepository.save(offerRequest);
         camp.getOfferRequests().add(offerRequest);
