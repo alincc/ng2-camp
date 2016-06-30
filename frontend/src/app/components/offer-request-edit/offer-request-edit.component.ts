@@ -20,6 +20,6 @@ export class OfferRequestEditComponent {
   saveOfferRequest = new EventEmitter<OfferRequest>();
 
   statusChanged(newValue) {
-    this.offerRequest.lastStatusChange = <Date>Date.now();
+    this.offerRequest.lastStatusChange = new Date();
   }
 }

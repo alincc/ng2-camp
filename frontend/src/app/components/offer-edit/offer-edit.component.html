@@ -5,38 +5,22 @@
     <div class="row">
       <div class="col s6">
         <label for="offerDate">Offer date</label>
-        <input id="offerDate"
-               materialize="pickadate"
-               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-               [(ngModel)]="offer.offerDate"
-               type="text"/>
+        <input id="offerDate" type="date" [(ngModel)]="offer.offerDate">
       </div>
       <div class="col s6">
         <label for="expirationDate">Offer expiration date</label>
-        <input id="expirationDate"
-               materialize="pickadate"
-               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-               [(ngModel)]="offer.expirationDate"
-               type="text"/>
+        <input id="expirationDate" type="date" [(ngModel)]="offer.expirationDate">
       </div>
     </div>
 
     <div class="row">
       <div class="col s6">
         <label for="fromDate">Camp from</label>
-        <input id="fromDate"
-               materialize="pickadate"
-               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-               [(ngModel)]="offer.fromDate"
-               type="text"/>
+        <input id="fromDate" type="date" [(ngModel)]="offer.fromDate">
       </div>
       <div class="col s6">
         <label for="toDate">Camp to</label>
-        <input id="toDate"
-               materialize="pickadate"
-               [materializeParams]="[{selectMonths: true, selectYears: 15}]"
-               [(ngModel)]="offer.toDate"
-               type="text"/>
+        <input id="toDate" type="date" [(ngModel)]="offer.toDate">
       </div>
     </div>
 

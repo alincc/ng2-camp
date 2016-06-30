@@ -13,8 +13,8 @@
     <tr *ngFor="let camp of camps">
       <td><a [linkTo]="'/camps/' + camp.id">{{camp.name}}</a></td>
       <td>{{camp.status}}</td>
-      <td>{{camp.fromDate}}</td>
-      <td>{{camp.toDate}}</td>
+      <td>{{camp.fromDate | date}}</td>
+      <td>{{camp.toDate | date}}</td>
     </tr>
   </table>
 </div>
