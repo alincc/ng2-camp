@@ -7,8 +7,9 @@
         <li class="tab col s3"><a href="#basics" [ngClass]="{active: step==='0'}">Basics</a></li>
         <li class="tab col s3"><a href="#date" [ngClass]="{active: step==='1'}">Date</a></li>
         <li class="tab col s3"><a href="#hotel" [ngClass]="{active: step==='2'}">Find Hotel</a></li>
-        <li class="tab col s3"><a href="#book" [ngClass]="{active: step==='3'}">Book Hotel</a></li>
-        <li class="tab col s3"><a href="#review" [ngClass]="{active: step==='4'}">Review</a></li>
+        <li class="tab col s3"><a href="#offers" [ngClass]="{active: step==='3'}">Request Offers</a></li>
+        <li class="tab col s3"><a href="#book" [ngClass]="{active: step==='4'}">Book Hotel</a></li>
+        <li class="tab col s3"><a href="#review" [ngClass]="{active: step==='5'}">Review</a></li>
       </ul>
     </div>
   </div>
@@ -16,25 +17,31 @@
   <div class="row">
     <div id="basics" class="col s12">
       <camp-basics [camp]="camp"></camp-basics>
-      <a class="btn waves-effect waves-light" href="#date">
+      <a class="btn waves-effect waves-light" [href]="'camps/' + camp.id + '?step=1'">
         <i class="material-icons right">play_arrow</i>Next
       </a>
     </div>
     <div id="date" class="col s12">
       <camp-date [camp]="camp"></camp-date>
-      <a class="btn waves-effect waves-light" href="#hotel">
+      <a class="btn waves-effect waves-light" [href]="'camps/' + camp.id + '?step=2'">
         <i class="material-icons right">play_arrow</i>Next
       </a>
     </div>
     <div id="hotel" class="col s12">
       <hotels [camp]="camp" [hotels]="hotels"></hotels>
-      <a class="btn waves-effect waves-light" href="#book">
+      <a class="btn waves-effect waves-light" [href]="'camps/' + camp.id + '?step=3'">
+        <i class="material-icons right">play_arrow</i>Next
+      </a>
+    </div>
+    <div id="offers" class="col s12">
+      <camp-offers [camp]="camp"></camp-offers>
+      <a class="btn waves-effect waves-light" [href]="'camps/' + camp.id + '?step=4'">
         <i class="material-icons right">play_arrow</i>Next
       </a>
     </div>
     <div id="book" class="col s12">
       <camp-book [camp]="camp"></camp-book>
-      <a class="btn waves-effect waves-light" href="#review">
+      <a class="btn waves-effect waves-light" [href]="'camps/' + camp.id + '?step=5'">
         <i class="material-icons right">play_arrow</i>Next
       </a>
     </div>
