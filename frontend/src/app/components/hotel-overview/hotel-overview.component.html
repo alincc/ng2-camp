@@ -49,6 +49,7 @@
           <th>City</th>
           <th>Country</th>
           <th>Info</th>
+          <th *ngIf="camp">Camp</th>
         </tr>
         </thead>
         <tbody>
@@ -64,6 +65,13 @@
               <i class="fa fa-tripadvisor fa-2x" aria-hidden="true"></i>
             </a>
           </td>
+          <td *ngIf="camp">
+            <a class='btn-floating waves-effect waves-light grey' href='#'>
+              <i class="material-icons">add</i>
+            </a>
+            <a class='btn-floating waves-effect waves-light grey' href='#'>
+              <i class="material-icons">remove</i>
+            </a>
         </tr>
       </table>
     </div>

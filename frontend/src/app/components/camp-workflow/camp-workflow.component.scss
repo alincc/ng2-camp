@@ -1,0 +1,13 @@
+.breadcrumb {
+  &.active {
+    color: white;
+  }
+  &:last-child:not(.active) {
+    color: rgba(255,255,255,0.7);
+  }
+}
+nav {
+  height: 35px;
+  line-height: 35px;
+}
+

@@ -4,8 +4,7 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/startWith';
-import {HotelService} from './../../shared/hotel.service.ts';
-import {Hotel} from '../../model/backend-typings';
+import {Hotel, Camp} from '../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {HotelsMapComponent} from './map/hotels-map.component';
 import {TooltipWorkaround} from '../../shared/tooltip/tooltip-workaround';
@@ -20,6 +19,9 @@ export class HotelOverviewComponent implements OnInit, OnDestroy {
 
   @Input()
   hotels:Observable<Hotel[]>;
+
+  @Input()
+  camp: Camp;
 
   stringFilterSubject:Subject<string> = new Subject<string>();
   countryFilterSubject:Subject<string[]> = new Subject<string[]>();
