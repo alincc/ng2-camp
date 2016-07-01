@@ -18,6 +18,7 @@ declare module "my-module" {
 
 declare var assert: any;
 
+
  *
  * If you're importing a module that uses Node.js modules which are CommonJS you need to import as
  *
@@ -28,6 +29,8 @@ import * as _ from 'lodash'
  * see https://github.com/typings/registry
  *
  */
+
+declare var $: any;
 
 
 // Extra variables that live on Global that will be replaced by webpack DefinePlugin
