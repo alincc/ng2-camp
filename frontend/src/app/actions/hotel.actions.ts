@@ -44,4 +44,14 @@ export class HotelActions {
     };
   }
 
+  static ADD_HOTEL = '[Hotel] Add Hotel';
+  addHotel(hotel: Hotel): Action {
+    return {
+      type: HotelActions.ADD_HOTEL,
+      payload: hotel
+    };
+  }
+
+
+
 }

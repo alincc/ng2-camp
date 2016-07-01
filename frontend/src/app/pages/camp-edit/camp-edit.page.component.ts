@@ -29,7 +29,8 @@ export class CampEditPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.campIdSubscription = this.routeParams.pluck<number>('campId')
+    this.campIdSubscription = this.routeParams.pluck<string>('campId')
+      .map(id => parseInt(id))
       .subscribe(campId => {
         if (!isNaN(campId)) {
           this.camp = this.campService.getCamp(campId);

@@ -1,7 +1,7 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
-import { Action} from '@ngrx/store';
+import {Action} from '@ngrx/store';
 import {HotelActions} from '../actions/index';
 import {Hotel} from '../model/backend-typings';
 
@@ -13,7 +13,7 @@ export const defaultState: AppState = {
   hotels: []
 }
 
-export const hotels = (state = defaultState, action:Action):AppState => {
+export const hotels = (state = defaultState, action: Action): AppState => {
   switch (action.type) {
     case HotelActions.LOAD_COLLECTION:
     {
@@ -24,10 +24,22 @@ export const hotels = (state = defaultState, action:Action):AppState => {
 
     case HotelActions.LOAD_COLLECTION_SUCCESS:
     {
-      const hotels:Hotel[] = action.payload;
+      const hotels: Hotel[] = action.payload;
       return {
         hotels: hotels,
       };
+    }
+
+    case HotelActions.ADD_HOTEL:
+    {
+      const hotel: Hotel = action.payload;
+
+      return Object.assign({}, state, {
+        hotels: [
+          ...state.hotels,
+          hotel
+        ]
+      })
     }
 
     default:

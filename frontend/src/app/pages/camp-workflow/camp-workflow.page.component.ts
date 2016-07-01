@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteParams, QueryParams} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/mergeMap';
 import {Camp, Hotel} from '../../model/backend-typings';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers/index';
@@ -32,11 +34,13 @@ export class CampWorkflowPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    let campId = this.routeParams.pluck<number>('campId');
-    this.camp = campId
+    this.camp = this.routeParams.pluck<string>('campId')
+      .distinctUntilChanged()
+      .map(id => parseInt(id))
       .filter(campId => !isNaN(campId))
       .flatMap(campId => this.campService.getCamp(campId));
-    this.step = this.queryParams.pluck<number>('step');
+    this.step = this.queryParams.pluck<string>('step')
+      .map(step => parseInt(step));
     this.hotels = this.store.select<Hotel[]>('hotels');
   }
 }

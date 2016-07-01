@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Camp, Hotel} from '../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
@@ -27,4 +27,8 @@ export class CampWorkflowComponent {
 
   @Input()
   step: number = 0;
+
+  changeStep(id: string) {
+    $('ul.tabs').tabs('select_tab', id);
+  }
 }

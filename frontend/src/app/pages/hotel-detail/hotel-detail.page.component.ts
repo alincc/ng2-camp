@@ -1,12 +1,16 @@
 import {Component} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/observable/interval';
 import {HotelService} from '../../shared/hotel.service';
 import {Hotel, Rating, Offer} from '../../model/backend-typings';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers/index';
 import {Observable} from 'rxjs/Observable';
 import {HotelDetailComponent} from '../../components/hotel-detail/hotel-detail.component';
 import {RatingService} from '../../shared/rating.service';
-import {MapService} from '../../shared/map.service';
 import * as Materialize from 'angular2-materialize/dist/index';
 import {OfferService} from '../../shared/offer.service';
 
@@ -25,29 +29,36 @@ import {OfferService} from '../../shared/offer.service';
 })
 export class HotelDetailPageComponent {
 
-  hotel:Observable<Hotel>;
-  ratings:Observable<Rating[]>;
-  offers:Observable<Offer[]>;
+  hotel: Observable<Hotel>;
+  ratings: Observable<Rating[]>;
+  offers: Observable<Offer[]>;
 
-  constructor(private routeParams:RouteParams,
+  hotelId: number;
+
+  constructor(private routeParams: RouteParams,
               private router: Router,
-              private ratingService:RatingService,
-              private offerService:OfferService,
-              private mapService:MapService,
-              private hotelService:HotelService) {
+              private ratingService: RatingService,
+              private offerService: OfferService,
+              private hotelService: HotelService,
+              private store: Store<AppState>) {
+    this.hotel = this.routeParams
+      .pluck<string>('hotelId')
+      .distinctUntilChanged()
+      .flatMap(hotelId => {
+        return this.store.select<Hotel[]>('hotels')
+          .flatMap(hotels => Observable.from(hotels))
+          .filter(hotel => {
+            return hotel.id.toString() === hotelId.toString();
+          })
+      })
+      .share();
+    this.ratings = this.hotel
+      .flatMap(hotel => this.ratingService.getByHotelId(hotel.id));
+    this.offers = this.hotel
+      .flatMap(hotel => this.offerService.getByHotelId(hotel.id));
   }
 
   ngOnInit() {
-    let hotelId = this.routeParams.pluck<number>('hotelId');
-    this.hotel = hotelId
-      .filter(hotelId => !isNaN(hotelId))
-      .flatMap(hotelId => this.hotelService.getHotel(hotelId));
-    this.ratings = hotelId
-      .filter(hotelId => !isNaN(hotelId))
-      .flatMap(hotelId => this.ratingService.getByHotelId(hotelId));
-    this.hotel = this.hotel.
-      flatMap(hotel => this.mapService.enrichHotelWithCoordinate(hotel));
-    this.offers = this.hotel.flatMap(hotel => this.offerService.getByHotelId(hotel.id));
   }
 
   deleteHotel(hotel: Hotel) {

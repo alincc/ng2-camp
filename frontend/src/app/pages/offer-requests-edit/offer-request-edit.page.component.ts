@@ -1,12 +1,13 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
-import {HotelService} from '../../shared/hotel.service';
 import {Hotel, OfferRequest} from '../../model/backend-typings';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers/index';
 import {RequestStatusEnum, getRequestStatusValues} from '../../model/RequestStatusEnum';
 import {OfferRequestService} from '../../shared/offer-request.service';
 import {OfferRequestEditComponent} from '../../components/offer-request-edit/offer-request-edit.component';
 import {Observable} from 'rxjs/Observable';
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/pluck';
 
 @Component({
@@ -23,27 +24,23 @@ import 'rxjs/add/operator/pluck';
 })
 export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
 
-  hotels:Observable<Hotel[]>;
-  offerRequest:Observable<OfferRequest>;
-  requestStatusList:RequestStatusEnum[];
+  hotels: Observable<Hotel[]>;
+  offerRequest: Observable<OfferRequest>;
+  requestStatusList: RequestStatusEnum[];
 
-  private campId:number;
-  private campIdSubscription:Subscription;
-  private offerRequestSubscription:Subscription;
+  private campId: number;
+  private campIdSubscription: Subscription;
+  private offerRequestSubscription: Subscription;
 
-  constructor(private routeParams:RouteParams,
-              private hotelService:HotelService,
-              private offerRequestService:OfferRequestService,
-              private router:Router) {
-  }
-
-  ngOnInit() {
-    this.campIdSubscription = this.routeParams.pluck<number>('campId')
-      .filter(campId => !isNaN(campId))
-      .subscribe(
-        (id) => this.campId = id
-    );
-    this.offerRequestSubscription = this.routeParams.pluck<number>('offerRequestId')
+  constructor(private routeParams: RouteParams,
+              private store: Store<AppState>,
+              private offerRequestService: OfferRequestService,
+              private router: Router) {
+    this.campIdSubscription = this.routeParams.pluck<string>('campId')
+      .map(id => parseInt(id))
+      .subscribe(id => this.campId = id);
+    this.offerRequestSubscription = this.routeParams.pluck<string>('offerRequestId')
+      .map(offerRequestId => parseInt(offerRequestId))
       .subscribe(offerRequestId => {
         if (!isNaN(offerRequestId)) {
           this.offerRequest = this.offerRequestService.getOfferRequest(offerRequestId);
@@ -52,9 +49,11 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.hotels = this.hotelService.getHotels();
-
+    this.hotels = this.store.select<Hotel[]>('hotels');
     this.requestStatusList = getRequestStatusValues();
+  }
+
+  ngOnInit() {
   }
 
   ngOnDestroy() {
@@ -62,7 +61,7 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
     this.offerRequestSubscription.unsubscribe();
   }
 
-  saveOfferRequest(offerRequest:OfferRequest) {
+  saveOfferRequest(offerRequest: OfferRequest) {
     this.offerRequestService.saveOfferRequest(this.campId, offerRequest).subscribe(
       () => this.goToCamp()
     );
