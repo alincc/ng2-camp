@@ -19,9 +19,10 @@ export class CampBookComponent {
       offerRequest.status = "OFFER_CONFIRMED";
       offerRequest.lastStatusChange = new Date();
       if (!offerRequest.offer) {
-        offerRequest.offer = new Offer();
-        offerRequest.offer.accepted = true;
-        offerRequest.offer.hotel = offerRequest.hotel;
+        offerRequest.offer = {
+          accepted: true,
+          hotel: offerRequest.hotel
+        };
       }
     }
   }
