@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Camp, Offer, OfferRequest} from '../../../model/backend-typings';
+import {Component, Input} from '@angular/core';
+import {Camp, OfferRequest} from '../../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
-import {RequestStatusEnum} from '../../../model/RequestStatusEnum';
 
 @Component({
   selector: 'camp-book',
