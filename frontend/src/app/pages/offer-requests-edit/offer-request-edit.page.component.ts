@@ -36,12 +36,11 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
               private store: Store<AppState>,
               private offerRequestService: OfferRequestService,
               private router: Router) {
-    this.campIdSubscription = this.routeParams.pluck<number>('campId')
-      .filter(campId => !isNaN(campId))
-      .subscribe(
-        (id) => this.campId = id
-      );
-    this.offerRequestSubscription = this.routeParams.pluck<number>('offerRequestId')
+    this.campIdSubscription = this.routeParams.pluck<string>('campId')
+      .map(id => parseInt(id))
+      .subscribe(id => this.campId = id);
+    this.offerRequestSubscription = this.routeParams.pluck<string>('offerRequestId')
+      .map(offerRequestId => parseInt(offerRequestId))
       .subscribe(offerRequestId => {
         if (!isNaN(offerRequestId)) {
           this.offerRequest = this.offerRequestService.getOfferRequest(offerRequestId);

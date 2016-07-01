@@ -42,7 +42,8 @@ export class HotelEditPageComponent implements OnInit, OnDestroy {
     this.countries = this.countryService
       .getAllCountries();
 
-    this.hotelIdSubscription = this.routeParams.pluck<number>('hotelId')
+    this.hotelIdSubscription = this.routeParams.pluck<string>('hotelId')
+      .map(id => parseInt(id))
       .subscribe(hotelId => {
         if (!isNaN(hotelId)) {
           this.hotel = this.store.select<Hotel[]>('hotels')
