@@ -1,16 +1,14 @@
 import {Component, OnInit} from "@angular/core";
-import "rxjs/add/observable/from";
-import "rxjs/add/operator/distinct";
+import {Observable} from 'rxjs/Observable';
 import {MaterializeDirective} from "angular2-materialize/dist/index";
-import {MailTemplate} from "../../model/backend-typings";
+import {MailTemplate, Camp} from "../../model/backend-typings";
 import {MailTemplateService} from "../../shared/mailtemplate.service";
 import {MarkdownConverter} from "../markdown/markDownConverter";
+import {CampService} from '../../shared/camp.service';
 
 @Component({
   selector: 'mail-templates',
   directives: [MaterializeDirective],
-  providers: [],
-  pipes: [],
   template: require('./mailtemplates.component.html')
 })
 export class MailTemplatesComponent implements OnInit {
@@ -26,10 +24,15 @@ export class MailTemplatesComponent implements OnInit {
   emailInput:string;
   phoneInput:string;
 
-  constructor(private mailTemplateService:MailTemplateService, private markDownConverter:MarkdownConverter) {
+  camps: Observable<Camp>;
+
+  constructor(private mailTemplateService:MailTemplateService,
+              private markDownConverter:MarkdownConverter,
+              private campService: CampService) {
   }
 
   ngOnInit() {
+    this.camps = this.campService.getCamps();
     this.refreshTemplates();
     // Trying to solve resize problem https://github.com/Dogfalo/materialize/issues/1503
     $('body').on('focus', '.materialize-textarea', function () {
