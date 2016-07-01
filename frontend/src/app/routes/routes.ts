@@ -36,11 +36,6 @@ export const routes: Routes = [
     guards: [AuthGuard],
     component: CampOverviewPageComponent
   },
-  // {
-  //   path: '/camps/:campId',
-  //   guards: [AuthGuard],
-  //   component: CampDetailPageComponent
-  // },
   {
     path: '/camps/:campId',
     guards: [AuthGuard],
