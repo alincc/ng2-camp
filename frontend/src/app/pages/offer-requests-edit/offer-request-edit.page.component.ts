@@ -7,7 +7,7 @@ import {RequestStatusEnum, getRequestStatusValues} from '../../model/RequestStat
 import {OfferRequestService} from '../../shared/offer-request.service';
 import {OfferRequestEditComponent} from '../../components/offer-request-edit/offer-request-edit.component';
 import {Observable} from 'rxjs/Observable';
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/pluck';
 
 @Component({
@@ -24,26 +24,23 @@ import 'rxjs/add/operator/pluck';
 })
 export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
 
-  hotels:Observable<Hotel[]>;
-  offerRequest:Observable<OfferRequest>;
-  requestStatusList:RequestStatusEnum[];
+  hotels: Observable<Hotel[]>;
+  offerRequest: Observable<OfferRequest>;
+  requestStatusList: RequestStatusEnum[];
 
-  private campId:number;
-  private campIdSubscription:Subscription;
-  private offerRequestSubscription:Subscription;
+  private campId: number;
+  private campIdSubscription: Subscription;
+  private offerRequestSubscription: Subscription;
 
-  constructor(private routeParams:RouteParams,
-              private store:Store<AppState>,
-              private offerRequestService:OfferRequestService,
-              private router:Router) {
-  }
-
-  ngOnInit() {
+  constructor(private routeParams: RouteParams,
+              private store: Store<AppState>,
+              private offerRequestService: OfferRequestService,
+              private router: Router) {
     this.campIdSubscription = this.routeParams.pluck<number>('campId')
       .filter(campId => !isNaN(campId))
       .subscribe(
         (id) => this.campId = id
-    );
+      );
     this.offerRequestSubscription = this.routeParams.pluck<number>('offerRequestId')
       .subscribe(offerRequestId => {
         if (!isNaN(offerRequestId)) {
@@ -57,12 +54,15 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
     this.requestStatusList = getRequestStatusValues();
   }
 
+  ngOnInit() {
+  }
+
   ngOnDestroy() {
     this.campIdSubscription.unsubscribe();
     this.offerRequestSubscription.unsubscribe();
   }
 
-  saveOfferRequest(offerRequest:OfferRequest) {
+  saveOfferRequest(offerRequest: OfferRequest) {
     this.offerRequestService.saveOfferRequest(this.campId, offerRequest).subscribe(
       () => this.goToCamp()
     );
