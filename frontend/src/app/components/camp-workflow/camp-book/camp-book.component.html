@@ -7,12 +7,13 @@
       <label for="camp_hotelDoodle" [class.active]="true">Vote for a Hotel</label>
     </div>
     <div class="input-field col s6">
-      <select id="camp_hotel" [(ngModel)]="selectedHotel" materialize="material_select" [materializeSelectOptions]="camp.offerRequests" required>
-        <option value="" disabled selected>Choose Hotel</option>
+      <select id="camp_hotel" materialize="material_select" [materializeSelectOptions]="camp.offerRequests" required
+              (change)="acceptOffer(offerRequest)">
+        <option value="" disabled selected>Accept Offer</option>
         <option *ngFor="let offerRequest of camp.offerRequests" [ngValue]="offerRequest.hotel"
                 [selected]="selectedHotel && offerRequest.hotel && selectedHotel.id === offerRequest.hotel.id">{{offerRequest.hotel.name}} - {{offerRequest.hotel.city}}, {{offerRequest.hotel.countryCode}}</option>
       </select>
-      <label for="camp_hotel">Choose Hotel</label>
+      <label for="camp_hotel">Accept Offer</label>
     </div>
     <div class="input-field col s3">
       <button id="camp_hotelIcs" class="btn waves-effect waves-light disabled">

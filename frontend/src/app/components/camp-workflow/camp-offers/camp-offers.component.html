@@ -40,7 +40,8 @@
 </div>
 <div id="add-offer" class="modal modal-fixed-footer">
   <div class="modal-content">
-    <offer-edit [offer]="{}"></offer-edit>
+    <!-- TODO: save the new offer -->
+    <offer-edit [offer]="{}" (saveOffer)="saveOffer($event)"></offer-edit>
   </div>
   <div class="modal-footer">
     <a class="modal-action modal-close waves-effect waves-light btn">Save</a>
@@ -49,7 +50,8 @@
 </div>
 <div id="view-offer" class="modal modal-fixed-footer">
   <div class="modal-content">
-    Offer
+    <!-- TODO: fix this to open the selected offer -->
+    <offer-edit [offer]="{}" (saveOffer)="saveOffer($event)"></offer-edit>
   </div>
   <div class="modal-footer">
     <a class="modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
