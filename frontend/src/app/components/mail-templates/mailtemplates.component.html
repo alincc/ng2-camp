@@ -9,9 +9,9 @@
             <div class="row">
               <div class="input-field col s6">
                 <select [(ngModel)]="selectedOption" materialize="material_select"
-                        [materializeSelectOptions]="selectOptions">
+                        [materializeSelectOptions]="camps | async">
                   <option value="" disabled selected>Choose camp</option>
-                  <option *ngFor="let option of selectOptions" [value]="option.value">{{option.name}}</option>
+                  <option *ngFor="let camp of camps | async" [value]="camp.name">{{camp.name}}</option>
                 </select>
                 <label>Choose a camp</label>
               </div>
