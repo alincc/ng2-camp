@@ -22,6 +22,8 @@ export interface Hotel {
     description?: string;
     holidayCheckUrl?: string;
     id?: number;
+    latitude?: number;
+    longitude?: number;
     name?: string;
     pictureUrl?: string;
     rooms?: number;

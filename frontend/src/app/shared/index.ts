@@ -7,6 +7,7 @@ import {RatingService} from './rating.service';
 import {OfferRequestService} from './offer-request.service';
 import {MailTemplateService} from './mailtemplate.service';
 import {CachedCrudService} from './cached-crud.service';
+import {MapService} from './map.service';
 
 export default [
   CrudService,
@@ -16,6 +17,7 @@ export default [
   AuthService,
   RatingService,
   OfferRequestService,
+  MapService,
   MailTemplateService,
   CachedCrudService,
 ];

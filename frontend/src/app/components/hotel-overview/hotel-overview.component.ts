@@ -10,7 +10,6 @@ import {Camp, Hotel} from '../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {HotelsMapComponent} from './map/hotels-map.component';
 import {HotelsTableComponent} from './table/hotels-table.component';
-import {HotelWithCoordinate} from '../..//model/hotelWithCoordinate';
 
 @Component({
   selector: 'hotels',
@@ -22,32 +21,32 @@ export class HotelOverviewComponent implements OnInit {
   @Input()
   camp: Camp;
   @Input()
-  hotelsWithCoordinates: Observable<HotelWithCoordinate[]>;
+  hotels: Observable<Hotel[]>;
 
   stringFilterSubject:Subject<string> = new Subject<string>();
   countryFilterSubject:Subject<string[]> = new Subject<string[]>();
 
   countryCodes: Observable<string[]>;
-  hotelsWithCoordinatesFiltered: Observable<HotelWithCoordinate[]>;
+  hotelsFiltered: Observable<Hotel[]>;
 
   ngOnInit() {
     let stringFilter: Observable<string> = this.stringFilterSubject.asObservable().startWith('');
     let countryFilter: Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
-    this.countryCodes = this.hotelsWithCoordinates
-      .flatMap((hotels: HotelWithCoordinate[]) => Observable.from(hotels))
-      .map((hotel: HotelWithCoordinate) => hotel.hotel.countryCode)
+    this.countryCodes = this.hotels
+      .flatMap((hotels: Hotel[]) => Observable.from(hotels))
+      .map((hotel: Hotel) => hotel.countryCode)
       .distinct()
       .toArray()
       .map((codes: string[]) => codes.sort());
 
-    this.hotelsWithCoordinatesFiltered = Observable.combineLatest(this.hotelsWithCoordinates, stringFilter, countryFilter)
+    this.hotelsFiltered = Observable.combineLatest(this.hotels, stringFilter, countryFilter)
       .map(data => {
-        let hotels: HotelWithCoordinate[] = data[0];
+        let hotels: Hotel[] = data[0];
         let filterInput: string = data[1];
         let countries: string[] = data[2];
 
-        return hotels.filter(hotel => this.hotelContainsString(hotel.hotel, filterInput))
-          .filter(hotel => this.hotelIsInCountries(hotel.hotel, countries));
+        return hotels.filter(hotel => this.hotelContainsString(hotel, filterInput))
+          .filter(hotel => this.hotelIsInCountries(hotel, countries));
       });
   }
 

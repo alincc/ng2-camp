@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
 import {Hotel} from '../../../model/backend-typings';
-import {Coordinate} from '../../../model/coordinate';
 
 @Component({
   selector: 'map',
@@ -18,7 +17,4 @@ export class MapComponent {
 
   @Input()
   hotel: Hotel;
-
-  @Input()
-  coordinate: Coordinate;
 }

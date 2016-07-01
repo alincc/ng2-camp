@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {RouteParams, QueryParams} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
 import {Camp, Hotel} from '../../model/backend-typings';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers/index';
 import {Observable} from 'rxjs/Observable';
 import {CampService} from '../../shared/camp.service';
-import {HotelService} from '../../shared/hotel.service.ts';
 import {CampWorkflowComponent} from '../../components/camp-workflow/camp-workflow.component';
-import {HotelWithCoordinate} from '../../model/hotelWithCoordinate';
 
 @Component({
   selector: 'camp-workflow-page',
@@ -22,13 +22,13 @@ import {HotelWithCoordinate} from '../../model/hotelWithCoordinate';
 export class CampWorkflowPageComponent implements OnInit {
 
   camp: Observable<Camp>;
-  hotels: Observable<HotelWithCoordinate[]>;
+  hotels: Observable<Hotel[]>;
   step: Observable<number>;
 
   constructor(private routeParams: RouteParams,
               private queryParams: QueryParams,
               private campService: CampService,
-              private hotelService: HotelService) {
+              private store:Store<AppState>) {
   }
 
   ngOnInit() {
@@ -37,6 +37,6 @@ export class CampWorkflowPageComponent implements OnInit {
       .filter(campId => !isNaN(campId))
       .flatMap(campId => this.campService.getCamp(campId));
     this.step = this.queryParams.pluck<number>('step');
-    this.hotels = this.hotelService.getHotelsWithCoordinates();
+    this.hotels = this.store.select<Hotel[]>('hotels');
   }
 }

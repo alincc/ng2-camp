@@ -8,7 +8,6 @@ import {HotelDetailComponent} from '../../components/hotel-detail/hotel-detail.c
 import {RatingService} from '../../shared/rating.service';
 import {MapService} from '../../shared/map.service';
 import * as Materialize from 'angular2-materialize/dist/index';
-import {Coordinate} from '../../model/coordinate';
 import {OfferService} from '../../shared/offer.service';
 
 @Component({
@@ -18,7 +17,6 @@ import {OfferService} from '../../shared/offer.service';
   template: `
     <hotel-detail 
         [hotel]="hotel | async" 
-        [coordinate]="coordinate | async" 
         [ratings]="ratings | async"
         [offers]="offers | async"
         (delete)="deleteHotel($event)">
@@ -29,7 +27,6 @@ export class HotelDetailPageComponent {
 
   hotel:Observable<Hotel>;
   ratings:Observable<Rating[]>;
-  coordinate:Observable<Coordinate>;
   offers:Observable<Offer[]>;
 
   constructor(private routeParams:RouteParams,
@@ -48,8 +45,8 @@ export class HotelDetailPageComponent {
     this.ratings = hotelId
       .filter(hotelId => !isNaN(hotelId))
       .flatMap(hotelId => this.ratingService.getByHotelId(hotelId));
-    this.coordinate = this.hotel.
-      flatMap(hotel => this.mapService.getCoordinate(hotel));
+    this.hotel = this.hotel.
+      flatMap(hotel => this.mapService.enrichHotelWithCoordinate(hotel));
     this.offers = this.hotel.flatMap(hotel => this.offerService.getByHotelId(hotel.id));
   }
 

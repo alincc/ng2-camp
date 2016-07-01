@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
-import {HotelWithCoordinate} from '../../../model/hotelWithCoordinate';
+import {Hotel} from '../../../model/backend-typings';
 
 @Component({
   selector: 'hotels-map',
@@ -16,6 +16,6 @@ import {HotelWithCoordinate} from '../../../model/hotelWithCoordinate';
 export class HotelsMapComponent {
 
   @Input()
-  hotelsWithCoordinates: Observable<HotelWithCoordinate[]>;
+  hotels: Observable<Hotel[]>;
 }
 

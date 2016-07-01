@@ -46,7 +46,6 @@ export function main(): Promise<any> {
     runEffects(effects),
     ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provideRouter(routes),
-    connectRouterToStore(),
     AuthGuard,
     actions,
     services

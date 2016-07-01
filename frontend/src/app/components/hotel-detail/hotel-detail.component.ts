@@ -5,7 +5,6 @@ import {MapComponent} from './map/map.component';
 import {OfferListComponent} from './offer-list/offer-list.component';
 import {RatingListComponent} from './rating-list/rating-list.component';
 import {RatingNewComponent} from "./rating-new/rating-new.component";
-import {Coordinate} from '../../model/coordinate'; 
 
 @Component({
   selector: 'hotel-detail',
@@ -20,8 +19,6 @@ export class HotelDetailComponent {
   ratings: Rating[];
   @Input()
   offers: Offer[];
-  @Input()
-  coordinate: Coordinate;
   @Output()
   delete = new EventEmitter<Hotel>();
 

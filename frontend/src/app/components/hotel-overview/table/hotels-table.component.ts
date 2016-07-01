@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 import {Hotel} from '../../../model/backend-typings';
-import {HotelWithCoordinate} from '../../../model/hotelWithCoordinate';
 
 @Component({
   selector: 'hotels-table',
@@ -9,7 +8,7 @@ import {HotelWithCoordinate} from '../../../model/hotelWithCoordinate';
 export class HotelsTableComponent {
 
   @Input()
-  hotels: HotelWithCoordinate[];
+  hotels: Hotel[];
 
 }
 

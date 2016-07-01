@@ -26,7 +26,7 @@ export const hotels = (state = defaultState, action:Action):AppState => {
     {
       const hotels:Hotel[] = action.payload;
       return {
-        hotels: hotels
+        hotels: hotels,
       };
     }
 

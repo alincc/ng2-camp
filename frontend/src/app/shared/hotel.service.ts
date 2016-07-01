@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Observable';
 import {Hotel} from '../model/backend-typings';
 import {CrudService} from './crud.service';
 import {MapService} from '../shared/map.service';
-import {HotelWithCoordinate} from '../model/hotelWithCoordinate';
 
 @Injectable()
 export class HotelService {
@@ -20,18 +19,13 @@ export class HotelService {
     return this.crud.get<Hotel[]>('/rest/hotels');
   }
 
-  getHotelsWithCoordinates(): Observable<HotelWithCoordinate[]> {
+  getHotelsWithCoordinates(): Observable<Hotel[]> {
     return this.getHotels()
       .map((hotels: Hotel[]) => Observable.from(hotels)
-        .map(hotel => this.getCoordinate(hotel))
+        .map(hotel => this.mapService.enrichHotelWithCoordinate(hotel))
         .concatAll()
         .toArray())
       .concatAll();
-  }
-
-  getCoordinate(hotel: Hotel): Observable<HotelWithCoordinate> {
-    return this.mapService.getCoordinate(hotel)
-      .map(coordinate => new HotelWithCoordinate(hotel, coordinate));
   }
 
   getHotel(id: number): Observable < Hotel > {
