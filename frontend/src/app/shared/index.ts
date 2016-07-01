@@ -8,6 +8,7 @@ import {OfferRequestService} from './offer-request.service';
 import {MailTemplateService} from './mailtemplate.service';
 import {CachedCrudService} from './cached-crud.service';
 import {MapService} from './map.service';
+import {OfferService} from './offer.service';
 
 export default [
   CrudService,
@@ -20,5 +21,6 @@ export default [
   MapService,
   MailTemplateService,
   CachedCrudService,
+  OfferService
 ];
 
