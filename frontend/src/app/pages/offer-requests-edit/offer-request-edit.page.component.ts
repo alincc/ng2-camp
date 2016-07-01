@@ -1,7 +1,8 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
-import {HotelService} from '../../shared/hotel.service';
 import {Hotel, OfferRequest} from '../../model/backend-typings';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers/index';
 import {RequestStatusEnum, getRequestStatusValues} from '../../model/RequestStatusEnum';
 import {OfferRequestService} from '../../shared/offer-request.service';
 import {OfferRequestEditComponent} from '../../components/offer-request-edit/offer-request-edit.component';
@@ -32,7 +33,7 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
   private offerRequestSubscription:Subscription;
 
   constructor(private routeParams:RouteParams,
-              private hotelService:HotelService,
+              private store:Store<AppState>,
               private offerRequestService:OfferRequestService,
               private router:Router) {
   }
@@ -52,8 +53,7 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.hotels = this.hotelService.getHotels();
-
+    this.hotels = this.store.select<Hotel[]>('hotels');
     this.requestStatusList = getRequestStatusValues();
   }
 

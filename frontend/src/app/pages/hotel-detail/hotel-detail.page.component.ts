@@ -3,6 +3,8 @@ import {RouteParams, Router} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
 import {HotelService} from '../../shared/hotel.service';
 import {Hotel, Rating, Offer} from '../../model/backend-typings';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers/index';
 import {Observable} from 'rxjs/Observable';
 import {HotelDetailComponent} from '../../components/hotel-detail/hotel-detail.component';
 import {RatingService} from '../../shared/rating.service';
@@ -33,15 +35,19 @@ export class HotelDetailPageComponent {
               private router: Router,
               private ratingService:RatingService,
               private offerService:OfferService,
+              private hotelService:HotelService,
               private mapService:MapService,
-              private hotelService:HotelService) {
+              private store:Store<AppState>) {
   }
 
   ngOnInit() {
     let hotelId = this.routeParams.pluck<number>('hotelId');
     this.hotel = hotelId
       .filter(hotelId => !isNaN(hotelId))
-      .flatMap(hotelId => this.hotelService.getHotel(hotelId));
+      .flatMap(hotelId => this.store.select<Hotel[]>('hotels')
+        .flatMap((hotels: Hotel[]) => Observable.from(hotels))
+        .filter(hotel => hotel.id === hotelId));
+
     this.ratings = hotelId
       .filter(hotelId => !isNaN(hotelId))
       .flatMap(hotelId => this.ratingService.getByHotelId(hotelId));

@@ -32,13 +32,7 @@ export class HotelOverviewComponent implements OnInit {
   ngOnInit() {
     let stringFilter: Observable<string> = this.stringFilterSubject.asObservable().startWith('');
     let countryFilter: Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
-    this.countryCodes = this.hotels
-      .flatMap((hotels: Hotel[]) => Observable.from(hotels))
-      .map((hotel: Hotel) => hotel.countryCode)
-      .distinct()
-      .toArray()
-      .map((codes: string[]) => codes.sort());
-
+    
     this.hotelsFiltered = Observable.combineLatest(this.hotels, stringFilter, countryFilter)
       .map(data => {
         let hotels: Hotel[] = data[0];
