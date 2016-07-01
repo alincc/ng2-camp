@@ -9,6 +9,7 @@
           <th>Date from</th>
           <th>Date to</th>
           <th>Status</th>
+          <th>Offer</th>
           <th></th>
         </tr>
         </thead>
@@ -16,18 +17,35 @@
         <tr *ngFor="let offerRequest of camp.offerRequests">
           <td>{{offerRequest.hotel.name}}</td>
           <td>{{offerRequest.hotel.city}}, {{offerRequest.hotel.countryCode}}</td>
-          <td>{{camp.fromDate}}</td>
-          <td>{{camp.toDate}}</td>
-          <td>{{camp.status}}</td>
-          <td><button class="btn-floating waves-effect waves-light"><i class="material-icons">mail_outline</i></button></td>
+          <td>{{camp.fromDate | date}}</td>
+          <td>{{camp.toDate | date}}</td>
+          <td>{{offerRequest.status}}</td>
+          <td><span *ngIf="offerRequest.offer">{{offerRequest.offer.currency}} {{offerRequest.offer.totalPrice}}</span></td>
+          <td>
+            <a class="btn-floating waves-effect waves-light modal-trigger" href="#mailtemplate" materialize="leanModal"><i class="material-icons">mail_outline</i></a>
+            <a class="btn-floating waves-effect waves-light modal-trigger" href="#add-offer" materialize="leanModal"><i class="material-icons">note_add</i></a>
+          </td>
         </tr>
       </table>
     </div>
   </div>
-  <div class="row">
-    <div class="col s12">
-      TODO: mail-button above should create mail template in a popup (?) (re-use &lt;mailtemplate>-directive!)
-    </div>
-  </div>
 
 </form>
+
+<div id="mailtemplate" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <mail-templates></mail-templates>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
+  </div>
+</div>
+<div id="add-offer" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <offer-edit [offer]="{}"></offer-edit>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-light btn">Save</a>
+    <a class="modal-action modal-close waves-effect waves-teal btn-flat">Cancel</a>
+  </div>
+</div>
