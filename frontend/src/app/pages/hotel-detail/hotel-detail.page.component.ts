@@ -51,14 +51,13 @@ export class HotelDetailPageComponent {
             return hotel.id.toString() === hotelId.toString();
           })
       })
-      .share();
+  }
+
+  ngOnInit() {
     this.ratings = this.hotel
       .flatMap(hotel => this.ratingService.getByHotelId(hotel.id));
     this.offers = this.hotel
       .flatMap(hotel => this.offerService.getByHotelId(hotel.id));
-  }
-
-  ngOnInit() {
   }
 
   deleteHotel(hotel: Hotel) {
