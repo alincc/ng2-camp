@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {RouteParams, Router} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/share';
 import 'rxjs/add/observable/interval';
 import {HotelService} from '../../shared/hotel.service';
 import {Hotel, Rating, Offer} from '../../model/backend-typings';
@@ -44,14 +45,13 @@ export class HotelDetailPageComponent {
       .pluck<string>('hotelId')
       .distinctUntilChanged()
       .flatMap(hotelId => {
-        let intHotelId:number = parseInt(hotelId);
         return this.store.select<Hotel[]>('hotels')
           .flatMap(hotels => Observable.from(hotels))
           .filter(hotel => {
-            console.log(hotel.id === intHotelId);
-            return hotel.id === intHotelId;
+            return hotel.id.toString() === hotelId.toString();
           })
-      });
+      })
+      .share();
     this.ratings = this.hotel
       .flatMap(hotel => this.ratingService.getByHotelId(hotel.id));
     this.offers = this.hotel
