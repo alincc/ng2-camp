@@ -30,9 +30,7 @@ export class HotelEditPageComponent implements OnInit, OnDestroy {
   countries: Observable<Country[]>;
   hotelIdSubscription: Subscription;
 
-  constructor(private hotelService: HotelService,
-              private countryService: CountryService,
-              private router: Router,
+  constructor(private countryService: CountryService,
               private store: Store<AppState>,
               private hotelActions: HotelActions,
               private routeParams: RouteParams) {

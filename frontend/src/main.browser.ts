@@ -10,11 +10,11 @@ import {bootstrap} from '@angular/platform-browser-dynamic';
 import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
 import {ENV_PROVIDERS} from './platform/environment';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
-import { provideRouter } from '@ngrx/router';
-import { provideStore } from '@ngrx/store';
-import { runEffects } from '@ngrx/effects';
-import { routes } from 'app/routes/routes';
-import { AuthGuard } from 'app/routes/authGuard';
+import {provideRouter} from '@ngrx/router';
+import {provideStore} from '@ngrx/store';
+import {runEffects} from '@ngrx/effects';
+import {routes} from 'app/routes/routes';
+import {AuthGuard} from 'app/routes/authGuard';
 
 import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 
@@ -22,6 +22,9 @@ import reducer from './app/reducers';
 import effects from './app/effects';
 import actions from './app/actions';
 import services from './app/shared/index';
+
+import {instrumentStore} from '@ngrx/store-devtools';
+import {useLogMonitor} from '@ngrx/store-log-monitor';
 
 /*
  * App Component
@@ -33,7 +36,7 @@ import {App} from './app/app.component';
  * Bootstrap our Angular app with a top level component `App` and inject
  * our Services and Providers into Angular's dependency injection
  */
-export function main(): Promise<any> {
+export function main():Promise<any> {
 
   return bootstrap(App, [
     ...PROVIDERS,
@@ -41,13 +44,19 @@ export function main(): Promise<any> {
     ...DIRECTIVES,
     ...PIPES,
     ...AUTH_PROVIDERS,
+    instrumentStore({
+      monitor: useLogMonitor({
+        position: 'right',
+        visible: false,
+      })
+    }),
     provideStore(reducer),
     runEffects(effects),
     ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provideRouter(routes),
     AuthGuard,
-    actions,
-    services
+    services,
+    actions
   ])
     .catch(err => console.error(err));
 

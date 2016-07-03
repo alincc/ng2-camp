@@ -33,6 +33,11 @@ export const routes: Routes = [
     component: HotelEditPageComponent
   },
   {
+    path: '/hotels/new',
+    guards: [AuthGuard],
+    component: HotelEditPageComponent
+  },
+  {
     path: '/camps',
     guards: [AuthGuard],
     component: CampOverviewPageComponent
