@@ -10,6 +10,7 @@ import {CampWorkflowPageComponent} from '../pages/camp-workflow/camp-workflow.pa
 import {OfferEditPageComponent} from '../pages/offer-edit/offer-edit.page.component';
 import {OfferRequestEditPageComponent} from '../pages/offer-requests-edit/offer-request-edit.page.component.ts';
 import {HotelOverviewPageComponent} from '../pages/hotel-overview/hotel-overview.page.component';
+import {HotelExistsGuard} from '../routes/hotelExistsGuard';
 
 export const routes: Routes = [
   {
@@ -23,12 +24,12 @@ export const routes: Routes = [
   },
   {
     path: '/hotels/:hotelId',
-    guards: [AuthGuard],
+    guards: [AuthGuard, HotelExistsGuard],
     component: HotelDetailPageComponent
   },
   {
     path: '/hotels/edit/:hotelId',
-    guards: [AuthGuard],
+    guards: [AuthGuard, HotelExistsGuard],
     component: HotelEditPageComponent
   },
   {

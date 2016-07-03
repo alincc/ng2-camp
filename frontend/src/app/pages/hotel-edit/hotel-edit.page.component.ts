@@ -60,9 +60,7 @@ export class HotelEditPageComponent implements OnInit, OnDestroy {
   }
 
   saveHotel(hotel: Hotel) {
-    this.store.dispatch(this.hotelActions.addToCollection(this.hotel));
-    this.hotelService.saveHotel(hotel).subscribe(hotel =>
-      this.router.go('/hotels/' + hotel.id));
+    this.store.dispatch(this.hotelActions.saveHotel(hotel));
   }
 
 }

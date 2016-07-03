@@ -5,53 +5,75 @@ import {Hotel} from '../model/backend-typings';
 @Injectable()
 export class HotelActions {
 
-  static LOAD_COLLECTION = '[Hotel] Load Collection';
-  loadCollection(): Action {
+  static LOAD_HOTELS = '[Hotel] Load Hotels';
+  loadHotels(): Action {
     return {
-      type: HotelActions.LOAD_COLLECTION
+      type: HotelActions.LOAD_HOTELS
     };
   }
 
-  static LOAD_COLLECTION_SUCCESS = '[Hotel] Load Collection Success';
-  loadCollectionSuccess(hotels: Hotel[]): Action {
+  static LOAD_HOTELS_SUCCESS = '[Hotel] Load Hotels Success';
+  loadHotelsSuccess(hotels: Hotel[]): Action {
     return {
-      type: HotelActions.LOAD_COLLECTION_SUCCESS,
+      type: HotelActions.LOAD_HOTELS_SUCCESS,
       payload: hotels
     };
   }
 
-  static ADD_TO_COLLECTION = '[Hotel] Add to Collection';
-  addToCollection(hotel: Hotel): Action {
+  static SAVE_HOTEL = '[Hotel] Save Hotel';
+  saveHotel(hotel: Hotel): Action {
     return {
-      type: HotelActions.ADD_TO_COLLECTION,
+      type: HotelActions.SAVE_HOTEL,
       payload: hotel
     };
   }
 
-  static ADD_TO_COLLECTION_SUCCESS = '[Hotel] Add to Collection Success';
-  addToCollectionSuccess(hotel: Hotel): Action {
+  static SAVE_HOTEL_SUCCESS = '[Hotel] Save Hotel Success';
+  saveHotelSuccess(hotel: Hotel): Action {
     return {
-      type: HotelActions.ADD_TO_COLLECTION_SUCCESS,
+      type: HotelActions.SAVE_HOTEL_SUCCESS,
       payload: hotel
     };
   }
 
-  static ADD_TO_COLLECTION_FAIL = '[Hotel] Add to Collection Fail';
-  addToCollectionFail(hotel: Hotel): Action {
+  static SAVE_HOTEL_FAIL = '[Hotel] Save Hotel Fail';
+  saveHotelFail(hotel: Hotel): Action {
     return {
-      type: HotelActions.ADD_TO_COLLECTION_FAIL,
+      type: HotelActions.SAVE_HOTEL_FAIL,
       payload: hotel
     };
   }
 
-  static ADD_HOTEL = '[Hotel] Add Hotel';
-  addHotel(hotel: Hotel): Action {
+  static DELETE_HOTEL = '[Hotel] Delete Hotel';
+  deleteHotel(hotel: Hotel): Action {
     return {
-      type: HotelActions.ADD_HOTEL,
+      type: HotelActions.DELETE_HOTEL,
       payload: hotel
     };
   }
 
+  static DELETE_HOTEL_SUCCESS = '[Hotel] Delete Hotel Success';
+  deleteHotelSuccess(hotel: Hotel): Action {
+    return {
+      type: HotelActions.DELETE_HOTEL_SUCCESS,
+      payload: hotel
+    };
+  }
 
+  static DELETE_HOTEL_FAIL = '[Hotel] Delete Hotel Fail';
+  deleteHotelFail(hotel: Hotel): Action {
+    return {
+      type: HotelActions.DELETE_HOTEL_FAIL,
+      payload: hotel
+    };
+  }
+
+  static LOAD_HOTEL = '[Hotel] Load Hotel';
+  loadHotel(hotel: Hotel): Action {
+    return {
+      type: HotelActions.LOAD_HOTEL,
+      payload: hotel
+    };
+  }
 
 }

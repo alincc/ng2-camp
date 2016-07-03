@@ -1,52 +1,35 @@
 import '@ngrx/core/add/operator/select';
+import { compose } from '@ngrx/core/compose';
+import { combineReducers } from '@ngrx/store';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
-import {Action} from '@ngrx/store';
-import {HotelActions} from '../actions/index';
-import {Hotel} from '../model/backend-typings';
+import {Observable} from 'rxjs/Observable';
+import hotelReducer, * as fromHotels from './hotel.reducer';
 
 export interface AppState {
-  hotels: Hotel[];
+  hotels: fromHotels.HotelsState
 }
 
-export const defaultState: AppState = {
-  hotels: []
+export default combineReducers({
+  hotels: hotelReducer
+});
+
+export function getHotelsState() {
+  return (state$: Observable<AppState>) => state$
+    .select(s => s.hotels);
 }
 
-export const hotels = (state = defaultState, action: Action): AppState => {
-  switch (action.type) {
-    case HotelActions.LOAD_COLLECTION:
-    {
-      return Object.assign({}, state, {
-        loading: true
-      });
-    }
-
-    case HotelActions.LOAD_COLLECTION_SUCCESS:
-    {
-      const hotels: Hotel[] = action.payload;
-      return {
-        hotels: hotels,
-      };
-    }
-
-    case HotelActions.ADD_HOTEL:
-    {
-      const hotel: Hotel = action.payload;
-
-      return Object.assign({}, state, {
-        hotels: [
-          ...state.hotels,
-          hotel
-        ]
-      })
-    }
-
-    default:
-    {
-      return state;
-    }
-  }
+export function getHotelsLoaded() {
+  return compose(fromHotels.getHotelsLoaded(), getHotelsState());
 }
+
+export function hasHotel(id: number) {
+  return compose(fromHotels.hasHotel(id), getHotelsState());
+}
+
+export function getHotels() {
+  return compose(fromHotels.getHotels(), getHotelsState());
+}
+
 
 

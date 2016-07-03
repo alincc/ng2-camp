@@ -7,12 +7,13 @@ import 'rxjs/add/observable/interval';
 import {HotelService} from '../../shared/hotel.service';
 import {Hotel, Rating, Offer} from '../../model/backend-typings';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../reducers/index';
+import {AppState, getHotels} from '../../reducers';
 import {Observable} from 'rxjs/Observable';
 import {HotelDetailComponent} from '../../components/hotel-detail/hotel-detail.component';
 import {RatingService} from '../../shared/rating.service';
 import * as Materialize from 'angular2-materialize/dist/index';
 import {OfferService} from '../../shared/offer.service';
+import {HotelActions} from '../../actions/hotel.actions';
 
 @Component({
   selector: 'hotel-detail-page',
@@ -40,20 +41,21 @@ export class HotelDetailPageComponent {
               private ratingService: RatingService,
               private offerService: OfferService,
               private hotelService: HotelService,
+              private hotelActions: HotelActions,
               private store: Store<AppState>) {
+  }
+
+  ngOnInit() {
     this.hotel = this.routeParams
       .pluck<string>('hotelId')
       .distinctUntilChanged()
       .flatMap(hotelId => {
-        return this.store.select<Hotel[]>('hotels')
+        return this.store.let(getHotels())
           .flatMap(hotels => Observable.from(hotels))
           .filter(hotel => {
             return hotel.id.toString() === hotelId.toString();
           })
-      })
-  }
-
-  ngOnInit() {
+      });
     this.ratings = this.hotel
       .flatMap(hotel => this.ratingService.getByHotelId(hotel.id));
     this.offers = this.hotel
@@ -61,6 +63,7 @@ export class HotelDetailPageComponent {
   }
 
   deleteHotel(hotel: Hotel) {
+    this.store.dispatch(this.hotelActions.deleteHotel(hotel));
     if (hotel && hotel.id) {
       this.hotelService.deleteHotel(hotel.id).subscribe(() => {
         Materialize.toast('Deleted hotel', 4000, 'rounded');

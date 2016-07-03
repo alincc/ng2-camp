@@ -12,14 +12,13 @@ import {ENV_PROVIDERS} from './platform/environment';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 import { provideRouter } from '@ngrx/router';
 import { provideStore } from '@ngrx/store';
-import { connectRouterToStore } from '@ngrx/router-store';
 import { runEffects } from '@ngrx/effects';
 import { routes } from 'app/routes/routes';
 import { AuthGuard } from 'app/routes/authGuard';
 
 import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 
-import {hotels} from './app/reducers';
+import reducer from './app/reducers';
 import effects from './app/effects';
 import actions from './app/actions';
 import services from './app/shared/index';
@@ -42,7 +41,7 @@ export function main(): Promise<any> {
     ...DIRECTIVES,
     ...PIPES,
     ...AUTH_PROVIDERS,
-    provideStore(hotels),
+    provideStore(reducer),
     runEffects(effects),
     ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provideRouter(routes),
