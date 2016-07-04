@@ -39,7 +39,6 @@ export class HotelEditPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.countries = this.countryService
       .getAllCountries();
-
     this.hotelIdSubscription = this.routeParams.pluck<string>('hotelId')
       .map(id => parseInt(id))
       .subscribe(hotelId => {

@@ -1,4 +1,4 @@
-<sebm-google-map *ngIf="hotel" [latitude]="hotel.latitude" [longitude]="hotel.longitude">
+<sebm-google-map *ngIf="hotel && hotel.latitude && hotel.longitude" [latitude]="hotel.latitude" [longitude]="hotel.longitude">
 
   <sebm-google-map-marker
     [latitude]="hotel.latitude"
@@ -8,6 +8,6 @@
 
 </sebm-google-map>
 
-<div *ngIf="!hotel">
+<div *ngIf="!hotel || !hotel.latitude || !hotel.longitude">
   Location information unavailable
 </div>

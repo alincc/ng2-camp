@@ -16,11 +16,7 @@ export class HotelService {
   }
 
   getHotels(): Observable<Hotel[]> {
-    return this.crud.get<Hotel[]>('/rest/hotels');
-  }
-
-  getHotelsWithCoordinates(): Observable<Hotel[]> {
-    return this.getHotels()
+    return this.crud.get<Hotel[]>('/rest/hotels')
       .map((hotels: Hotel[]) => Observable.from(hotels)
         .map(hotel => this.mapService.enrichHotelWithCoordinate(hotel))
         .concatAll()
@@ -29,7 +25,8 @@ export class HotelService {
   }
 
   getHotel(id: number): Observable < Hotel > {
-    return this.crud.get<Hotel>('/rest/hotels/' + id);
+    return this.crud.get<Hotel>('/rest/hotels/' + id)
+      .map(hotel => this.mapService.enrichHotelWithCoordinate(hotel));
   }
 
   deleteHotel(id: number): Observable < Response > {

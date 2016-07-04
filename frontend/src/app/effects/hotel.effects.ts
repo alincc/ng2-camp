@@ -12,10 +12,10 @@ import {Hotel} from '../model/backend-typings';
 
 @Injectable()
 export class HotelEffects {
-  constructor(private updates$: StateUpdates<AppState>,
-              private hotelService: HotelService,
-              private router: Router,
-              private hotelActions: HotelActions) {
+  constructor(private updates$:StateUpdates<AppState>,
+              private hotelService:HotelService,
+              private router:Router,
+              private hotelActions:HotelActions) {
   }
 
   @Effect()
@@ -24,15 +24,15 @@ export class HotelEffects {
   @Effect()
   loadHotels = this.updates$
     .whenAction(HotelActions.LOAD_HOTELS)
-    .switchMapTo(this.hotelService.getHotelsWithCoordinates())
-    .map((hotels) => this.hotelActions.loadHotelsSuccess(hotels));
+    .switchMapTo(this.hotelService.getHotels())
+    .map(hotels => this.hotelActions.loadHotelsSuccess(hotels));
 
   @Effect()
   saveHotel = this.updates$
     .whenAction(HotelActions.SAVE_HOTEL)
     .map<Hotel>(toPayload)
-    .mergeMap(hotel => this.hotelService.saveHotel(hotel)
-      .flatMap(savedHotel => this.hotelActions.saveHotelSuccess(savedHotel))
+    .flatMap(hotel => this.hotelService.saveHotel(hotel)
+      .map(savedHotel => this.hotelActions.saveHotelSuccess(savedHotel))
       .catch(() => Observable.of(
         this.hotelActions.saveHotelFail(hotel)
       ))
@@ -42,13 +42,15 @@ export class HotelEffects {
   saveHotelSuccess = this.updates$
     .whenAction(HotelActions.SAVE_HOTEL_SUCCESS)
     .map<Hotel>(toPayload)
-    .mergeMap(hotel => this.router.go('/hotels/' + hotel.id));
+    .do(hotel => {
+      this.router.go('/hotels/' + hotel.id)
+    }).filter(() => false);
 
   @Effect()
   deleteHotel = this.updates$
     .whenAction(HotelActions.DELETE_HOTEL)
     .map<Hotel>(toPayload)
-    .mergeMap(hotel => this.hotelService.deleteHotel(hotel.id)
+    .flatMap(hotel => this.hotelService.deleteHotel(hotel.id)
       .mapTo(this.hotelActions.deleteHotelSuccess(hotel))
       .catch(() => Observable.of(
         this.hotelActions.deleteHotelFail(hotel)

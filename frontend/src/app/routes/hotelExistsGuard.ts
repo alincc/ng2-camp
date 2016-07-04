@@ -22,12 +22,11 @@ export class HotelExistsGuard implements Guard {
       .take(1);
   }
 
-  hasHotelInStore(id: number) {
+  hasHotelInStore(id: number){
     return this.store.let(hasHotel(id)).take(1);
   }
 
   hasHotelInApi(id: number) {
-    console.log(id);
     return this.hotelService.getHotel(id)
       .map(hotel => this.hotelActions.loadHotel(hotel))
       .do(action => this.store.dispatch(action))
@@ -46,7 +45,9 @@ export class HotelExistsGuard implements Guard {
   }
 
   protectRoute(candidate: TraversalCandidate) {
-    console.log(candidate.routeParams);
+    if(candidate.routeParams.hotelId === 'new') {
+      return Observable.of(false);
+    }
     return this.waitForCollectionToLoad()
       .switchMapTo(this.hasHotel(candidate.routeParams.hotelId));
   }
