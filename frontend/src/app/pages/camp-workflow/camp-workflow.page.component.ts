@@ -5,7 +5,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/mergeMap';
 import {Camp, Hotel} from '../../model/backend-typings';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../reducers/index';
+import {AppState, getHotels} from '../../reducers/index';
 import {Observable} from 'rxjs/Observable';
 import {CampService} from '../../shared/camp.service';
 import {CampWorkflowComponent} from '../../components/camp-workflow/camp-workflow.component';
@@ -41,6 +41,6 @@ export class CampWorkflowPageComponent implements OnInit {
       .flatMap(campId => this.campService.getCamp(campId));
     this.step = this.queryParams.pluck<string>('step')
       .map(step => parseInt(step));
-    this.hotels = this.store.select<Hotel[]>('hotels');
+    this.hotels = this.store.let(getHotels());
   }
 }
