@@ -19,9 +19,9 @@ import {AuthGuard} from 'app/routes/authGuard';
 import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 
 import reducer from './app/reducers';
-import effects from './app/effects';
-import actions from './app/actions';
-import services from './app/shared/index';
+import {EFFECTS} from './app/effects';
+import {ACTIONS} from './app/actions';
+import services from './app/shared';
 
 import {instrumentStore} from '@ngrx/store-devtools';
 import {useLogMonitor} from '@ngrx/store-log-monitor';
@@ -50,13 +50,13 @@ export function main():Promise<any> {
         visible: false,
       })
     }),
+    ...ACTIONS,
     provideStore(reducer),
-    runEffects(effects),
+    runEffects(EFFECTS),
     ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
     provideRouter(routes),
     AuthGuard,
-    services,
-    actions
+    services
   ])
     .catch(err => console.error(err));
 

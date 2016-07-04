@@ -11,6 +11,7 @@ import {OfferEditPageComponent} from '../pages/offer-edit/offer-edit.page.compon
 import {OfferRequestEditPageComponent} from '../pages/offer-requests-edit/offer-request-edit.page.component.ts';
 import {HotelOverviewPageComponent} from '../pages/hotel-overview/hotel-overview.page.component';
 import {HotelExistsGuard} from '../routes/hotelExistsGuard';
+import {CampExistsGuard} from "./campExistsGuard";
 
 export const routes: Routes = [
   {
@@ -44,12 +45,12 @@ export const routes: Routes = [
   },
   {
     path: '/camps/:campId',
-    guards: [AuthGuard],
+    guards: [AuthGuard, CampExistsGuard],
     component: CampWorkflowPageComponent
   },
   {
     path: '/camps/edit/:campId',
-    guards: [AuthGuard],
+    guards: [AuthGuard, CampExistsGuard],
     component: CampEditPageComponent
   },
   {

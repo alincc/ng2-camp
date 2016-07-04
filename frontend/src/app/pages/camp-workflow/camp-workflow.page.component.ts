@@ -9,6 +9,7 @@ import {AppState, getHotels} from '../../reducers/index';
 import {Observable} from 'rxjs/Observable';
 import {CampService} from '../../shared/camp.service';
 import {CampWorkflowComponent} from '../../components/camp-workflow/camp-workflow.component';
+import {getCamps} from "../../reducers/camp.reducer";
 
 @Component({
   selector: 'camp-workflow-page',
@@ -38,7 +39,7 @@ export class CampWorkflowPageComponent implements OnInit {
       .distinctUntilChanged()
       .map(id => parseInt(id))
       .filter(campId => !isNaN(campId))
-      .flatMap(campId => this.campService.getCamp(campId));
+      .flatMap(campId => this.store.let(getCamp(campId)));
     this.step = this.queryParams.pluck<string>('step')
       .map(step => parseInt(step));
     this.hotels = this.store.let(getHotels());

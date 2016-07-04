@@ -1,9 +1,9 @@
 import {HotelActions} from './hotel.actions';
+import {CampActions} from "./camp.actions";
 
-export {
-  HotelActions
-};
-
-export default [
-  HotelActions
+export const ACTIONS = [
+  HotelActions,
+  CampActions
 ];
+
+

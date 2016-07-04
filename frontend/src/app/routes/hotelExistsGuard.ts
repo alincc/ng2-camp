@@ -16,7 +16,7 @@ export class HotelExistsGuard implements Guard {
               private hotelActions: HotelActions) {
   }
 
-  waitForCollectionToLoad() {
+  waitForHotelsToLoad() {
     return this.store.let(getHotelsLoaded())
       .filter(loaded => loaded)
       .take(1);
@@ -48,7 +48,7 @@ export class HotelExistsGuard implements Guard {
     if(candidate.routeParams.hotelId === 'new') {
       return Observable.of(false);
     }
-    return this.waitForCollectionToLoad()
+    return this.waitForHotelsToLoad()
       .switchMapTo(this.hasHotel(candidate.routeParams.hotelId));
   }
 

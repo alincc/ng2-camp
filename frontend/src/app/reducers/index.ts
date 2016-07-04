@@ -5,13 +5,16 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
 import {Observable} from 'rxjs/Observable';
 import hotelReducer, * as fromHotels from './hotel.reducer';
+import campReducer, * as fromCamps from './camp.reducer';
 
 export interface AppState {
-  hotels: fromHotels.HotelsState
+  hotels: fromHotels.HotelsState,
+  camps: fromCamps.CampsState
 }
 
 export default combineReducers({
-  hotels: hotelReducer
+  hotels: hotelReducer,
+  camps: campReducer
 });
 
 export function getHotelsState() {
@@ -29,6 +32,23 @@ export function hasHotel(id: number) {
 
 export function getHotels() {
   return compose(fromHotels.getHotels(), getHotelsState());
+}
+
+export function getCampsState() {
+  return (state$: Observable<AppState>) => state$
+    .select(s => s.camps);
+}
+
+export function getCampsLoaded() {
+  return compose(fromCamps.getCampsLoaded(), getCampsState());
+}
+
+export function hasCamp(id: number) {
+  return compose(fromCamps.hasCamp(id), getCampsState());
+}
+
+export function getCamps() {
+  return compose(fromCamps.getCamps(), getCampsState());
 }
 
 

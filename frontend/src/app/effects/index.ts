@@ -1,5 +1,7 @@
-import { HotelEffects } from './hotel.effects';
+import {HotelEffects} from './hotel.effects';
+import {CampEffects} from "./camp.effects";
 
-export default [
-  HotelEffects
+export const EFFECTS = [
+  HotelEffects,
+  CampEffects
 ];

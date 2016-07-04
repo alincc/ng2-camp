@@ -46,11 +46,7 @@ export class CampEditPageComponent implements OnInit, OnDestroy {
 
   saveCamp(camp: Camp) {
     this.campService.saveCamp(camp).subscribe(
-      (camp) => this.openCamp(camp)
+      (camp) => this.router.go('/camps/' + camp.id)
     );
-  }
-
-  openCamp(camp:Camp) {
-    this.router.go('/camps/' + camp.id);
   }
 }
