@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 import {Camp, CampStatus} from '../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize';
 import {NgClass} from '@angular/common';
@@ -6,7 +6,8 @@ import {NgClass} from '@angular/common';
 @Component({
   selector: 'camp-edit',
   directives: [MaterializeDirective, NgClass],
-  template: require('./camp-edit.component.html')
+  template: require('./camp-edit.component.html'),
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CampEditComponent {
 

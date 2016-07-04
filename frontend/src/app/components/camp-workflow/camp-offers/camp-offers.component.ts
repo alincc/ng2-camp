@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {Camp, RequestStatus} from '../../../model/backend-typings';
 import {MaterializeDirective} from 'angular2-materialize/dist/index';
 import {OfferEditComponent} from '../../offer-edit/offer-edit.component';
@@ -7,7 +7,8 @@ import {MailTemplatesComponent} from '../../mail-templates/mailtemplates.compone
 @Component({
   selector: 'camp-offers',
   directives: [MaterializeDirective, OfferEditComponent, MailTemplatesComponent],
-  template: require('./camp-offers.component.html')
+  template: require('./camp-offers.component.html'),
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CampOffersComponent {
 
