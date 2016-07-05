@@ -72,16 +72,18 @@ export function getHotelsLoading() {
 }
 export function hasHotel(id: number) {
   return (state$: Observable<HotelsState>) => state$
-    .select(s => s.hotels.forEach(hotel => {
-      let hotelExists: boolean = false;
-      if (hotel.id.toString() === id.toString()) {
-        hotelExists = true;
-      }
-      return hotelExists;
-    }));
+    .select(s => s.hotels
+      .filter(hotel => hotel.id.toString() === id.toString()));
+}
+
+export function getHotel(id:number) {
+    return (state$: Observable<HotelsState>) => state$
+      .select(s => s.hotels)
+    .flatMap(hotels => Observable.from(hotels))
+    .filter(hotel => hotel.id.toString() === id.toString());
 }
 
 export function getHotels() {
   return (state$: Observable<HotelsState>) => state$
     .select(s => s.hotels);
-};
+}

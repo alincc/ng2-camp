@@ -5,11 +5,9 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/mergeMap';
 import {Camp, Hotel} from '../../model/backend-typings';
 import {Store} from '@ngrx/store';
-import {AppState, getHotels} from '../../reducers/index';
+import {AppState, getHotels, getCamp} from '../../reducers/index';
 import {Observable} from 'rxjs/Observable';
-import {CampService} from '../../shared/camp.service';
 import {CampWorkflowComponent} from '../../components/camp-workflow/camp-workflow.component';
-import {getCamps} from "../../reducers/camp.reducer";
 
 @Component({
   selector: 'camp-workflow-page',
@@ -30,15 +28,13 @@ export class CampWorkflowPageComponent implements OnInit {
 
   constructor(private routeParams: RouteParams,
               private queryParams: QueryParams,
-              private campService: CampService,
               private store:Store<AppState>) {
   }
 
   ngOnInit() {
-    this.camp = this.routeParams.pluck<string>('campId')
+   this.camp = this.routeParams
+      .pluck<string>('campId')
       .distinctUntilChanged()
-      .map(id => parseInt(id))
-      .filter(campId => !isNaN(campId))
       .flatMap(campId => this.store.let(getCamp(campId)));
     this.step = this.queryParams.pluck<string>('step')
       .map(step => parseInt(step));

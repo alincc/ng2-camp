@@ -34,6 +34,10 @@ export function getHotels() {
   return compose(fromHotels.getHotels(), getHotelsState());
 }
 
+export function getHotel(id: number) {
+  return compose(fromHotels.getHotel(id), getHotelsState());
+}
+
 export function getCampsState() {
   return (state$: Observable<AppState>) => state$
     .select(s => s.camps);
@@ -49,6 +53,10 @@ export function hasCamp(id: number) {
 
 export function getCamps() {
   return compose(fromCamps.getCamps(), getCampsState());
+}
+
+export function getCamp(id: number) {
+  return compose(fromCamps.getCamp(id), getCampsState());
 }
 
 

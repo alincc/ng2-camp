@@ -6,18 +6,19 @@ import {Action} from '@ngrx/store';
 import {CampActions} from "../actions/camp.actions";
 
 export interface CampsState {
-  loaded: boolean;
-  loading: boolean;
-  camps: Camp[];
-};
+  loaded:boolean;
+  loading:boolean;
+  camps:Camp[];
+}
+;
 
-const initialState: CampsState = {
+const initialState:CampsState = {
   loaded: false,
   loading: false,
   camps: []
 };
 
-export default function (state = initialState, action: Action): CampsState {
+export default function (state = initialState, action:Action):CampsState {
   switch (action.type) {
     case CampActions.LOAD_CAMPS:
     {
@@ -62,26 +63,28 @@ export default function (state = initialState, action: Action): CampsState {
 }
 
 export function getCampsLoaded() {
-  return (state$: Observable<CampsState>) => state$
+  return (state$:Observable<CampsState>) => state$
     .select(s => s.loaded);
 }
 
 export function getCampsLoading() {
-  return (state$: Observable<CampsState>) => state$
+  return (state$:Observable<CampsState>) => state$
     .select(s => s.loading);
 }
-export function hasCamp(id: number) {
-  return (state$: Observable<CampsState>) => state$
-    .select(s => s.camps.forEach(camp => {
-      let campExists: boolean = false;
-      if (camp.id.toString() === id.toString()) {
-        campExists = true;
-      }
-      return campExists;
-    }));
+export function hasCamp(id:number) {
+  return (state$:Observable<CampsState>) => state$
+    .select(s => s.camps
+      .filter(camp => camp.id.toString() === id.toString()));
 }
 
 export function getCamps() {
-  return (state$: Observable<CampsState>) => state$
+  return (state$:Observable<CampsState>) => state$
     .select(s => s.camps);
-};
+}
+
+export function getCamp(id:number) {
+  return (state$:Observable<CampsState>) => state$
+    .select(s => s.camps)
+    .flatMap(camps => Observable.from(camps))
+    .filter(camp => camp.id.toString() === id.toString());
+}

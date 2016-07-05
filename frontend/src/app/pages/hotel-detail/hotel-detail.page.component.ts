@@ -7,7 +7,7 @@ import 'rxjs/add/observable/interval';
 import {HotelService} from '../../shared/hotel.service';
 import {Hotel, Rating, Offer} from '../../model/backend-typings';
 import {Store} from '@ngrx/store';
-import {AppState, getHotels} from '../../reducers';
+import {AppState, getHotel} from '../../reducers';
 import {Observable} from 'rxjs/Observable';
 import {HotelDetailComponent} from '../../components/hotel-detail/hotel-detail.component';
 import {RatingService} from '../../shared/rating.service';
@@ -48,14 +48,8 @@ export class HotelDetailPageComponent {
   ngOnInit() {
     this.hotel = this.routeParams
       .pluck<string>('hotelId')
-      .distinctUntilChanged()
-      .flatMap(hotelId => {
-        return this.store.let(getHotels())
-          .flatMap(hotels => Observable.from(hotels))
-          .filter(hotel => {
-            return hotel.id.toString() === hotelId.toString();
-          })
-      });
+      .distinctUntilChanged() 
+      .flatMap(hotelId =>this.store.let(getHotel(hotelId)));
     this.ratings = this.hotel
       .flatMap(hotel => this.ratingService.getByHotelId(hotel.id));
     this.offers = this.hotel
