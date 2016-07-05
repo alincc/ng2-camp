@@ -4,8 +4,6 @@ import {Offer} from '../../../model/backend-typings';
 
 @Component({
   selector: 'offer-list',
-  directives: [],
-  providers: [],
   template: require('./offer-list.component.html'),
   changeDetection: ChangeDetectionStrategy.OnPush
 })

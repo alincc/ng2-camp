@@ -18,5 +18,6 @@ export class HotelsMapComponent {
 
   @Input()
   hotels: Observable<Hotel[]>;
+
 }
 

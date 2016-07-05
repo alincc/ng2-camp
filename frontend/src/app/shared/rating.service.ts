@@ -12,6 +12,10 @@ export class RatingService {
     return this.crud.post<Rating>('/rest/hotels/' + hotelId + '/ratings', rating);
   }
 
+  getRatings(): Observable<Rating[]> {
+    return this.crud.get<Rating[]>('/rest/ratings');
+  }
+
   getByHotelId(id: number): Observable<Rating[]> {
     return this.crud.get<Rating[]>('/rest/hotels/' + id + '/ratings');
   }
