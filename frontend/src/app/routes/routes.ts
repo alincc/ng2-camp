@@ -3,7 +3,6 @@ import {HotelDetailPageComponent} from '../pages/hotel-detail/hotel-detail.page.
 import {LoginComponent} from '../components/login/login.component';
 import {AuthGuard} from './authGuard';
 import {CampOverviewPageComponent} from '../pages/camp-overview/camp-overview.page.component';
-import {CampEditPageComponent} from '../pages/camp-edit/camp-edit.page.component';
 import {HotelEditPageComponent} from '../pages/hotel-edit/hotel-edit.page.component';
 import {MailTemplatesComponent} from '../components/mail-templates/mailtemplates.component';
 import {CampWorkflowPageComponent} from '../pages/camp-workflow/camp-workflow.page.component';
@@ -47,11 +46,6 @@ export const routes: Routes = [
     path: '/camps/:campId',
     guards: [AuthGuard, CampExistsGuard],
     component: CampWorkflowPageComponent
-  },
-  {
-    path: '/camps/edit/:campId',
-    guards: [AuthGuard, CampExistsGuard],
-    component: CampEditPageComponent
   },
   {
     path: '/camps/:campId/offer-requests/edit/:offerRequestId',

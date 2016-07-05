@@ -16,7 +16,7 @@ import {AppState, getCamps} from "../../reducers";
 })
 export class CampOverviewPageComponent implements OnInit {
 
-  camps: Observable<Camp[]>;
+  camps: Observable<Camp[]>; 
 
   constructor(private store:Store<AppState>) {
   }
