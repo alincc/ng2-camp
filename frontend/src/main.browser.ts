@@ -16,7 +16,7 @@ import {runEffects} from '@ngrx/effects';
 import {routes} from 'app/routes/routes';
 import {AuthGuard} from 'app/routes/authGuard';
 
-import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
+import {GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 
 import reducer from './app/reducers';
 import {EFFECTS} from './app/effects';
@@ -53,7 +53,7 @@ export function main():Promise<any> {
     ...ACTIONS,
     provideStore(reducer),
     runEffects(EFFECTS),
-    ...ANGULAR2_GOOGLE_MAPS_PROVIDERS,
+    ...GOOGLE_MAPS_PROVIDERS,
     provideRouter(routes),
     AuthGuard,
     services
