@@ -31,7 +31,8 @@ export class OfferEditPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.offerIdSubscription = this.routeParams.pluck<number>('offerId')
+    this.offerIdSubscription = this.routeParams.pluck<string>('offerId')
+      .map(offerId => parseInt(offerId))
       .subscribe(offerId => {
         if (!isNaN(offerId)) {
           this.offer = this.offerService.getOffer(offerId);
@@ -39,7 +40,8 @@ export class OfferEditPageComponent implements OnInit, OnDestroy {
           this.offer = Observable.of({} as Offer);
         }
       });
-     this.hotelIdSubscription= this.queryParams.pluck<number>('hotelId')
+     this.hotelIdSubscription= this.queryParams.pluck<string>('hotelId')
+       .map(id => parseInt(id))
       .subscribe(id => this.hotelId = id);
   }
 

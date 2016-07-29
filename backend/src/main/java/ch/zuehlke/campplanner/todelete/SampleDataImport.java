@@ -54,7 +54,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         Hotel hotelVierJahreszeiten = createCompleteHotel();
         Offer offerWartegg1 = createOffer1();
         Offer offerWartegg2 = createOffer2();
-        Offer offerVierJahreszeiten = createOffer1();
+        Offer offerVierJahreszeiten = createOffer2();
         hotelWartegg.addOffer(offerWartegg1);
         hotelWartegg.addOffer(offerWartegg2);
         hotelVierJahreszeiten.addOffer(offerVierJahreszeiten);
@@ -129,6 +129,7 @@ public class SampleDataImport implements ApplicationListener<ContextRefreshedEve
         camp.setOfferRequests(Arrays.asList(offerRequest));
         camp.setFromDate(new Date());
         camp.setToDate(new Date());
+        camp.setOrganizer("Johny");
         return camp;
     }
 

@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col s12" *ngIf="!acceptedHotel">
+    <div class="card-panel">
+      <i class="material-icons left yellow-text">warning</i>You cannot rate a hotel before you accepted an offer.
+    </div>
+  </div>
+  <div class="col s6" *ngIf="acceptedHotel">
+    <div class="card-panel">
+      <h5>Hotel Ratings</h5>
+      <rating-list [ratings]="acceptedHotel.ratings"></rating-list>
+      <a materialize="leanModal" class="btn-floating waves-effect waves-light modal-trigger" href="#modal-new-rating"><i class="material-icons">star_rate</i></a>
+    </div>
+  </div>
+</div>
+
+<rating-new (ratingSavedEvent)="deliverRatingSavedEvent($event)"></rating-new>

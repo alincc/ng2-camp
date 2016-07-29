@@ -34,14 +34,20 @@ public class Hotel {
     private String holidayCheckUrl;
     private Integer rooms;
 
+    private Double latitude;
+    private Double longitude;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Offer> offers;
+
+
 
     public List<Offer> getOffers() {
         if (offers == null) {
             offers = new LinkedList<>();
         }
+
         return offers;
     }
 
@@ -160,6 +166,22 @@ public class Hotel {
 
     public void setHolidayCheckUrl(String holidayCheckUrl) {
         this.holidayCheckUrl = holidayCheckUrl;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public void addOffer(Offer offer) {

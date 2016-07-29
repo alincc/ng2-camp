@@ -3,13 +3,16 @@ import {HotelDetailPageComponent} from '../pages/hotel-detail/hotel-detail.page.
 import {LoginComponent} from '../components/login/login.component';
 import {AuthGuard} from './authGuard';
 import {CampOverviewPageComponent} from '../pages/camp-overview/camp-overview.page.component';
-import {CampEditPageComponent} from '../pages/camp-edit/camp-edit.page.component';
 import {HotelEditPageComponent} from '../pages/hotel-edit/hotel-edit.page.component';
 import {MailTemplatesComponent} from '../components/mail-templates/mailtemplates.component';
-import {CampDetailPageComponent} from '../pages/camp-detail/camp-detail.page.component';
+import {CampWorkflowPageComponent} from '../pages/camp-workflow/camp-workflow.page.component';
 import {OfferEditPageComponent} from '../pages/offer-edit/offer-edit.page.component';
 import {OfferRequestEditPageComponent} from '../pages/offer-requests-edit/offer-request-edit.page.component.ts';
 import {HotelOverviewPageComponent} from '../pages/hotel-overview/hotel-overview.page.component';
+import {HotelExistsGuard} from '../routes/hotelExistsGuard';
+import {CampExistsGuard} from "./campExistsGuard";
+import {OfferRequestExistsGuard} from "./offerRequestExistsGuard";
+import {OfferExistsGuard} from "./offerExistsGuard";
 
 export const routes: Routes = [
   {
@@ -23,11 +26,16 @@ export const routes: Routes = [
   },
   {
     path: '/hotels/:hotelId',
-    guards: [AuthGuard],
+    guards: [AuthGuard, HotelExistsGuard],
     component: HotelDetailPageComponent
   },
   {
     path: '/hotels/edit/:hotelId',
+    guards: [AuthGuard, HotelExistsGuard],
+    component: HotelEditPageComponent
+  },
+  {
+    path: '/hotels/new',
     guards: [AuthGuard],
     component: HotelEditPageComponent
   },
@@ -38,22 +46,17 @@ export const routes: Routes = [
   },
   {
     path: '/camps/:campId',
-    guards: [AuthGuard],
-    component: CampDetailPageComponent
-  },
-  {
-    path: '/camps/edit/:campId',
-    guards: [AuthGuard],
-    component: CampEditPageComponent
+    guards: [AuthGuard, CampExistsGuard],
+    component: CampWorkflowPageComponent
   },
   {
     path: '/camps/:campId/offer-requests/edit/:offerRequestId',
-    guards: [AuthGuard],
+    guards: [AuthGuard, OfferRequestExistsGuard],
     component: OfferRequestEditPageComponent
   },
   {
     path: '/offers/edit/:offerId',
-    guards: [AuthGuard],
+    guards: [AuthGuard, OfferExistsGuard],
     component: OfferEditPageComponent
   },
   {

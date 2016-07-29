@@ -17,7 +17,7 @@ i {
 
 .card .card-content .default-styling ul {
   padding-left: 40px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .card .card-content .default-styling li {
@@ -28,4 +28,13 @@ i {
 .card .card-content .default-styling p {
   display: block;
   margin-top: 1em;
+}
+
+form .input-field {
+  .btn, i.prefix {
+    margin-top: 7px;
+  }
+  .btn {
+    width: 100%;
+  }
 }

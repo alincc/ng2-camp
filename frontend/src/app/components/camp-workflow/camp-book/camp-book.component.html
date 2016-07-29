@@ -1,0 +1,41 @@
+<form>
+  <div class="row">
+    <div class="input-field col s3">
+      <a id="camp_hotelDoodle" class="btn waves-effect waves-light" [href]="'http://doodle.com/create?type=text&locale=en&title=' + camp.name + '&name=' + camp.organizer + '&option1=Lasagne&option2=Pasta&option3=Pizza&option4=Polenta'" target="_blank">
+        <i class="material-icons right">open_in_new</i>Create Doodle
+      </a>
+      <label for="camp_hotelDoodle" [class.active]="true">Vote for a Hotel</label>
+    </div>
+    <div class="input-field col s6">
+      <select id="camp_hotel" materialize="material_select" [materializeSelectOptions]="camp.offerRequests" required
+              (change)="acceptOffer(offerRequest)">
+        <option value="" disabled selected>Accept Offer</option>
+        <option *ngFor="let offerRequest of camp.offerRequests" [ngValue]="offerRequest.hotel"
+                [selected]="selectedHotel && offerRequest.hotel && selectedHotel.id === offerRequest.hotel.id">{{offerRequest.hotel.name}} - {{offerRequest.hotel.city}}, {{offerRequest.hotel.countryCode}}</option>
+      </select>
+      <label for="camp_hotel">Accept Offer</label>
+    </div>
+    <div class="input-field col s3">
+      <button id="camp_hotelIcs" class="btn waves-effect waves-light disabled">
+        <i class="material-icons left">file_download</i>Download .ics
+      </button>
+      <label for="camp_hotelIcs" [class.active]="true">Create Calendar Entry</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s6">
+      <div class="card-panel">
+        <i class="material-icons left">info_outline</i>
+        Write to hotel to accept the offer and confirm the booking.
+      </div>
+    </div>
+    <div class="col s6">
+      <div class="card-panel">
+        <i class="material-icons left">info_outline</i>
+        Write to other hotels to reject their offers.
+      </div>
+    </div>
+  </div>
+
+</form>

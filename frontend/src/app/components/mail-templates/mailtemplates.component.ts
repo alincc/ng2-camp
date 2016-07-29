@@ -70,7 +70,6 @@ export class MailTemplatesComponent implements OnInit {
     this.mailTemplateService.saveOrUpdate(this.mailTemplate).subscribe(
       savedTemplate => {
         if (!this.isTemplateChanged) {
-          console.log("add");
           this.mailTemplate = savedTemplate;
           this.mailTemplates.push(savedTemplate);
           this.mailTemplateId = savedTemplate.id;

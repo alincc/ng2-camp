@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Camp} from '../../model/backend-typings';
-import {CampService} from '../../shared/camp.service';
 import {CampOverviewComponent} from '../../components/camp-overview/camp-overview.component';
+import {Store} from "@ngrx/store";
+import {AppState, getCamps} from "../../reducers";
 
 @Component({
   selector: 'camp-overview-page',
@@ -15,12 +16,12 @@ import {CampOverviewComponent} from '../../components/camp-overview/camp-overvie
 })
 export class CampOverviewPageComponent implements OnInit {
 
-  camps: Observable<Camp[]>;
+  camps: Observable<Camp[]>; 
 
-  constructor(private campService:CampService) {
+  constructor(private store:Store<AppState>) {
   }
 
   ngOnInit() {
-    this.camps = this.campService.getCamps();
+    this.camps = this.store.let(getCamps());
   }
 }

@@ -6,6 +6,7 @@ import {provide} from '@angular/core';
 import {Response,} from '@angular/http';
 import {Camp} from '../model/backend-typings';
 import {CrudService} from './crud.service';
+import {beforeEachProviders} from "@angular/core/testing";
 
 describe('camp service', () => {
 

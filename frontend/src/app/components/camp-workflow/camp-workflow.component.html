@@ -1,0 +1,52 @@
+<div *ngIf="camp">
+  <h4 class="header">{{camp.name}}</h4>
+
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs z-depth-1" materialize="tabs">
+        <li class="tab col s3"><a href="#basics" [ngClass]="{active: step===0}">Basics</a></li>
+        <li class="tab col s3"><a href="#date" [ngClass]="{active: step===1}">Date</a></li>
+        <li class="tab col s3"><a href="#hotel" [ngClass]="{active: step===2}">Find Hotel</a></li>
+        <li class="tab col s3"><a href="#offers" [ngClass]="{active: step===3}">Offers</a></li>
+        <li class="tab col s3"><a href="#book" [ngClass]="{active: step===4}">Book Hotel</a></li>
+        <li class="tab col s3"><a href="#review" [ngClass]="{active: step===5}">Review</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="basics" class="col s12">
+      <camp-basics [camp]="camp"></camp-basics>
+      <a class="btn waves-effect waves-light" (click)="changeStep('date')">
+        <i class="material-icons right">play_arrow</i>Next
+      </a>
+    </div>
+    <div id="date" class="col s12">
+      <camp-date [camp]="camp"></camp-date>
+      <a class="btn waves-effect waves-light" (click)="changeStep('hotel')">
+        <i class="material-icons right">play_arrow</i>Next
+      </a>
+    </div>
+    <div id="hotel" class="col s12">
+      <hotels [camp]="camp" [hotels]="hotels"></hotels>
+      <a class="btn waves-effect waves-light" (click)="changeStep('offers')">
+        <i class="material-icons right">play_arrow</i>Next
+      </a>
+    </div>
+    <div id="offers" class="col s12">
+      <camp-offers [camp]="camp"></camp-offers>
+      <a class="btn waves-effect waves-light" (click)="changeStep('book')">
+        <i class="material-icons right">play_arrow</i>Next
+      </a>
+    </div>
+    <div id="book" class="col s12">
+      <camp-book [camp]="camp"></camp-book>
+      <a class="btn waves-effect waves-light" (click)="changeStep('review')">
+        <i class="material-icons right">play_arrow</i>Next
+      </a>
+    </div>
+    <div id="review" class="col s12">
+      <camp-review [camp]="camp"></camp-review>
+    </div>
+  </div>
+</div>

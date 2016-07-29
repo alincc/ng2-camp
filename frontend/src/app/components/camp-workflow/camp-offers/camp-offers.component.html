@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col s12">
+    <table class="responsive-table striped bordered">
+      <thead>
+      <tr>
+        <th>Hotel</th>
+        <th>Location</th>
+        <th>Request Sent</th>
+        <th>Last Change</th>
+        <th>Status</th>
+        <th>Offer</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let offerRequest of camp.offerRequests">
+        <td>{{offerRequest.hotel.name}}</td>
+        <td>{{offerRequest.hotel.city}}, {{offerRequest.hotel.countryCode}}</td>
+        <td>{{offerRequest.date | date}}</td>
+        <td>{{offerRequest.lastStatusChange | date}}</td>
+        <td><div class="chip" [ngClass]="getStatusColor(offerRequest.status)">{{offerRequest.status}}</div></td>
+        <td><span *ngIf="offerRequest.offer">{{offerRequest.offer.currency}} {{offerRequest.offer.totalPrice}}</span></td>
+        <td>
+          <a class="btn-floating waves-effect waves-light modal-trigger" href="#mailtemplate" materialize="leanModal" *ngIf="!offerRequest.offer && offerRequest.status!=='REQUEST_SENT'"><i class="material-icons">mail_outline</i></a>
+          <a class="btn-floating waves-effect waves-light modal-trigger" href="#add-offer" materialize="leanModal" *ngIf="!offerRequest.offer && offerRequest.status==='REQUEST_SENT'"><i class="material-icons">note_add</i></a>
+          <a class="btn-floating waves-effect waves-light modal-trigger" href="#view-offer" materialize="leanModal" *ngIf="offerRequest.offer"><i class="material-icons">find_in_page</i></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div id="mailtemplate" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <mail-templates></mail-templates>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
+  </div>
+</div>
+<div id="add-offer" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <!-- TODO: save the new offer -->
+    <offer-edit [offer]="{}" (saveOffer)="saveOffer($event)"></offer-edit>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-light btn">Save</a>
+    <a class="modal-action modal-close waves-effect waves-teal btn-flat">Cancel</a>
+  </div>
+</div>
+<div id="view-offer" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <!-- TODO: fix this to open the selected offer -->
+    <offer-edit [offer]="{}" (saveOffer)="saveOffer($event)"></offer-edit>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
+  </div>
+</div>

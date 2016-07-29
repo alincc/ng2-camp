@@ -3,8 +3,10 @@ export interface Camp {
     fromDate?: Date;
     id?: number;
     name?: string;
+    notes?: string;
     numberOfPeople?: number;
     offerRequests?: OfferRequest[];
+    organizer?: string;
     status?: CampStatus;
     team?: string;
     toDate?: Date;
@@ -20,6 +22,8 @@ export interface Hotel {
     description?: string;
     holidayCheckUrl?: string;
     id?: number;
+    latitude?: number;
+    longitude?: number;
     name?: string;
     pictureUrl?: string;
     rooms?: number;

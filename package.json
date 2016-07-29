@@ -4,14 +4,10 @@
   "description": "Camp planning made easy",
   "author": "Joachim Prinzbach <joachim.prinzbach@gmail.com>",
   "license": "MIT",
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
-
   },
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "homepage": "https://github.com/joachimprinzbach/ng2-camp#readme",
   "engines": {
     "node": ">= 4.2.1",
