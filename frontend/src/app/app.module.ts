@@ -1,6 +1,6 @@
 import "angular2-materialize";
 import {AUTH_PROVIDERS} from 'angular2-jwt';
-import {provideRouter} from '@ngrx/router';
+import {provideRouter, LinkTo} from '@ngrx/router';
 import {provideStore} from '@ngrx/store';
 import {runEffects} from '@ngrx/effects';
 import {GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
@@ -24,7 +24,8 @@ import { App } from './app.component';
     App
   ],
   declarations: [
-    App
+    App,
+    LinkTo
   ],
   imports: [
     BrowserModule,
