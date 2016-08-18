@@ -1,11 +1,9 @@
 import "angular2-materialize";
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 import {provideRouter, LinkTo} from '@ngrx/router';
-import {provideStore} from '@ngrx/store';
-import {runEffects} from '@ngrx/effects';
-import {GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
-import {instrumentStore} from '@ngrx/store-devtools';
-import {useLogMonitor} from '@ngrx/store-log-monitor';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {AgmCoreModule} from 'angular2-google-maps/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -18,6 +16,7 @@ import {ACTIONS} from './actions';
 import services from './shared';
 
 import { App } from './app.component';
+import {MarkdownConverter} from "./components/markdown/markDownConverter";
 
 @NgModule({
   bootstrap: [
@@ -29,22 +28,17 @@ import { App } from './app.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    AgmCoreModule,
+    StoreModule.provideStore(reducer),
+    EffectsModule.run(EFFECTS)
   ],
   providers: [
     ...AUTH_PROVIDERS,
-    ...GOOGLE_MAPS_PROVIDERS,
+    MarkdownConverter,
     AuthGuard,
     services,
-    instrumentStore({
-      monitor: useLogMonitor({
-        position: 'right',
-        visible: false,
-      })
-    }),
     ...ACTIONS,
-    provideStore(reducer),
-    runEffects(EFFECTS),
     provideRouter(routes),
   ]
 })
