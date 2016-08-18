@@ -11,12 +11,16 @@ import { NgModule } from '@angular/core';
 import {routes} from './routes/routes';
 import {AuthGuard} from './routes/authGuard';
 import reducer from './reducers';
-import {EFFECTS} from './effects';
 import {ACTIONS} from './actions';
 import services from './shared';
 
 import { App } from './app.component';
 import {MarkdownConverter} from "./components/markdown/markDownConverter";
+import {CampEffects} from "./effects/camp.effects";
+import {HotelEffects} from "./effects/hotel.effects";
+import {OfferEffects} from "./effects/offer.effects";
+import {OfferRequestEffects} from "./effects/offer-request.effects";
+import {RatingEffects} from "./effects/rating.effects";
 
 @NgModule({
   bootstrap: [
@@ -31,7 +35,11 @@ import {MarkdownConverter} from "./components/markdown/markDownConverter";
     HttpModule,
     AgmCoreModule,
     StoreModule.provideStore(reducer),
-    EffectsModule.run(EFFECTS)
+    EffectsModule.run(CampEffects),/*
+    EffectsModule.run(HotelEffects),
+    EffectsModule.run(OfferEffects),
+    EffectsModule.run(OfferRequestEffects),
+    EffectsModule.run(RatingEffects)*/
   ],
   providers: [
     ...AUTH_PROVIDERS,

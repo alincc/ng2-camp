@@ -22,7 +22,7 @@ export class CampEffects implements OnDestroy {
   @Effect()
   loadCampsOnInit = Observable.of(this.campActions.loadCamps());
 
-  @Effect()
+  /*@Effect()
   loadCamps = this.actions$
     .ofType(CampActions.LOAD_CAMPS)
     .switchMapTo(this.campService.getCamps())
@@ -53,6 +53,6 @@ export class CampEffects implements OnDestroy {
       .catch(() => Observable.of(
         this.campActions.deleteCampFail(camp)
       ))
-    );
+    );*/
 
 }
