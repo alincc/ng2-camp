@@ -6,12 +6,14 @@ import 'rxjs/add/operator/switchMapTo';
 import {Actions, Effect} from '@ngrx/effects';
 import {HotelActions} from '../actions/hotel.actions';
 import {HotelService} from '../shared/hotel.service';
+import {Router} from "@ngrx/router";
 
 @Injectable()
 export class HotelEffects implements OnDestroy {
 
   constructor(private actions$:Actions,
               private hotelService:HotelService,
+              private router:Router,
               private hotelActions:HotelActions) {
   }
 
@@ -27,7 +29,6 @@ export class HotelEffects implements OnDestroy {
     .switchMapTo(this.hotelService.getHotels())
     .map(hotels => this.hotelActions.loadHotelsSuccess(hotels));
 
-  /*
   @Effect()
   saveHotel = this.actions$
     .ofType(HotelActions.SAVE_HOTEL)
@@ -53,6 +54,6 @@ export class HotelEffects implements OnDestroy {
       .catch(() => Observable.of(
         this.hotelActions.deleteHotelFail(hotel)
       ))
-    );*/
+    );
 
 }

@@ -6,11 +6,13 @@ import 'rxjs/add/operator/switchMapTo';
 import {Actions, Effect} from '@ngrx/effects';
 import {OfferService} from "../shared/offer.service";
 import {OfferActions} from "../actions/offer.actions";
+import {Router} from "@ngrx/router";
 
 @Injectable()
 export class OfferEffects implements OnDestroy {
   constructor(private actions$:Actions,
               private offerService:OfferService,
+              private router:Router,
               private offerActions:OfferActions) {
   }
 
@@ -29,18 +31,16 @@ export class OfferEffects implements OnDestroy {
   /*@Effect()
   saveOffer = this.actions$
     .ofType(OfferActions.SAVE_OFFER)
-    .map<Offer>(toPayload)
     .flatMap(offer => this.offerService.saveOfferForHotelId(offer)
       .map(savedOffer => this.offerActions.saveOfferSuccess(savedOffer))
       .catch(() => Observable.of(
         this.offerActions.saveOfferFail(offer)
       ))
-    );
+    );*/
 
   @Effect()
   saveOfferSuccess = this.actions$
     .ofType(OfferActions.SAVE_OFFER_SUCCESS)
-    .map<Offer>(toPayload)
     .do(offer => {
       this.router.go('/offers/' + offer.id)
     }).filter(() => false);
@@ -48,12 +48,10 @@ export class OfferEffects implements OnDestroy {
   @Effect()
   deleteOffer = this.actions$
     .ofType(OfferActions.DELETE_OFFER)
-    .map<Offer>(toPayload)
     .flatMap(offer => this.offerService.deleteOffer(offer.id)
       .mapTo(this.offerActions.deleteOfferSuccess(offer))
       .catch(() => Observable.of(
         this.offerActions.deleteOfferFail(offer)
       ))
     );
-*/
 }

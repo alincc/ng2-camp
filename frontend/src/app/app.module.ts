@@ -35,11 +35,11 @@ import {RatingEffects} from "./effects/rating.effects";
     HttpModule,
     AgmCoreModule,
     StoreModule.provideStore(reducer),
-    EffectsModule.run(CampEffects),/*
+    EffectsModule.run(CampEffects),
     EffectsModule.run(HotelEffects),
     EffectsModule.run(OfferEffects),
     EffectsModule.run(OfferRequestEffects),
-    EffectsModule.run(RatingEffects)*/
+    EffectsModule.run(RatingEffects)
   ],
   providers: [
     ...AUTH_PROVIDERS,
