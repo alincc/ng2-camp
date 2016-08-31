@@ -8,7 +8,6 @@ import {Store} from '@ngrx/store';
 import {AppState, getHotel, getRatingsByHotelId, getOffersByHotelId} from '../../reducers';
 import {Observable} from 'rxjs/Observable';
 import {HotelDetailComponent} from '../../components/hotel-detail/hotel-detail.component';
-import {OfferService} from '../../shared/offer.service';
 import {HotelActions} from '../../actions/hotel.actions';
 import {ActivatedRoute} from "@angular/router";
 
@@ -35,7 +34,6 @@ export class HotelDetailPageComponent {
 
   constructor(private route: ActivatedRoute,
               private hotelActions: HotelActions,
-              private offerService: OfferService,
               private store: Store<AppState>) {
   }
 

@@ -74,7 +74,7 @@ export function getRatingsLoading() {
 export function hasRating(id:number) {
   return (state$:Observable<RatingsState>) => state$
     .select(s => s.ratings
-      .filter(rating => rating.id.toString() === id.toString()));
+      .some(rating => rating.id.toString() === id.toString()));
 }
 
 export function getRatings() {
@@ -85,7 +85,7 @@ export function getRatings() {
 export function getByHotelId(id:number) {
   return (state$:Observable<RatingsState>) => state$
     .select(s => s.ratings
-      .some(rating => {
+      .filter(rating => {
         return rating.hotel.id.toString() === id.toString()
       }));
 }
