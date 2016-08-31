@@ -48,7 +48,7 @@
     "@angular/router": "3.0.0-rc.1",
     "@ngrx/core": "1.0.2",
     "@ngrx/effects": "2.0.0-beta.2",
-    "@ngrx/router-store": "0.0.1",
+    "@ngrx/router-store": "1.1.0",
     "@ngrx/store": "2.1.2",
     "@ngrx/store-devtools": "2.0.0-beta.1",
     "@ngrx/store-log-monitor": "2.0.0-beta.1",

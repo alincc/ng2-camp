@@ -9,13 +9,15 @@ import campReducer, * as fromCamps from './camp.reducer';
 import offerReducer, * as fromOffers from './offer.reducer';
 import offerRequestReducer, * as fromOfferRequests from './offer-request.reducer';
 import ratingReducer, * as fromRatings from './rating.reducer';
+import {RouterState, routerReducer} from "@ngrx/router-store";
 
 export interface AppState {
   hotels: fromHotels.HotelsState,
   camps: fromCamps.CampsState,
   offers: fromOffers.OffersState,
   offerRequests: fromOfferRequests.OfferRequestsState,
-  ratings: fromRatings.RatingsState
+  ratings: fromRatings.RatingsState,
+  router: RouterState
 }
 
 export default combineReducers({
@@ -23,7 +25,8 @@ export default combineReducers({
   camps: campReducer,
   offers: offerReducer,
   offerRequests: offerRequestReducer,
-  ratings: ratingReducer
+  ratings: ratingReducer,
+  router: routerReducer
 });
 
 export function getHotelsState() {

@@ -6,13 +6,12 @@ import 'rxjs/add/operator/switchMapTo';
 import {Actions, Effect} from '@ngrx/effects';
 import {CampService} from "../shared/camp.service";
 import {CampActions} from "../actions/camp.actions";
-import {Router} from "@angular/router";
+import { go } from '@ngrx/router-store';
 
 @Injectable()
 export class CampEffects implements OnDestroy {
   constructor(private actions$: Actions,
               private campService:CampService,
-              private router:Router,
               private campActions:CampActions) {
   }
 
@@ -42,7 +41,7 @@ export class CampEffects implements OnDestroy {
   saveCampSuccess = this.actions$
     .ofType(CampActions.SAVE_CAMP_SUCCESS)
     .do(camp => {
-      this.router.navigate(['/camps/', camp.id])
+      go(['/camps/', {routeParam: camp.id}])
     }).filter(() => false);
 
   @Effect()

@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 @Injectable()
 export class CrudService {
 
-  constructor(private authHttp: AuthHttp, private router: Router) {
+  constructor(private authHttp: AuthHttp) {
   }
 
   public get<T>(url: string): Observable<T> {
@@ -58,7 +58,7 @@ export class CrudService {
     console.log('error', error);
     if (error.message === 'No JWT present or has expired') {
       console.log('no JWT, redirecting to login page');
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
       return true;
     }
     return false;
