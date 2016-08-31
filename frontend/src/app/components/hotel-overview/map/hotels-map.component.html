@@ -6,7 +6,7 @@
     [markerDraggable]="true">
 
     <sebm-google-map-info-window>
-      <strong><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></strong>
+      <strong><a [routerLink]="['/hotels/', hotel.id]">{{hotel.name}}</a></strong>
     </sebm-google-map-info-window>
 
   </sebm-google-map-marker>

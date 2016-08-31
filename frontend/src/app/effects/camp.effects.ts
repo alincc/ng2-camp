@@ -4,9 +4,9 @@ import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMapTo';
 import {Actions, Effect} from '@ngrx/effects';
-import {Router} from '@ngrx/router';
 import {CampService} from "../shared/camp.service";
 import {CampActions} from "../actions/camp.actions";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class CampEffects implements OnDestroy {
@@ -42,7 +42,7 @@ export class CampEffects implements OnDestroy {
   saveCampSuccess = this.actions$
     .ofType(CampActions.SAVE_CAMP_SUCCESS)
     .do(camp => {
-      this.router.go('/camps/' + camp.id)
+      this.router.navigate(['/camps/', camp.id])
     }).filter(() => false);
 
   @Effect()

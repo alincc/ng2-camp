@@ -4,13 +4,13 @@ import 'rxjs/add/observable/concat';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
-import {Guard, TraversalCandidate} from '@ngrx/router';
 import {AppState, getRatingsLoaded, hasRating} from '../reducers';
 import {RatingService} from "../shared/rating.service";
 import {RatingActions} from "../actions/rating.actions";
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from "@angular/router";
 
 @Injectable()
-export class RatingExistsGuard implements Guard {
+export class RatingExistsGuard implements CanActivate {
   constructor(private store: Store<AppState>,
               private ratingService: RatingService,
               private ratingActions: RatingActions) {
@@ -44,12 +44,12 @@ export class RatingExistsGuard implements Guard {
       });
   }
 
-  protectRoute(candidate: TraversalCandidate) {
-    if(candidate.routeParams.ratingId === 'new') {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    if(route.params.ratingId === 'new') {
       return Observable.of(false);
     }
     return this.waitForRatingsToLoad()
-      .switchMapTo(this.hasRating(candidate.routeParams.ratingId));
+      .switchMapTo(this.hasRating(route.params.ratingId));
   }
 
 }

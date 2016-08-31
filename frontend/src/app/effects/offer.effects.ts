@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMapTo';
 import {Actions, Effect} from '@ngrx/effects';
 import {OfferService} from "../shared/offer.service";
 import {OfferActions} from "../actions/offer.actions";
-import {Router} from "@ngrx/router";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class OfferEffects implements OnDestroy {
@@ -42,7 +42,7 @@ export class OfferEffects implements OnDestroy {
   saveOfferSuccess = this.actions$
     .ofType(OfferActions.SAVE_OFFER_SUCCESS)
     .do(offer => {
-      this.router.go('/offers/' + offer.id)
+      this.router.navigate(['/offers/', offer.id])
     }).filter(() => false);
 
   @Effect()

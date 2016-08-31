@@ -4,13 +4,13 @@ import 'rxjs/add/observable/concat';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
-import {Guard, TraversalCandidate} from '@ngrx/router';
 import {AppState, getOffersLoaded, hasOffer} from '../reducers';
 import {OfferService} from "../shared/offer.service";
 import {OfferActions} from "../actions/offer.actions";
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from "@angular/router";
 
 @Injectable()
-export class OfferExistsGuard implements Guard {
+export class OfferExistsGuard implements CanActivate {
   constructor(private store: Store<AppState>,
               private offerService: OfferService,
               private offerActions: OfferActions) {
@@ -44,12 +44,12 @@ export class OfferExistsGuard implements Guard {
       });
   }
 
-  protectRoute(candidate: TraversalCandidate) {
-    if(candidate.routeParams.offerId === 'new') {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    if(route.params.offerId === 'new') {
       return Observable.of(false);
     }
     return this.waitForOffersToLoad()
-      .switchMapTo(this.hasOffer(candidate.routeParams.offerId));
+      .switchMapTo(this.hasOffer(route.params.offerId));
   }
 
 }

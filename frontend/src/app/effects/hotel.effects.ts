@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMapTo';
 import {Actions, Effect} from '@ngrx/effects';
 import {HotelActions} from '../actions/hotel.actions';
 import {HotelService} from '../shared/hotel.service';
-import {Router} from "@ngrx/router";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class HotelEffects implements OnDestroy {
@@ -43,7 +43,7 @@ export class HotelEffects implements OnDestroy {
   saveHotelSuccess = this.actions$
     .ofType(HotelActions.SAVE_HOTEL_SUCCESS)
     .do(hotel => {
-      this.router.go('/hotels/' + hotel.id)
+      this.router.navigate(['/hotels/', hotel.id])
     }).filter(() => false);
 
   @Effect()

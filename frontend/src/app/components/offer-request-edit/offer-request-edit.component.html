@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col s3">
         <select id="requestStatus" materialize="material_select" [materializeSelectOptions]="requestStatusList"
-                [(ngModel)]="offerRequest.status" (change)="statusChanged($event)" ngControl="requestStatus">
+                [(ngModel)]="offerRequest.status" (change)="statusChanged($event)">
           <option *ngFor="let status of requestStatusList" [value]="status" [selected]="requestStatus === offerRequest.status">{{status}}</option>
         </select>
         <label for="requestStatus">Request status</label>

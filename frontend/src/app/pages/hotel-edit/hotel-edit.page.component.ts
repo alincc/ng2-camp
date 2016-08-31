@@ -1,7 +1,5 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Hotel} from '../../model/backend-typings';
-import {HotelService} from '../../shared/hotel.service';
-import {RouteParams, Router} from '@ngrx/router';
 import {HotelActions} from '../../actions/hotel.actions';
 import {Country} from '../../model/country';
 import {CountryService} from '../../shared/country.service';
@@ -12,6 +10,7 @@ import {AppState} from '../../reducers/index';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/observable/of';
 import {HotelEditComponent} from '../../components/hotel-edit/hotel-edit.component';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'hotel-edit-page',
@@ -33,13 +32,13 @@ export class HotelEditPageComponent implements OnInit, OnDestroy {
   constructor(private countryService: CountryService,
               private store: Store<AppState>,
               private hotelActions: HotelActions,
-              private routeParams: RouteParams) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.countries = this.countryService
       .getAllCountries();
-    this.hotelIdSubscription = this.routeParams.pluck<string>('hotelId')
+    this.hotelIdSubscription = this.route.params.pluck<string>('hotelId')
       .map(id => parseInt(id))
       .subscribe(hotelId => {
         if (!isNaN(hotelId)) {

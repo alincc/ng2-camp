@@ -1,5 +1,4 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {RouteParams, Router} from '@ngrx/router';
 import {Hotel, OfferRequest} from '../../model/backend-typings';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers/index';
@@ -9,6 +8,7 @@ import {OfferRequestEditComponent} from '../../components/offer-request-edit/off
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/pluck';
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'offer-request-edit-page',
@@ -32,14 +32,14 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
   private campIdSubscription: Subscription;
   private offerRequestSubscription: Subscription;
 
-  constructor(private routeParams: RouteParams,
+  constructor(private route: ActivatedRoute,
               private store: Store<AppState>,
               private offerRequestService: OfferRequestService,
               private router: Router) {
-    this.campIdSubscription = this.routeParams.pluck<string>('campId')
+    this.campIdSubscription = this.route.params.pluck<string>('campId')
       .map(id => parseInt(id))
       .subscribe(id => this.campId = id);
-    this.offerRequestSubscription = this.routeParams.pluck<string>('offerRequestId')
+    this.offerRequestSubscription = this.route.params.pluck<string>('offerRequestId')
       .map(offerRequestId => parseInt(offerRequestId))
       .subscribe(offerRequestId => {
         if (!isNaN(offerRequestId)) {
@@ -68,6 +68,6 @@ export class OfferRequestEditPageComponent implements OnInit, OnDestroy {
   }
 
   private goToCamp() {
-    this.router.go('/camps/' + this.campId);
+    this.router.navigate(['/camps/', this.campId]);
   }
 }

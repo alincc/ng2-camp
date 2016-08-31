@@ -1,14 +1,14 @@
 <nav>
   <div class="nav-wrapper blue">
     <ul id="nav-mobile" class="left">
-      <li *ngIf="auth.authenticated()" linkActive="active"><a [linkTo]="'/hotels'">Hotels</a></li>
-      <li *ngIf="auth.authenticated()" linkActive="active"><a [linkTo]="'/camps'">Camps</a></li>
-      <li *ngIf="auth.authenticated()" linkActive="active"><a [linkTo]="'/mailtemplates'">Mail templates</a></li>
+      <li *ngIf="auth.authenticated()" routerLinkActive="active"><a [routerLink]="'/hotels'">Hotels</a></li>
+      <li *ngIf="auth.authenticated()" routerLinkActive="active"><a [routerLink]="'/camps'">Camps</a></li>
+      <li *ngIf="auth.authenticated()" routerLinkActive="active"><a [routerLink]="'/mailtemplates'">Mail templates</a></li>
     </ul>
     <a href="#" class="brand-logo center">ng-camp</a>
     <ul class="right">
-      <li *ngIf="!auth.authenticated()" linkActive="active"><a [linkTo]="'/login'">Login</a></li>
-      <li *ngIf="auth.authenticated()" linkActive="active">
+      <li *ngIf="!auth.authenticated()" routerLinkActive="active"><a [routerLink]="'/login'">Login</a></li>
+      <li *ngIf="auth.authenticated()" routerLinkActive="active">
         <a class="dropdown-button" href="#!" data-activates="user-dropdown" materialize="dropdown">
           <i class="material-icons left">perm_identity</i>{{ username }}
         </a>

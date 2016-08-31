@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {tokenNotExpired} from 'angular2-jwt';
-import {Router} from '@ngrx/router';
 import {UrlProvider} from './urlProvider';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthService {
@@ -28,14 +28,14 @@ export class AuthService {
     }).subscribe((response) => {
       localStorage.setItem('id_token', response.text());
       localStorage.setItem('username', username);
-      this.router.go('/hotels');
+      this.router.navigate(['/hotels']);
     });
   }
 
   public logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('username');
-    this.router.go('/login');
+    this.router.navigate(['/login']);
   }
 
   public getUsername(): string {

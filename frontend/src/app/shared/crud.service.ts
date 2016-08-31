@@ -3,9 +3,9 @@ import {Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
-import {Router} from '@ngrx/router';
 import {AuthHttp} from 'angular2-jwt';
 import {UrlProvider} from './urlProvider';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class CrudService {
@@ -58,7 +58,7 @@ export class CrudService {
     console.log('error', error);
     if (error.message === 'No JWT present or has expired') {
       console.log('no JWT, redirecting to login page');
-      this.router.go('/login');
+      this.router.navigate(['/login']);
       return true;
     }
     return false;

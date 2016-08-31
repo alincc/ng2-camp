@@ -1,4 +1,3 @@
-import {Routes, Route} from '@ngrx/router';
 import {HotelDetailPageComponent} from '../pages/hotel-detail/hotel-detail.page.component';
 import {LoginComponent} from '../components/login/login.component';
 import {AuthGuard} from './authGuard';
@@ -13,6 +12,7 @@ import {HotelExistsGuard} from '../routes/hotelExistsGuard';
 import {CampExistsGuard} from "./campExistsGuard";
 import {OfferRequestExistsGuard} from "./offerRequestExistsGuard";
 import {OfferExistsGuard} from "./offerExistsGuard";
+import {Routes} from "@angular/router";
 
 export const routes: Routes = [
   {
@@ -21,51 +21,51 @@ export const routes: Routes = [
   },
   {
     path: '/hotels',
-    guards: [AuthGuard],
+    canActivate: [AuthGuard],
     component: HotelOverviewPageComponent
   },
   {
     path: '/hotels/:hotelId',
-    guards: [AuthGuard, HotelExistsGuard],
+    canActivate: [AuthGuard, HotelExistsGuard],
     component: HotelDetailPageComponent
   },
   {
     path: '/hotels/edit/:hotelId',
-    guards: [AuthGuard, HotelExistsGuard],
+    canActivate: [AuthGuard, HotelExistsGuard],
     component: HotelEditPageComponent
   },
   {
     path: '/hotels/new',
-    guards: [AuthGuard],
+    canActivate: [AuthGuard],
     component: HotelEditPageComponent
   },
   {
     path: '/camps',
-    guards: [AuthGuard],
+    canActivate: [AuthGuard],
     component: CampOverviewPageComponent
   },
   {
     path: '/camps/:campId',
-    guards: [AuthGuard, CampExistsGuard],
+    canActivate: [AuthGuard, CampExistsGuard],
     component: CampWorkflowPageComponent
   },
   {
     path: '/camps/:campId/offer-requests/edit/:offerRequestId',
-    guards: [AuthGuard, OfferRequestExistsGuard],
+    canActivate: [AuthGuard, OfferRequestExistsGuard],
     component: OfferRequestEditPageComponent
   },
   {
     path: '/offers/edit/:offerId',
-    guards: [AuthGuard, OfferExistsGuard],
+    canActivate: [AuthGuard, OfferExistsGuard],
     component: OfferEditPageComponent
   },
   {
     path: '/mailtemplates',
-    guards: [AuthGuard],
+    canActivate: [AuthGuard],
     component: MailTemplatesComponent
   },
   {
     path: '/login',
     component: LoginComponent
   }
-] as Route[];
+];

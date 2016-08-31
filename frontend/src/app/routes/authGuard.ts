@@ -3,17 +3,17 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {Guard, Router, TraversalCandidate} from '@ngrx/router';
 import {tokenNotExpired} from 'angular2-jwt';
+import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from "@angular/router";
 
 @Injectable()
-export class AuthGuard implements Guard {
+export class AuthGuard implements CanActivate {
   constructor(private router: Router) {
   }
 
-  protectRoute(candidate: TraversalCandidate) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (!tokenNotExpired()) {
-      this.router.go('/login');
+      this.router.navigate(['/login']);
       return Observable.of(false);
     }
     return Observable.of(true);
