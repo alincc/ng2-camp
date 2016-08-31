@@ -1,5 +1,6 @@
+import "materialize-css";
 import "angular2-materialize";
-import {AUTH_PROVIDERS} from 'angular2-jwt';
+import {AuthHttp, provideAuth} from 'angular2-jwt';
 import {provideRouter, LinkTo} from '@ngrx/router';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
@@ -21,6 +22,7 @@ import {HotelEffects} from "./effects/hotel.effects";
 import {OfferEffects} from "./effects/offer.effects";
 import {OfferRequestEffects} from "./effects/offer-request.effects";
 import {RatingEffects} from "./effects/rating.effects";
+import {MaterializeDirective} from "angular2-materialize";
 
 @NgModule({
   bootstrap: [
@@ -28,7 +30,8 @@ import {RatingEffects} from "./effects/rating.effects";
   ],
   declarations: [
     App,
-    LinkTo
+    LinkTo,
+    MaterializeDirective
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,15 @@ import {RatingEffects} from "./effects/rating.effects";
     EffectsModule.run(RatingEffects)
   ],
   providers: [
-    ...AUTH_PROVIDERS,
+    AuthHttp,
+    provideAuth({
+      headerName: 'Authorization',
+      headerPrefix: 'bearer',
+      tokenName: 'token',
+      tokenGetter: (() => localStorage.getItem('id_token')),
+      globalHeaders: [{ 'Content-Type': 'application/json' }],
+      noJwtError: false
+    }),
     MarkdownConverter,
     AuthGuard,
     services,
