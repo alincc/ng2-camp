@@ -5,22 +5,22 @@
     <div class="row">
       <div class="col s6">
         <label for="offerDate">Offer date</label>
-        <input id="offerDate" type="date" [(ngModel)]="offer.offerDate">
+        <input id="offerDate" type="date" [(ngModel)]="offer.offerDate" name="offerDate">
       </div>
       <div class="col s6">
         <label for="expirationDate">Offer expiration date</label>
-        <input id="expirationDate" type="date" [(ngModel)]="offer.expirationDate">
+        <input id="expirationDate" type="date" [(ngModel)]="offer.expirationDate" name="expirationDate">
       </div>
     </div>
 
     <div class="row">
       <div class="col s6">
         <label for="fromDate">Camp from</label>
-        <input id="fromDate" type="date" [(ngModel)]="offer.fromDate">
+        <input id="fromDate" type="date" [(ngModel)]="offer.fromDate" name="fromDate">
       </div>
       <div class="col s6">
         <label for="toDate">Camp to</label>
-        <input id="toDate" type="date" [(ngModel)]="offer.toDate">
+        <input id="toDate" type="date" [(ngModel)]="offer.toDate" name="toDate">
       </div>
     </div>
 
@@ -28,13 +28,13 @@
       <div class="col s6">
         <label for="people">Number of people - {{offer.numberOfPeople}}</label>
         <p class="range-field">
-          <input type="range" id="people" min="1" max="100" [(ngModel)]="offer.numberOfPeople"/>
+          <input type="range" id="people" min="1" max="100" [(ngModel)]="offer.numberOfPeople" name="numberOfPeople"/>
         </p>
       </div>
       <div class="col s6">
         <label for="singleRooms">Number of single rooms - {{offer.singleRooms}}</label>
         <p class="range-field">
-          <input type="range" id="singleRooms" min="1" max="100" [(ngModel)]="offer.singleRooms"/>
+          <input type="range" id="singleRooms" min="1" max="100" [(ngModel)]="offer.singleRooms" name="singleRooms"/>
         </p>
       </div>
     </div>
@@ -43,11 +43,11 @@
       <div class="col s6">
         <label for="doubleRooms">Number of double rooms - {{offer.doubleRooms}}</label>
         <p class="range-field">
-          <input type="range" id="doubleRooms" min="1" max="100" [(ngModel)]="offer.doubleRooms"/>
+          <input type="range" id="doubleRooms" min="1" max="100" [(ngModel)]="offer.doubleRooms" name="doubleRooms"/>
         </p>
       </div>
       <div class="col s6">
-        <input type="checkbox" id="accepted" [(ngModel)]="offer.accepted"/>
+        <input type="checkbox" id="accepted" [(ngModel)]="offer.accepted" name="accepted"/>
         <label for="accepted">Offer accepted</label>
       </div>
     </div>
@@ -55,17 +55,17 @@
     <div class="row">
       <div class="col s6">
         <label for="totalPrice">Total price</label>
-        <input type="number" id="totalPrice" [(ngModel)]="offer.totalPrice"/>
+        <input type="number" id="totalPrice" [(ngModel)]="offer.totalPrice" name="totalPrice"/>
       </div>
       <div class="col s6">
         <label for="currency">Currency</label>
-        <input type="text" id="currency" [(ngModel)]="offer.currency"/>
+        <input type="text" id="currency" [(ngModel)]="offer.currency" name="currency"/>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
-        <textarea id="description" class="materialize-textarea" [(ngModel)]="offer.description"></textarea>
+        <textarea id="description" class="materialize-textarea" [(ngModel)]="offer.description" name="description"></textarea>
         <label for="description">Description</label>
       </div>
     </div>

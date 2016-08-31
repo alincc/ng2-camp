@@ -1,17 +1,17 @@
 <form>
   <div class="row">
     <div class="input-field col s6">
-      <input id="camp_name" placeholder="Camp Name" type="text" class="validate" required [(ngModel)]="camp.name">
+      <input id="camp_name" placeholder="Camp Name" type="text" class="validate" required [(ngModel)]="camp.name" name="name">
       <label for="camp_name" [class.active]="camp.name">Camp Name</label>
     </div>
     <div class="input-field col s6">
-      <input id="camp_organizer" placeholder="Camp Organizer" type="text" class="validate" [(ngModel)]="camp.organizer">
+      <input id="camp_organizer" placeholder="Camp Organizer" type="text" class="validate" [(ngModel)]="camp.organizer" name="organizer">
       <label for="camp_organizer" [class.active]="camp.organizer">Camp Organizer</label>
     </div>
   </div>
   <div class="row">
     <div class="input-field col s12">
-      <textarea id="camp_notes" class="materialize-textarea" [(ngModel)]="camp.notes"></textarea>
+      <textarea id="camp_notes" class="materialize-textarea" [(ngModel)]="camp.notes" name="notes"></textarea>
       <label for="camp_notes" [class.active]="camp.notes">Camp Notes</label>
     </div>
   </div>
