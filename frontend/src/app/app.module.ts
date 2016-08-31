@@ -9,7 +9,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule} from '@angular/http';
 import {NgModule} from '@angular/core';
 import {FormsModule}   from '@angular/forms';
-import {routes} from './routes/routes';
 import {AuthGuard} from './routes/authGuard';
 import reducer from './reducers';
 import {ACTIONS} from './actions';
@@ -22,7 +21,6 @@ import {OfferEffects} from "./effects/offer.effects";
 import {OfferRequestEffects} from "./effects/offer-request.effects";
 import {RatingEffects} from "./effects/rating.effects";
 import {MaterializeDirective} from "angular2-materialize";
-import {RouterModule} from "@angular/router";
 import {HotelExistsGuard} from "./routes/hotelExistsGuard";
 import {OfferExistsGuard} from "./routes/offerExistsGuard";
 import {OfferRequestExistsGuard} from "./routes/offerRequestExistsGuard";
@@ -37,6 +35,7 @@ import {CampOverviewPageComponent} from "./pages/camp-overview/camp-overview.pag
 import {HotelEditPageComponent} from "./pages/hotel-edit/hotel-edit.page.component";
 import {HotelDetailPageComponent} from "./pages/hotel-detail/hotel-detail.page.component";
 import {HotelOverviewPageComponent} from "./pages/hotel-overview/hotel-overview.page.component";
+import {routing} from "./routes/app.routing";
 
 @NgModule({
   bootstrap: [
@@ -60,7 +59,6 @@ import {HotelOverviewPageComponent} from "./pages/hotel-overview/hotel-overview.
     HttpModule,
     FormsModule,
     AgmCoreModule.forRoot(),
-    RouterModule,
     StoreModule.provideStore(reducer),
     RouterStoreModule.connectRouter(),
     EffectsModule.run(CampEffects),
@@ -68,7 +66,7 @@ import {HotelOverviewPageComponent} from "./pages/hotel-overview/hotel-overview.
     EffectsModule.run(OfferEffects),
     EffectsModule.run(OfferRequestEffects),
     EffectsModule.run(RatingEffects),
-    RouterModule.forRoot(routes)
+    routing
   ],
   providers: [
     AuthHttp,

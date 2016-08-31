@@ -74,7 +74,7 @@ export function getOffersLoading() {
 export function hasOffer(id:number) {
   return (state$:Observable<OffersState>) => state$
     .select(s => s.offers
-      .filter(offer => offer.id.toString() === id.toString()));
+      .some(offer => offer.id.toString() === id.toString()));
 }
 
 export function getOffers() {

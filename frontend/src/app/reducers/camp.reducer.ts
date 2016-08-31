@@ -74,7 +74,7 @@ export function getCampsLoading() {
 export function hasCamp(id:number) {
   return (state$:Observable<CampsState>) => state$
     .select(s => s.camps
-      .filter(camp => camp.id.toString() === id.toString()));
+      .some(camp => camp.id.toString() === id.toString()));
 }
 
 export function getCamps() {

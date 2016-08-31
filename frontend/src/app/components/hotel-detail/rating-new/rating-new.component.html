@@ -5,14 +5,14 @@
       <div class="col s6">
         <label for="rating">Rating</label>
         <p class="range-field">
-          <input type="number" id="rating" min="1" max="5" [(ngModel)]="rating.ratingFrom1To5"/>
+          <input type="number" id="rating" min="1" max="5" [(ngModel)]="rating.ratingFrom1To5" name="ratingFrom1To5"/>
         </p>
       </div>
     </div>
 
     <div class="row">
       <div class="input-field col s12">
-        <textarea id="description" class="materialize-textarea" [(ngModel)]="rating.description"></textarea>
+        <textarea id="description" class="materialize-textarea" [(ngModel)]="rating.description" name="description"></textarea>
         <label for="description">Description</label>
       </div>
     </div>

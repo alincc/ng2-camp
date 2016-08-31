@@ -12,9 +12,10 @@ import {HotelExistsGuard} from '../routes/hotelExistsGuard';
 import {CampExistsGuard} from "./campExistsGuard";
 import {OfferRequestExistsGuard} from "./offerRequestExistsGuard";
 import {OfferExistsGuard} from "./offerExistsGuard";
-import {Routes} from "@angular/router";
+import {Routes, RouterModule} from "@angular/router";
+import {ModuleWithProviders} from "@angular/core";
 
-export const routes: Routes = [
+const appRoutes: Routes = [
   {
     path: '',
     redirectTo: 'hotels',
@@ -70,3 +71,5 @@ export const routes: Routes = [
     component: LoginComponent
   }
 ];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
