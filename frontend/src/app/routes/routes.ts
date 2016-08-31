@@ -16,56 +16,57 @@ import {Routes} from "@angular/router";
 
 export const routes: Routes = [
   {
-    path: '/',
-    redirectTo: '/hotels'
+    path: '',
+    redirectTo: 'hotels',
+    pathMatch: 'full'
   },
   {
-    path: '/hotels',
+    path: 'hotels',
     canActivate: [AuthGuard],
     component: HotelOverviewPageComponent
   },
   {
-    path: '/hotels/:hotelId',
+    path: 'hotels/:hotelId',
     canActivate: [AuthGuard, HotelExistsGuard],
     component: HotelDetailPageComponent
   },
   {
-    path: '/hotels/edit/:hotelId',
+    path: 'hotels/edit/:hotelId',
     canActivate: [AuthGuard, HotelExistsGuard],
     component: HotelEditPageComponent
   },
   {
-    path: '/hotels/new',
+    path: 'hotels/new',
     canActivate: [AuthGuard],
     component: HotelEditPageComponent
   },
   {
-    path: '/camps',
+    path: 'camps',
     canActivate: [AuthGuard],
     component: CampOverviewPageComponent
   },
   {
-    path: '/camps/:campId',
+    path: 'camps/:campId',
     canActivate: [AuthGuard, CampExistsGuard],
     component: CampWorkflowPageComponent
   },
   {
-    path: '/camps/:campId/offer-requests/edit/:offerRequestId',
+    path: 'camps/:campId/offer-requests/edit/:offerRequestId',
     canActivate: [AuthGuard, OfferRequestExistsGuard],
     component: OfferRequestEditPageComponent
   },
   {
-    path: '/offers/edit/:offerId',
+    path: 'offers/edit/:offerId',
     canActivate: [AuthGuard, OfferExistsGuard],
     component: OfferEditPageComponent
   },
   {
-    path: '/mailtemplates',
+    path: 'mailtemplates',
     canActivate: [AuthGuard],
     component: MailTemplatesComponent
   },
   {
-    path: '/login',
+    path: 'login',
     component: LoginComponent
   }
 ];
