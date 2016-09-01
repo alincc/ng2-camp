@@ -29,6 +29,7 @@ export class CampWorkflowComponent {
   step: number = 0;
 
   changeStep(id: string) {
-    $('ul.tabs').tabs('select_tab', id);
+    let tabs:any = $('ul.tabs');
+    tabs.tabs('select_tab', id);
   }
 }

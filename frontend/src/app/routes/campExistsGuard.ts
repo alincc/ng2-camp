@@ -45,11 +45,11 @@ export class CampExistsGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if(route.params.campId === 'new') {
+    if(route.params['campId'] === 'new') {
       return Observable.of(false);
     }
     return this.waitForCampsToLoad()
-      .switchMapTo(this.hasCamp(route.params.campId));
+      .switchMapTo(this.hasCamp(route.params['campId']));
   }
 
 }

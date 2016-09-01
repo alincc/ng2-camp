@@ -45,11 +45,11 @@ export class RatingExistsGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if(route.params.ratingId === 'new') {
+    if((route.params['ratingId']) === 'new') {
       return Observable.of(false);
     }
     return this.waitForRatingsToLoad()
-      .switchMapTo(this.hasRating(route.params.ratingId));
+      .switchMapTo(this.hasRating(route.params['ratingId']));
   }
 
 }

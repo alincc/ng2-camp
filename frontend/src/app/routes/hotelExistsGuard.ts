@@ -45,11 +45,11 @@ export class HotelExistsGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if(route.params.hotelId === 'new') {
+    if(route.params['hotelId'] === 'new') {
       return Observable.of(false);
     }
     return this.waitForHotelsToLoad()
-      .switchMapTo(this.hasHotel(route.params.hotelId));
+      .switchMapTo(this.hasHotel(route.params['hotelId']));
   }
 
 }

@@ -45,11 +45,11 @@ export class OfferRequestExistsGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if(route.params.offerRequestId === 'new') {
+    if(route.params['offerRequestId'] === 'new') {
       return Observable.of(false);
     }
     return this.waitForOfferRequestsToLoad()
-      .switchMapTo(this.hasOfferRequest(route.params.offerRequestId));
+      .switchMapTo(this.hasOfferRequest(route.params['offerRequestId']));
   }
 
 }

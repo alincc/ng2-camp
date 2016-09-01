@@ -35,8 +35,10 @@ export class MailTemplatesComponent implements OnInit {
     this.camps = this.campService.getCamps();
     this.refreshTemplates();
     // Trying to solve resize problem https://github.com/Dogfalo/materialize/issues/1503
-    $('body').on('focus', '.materialize-textarea', function () {
-      $(this).trigger('autoresize');
+    let body:any = $('body');
+    body.on('focus', '.materialize-textarea', function () {
+      let that:any = $(this);
+      that.trigger('autoresize');
     })
   }
 
