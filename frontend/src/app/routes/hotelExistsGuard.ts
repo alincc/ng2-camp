@@ -4,13 +4,13 @@ import 'rxjs/add/observable/concat';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
-import {Guard, TraversalCandidate} from '@ngrx/router';
 import {AppState, getHotelsLoaded, hasHotel} from '../reducers';
 import {HotelActions} from '../actions/hotel.actions';
 import {HotelService} from '../shared/hotel.service';
+import {ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate} from "@angular/router";
 
 @Injectable()
-export class HotelExistsGuard implements Guard {
+export class HotelExistsGuard implements CanActivate {
   constructor(private store: Store<AppState>,
               private hotelService: HotelService,
               private hotelActions: HotelActions) {
@@ -44,12 +44,12 @@ export class HotelExistsGuard implements Guard {
       });
   }
 
-  protectRoute(candidate: TraversalCandidate) {
-    if(candidate.routeParams.hotelId === 'new') {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    if(route.params['hotelId'] === 'new') {
       return Observable.of(false);
     }
     return this.waitForHotelsToLoad()
-      .switchMapTo(this.hasHotel(candidate.routeParams.hotelId));
+      .switchMapTo(this.hasHotel(route.params['hotelId']));
   }
 
 }

@@ -1,4 +1,3 @@
-import {Routes, Route} from '@ngrx/router';
 import {HotelDetailPageComponent} from '../pages/hotel-detail/hotel-detail.page.component';
 import {LoginComponent} from '../components/login/login.component';
 import {AuthGuard} from './authGuard';
@@ -13,59 +12,64 @@ import {HotelExistsGuard} from '../routes/hotelExistsGuard';
 import {CampExistsGuard} from "./campExistsGuard";
 import {OfferRequestExistsGuard} from "./offerRequestExistsGuard";
 import {OfferExistsGuard} from "./offerExistsGuard";
+import {Routes, RouterModule} from "@angular/router";
+import {ModuleWithProviders} from "@angular/core";
 
-export const routes: Routes = [
+const appRoutes: Routes = [
   {
-    path: '/',
-    redirectTo: '/hotels'
+    path: '',
+    redirectTo: 'hotels',
+    pathMatch: 'full'
   },
   {
-    path: '/hotels',
-    guards: [AuthGuard],
+    path: 'hotels',
+    canActivate: [AuthGuard],
     component: HotelOverviewPageComponent
   },
   {
-    path: '/hotels/:hotelId',
-    guards: [AuthGuard, HotelExistsGuard],
+    path: 'hotels/:hotelId',
+    canActivate: [AuthGuard, HotelExistsGuard],
     component: HotelDetailPageComponent
   },
   {
-    path: '/hotels/edit/:hotelId',
-    guards: [AuthGuard, HotelExistsGuard],
+    path: 'hotels/edit/:hotelId',
+    canActivate: [AuthGuard, HotelExistsGuard],
     component: HotelEditPageComponent
   },
   {
-    path: '/hotels/new',
-    guards: [AuthGuard],
+    path: 'hotels/new',
+    canActivate: [AuthGuard],
     component: HotelEditPageComponent
   },
   {
-    path: '/camps',
-    guards: [AuthGuard],
+    path: 'camps',
+    canActivate: [AuthGuard],
     component: CampOverviewPageComponent
   },
   {
-    path: '/camps/:campId',
-    guards: [AuthGuard, CampExistsGuard],
+    path: 'camps/:campId',
+    canActivate: [AuthGuard, CampExistsGuard],
     component: CampWorkflowPageComponent
   },
   {
-    path: '/camps/:campId/offer-requests/edit/:offerRequestId',
-    guards: [AuthGuard, OfferRequestExistsGuard],
+    path: 'camps/:campId/offer-requests/edit/:offerRequestId',
+    canActivate: [AuthGuard, OfferRequestExistsGuard],
     component: OfferRequestEditPageComponent
   },
   {
-    path: '/offers/edit/:offerId',
-    guards: [AuthGuard, OfferExistsGuard],
+    path: 'offers/edit/:offerId',
+    canActivate: [AuthGuard, OfferExistsGuard],
     component: OfferEditPageComponent
   },
   {
-    path: '/mailtemplates',
-    guards: [AuthGuard],
+    path: 'mailtemplates',
+    canActivate: [AuthGuard],
     component: MailTemplatesComponent
   },
   {
-    path: '/login',
+    path: 'login',
     component: LoginComponent
   }
-] as Route[];
+];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

@@ -10,7 +10,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let hotel of hotels">
-    <td><a [linkTo]="'/hotels/' + hotel.id">{{hotel.name}}</a></td>
+    <td><a [routerLink]="['/hotels/', hotel.id]">{{hotel.name}}</a></td>
     <td>{{hotel.city}}</td>
     <td>{{hotel.countryCode}}</td>
     <td>

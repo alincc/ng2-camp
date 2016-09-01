@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {RouteParams, QueryParams} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/mergeMap';
@@ -8,6 +7,7 @@ import {Store} from '@ngrx/store';
 import {AppState, getHotels, getCamp} from '../../reducers/index';
 import {Observable} from 'rxjs/Observable';
 import {CampWorkflowComponent} from '../../components/camp-workflow/camp-workflow.component';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'camp-workflow-page',
@@ -26,17 +26,17 @@ export class CampWorkflowPageComponent implements OnInit {
   hotels: Observable<Hotel[]>;
   step: Observable<number>;
 
-  constructor(private routeParams: RouteParams,
-              private queryParams: QueryParams,
+  constructor(private route: ActivatedRoute,
               private store:Store<AppState>) {
   }
 
   ngOnInit() {
-   this.camp = this.routeParams
+   this.camp = this.route.params
       .pluck<string>('campId')
       .distinctUntilChanged()
+      .map(campId => parseInt(campId))
       .flatMap(campId => this.store.let(getCamp(campId)));
-    this.step = this.queryParams.pluck<string>('step')
+    this.step = this.route.queryParams.pluck<string>('step')
       .map(step => parseInt(step));
     this.hotels = this.store.let(getHotels());
   }

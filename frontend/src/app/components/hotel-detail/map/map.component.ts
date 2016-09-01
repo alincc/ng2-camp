@@ -1,10 +1,8 @@
 import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
-import {GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
 import {Hotel} from '../../../model/backend-typings';
 
 @Component({
   selector: 'map',
-  directives: [GOOGLE_MAPS_DIRECTIVES],
   styles: [`
     .sebm-google-map-container {
       height: 300px;

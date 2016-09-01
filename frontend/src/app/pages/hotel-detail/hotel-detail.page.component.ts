@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {RouteParams} from '@ngrx/router';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/share';
@@ -9,8 +8,8 @@ import {Store} from '@ngrx/store';
 import {AppState, getHotel, getRatingsByHotelId, getOffersByHotelId} from '../../reducers';
 import {Observable} from 'rxjs/Observable';
 import {HotelDetailComponent} from '../../components/hotel-detail/hotel-detail.component';
-import {OfferService} from '../../shared/offer.service';
 import {HotelActions} from '../../actions/hotel.actions';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'hotel-detail-page',
@@ -33,16 +32,16 @@ export class HotelDetailPageComponent {
 
   hotelId: number;
 
-  constructor(private routeParams: RouteParams,
+  constructor(private route: ActivatedRoute,
               private hotelActions: HotelActions,
-              private offerService: OfferService,
               private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.hotel = this.routeParams
+    this.hotel = this.route.params
       .pluck<string>('hotelId')
       .distinctUntilChanged()
+      .map(hotelId => parseInt(hotelId))
       .flatMap(hotelId =>this.store.let(getHotel(hotelId)));
     this.ratings = this.hotel
       .flatMap(hotel => this.store.let(getRatingsByHotelId(hotel.id)));

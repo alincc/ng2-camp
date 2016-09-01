@@ -8,7 +8,7 @@
           <form materialize class="col s12" #mailTemplateForm="ngForm">
             <div class="row">
               <div class="input-field col s6">
-                <select [(ngModel)]="selectedOption" materialize="material_select"
+                <select [(ngModel)]="selectedOption" name="selectedOption" materialize="material_select"
                         [materializeSelectOptions]="camps | async">
                   <option value="" disabled selected>Choose camp</option>
                   <option *ngFor="let camp of camps | async" [value]="camp.name">{{camp.name}}</option>
@@ -20,13 +20,13 @@
             <div class="row">
               <div class="col s6">
                 <label for="fromDate">From</label>
-                <input id="fromDate" type="date" [ngModel]="fromDateInput"
+                <input id="fromDate" type="date" [ngModel]="fromDateInput" name="fromDate"
                        (ngModelChange)="fromDateInput=$event; refreshTemplates()">
               </div>
 
               <div class="col s6">
                 <label for="toDate">To</label>
-                <input id="toDate" type="date" [ngModel]="toDateInput"
+                <input id="toDate" type="date" [ngModel]="toDateInput" name="toDate"
                        (ngModelChange)="toDateInput=$event; refreshTemplates()">
               </div>
             </div>
@@ -34,13 +34,13 @@
             <div class="row">
               <div class="input-field col s6">
                 <input id="contactEmail" type="text" class="validate"
-                       [ngModel]="emailInput"
+                       [ngModel]="emailInput" name="contactEmail"
                        (ngModelChange)="emailInput=$event; refreshTemplates()" >
                 <label for="contactEmail">Contact email</label>
               </div>
               <div class="input-field col s6">
                 <input id="contactPhone" type="text" class="validate"
-                       [ngModel]="phoneInput"
+                       [ngModel]="phoneInput" name="contactPhone"
                        (ngModelChange)="phoneInput=$event; refreshTemplates()">
                 <label for="contactPhone">Contact phone</label>
               </div>
@@ -63,7 +63,7 @@
           <form materialize class="col s12" #mailTemplateForm="ngForm">
             <div class="row">
               <div *ngIf="!isNewTemplate" class="input-field col s6">
-                <select [(ngModel)]="mailTemplateId" materialize="material_select"
+                <select [(ngModel)]="mailTemplateId" materialize="material_select" name="mailTemplateId"
                         [materializeSelectOptions]="mailTemplates" (change)="onChange($event.target.value)">
                   <option *ngFor="let mailTemplate of mailTemplates" [value]="mailTemplate.id">{{mailTemplate.name}}</option>
                 </select>
@@ -71,7 +71,7 @@
               </div>
 
               <div *ngIf="isNewTemplate" class="input-field col s6">
-                <input [(ngModel)]="mailTemplate.name" id="templateName" type="text" class="validate" >
+                <input [(ngModel)]="mailTemplate.name" name="mailTemplateName" id="templateName" type="text" class="validate" >
                 <label for="templateName">New template name</label>
               </div>
 
@@ -90,9 +90,9 @@
               </div>
             </div>
 
-            <div class="row">
+           <div class="row">
               <div class="input-field col s12">
-                <textarea [(ngModel)]="mailTemplate.text" id="templateText" #templateText class="materialize-textarea" (change)="onTemplateChange()"
+                <textarea [(ngModel)]="mailTemplate.text" name="templateText" id="templateText" #templateText class="materialize-textarea" (change)="onTemplateChange()"
                           (keyup)="refreshHtml(templateText.value)"></textarea>
                 <label for="templateText">Template text</label>
               </div>

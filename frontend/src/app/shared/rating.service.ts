@@ -19,4 +19,10 @@ export class RatingService {
   getByHotelId(id: number): Observable<Rating[]> {
     return this.crud.get<Rating[]>('/rest/hotels/' + id + '/ratings');
   }
+
+
+  getRating(id: number): Observable<Rating> {
+    return this.crud.get<Rating>('/rest/ratings/' + id);
+  }
+
 }

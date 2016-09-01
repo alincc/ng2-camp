@@ -10,7 +10,7 @@ import '@angular/core';
 import '@angular/common';
 import '@angular/http';
 import '@ngrx/core';
-import '@ngrx/router';
+import '@angular/router';
 import '@ngrx/store';
 import '@ngrx/router-store';
 import '@ngrx/effects';

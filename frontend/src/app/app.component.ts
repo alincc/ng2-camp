@@ -1,13 +1,11 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {HotelOverviewComponent} from './components/hotel-overview/hotel-overview.component';
-import {MarkdownConverter} from './components/markdown/markDownConverter';
-import {StoreLogMonitorComponent} from '@ngrx/store-log-monitor';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app',
-  directives: [HotelOverviewComponent, NavigationComponent, StoreLogMonitorComponent],
-  providers: [MarkdownConverter],
+  directives: [HotelOverviewComponent, NavigationComponent],
   styles: [
     require('./app.scss')
   ],
@@ -16,13 +14,15 @@ import {StoreLogMonitorComponent} from '@ngrx/store-log-monitor';
 })
 export class App implements OnInit {
 
-  ngOnInit() {
+  constructor(private router: Router) {
+  }
 
+  ngOnInit() {
     let auth:string = localStorage.getItem('auth');
     if (auth === 'logged') {
-      // this.router.navigate(['/']);
+      this.router.navigate(['/']);
     } else {
-      // this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
     }
   }
 }

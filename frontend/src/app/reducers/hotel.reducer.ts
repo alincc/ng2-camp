@@ -73,7 +73,7 @@ export function getHotelsLoading() {
 export function hasHotel(id: number) {
   return (state$: Observable<HotelsState>) => state$
     .select(s => s.hotels
-      .filter(hotel => hotel.id.toString() === id.toString()));
+      .some(hotel => hotel.id.toString() === id.toString()));
 }
 
 export function getHotel(id:number) {

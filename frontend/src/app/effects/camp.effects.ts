@@ -1,36 +1,35 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMapTo';
-import {StateUpdates, Effect, toPayload} from '@ngrx/effects';
-import {Router} from '@ngrx/router';
-import {AppState} from '../reducers';
-import {Camp} from '../model/backend-typings';
+import {Actions, Effect} from '@ngrx/effects';
 import {CampService} from "../shared/camp.service";
 import {CampActions} from "../actions/camp.actions";
+import { go } from '@ngrx/router-store';
 
 @Injectable()
-export class CampEffects {
-  constructor(private updates$:StateUpdates<AppState>,
+export class CampEffects implements OnDestroy {
+  constructor(private actions$: Actions,
               private campService:CampService,
-              private router:Router,
               private campActions:CampActions) {
+  }
+
+  ngOnDestroy() {
   }
 
   @Effect()
   loadCampsOnInit = Observable.of(this.campActions.loadCamps());
 
   @Effect()
-  loadCamps = this.updates$
-    .whenAction(CampActions.LOAD_CAMPS)
+  loadCamps = this.actions$
+    .ofType(CampActions.LOAD_CAMPS)
     .switchMapTo(this.campService.getCamps())
     .map(camps => this.campActions.loadCampsSuccess(camps));
 
   @Effect()
-  saveCamp = this.updates$
-    .whenAction(CampActions.SAVE_CAMP)
-    .map<Camp>(toPayload)
+  saveCamp = this.actions$
+    .ofType(CampActions.SAVE_CAMP)
     .flatMap(camp => this.campService.saveCamp(camp)
       .map(savedCamp => this.campActions.saveCampSuccess(savedCamp))
       .catch(() => Observable.of(
@@ -39,17 +38,15 @@ export class CampEffects {
     );
 
   @Effect()
-  saveCampSuccess = this.updates$
-    .whenAction(CampActions.SAVE_CAMP_SUCCESS)
-    .map<Camp>(toPayload)
+  saveCampSuccess = this.actions$
+    .ofType(CampActions.SAVE_CAMP_SUCCESS)
     .do(camp => {
-      this.router.go('/camps/' + camp.id)
+      go(['/camps/', {routeParam: camp.id}])
     }).filter(() => false);
 
   @Effect()
-  deleteCamp = this.updates$
-    .whenAction(CampActions.DELETE_CAMP)
-    .map<Camp>(toPayload)
+  deleteCamp = this.actions$
+    .ofType(CampActions.DELETE_CAMP)
     .flatMap(camp => this.campService.deleteCamp(camp.id)
       .mapTo(this.campActions.deleteCampSuccess(camp))
       .catch(() => Observable.of(

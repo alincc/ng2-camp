@@ -8,19 +8,19 @@
     </div>
     <div class="input-field col s2">
       <i class="material-icons prefix">today</i>
-      <input id="camp_fromDate" placeholder="Date From" type="date" class="datepicker" [(ngModel)]="camp.fromDate"
+      <input id="camp_fromDate" placeholder="Date From" type="date" class="datepicker" [(ngModel)]="camp.fromDate" name="fromDate"
              materialize="pickadate" [materializeParams]="[{selectMonths: true, selectYears: 15}]"/>
       <label for="camp_fromDate" [class.active]="camp.fromDate">Date From</label>
     </div>
     <div class="input-field col s2">
       <i class="material-icons prefix">today</i>
-      <input id="camp_toDate" placeholder="Date To" type="date" class="datepicker" [(ngModel)]="camp.toDate"
+      <input id="camp_toDate" placeholder="Date To" type="date" class="datepicker" [(ngModel)]="camp.toDate" name="toDate"
              materialize="pickadate" [materializeParams]="[{selectMonths: true, selectYears: 15}]"/>
       <label for="camp_toDate" [class.active]="camp.toDate">Date To</label>
     </div>
     <div class="input-field col s2">
       <i class="material-icons prefix">supervisor_account</i>
-      <input id="camp_people" placeholder="Number of People" type="number" class="validate" [(ngModel)]="camp.numberOfPeople"/>
+      <input id="camp_people" placeholder="Number of People" type="number" class="validate" [(ngModel)]="camp.numberOfPeople" name="numberOfPeople"/>
       <label for="camp_people" [class.active]="camp.numberOfPeople">Number of People</label>
     </div>
     <div class="input-field col s3">

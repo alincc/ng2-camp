@@ -4,13 +4,13 @@ import 'rxjs/add/observable/concat';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
-import {Guard, TraversalCandidate} from '@ngrx/router';
 import {AppState, getCampsLoaded, hasCamp} from '../reducers';
 import {CampService} from "../shared/camp.service";
 import {CampActions} from "../actions/camp.actions";
+import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from "@angular/router";
 
 @Injectable()
-export class CampExistsGuard implements Guard {
+export class CampExistsGuard implements CanActivate {
   constructor(private store: Store<AppState>,
               private campService: CampService,
               private campActions: CampActions) {
@@ -44,12 +44,12 @@ export class CampExistsGuard implements Guard {
       });
   }
 
-  protectRoute(candidate: TraversalCandidate) {
-    if(candidate.routeParams.campId === 'new') {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    if(route.params['campId'] === 'new') {
       return Observable.of(false);
     }
     return this.waitForCampsToLoad()
-      .switchMapTo(this.hasCamp(candidate.routeParams.campId));
+      .switchMapTo(this.hasCamp(route.params['campId']));
   }
 
 }
