@@ -27,6 +27,7 @@ export class CampEffects {
   @Effect()
   saveCamp = this.actions$
     .ofType(CampActions.SAVE_CAMP)
+    .map(action => action.payload)
     .flatMap(camp => this.campService.saveCamp(camp)
       .map(savedCamp => this.campActions.saveCampSuccess(savedCamp))
       .catch(() => Observable.of(
@@ -37,6 +38,7 @@ export class CampEffects {
   @Effect()
   saveCampSuccess = this.actions$
     .ofType(CampActions.SAVE_CAMP_SUCCESS)
+    .map(action => action.payload)
     .do(camp => {
       go(['/camps/', {routeParam: camp.id}])
     }).filter(() => false);
@@ -44,6 +46,7 @@ export class CampEffects {
   @Effect()
   deleteCamp = this.actions$
     .ofType(CampActions.DELETE_CAMP)
+    .map(action => action.payload)
     .flatMap(camp => this.campService.deleteCamp(camp.id)
       .mapTo(this.campActions.deleteCampSuccess(camp))
       .catch(() => Observable.of(

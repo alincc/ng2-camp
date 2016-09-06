@@ -40,6 +40,7 @@ export class OfferRequestEffects {
   @Effect()
   saveOfferRequestSuccess = this.actions$
     .ofType(OfferRequestActions.SAVE_OFFER_REQUEST_SUCCESS)
+    .map(action => action.payload)
     .do(offerRequest => {
       go(['/offerRequests/', {routeParam: offerRequest.id}])
     }).filter(() => false);
@@ -47,6 +48,7 @@ export class OfferRequestEffects {
   @Effect()
   deleteOfferRequest = this.actions$
     .ofType(OfferRequestActions.DELETE_OFFER_REQUEST)
+    .map(action => action.payload)
     .flatMap(offerRequest => this.offerRequestService.deleteOfferRequest(offerRequest.id)
       .mapTo(this.offerRequestActions.deleteOfferRequestSuccess(offerRequest))
       .catch(() => Observable.of(

@@ -28,6 +28,7 @@ export class HotelEffects {
   @Effect()
   saveHotel = this.actions$
     .ofType(HotelActions.SAVE_HOTEL)
+    .map(action => action.payload)
     .flatMap(hotel => this.hotelService.saveHotel(hotel)
       .map(savedHotel => this.hotelActions.saveHotelSuccess(savedHotel))
       .catch(() => Observable.of(
@@ -38,6 +39,7 @@ export class HotelEffects {
   @Effect()
   saveHotelSuccess = this.actions$
     .ofType(HotelActions.SAVE_HOTEL_SUCCESS)
+    .map(action => action.payload)
     .do(hotel => {
       go(['/hotels/', {routeParam: hotel.id}])
     }).filter(() => false);
@@ -45,6 +47,7 @@ export class HotelEffects {
   @Effect()
   deleteHotel = this.actions$
     .ofType(HotelActions.DELETE_HOTEL)
+    .map(action => action.payload)
     .flatMap(hotel => this.hotelService.deleteHotel(hotel.id)
       .mapTo(this.hotelActions.deleteHotelSuccess(hotel))
       .catch(() => Observable.of(
