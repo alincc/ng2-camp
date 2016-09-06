@@ -9,7 +9,7 @@ import {OfferRequestActions} from "../actions/offer-request.actions";
 import {go} from "@ngrx/router-store";
 
 @Injectable()
-export class OfferRequestEffects implements OnDestroy {
+export class OfferRequestEffects {
   constructor(private actions$:Actions,
               private offerRequestService:OfferRequestService,
               private offerRequestActions:OfferRequestActions) {

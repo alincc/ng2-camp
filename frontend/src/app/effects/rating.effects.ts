@@ -8,13 +8,10 @@ import {RatingService} from "../shared/rating.service";
 import {RatingActions} from "../actions/rating.actions";
 
 @Injectable()
-export class RatingEffects implements OnDestroy {
+export class RatingEffects {
   constructor(private action$:Actions,
               private ratingService:RatingService,
               private ratingActions:RatingActions) {
-  }
-
-  ngOnDestroy() {
   }
 
   @Effect()

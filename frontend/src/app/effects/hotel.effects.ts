@@ -9,14 +9,11 @@ import {HotelService} from '../shared/hotel.service';
 import {go} from "@ngrx/router-store";
 
 @Injectable()
-export class HotelEffects implements OnDestroy {
+export class HotelEffects {
 
   constructor(private actions$:Actions,
               private hotelService:HotelService,
               private hotelActions:HotelActions) {
-  }
-
-  ngOnDestroy() {
   }
 
   @Effect()

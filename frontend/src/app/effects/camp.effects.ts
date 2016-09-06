@@ -9,13 +9,10 @@ import {CampActions} from "../actions/camp.actions";
 import { go } from '@ngrx/router-store';
 
 @Injectable()
-export class CampEffects implements OnDestroy {
+export class CampEffects {
   constructor(private actions$: Actions,
               private campService:CampService,
               private campActions:CampActions) {
-  }
-
-  ngOnDestroy() {
   }
 
   @Effect()
