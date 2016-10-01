@@ -4,7 +4,6 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers/index';
 import {RequestStatusEnum, getRequestStatusValues} from '../../model/RequestStatusEnum';
 import {OfferRequestService} from '../../shared/offer-request.service';
-import {OfferRequestEditComponent} from '../../components/offer-request-edit/offer-request-edit.component';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/pluck';
@@ -12,7 +11,6 @@ import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'offer-request-edit-page',
-  directives: [OfferRequestEditComponent],
   template: `
     <offer-request-edit
         [offerRequest]="offerRequest | async"

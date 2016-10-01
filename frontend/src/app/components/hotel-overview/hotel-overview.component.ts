@@ -7,13 +7,9 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/concatAll';
 import 'rxjs/add/operator/toArray';
 import {Camp, Hotel} from '../../model/backend-typings';
-import {MaterializeDirective} from 'angular2-materialize/dist/index';
-import {HotelsMapComponent} from './map/hotels-map.component';
-import {HotelsTableComponent} from './table/hotels-table.component';
 
 @Component({
   selector: 'hotels',
-  directives: [MaterializeDirective, HotelsMapComponent, HotelsTableComponent],
   template: require('./hotel-overview.component.html')
 })
 export class HotelOverviewComponent implements OnInit {
@@ -32,7 +28,7 @@ export class HotelOverviewComponent implements OnInit {
   ngOnInit() {
     let stringFilter: Observable<string> = this.stringFilterSubject.asObservable().startWith('');
     let countryFilter: Observable<string[]> = this.countryFilterSubject.asObservable().startWith([]);
-    
+
     this.hotelsFiltered = Observable.combineLatest(this.hotels, stringFilter, countryFilter)
       .map(data => {
         let hotels: Hotel[] = data[0];

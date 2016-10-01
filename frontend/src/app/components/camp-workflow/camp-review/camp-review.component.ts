@@ -6,7 +6,6 @@ import {RatingNewComponent} from '../../hotel-detail/rating-new/rating-new.compo
 
 @Component({
   selector: 'camp-review',
-  directives: [MaterializeDirective, RatingListComponent, RatingNewComponent],
   template: require('./camp-review.component.html')
 })
 export class CampReviewComponent implements OnInit {

@@ -17,8 +17,7 @@ import '@ngrx/effects';
 import 'marked';
 
 // RxJS
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
+import 'rxjs/Rx';
 
 if ('production' === ENV) {
   // Production

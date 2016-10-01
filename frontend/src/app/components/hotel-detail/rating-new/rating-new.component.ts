@@ -3,8 +3,6 @@ import {Rating} from '../../../model/backend-typings';
 
 @Component({
   selector: 'rating-new',
-  directives: [],
-  providers: [],
   template: require('./rating-new.component.html'),
   changeDetection: ChangeDetectionStrategy.OnPush
 })

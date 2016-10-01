@@ -1,10 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthService} from '../../shared/auth.service';
-import {MaterializeDirective} from 'angular2-materialize';
 
 @Component({
   selector: 'login',
-  directives: [MaterializeDirective],
   providers: [],
   template: require('./login.component.html')
 })

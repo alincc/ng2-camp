@@ -7,13 +7,11 @@ import {Hotel, Rating, Offer} from '../../model/backend-typings';
 import {Store} from '@ngrx/store';
 import {AppState, getHotel, getRatingsByHotelId, getOffersByHotelId} from '../../reducers';
 import {Observable} from 'rxjs/Observable';
-import {HotelDetailComponent} from '../../components/hotel-detail/hotel-detail.component';
 import {HotelActions} from '../../actions/hotel.actions';
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'hotel-detail-page',
-  directives: [HotelDetailComponent],
   providers: [],
   template: `
     <hotel-detail 

@@ -36,6 +36,25 @@ import {HotelEditPageComponent} from "./pages/hotel-edit/hotel-edit.page.compone
 import {HotelDetailPageComponent} from "./pages/hotel-detail/hotel-detail.page.component";
 import {HotelOverviewPageComponent} from "./pages/hotel-overview/hotel-overview.page.component";
 import {routing} from "./routes/app.routing";
+import {CampOverviewComponent} from "./components/camp-overview/camp-overview.component";
+import {CampBasicsComponent} from "./components/camp-workflow/camp-basics/camp-basics.component";
+import {CampBookComponent} from "./components/camp-workflow/camp-book/camp-book.component";
+import {CampDateComponent} from "./components/camp-workflow/camp-date/camp-date.component";
+import {CampOffersComponent} from "./components/camp-workflow/camp-offers/camp-offers.component";
+import {CampReviewComponent} from "./components/camp-workflow/camp-review/camp-review.component";
+import {CampWorkflowComponent} from "./components/camp-workflow/camp-workflow.component";
+import {MapComponent} from "./components/hotel-detail/map/map.component";
+import {OfferListComponent} from "./components/hotel-detail/offer-list/offer-list.component";
+import {RatingListComponent} from "./components/hotel-detail/rating-list/rating-list.component";
+import {RatingNewComponent} from "./components/hotel-detail/rating-new/rating-new.component";
+import {HotelDetailComponent} from "./components/hotel-detail/hotel-detail.component";
+import {HotelEditComponent} from "./components/hotel-edit/hotel-edit.component";
+import {HotelsMapComponent} from "./components/hotel-overview/map/hotels-map.component";
+import {HotelsTableComponent} from "./components/hotel-overview/table/hotels-table.component";
+import {HotelOverviewComponent} from "./components/hotel-overview/hotel-overview.component";
+import {NavigationComponent} from "./components/navigation/navigation.component";
+import {OfferEditComponent} from "./components/offer-edit/offer-edit.component";
+import {OfferRequestEditComponent} from "./components/offer-request-edit/offer-request-edit.component";
 
 @NgModule({
   bootstrap: [
@@ -52,7 +71,27 @@ import {routing} from "./routes/app.routing";
     OfferRequestEditPageComponent,
     OfferEditPageComponent,
     MailTemplatesComponent,
-    LoginComponent
+    LoginComponent,
+    CampOverviewComponent,
+    CampBasicsComponent,
+    CampBookComponent,
+    CampDateComponent,
+    CampOffersComponent,
+    CampReviewComponent,
+    CampWorkflowComponent,
+    MapComponent,
+    OfferListComponent,
+    RatingListComponent,
+    RatingNewComponent,
+    HotelDetailComponent,
+    HotelEditComponent,
+    HotelsMapComponent,
+    HotelsTableComponent,
+    HotelOverviewComponent,
+    MailTemplatesComponent,
+    NavigationComponent,
+    OfferEditComponent,
+    OfferRequestEditComponent
   ],
   imports: [
     BrowserModule,

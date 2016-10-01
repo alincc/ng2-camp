@@ -6,12 +6,10 @@ import {Camp, Hotel} from '../../model/backend-typings';
 import {Store} from '@ngrx/store';
 import {AppState, getHotels, getCamp} from '../../reducers/index';
 import {Observable} from 'rxjs/Observable';
-import {CampWorkflowComponent} from '../../components/camp-workflow/camp-workflow.component';
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'camp-workflow-page',
-  directives: [CampWorkflowComponent],
   template: `
     <camp-workflow 
         [camp]="camp | async"

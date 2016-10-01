@@ -9,12 +9,10 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers/index';
 import 'rxjs/add/operator/pluck';
 import 'rxjs/add/observable/of';
-import {HotelEditComponent} from '../../components/hotel-edit/hotel-edit.component';
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'hotel-edit-page',
-  directives: [HotelEditComponent],
   template: `
     <hotel-edit 
       [hotel]="hotel | async"

@@ -1,10 +1,8 @@
 import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {Camp} from '../../../model/backend-typings';
-import {MaterializeDirective} from 'angular2-materialize/dist/index';
 
 @Component({
   selector: 'camp-date',
-  directives: [MaterializeDirective],
   template: require('./camp-date.component.html'),
   changeDetection: ChangeDetectionStrategy.OnPush
 })

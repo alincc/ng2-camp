@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable} from 'rxjs/Observable';
-import {MaterializeDirective} from "angular2-materialize/dist/index";
 import {MailTemplate, Camp} from "../../model/backend-typings";
 import {MailTemplateService} from "../../shared/mailtemplate.service";
 import {MarkdownConverter} from "../markdown/markDownConverter";
@@ -8,7 +7,6 @@ import {CampService} from '../../shared/camp.service';
 
 @Component({
   selector: 'mail-templates',
-  directives: [MaterializeDirective],
   template: require('./mailtemplates.component.html')
 })
 export class MailTemplatesComponent implements OnInit {

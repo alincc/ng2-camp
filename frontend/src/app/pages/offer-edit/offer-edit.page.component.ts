@@ -4,12 +4,10 @@ import 'rxjs/add/observable/of';
 import {Subscription} from "rxjs/Subscription";
 import {OfferService} from '../../shared/offer.service';
 import {Offer} from '../../model/backend-typings';
-import {OfferEditComponent} from '../../components/offer-edit/offer-edit.component';
 import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'offer-edit-page',
-  directives: [OfferEditComponent],
   template: `
     <offer-edit
         [offer]="offer | async"
