@@ -1,8 +1,6 @@
 ### Web App ###
 * npm install
-* npm run postinstall 
-* 
+* npm start
 
-### Gradle build ###
-* Node Plugin: https://github.com/srs/gradle-node-plugin
+
 
